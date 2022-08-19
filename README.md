@@ -1,6 +1,8 @@
 # Vueform Builder Docs
 
-Documentation for Vueform Builder. Vueform Builder requires a separate license from Vueform - [learn more](https://vueform.com/builder).
+Documentation for Vueform Builder.
+
+## Table
 
 ## Requirements
 
@@ -190,6 +192,18 @@ export default {
 }
 ```
 
+### Settings
+
+The following options are for configuring different aspects of the builder's layout.
+
+```js
+// builder.config.js
+
+export default {
+  storagePrefix: null, // prefixes localStorage keys
+}
+```
+
 ### Layout
 
 The following options are for configuring different aspects of the builder's layout.
@@ -289,10 +303,10 @@ export default {
     'link',
     'divider',
     'html',
-    'object',
-    'columns2',
-    'columns3',
-    'columns4',
+    'container',
+    'container2',
+    'container3',
+    'container4',
     'list',
     'nestedList',
   ],
@@ -315,6 +329,7 @@ export default {
       properties: {
         name: true,
         width: true,
+        nesting: true,
       },
       submission: {
         endpoint: true,
@@ -536,7 +551,6 @@ export default {
   export: {
     props: {
       export: {
-        vue: true,
         output: true,
         api: true,
         theme: true,
@@ -592,7 +606,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
           meta: true,
         },
         data: {
@@ -601,6 +617,7 @@ export default {
           items: true,
           selectItems: true,
           object: true,
+          nested: true,
         },
         decorators: {
           tooltip: true,
@@ -698,7 +715,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
@@ -737,7 +756,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
@@ -776,7 +797,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
@@ -815,7 +838,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
@@ -854,7 +879,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
@@ -893,7 +920,9 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
@@ -932,16 +961,16 @@ export default {
           name: true,
           inputType: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         data: {
           default: true,
           submit: true,
         },
         decorators: {
-          tooltip: true,
           addons: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -970,7 +999,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         textarea: {
           autogrow: true,
@@ -1011,7 +1042,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         file: {
           endpoint: true,
@@ -1023,8 +1056,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1050,6 +1081,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         checkbox: {
           text: true,
@@ -1060,8 +1093,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1087,6 +1118,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         data: {
           items: true,
@@ -1094,8 +1127,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1122,6 +1153,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         data: {
           items: true,
@@ -1129,8 +1162,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1157,6 +1188,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         data: {
           items: true,
@@ -1164,8 +1197,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1192,6 +1223,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         radio: {
           text: true,
@@ -1202,8 +1235,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1229,6 +1260,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         data: {
           items: true,
@@ -1236,8 +1269,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1264,6 +1295,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         data: {
           items: true,
@@ -1271,8 +1304,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1299,6 +1330,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         data: {
           items: true,
@@ -1306,8 +1339,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1334,6 +1365,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         toggle: {
           text: true,
@@ -1345,8 +1378,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1372,7 +1403,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         select: {
           native: true,
@@ -1402,8 +1435,8 @@ export default {
           after: true,
         },
         layout: {
-          columns: true,
           size: true,
+          columns: true,
         },
         validation: {
           fieldName: true,
@@ -1423,11 +1456,16 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         select: {
           native: true,
+          searchHeader: true,
           search: true,
+          strictSearch: true,
+          trackBy: true,
           inputType: true,
           autocomplete: true,
           create: true,
@@ -1452,8 +1490,8 @@ export default {
           after: true,
         },
         layout: {
-          columns: true,
           size: true,
+          columns: true,
         },
         validation: {
           fieldName: true,
@@ -1473,10 +1511,15 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         select: {
+          searchHeader: true,
           search: true,
+          strictSearch: true,
+          trackBy: true,
           inputType: true,
           autocomplete: true,
           create: true,
@@ -1500,8 +1543,8 @@ export default {
           after: true,
         },
         layout: {
-          columns: true,
           size: true,
+          columns: true,
         },
         validation: {
           fieldName: true,
@@ -1521,7 +1564,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         date: {
           date: true,
@@ -1533,9 +1578,7 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
           addons: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1562,7 +1605,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         date: {
           date: true,
@@ -1574,9 +1619,7 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
           addons: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1603,7 +1646,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         date: {
           date: true,
@@ -1615,9 +1660,7 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
           addons: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1644,7 +1687,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         date: {
           dateMode: true,
@@ -1656,9 +1701,7 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
           addons: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1685,7 +1728,9 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
           placeholder: true,
+          description: true,
         },
         date: {
           dateMode: true,
@@ -1697,9 +1742,7 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
           addons: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1726,6 +1769,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         slider: {
           slider: true,
@@ -1738,8 +1783,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1765,6 +1808,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         slider: {
           slider: true,
@@ -1777,8 +1822,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1804,6 +1847,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         slider: {
           slider: true,
@@ -1816,8 +1861,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1843,6 +1886,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         file: {
           file: true,
@@ -1855,8 +1900,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1883,6 +1926,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         file: {
           multifile: true,
@@ -1891,8 +1936,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1920,6 +1963,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         file: {
           file: true,
@@ -1932,8 +1977,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1960,6 +2003,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         file: {
           multifile: true,
@@ -1968,8 +2013,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -1997,6 +2040,8 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         file: {
           multifile: true,
@@ -2005,8 +2050,6 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2052,13 +2095,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         button: {
           button: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2080,13 +2123,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         button: {
           button: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2108,13 +2151,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         button: {
           button: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2136,13 +2179,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         button: {
           button: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2164,13 +2207,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         button: {
           button: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2192,13 +2235,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2216,13 +2259,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2240,13 +2283,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2264,13 +2307,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2288,13 +2331,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2312,13 +2355,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2336,13 +2379,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2360,13 +2403,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2384,13 +2427,13 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
@@ -2408,9 +2451,126 @@ export default {
           type: true,
           name: true,
           label: true,
+          tooltip: true,
+          description: true,
         },
         content: {
           static: true,
+        },
+        decorators: {
+          before: true,
+          between: true,
+          after: true,
+        },
+        layout: {
+          size: true,
+          columns: true,
+        },
+        conditions: {
+          conditions: true,
+        },
+      },
+      container: {
+        properties: {
+          type: true,
+          name: true,
+          label: true,
+          tooltip: true,
+          description: true,
+        },
+        data: {
+          nested: true,
+        },
+        decorators: {
+          before: true,
+          between: true,
+          after: true,
+        },
+        layout: {
+          size: true,
+          columns: true,
+        },
+        conditions: {
+          conditions: true,
+        },
+      },
+      container2: {
+        properties: {
+          type: true,
+          name: true,
+          label: true,
+          tooltip: true,
+          description: true,
+        },
+        data: {
+          nested: true,
+        },
+        decorators: {
+          before: true,
+          between: true,
+          after: true,
+        },
+        layout: {
+          size: true,
+          columns: true,
+        },
+        conditions: {
+          conditions: true,
+        },
+      },
+      container3: {
+        properties: {
+          type: true,
+          name: true,
+          label: true,
+          tooltip: true,
+          description: true,
+        },
+        data: {
+          nested: true,
+        },
+        decorators: {
+          before: true,
+          between: true,
+          after: true,
+        },
+        layout: {
+          size: true,
+          columns: true,
+        },
+        conditions: {
+          conditions: true,
+        },
+      },
+      container4: {
+        properties: {
+          type: true,
+          name: true,
+          label: true,
+          tooltip: true,
+          description: true,
+        },
+        data: {
+          nested: true,
+        },
+        decorators: {
+          before: true,
+          between: true,
+          after: true,
+        },
+        layout: {
+          size: true,
+          columns: true,
+        },
+        conditions: {
+          conditions: true,
+        },
+      },
+      list: {
+        properties: {
+          type: true,
+          name: true,
+          label: true,
         },
         decorators: {
           tooltip: true,
@@ -2427,11 +2587,6 @@ export default {
           conditions: true,
         },
       },
-      object: {},
-      columns2: {},
-      columns3: {},
-      columns4: {},
-      list: {},
       nestedList: {},
     },
   },
@@ -2616,7 +2771,7 @@ export default {
             'border-width-checkbox-b': 'var(--vf-border-width-input-b)',
             'border-width-checkbox-l': 'var(--vf-border-width-input-l)',
             'border-width-dropdown': '1px',
-            'border-width-btn': '3px',
+            'border-width-btn': '1px',
             'border-width-toggle': '0.125rem',
             'border-width-tag': '1px',
             'shadow-input': '0px 0px 0px 0px rgba(0,0,0,0)',
