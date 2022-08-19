@@ -2,8 +2,6 @@
 
 Documentation for Vueform Builder. Vueform Builder requires a separate license from Vueform - [learn more](https://vueform.com/builder).
 
-## Table
-
 ## Requirements
 
 - Vue.js 3.0.0+
