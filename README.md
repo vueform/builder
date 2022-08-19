@@ -1,6 +1,6 @@
 # Vueform Builder Docs
 
-Documentation for Vueform Builder. Documentation for Vueform Builder. Vueform Builder requires a separate license from Vueform - [learn more](https://vueform.com/builder).
+Documentation for Vueform Builder. Vueform Builder requires a separate license from Vueform - [learn more](https://vueform.com/builder).
 
 ## Table
 
