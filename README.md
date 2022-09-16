@@ -2,12 +2,12 @@
 
 Documentation for Vueform Builder. Vueform Builder requires a separate license from Vueform - [learn more](https://vueform.com/builder).
 
-## Requirements
+# Requirements
 
 - Vue.js 3.0.0+
 - Tailwind CSS 3.0.0+ 
 
-## Manual Installation
+# Manual Installation
 
 #### 1. Install Vueform in your project
 
@@ -70,6 +70,7 @@ module.exports = {
     './node_modules/@vueform/builder/**/*.js',
     './node_modules/@vueform/builder/**/*.css',
   ],
+  darkMode: 'class',
   // ...
   plugins: [
     // ...
@@ -109,7 +110,7 @@ export default {
 </template>
 ```
 
-## Saving
+# Saving
 
 To save the output of the form you can subscribe to `@save` event, which is triggered anytime the form settings are changed:
 
@@ -138,7 +139,9 @@ The `@save` event has two params:
 - **builderObject** `{object}` <br> the object that should be saved to db (and can be loaded)
 - **history** `{array}` <br> he array of previous builderObjects
 
-### Manual Saving
+The history object only contains the last `n` elements which is possible to store given the local storage limit of 5 MB in most cases (enough for about 100 records for an average form).
+
+## Manual Saving
 
 The current state of the form is always available in local storage as `vueform-builder` and `vueform-history`.
 
@@ -149,7 +152,7 @@ const builderObject = localStorage.getItem('vueform-builder')
 const history = localStorage.getItem('vueform-history')
 ```
 
-## Loading
+# Loading
 
 Once a form's JSON (& history) are saved into the database they can be loaded back using Vueform Builder's `.load()` method:
 
@@ -178,7 +181,7 @@ Once a form's JSON (& history) are saved into the database they can be loaded ba
 </script>
 ```
 
-## Configuration
+# Configuration
 
 Vueform Builder can be configured via `builder.config.js`:
 
@@ -190,7 +193,7 @@ export default {
 }
 ```
 
-### Settings
+## Settings
 
 The following options are for configuring different aspects of the builder's layout.
 
@@ -199,10 +202,11 @@ The following options are for configuring different aspects of the builder's lay
 
 export default {
   storagePrefix: null, // prefixes localStorage keys
+  delay: 300, // the ms to wait between last text input and preview rerender, `false` turns it off (not recommended)
 }
 ```
 
-### Layout
+## Layout
 
 The following options are for configuring different aspects of the builder's layout.
 
@@ -225,7 +229,7 @@ export default {
 }
 ```
 
-### Elements
+## Elements
 
 The following options configure the available elements & element categories.
 
@@ -314,7 +318,7 @@ export default {
 }
 ```
 
-### Form settings panel
+## Form settings panel
 
 The following options can be used to disable form settings config options.
 
@@ -331,15 +335,22 @@ export default {
       },
       submission: {
         endpoint: true,
-        method: true,
         formKey: true,
       },
       validation: {
         live: true,
       },
       layout: {
-        size: true,
-        columns: true,
+        size: {
+          sm: true,
+          md: true,
+          lg: true,
+        },
+        columns: {
+          container: true,
+          label: true,
+          wrapper: true,
+        },
         forceLabels: true,
         floatPlaceholders: true,
         displayErrors: true,
@@ -350,7 +361,7 @@ export default {
 }
 ```
 
-### Theme settings panel
+## Theme settings panel
 
 The following options can be used to disable theme config options.
 
@@ -538,7 +549,7 @@ export default {
 }
 ```
 
-### Export settings panel
+## Export settings panel
 
 The following options can be used to disable export config options.
 
@@ -559,9 +570,9 @@ export default {
 }
 ```
 
-### Element settings panel
+## Element settings panel
 
-Element settings are a bit more complex than form, theme or export. Options can be disabled for different elements under `element.props`. This object has an item for each element type and a special one, called `default`.
+Element settings can be disabled for different elements under `element.props`. This object has an item for each element type and a special one, called `default`.
 
 ```js
 // builder.config.js
@@ -570,12 +581,17 @@ export default {
   element: {
     props: {
       default: {
+        placeholder: false,
         // ...
       },
       text: {
         // ...
       },
       textarea: {
+        // ...
+      },
+      select: {
+        placeholder: true,
         // ...
       },
       // ...
@@ -586,9 +602,35 @@ export default {
 
 The `default` contains all the options of all the elements and can be used to disable properties globally, without having to go through each element and eg. disabling conditions for each.
 
-The `{ELEMENT_NAME}` sections contain configuration options for only that specific element. These can be used to disable config options for certain elements only and to override `default`.
+The `"ELEMENT_NAME"` (eg. `text`, `textarea` or `select`) sections contain configuration options for only that specific element. These can be used to disable config options for certain elements only and to override `default`.
 
-> Note: certain config options like `validation` are coupled and can only disabled as a whole. This might change in future releases.
+Certain configuration options are broken down further into "sub-options", enabling to turn off features within configuration groups, eg. `validation`:
+
+```js
+// builder.config.js
+
+export default {
+  element: {
+    props: {
+      default: {
+        // Turn off validation feature
+        // completely for each element
+        validation: false,
+
+        // Turn off only "min", "max" and
+        // "size" validation rules for each
+        // element that have them
+        validation: {
+          min: false,
+          max: false,
+          size: false,
+        }
+      },
+      // ...
+    },
+  },
+}
+```
 
 Here's the complete config for element props:
 
@@ -605,35 +647,125 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
           meta: true,
         },
         data: {
           default: true,
           submit: true,
-          items: true,
-          selectItems: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+          },
           object: true,
           nested: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
+          tooltip: true,
+          description: true,
         },
         layout: {
-          size: true,
-          columns: true,
-          view: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
+          view: {
+            tabs: true,
+            blocks: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
-          fileRules: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
+          fileRules: {
+            min: true,
+            max: true,
+            mimes: true,
+            extensions: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -645,66 +777,104 @@ export default {
           autocomplete: true,
           attrs: true,
         },
-        textarea: {
+        options: {
           autogrow: true,
           rows: true,
-        },
-        file: {
-          endpoint: true,
-          accept: true,
+          endpoint: {
+            method: true,
+          },
+          accept: {
+            mimes: true,
+            extensions: true,
+          },
           tools: true,
-          file: true,
-          fileAccept: true,
-          fileEndpoints: true,
-          params: true,
-          multifile: true,
-        },
-        checkbox: {
           text: true,
           boolValue: true,
-        },
-        radio: {
-          text: true,
           radio: true,
-        },
-        toggle: {
-          text: true,
           labels: true,
-          boolValue: true,
-        },
-        select: {
           native: true,
-          searchHeader: true,
-          search: true,
-          strictSearch: true,
-          trackBy: true,
-          inputType: true,
-          autocomplete: true,
-          create: true,
-          behavior: true,
-          ui: true,
-          optionLimit: true,
+          search: {
+            strict: true,
+            trackBy: true,
+            inputType: true,
+            autocomplete: true,
+          },
+          create: {
+            append: true,
+            addOn: true,
+          },
+          behavior: {
+            deselect: true,
+            clear: true,
+            closeOnSelect: true,
+          },
+          ui: {
+            caret: true,
+            truncate: true,
+            openDirection: true,
+            limit: true,
+          },
           noOptions: true,
+          noResults: true,
           max: true,
           multipleLabel: true,
-        },
-        date: {
-          date: true,
-          dateFormats: true,
-          dateConstraints: true,
-          dateMode: true,
-        },
-        slider: {
-          slider: true,
-          tooltips: true,
-          tooltipPosition: true,
-          format: true,
-        },
-        button: {
-          button: true,
-        },
-        content: {
-          static: true,
+          format: {
+            display: true,
+            value: true,
+            load: true,
+          },
+          restrictions: {
+            min: true,
+            max: true,
+            disables: true,
+          },
+          hour24: true,
+          seconds: true,
+          mode: true,
+          min: true,
+          step: true,
+          orientation: true,
+          direction: true,
+          tooltips: {
+            merge: true,
+            show: true,
+            position: true,
+          },
+          tooltipFormat: true,
+          autoUpload: true,
+          dragAndDrop: true,
+          softRemove: true,
+          clickable: true,
+          urls: {
+            click: true,
+            preview: true,
+          },
+          endpoints: {
+            uploadTemp: true,
+            uploadTempMethod: true,
+            removeTemp: true,
+            removeTempMethod: true,
+            remove: true,
+            removeMethod: true,
+          },
+          params: true,
+          controls: {
+            add: true,
+            remove: true,
+            sort: true,
+          },
+          store: {
+            object: true,
+            file: true,
+            order: true,
+          },
+          buttonLabel: true,
+          buttonType: true,
+          submits: true,
+          resets: true,
+          href: true,
+          target: true,
+          content: true,
         },
       },
       text: {
@@ -714,7 +884,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -722,20 +894,71 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            before: true,
+            before_or_equal: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            email: true,
+            exists: true,
+            gt: true,
+            gte: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -755,7 +978,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -763,20 +988,87 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -796,7 +1088,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -804,20 +1098,87 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -837,7 +1198,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -845,20 +1208,87 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -878,7 +1308,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -886,20 +1318,87 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -919,7 +1418,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -927,20 +1428,87 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -960,7 +1528,9 @@ export default {
           inputType: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
         data: {
@@ -968,18 +1538,31 @@ export default {
           submit: true,
         },
         decorators: {
-          addons: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            required: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -998,10 +1581,12 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        textarea: {
+        options: {
           autogrow: true,
           rows: true,
         },
@@ -1010,20 +1595,62 @@ export default {
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          addons: true,
-          description: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            email: true,
+            exists: true,
+            gt: true,
+            gte: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1041,12 +1668,19 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        file: {
-          endpoint: true,
-          accept: true,
+        options: {
+          endpoint: {
+            method: true,
+          },
+          accept: {
+            mimes: true,
+            extensions: true,
+          },
           tools: true,
         },
         data: {
@@ -1059,12 +1693,34 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            different: true,
+            gt: true,
+            gte: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            nullable: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1082,7 +1738,7 @@ export default {
           tooltip: true,
           description: true,
         },
-        checkbox: {
+        options: {
           text: true,
           boolValue: true,
         },
@@ -1096,12 +1752,26 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            different: true,
+            in: true,
+            not_in: true,
+            same: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1120,7 +1790,11 @@ export default {
           description: true,
         },
         data: {
-          items: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+          },
           default: true,
           submit: true,
         },
@@ -1130,13 +1804,32 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            tabs: true,
+            blocks: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            array: true,
+            distinct: true,
+            max: true,
+            min: true,
+            nullable: true,
+            required: true,
+            size: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1155,7 +1848,21 @@ export default {
           description: true,
         },
         data: {
-          items: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           submit: true,
         },
@@ -1165,13 +1872,83 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1190,7 +1967,21 @@ export default {
           description: true,
         },
         data: {
-          items: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           submit: true,
         },
@@ -1200,13 +1991,83 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1224,7 +2085,7 @@ export default {
           tooltip: true,
           description: true,
         },
-        radio: {
+        options: {
           text: true,
           radio: true,
         },
@@ -1238,12 +2099,26 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            boolean: true,
+            in: true,
+            in_array: true,
+            not_in: true,
+            required: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1262,7 +2137,11 @@ export default {
           description: true,
         },
         data: {
-          items: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+          },
           default: true,
           submit: true,
         },
@@ -1272,13 +2151,32 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            tabs: true,
+            blocks: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            different: true,
+            in: true,
+            in_array: true,
+            not_in: true,
+            nullable: true,
+            required: true,
+            same: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1297,7 +2195,21 @@ export default {
           description: true,
         },
         data: {
-          items: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           submit: true,
         },
@@ -1307,13 +2219,83 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1332,7 +2314,21 @@ export default {
           description: true,
         },
         data: {
-          items: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           submit: true,
         },
@@ -1342,13 +2338,83 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1366,7 +2432,7 @@ export default {
           tooltip: true,
           description: true,
         },
-        toggle: {
+        options: {
           text: true,
           labels: true,
           boolValue: true,
@@ -1381,12 +2447,27 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            different: true,
+            in: true,
+            not_in: true,
+            nullable: true,
+            required: true,
+            same: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1402,43 +2483,110 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        select: {
+        options: {
           native: true,
-          searchHeader: true,
-          search: true,
-          strictSearch: true,
-          trackBy: true,
-          inputType: true,
-          autocomplete: true,
-          create: true,
-          behavior: true,
-          ui: true,
-          optionLimit: true,
+          search: {
+            strict: true,
+            trackBy: true,
+            inputType: true,
+            autocomplete: true,
+          },
+          create: {
+            append: true,
+            addOn: true,
+          },
+          behavior: {
+            deselect: true,
+            clear: true,
+            closeOnSelect: true,
+          },
+          ui: {
+            caret: true,
+            truncate: true,
+            openDirection: true,
+            limit: true,
+          },
           noOptions: true,
+          noResults: true,
         },
         data: {
-          selectItems: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           object: true,
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            email: true,
+            exists: true,
+            gt: true,
+            gte: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1455,45 +2603,91 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        select: {
+        options: {
           native: true,
-          searchHeader: true,
-          search: true,
-          strictSearch: true,
-          trackBy: true,
-          inputType: true,
-          autocomplete: true,
-          create: true,
-          behavior: true,
-          ui: true,
-          optionLimit: true,
+          search: {
+            strict: true,
+            trackBy: true,
+            inputType: true,
+            autocomplete: true,
+          },
+          create: {
+            append: true,
+            addOn: true,
+          },
+          behavior: {
+            deselect: true,
+            clear: true,
+            closeOnSelect: true,
+          },
+          ui: {
+            caret: true,
+            truncate: true,
+            openDirection: true,
+            limit: true,
+          },
           max: true,
           multipleLabel: true,
           noOptions: true,
+          noResults: true,
         },
         data: {
-          selectItems: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           object: true,
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            array: true,
+            distinct: true,
+            gt: true,
+            gte: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            nullable: true,
+            required: true,
+            size: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1510,43 +2704,89 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        select: {
-          searchHeader: true,
-          search: true,
-          strictSearch: true,
-          trackBy: true,
-          inputType: true,
-          autocomplete: true,
-          create: true,
-          behavior: true,
-          ui: true,
-          optionLimit: true,
+        options: {
+          search: {
+            strict: true,
+            trackBy: true,
+            inputType: true,
+            autocomplete: true,
+          },
+          create: {
+            append: true,
+            addOn: true,
+          },
+          behavior: {
+            deselect: true,
+            clear: true,
+            closeOnSelect: true,
+          },
+          ui: {
+            caret: true,
+            truncate: true,
+            openDirection: true,
+            limit: true,
+          },
           max: true,
           noOptions: true,
+          noResults: true,
         },
         data: {
-          selectItems: true,
+          items: {
+            list: true,
+            json: true,
+            endpoint: true,
+            valueKey: true,
+            labelKey: true,
+            dataKey: true,
+            searchParam: true,
+            updateOnSearch: true,
+            delay: true,
+            minChars: true,
+            resolveOnLoad: true,
+            filterResults: true,
+            clearOnSearch: true,
+          },
           default: true,
           object: true,
           submit: true,
         },
         decorators: {
-          tooltip: true,
-          description: true,
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            array: true,
+            distinct: true,
+            gt: true,
+            gte: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            nullable: true,
+            required: true,
+            size: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1563,31 +2803,66 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        date: {
-          date: true,
-          dateFormats: true,
-          dateConstraints: true,
+        options: {
+          format: {
+            display: true,
+            value: true,
+            load: true,
+          },
+          restrictions: {
+            min: true,
+            max: true,
+            disables: true,
+          },
         },
         data: {
           default: true,
           submit: true,
         },
         decorators: {
-          addons: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            after: true,
+            after_or_equal: true,
+            before: true,
+            before_or_equal: true,
+            date: true,
+            date_format: true,
+            different: true,
+            in: true,
+            in_array: true,
+            not_in: true,
+            nullable: true,
+            required: true,
+            same: true,
+            string: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1604,31 +2879,111 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        date: {
-          date: true,
-          dateFormats: true,
-          dateConstraints: true,
+        options: {
+          hour24: true,
+          seconds: true,
+          format: {
+            display: true,
+            value: true,
+            load: true,
+          },
+          restrictions: {
+            min: true,
+            max: true,
+            disables: true,
+          },
         },
         data: {
           default: true,
           submit: true,
         },
         decorators: {
-          addons: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1645,31 +3000,106 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        date: {
-          date: true,
-          dateFormats: true,
-          dateConstraints: true,
+        options: {
+          hour24: true,
+          seconds: true,
+          format: {
+            display: true,
+            value: true,
+            load: true,
+          },
         },
         data: {
           default: true,
           submit: true,
         },
         decorators: {
-          addons: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1686,31 +3116,66 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        date: {
-          dateMode: true,
-          dateFormats: true,
-          dateConstraints: true,
+        options: {
+          mode: true,
+          format: {
+            display: true,
+            value: true,
+            load: true,
+          },
+          restrictions: {
+            min: true,
+            max: true,
+            disables: true,
+          },
         },
         data: {
           default: true,
           submit: true,
         },
         decorators: {
-          addons: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            after: true,
+            after_or_equal: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            date: true,
+            date_format: true,
+            distinct: true,
+            max: true,
+            min: true,
+            nullable: true,
+            required: true,
+            size: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1727,31 +3192,110 @@ export default {
           name: true,
           label: true,
           tooltip: true,
-          placeholder: true,
+          placeholder: {
+            floating: true,
+          },
           description: true,
         },
-        date: {
-          dateMode: true,
-          dateFormats: true,
-          dateConstraints: true,
+        options: {
+          mode: true,
+          format: {
+            display: true,
+            value: true,
+            load: true,
+          },
+          restrictions: {
+            min: true,
+            max: true,
+            disables: true,
+          },
         },
         data: {
           default: true,
           submit: true,
         },
         decorators: {
-          addons: true,
+          addons: {
+            prefix: true,
+            suffix: true,
+          },
           before: true,
           between: true,
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1770,11 +3314,18 @@ export default {
           tooltip: true,
           description: true,
         },
-        slider: {
-          slider: true,
-          tooltips: true,
-          tooltipPosition: true,
-          format: true,
+        options: {
+          min: true,
+          max: true,
+          step: true,
+          orientation: true,
+          direction: true,
+          tooltips: {
+            merge: true,
+            show: true,
+            position: true,
+          },
+          tooltipFormat: true,
         },
         data: {
           default: true,
@@ -1786,12 +3337,42 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            array: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            distinct: true,
+            gt: true,
+            gte: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1809,11 +3390,18 @@ export default {
           tooltip: true,
           description: true,
         },
-        slider: {
-          slider: true,
-          tooltips: true,
-          tooltipPosition: true,
-          format: true,
+        options: {
+          min: true,
+          max: true,
+          step: true,
+          orientation: true,
+          direction: true,
+          tooltips: {
+            merge: true,
+            show: true,
+            position: true,
+          },
+          tooltipFormat: true,
         },
         data: {
           default: true,
@@ -1825,12 +3413,78 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1848,11 +3502,18 @@ export default {
           tooltip: true,
           description: true,
         },
-        slider: {
-          slider: true,
-          tooltips: true,
-          tooltipPosition: true,
-          format: true,
+        options: {
+          min: true,
+          max: true,
+          step: true,
+          orientation: true,
+          direction: true,
+          tooltips: {
+            merge: true,
+            show: true,
+            position: true,
+          },
+          tooltipFormat: true,
         },
         data: {
           default: true,
@@ -1864,12 +3525,78 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1887,10 +3614,28 @@ export default {
           tooltip: true,
           description: true,
         },
-        file: {
-          file: true,
-          fileAccept: true,
-          fileEndpoints: true,
+        options: {
+          autoUpload: true,
+          dragAndDrop: true,
+          softRemove: true,
+          clickable: true,
+          urls: {
+            click: true,
+            preview: true,
+          },
+          accept: {
+            types: true,
+            mimes: true,
+            extensions: true,
+          },
+          endpoints: {
+            uploadTemp: true,
+            uploadTempMethod: true,
+            removeTemp: true,
+            removeTempMethod: true,
+            remove: true,
+            removeMethod: true,
+          },
           params: true,
         },
         data: {
@@ -1903,13 +3648,40 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            dimensions: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            nullable: true,
+            required: true,
+            size: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1927,8 +3699,39 @@ export default {
           tooltip: true,
           description: true,
         },
-        file: {
-          multifile: true,
+        options: {
+          autoUpload: true,
+          dragAndDrop: true,
+          softRemove: true,
+          clickable: true,
+          urls: {
+            click: true,
+            preview: true,
+          },
+          controls: {
+            add: true,
+            remove: true,
+            sort: true,
+          },
+          store: {
+            object: true,
+            file: true,
+            order: true,
+          },
+          accept: {
+            types: true,
+            mimes: true,
+            extensions: true,
+          },
+          endpoints: {
+            uploadTemp: true,
+            uploadTempMethod: true,
+            removeTemp: true,
+            removeTempMethod: true,
+            remove: true,
+            removeMethod: true,
+          },
+          params: true,
         },
         data: {
           submit: true,
@@ -1939,14 +3742,50 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          fileRules: true,
-          validation: true,
+          fileRules: {
+            min: true,
+            max: true,
+            mimes: true,
+            extensions: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+          },
+          validation: {
+            array: true,
+            gt: true,
+            gte: true,
+            lt: true,
+            lte: true,
+            max: true,
+            min: true,
+            nullable: true,
+            required: true,
+            size: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -1964,10 +3803,27 @@ export default {
           tooltip: true,
           description: true,
         },
-        file: {
-          file: true,
-          fileAccept: true,
-          fileEndpoints: true,
+        options: {
+          autoUpload: true,
+          dragAndDrop: true,
+          softRemove: true,
+          clickable: true,
+          urls: {
+            click: true,
+            preview: true,
+          },
+          accept: {
+            mimes: true,
+            extensions: true,
+          },
+          endpoints: {
+            uploadTemp: true,
+            uploadTempMethod: true,
+            removeTemp: true,
+            removeTempMethod: true,
+            remove: true,
+            removeMethod: true,
+          },
           params: true,
         },
         data: {
@@ -1980,13 +3836,83 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          validation: true,
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2004,8 +3930,38 @@ export default {
           tooltip: true,
           description: true,
         },
-        file: {
-          multifile: true,
+        options: {
+          autoUpload: true,
+          dragAndDrop: true,
+          softRemove: true,
+          clickable: true,
+          urls: {
+            click: true,
+            preview: true,
+          },
+          controls: {
+            add: true,
+            remove: true,
+            sort: true,
+          },
+          store: {
+            object: true,
+            file: true,
+            order: true,
+          },
+          accept: {
+            mimes: true,
+            extensions: true,
+          },
+          endpoints: {
+            uploadTemp: true,
+            uploadTempMethod: true,
+            removeTemp: true,
+            removeTempMethod: true,
+            remove: true,
+            removeMethod: true,
+          },
+          params: true,
         },
         data: {
           submit: true,
@@ -2016,14 +3972,97 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          fileRules: true,
-          validation: true,
+          fileRules: {
+            min: true,
+            max: true,
+            mimes: true,
+            extensions: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+          },
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2041,8 +4080,38 @@ export default {
           tooltip: true,
           description: true,
         },
-        file: {
-          multifile: true,
+        options: {
+          autoUpload: true,
+          dragAndDrop: true,
+          softRemove: true,
+          clickable: true,
+          urls: {
+            click: true,
+            preview: true,
+          },
+          controls: {
+            add: true,
+            remove: true,
+            sort: true,
+          },
+          store: {
+            object: true,
+            file: true,
+            order: true,
+          },
+          accept: {
+            mimes: true,
+            extensions: true,
+          },
+          endpoints: {
+            uploadTemp: true,
+            uploadTempMethod: true,
+            removeTemp: true,
+            removeTempMethod: true,
+            remove: true,
+            removeMethod: true,
+          },
+          params: true,
         },
         data: {
           submit: true,
@@ -2053,14 +4122,97 @@ export default {
           after: true,
         },
         layout: {
-          view: true,
-          size: true,
-          columns: true,
+          view: {
+            file: true,
+            image: true,
+            gallery: true,
+          },
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         validation: {
           fieldName: true,
-          fileRules: true,
-          validation: true,
+          fileRules: {
+            min: true,
+            max: true,
+            mimes: true,
+            extensions: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+          },
+          validation: {
+            accepted: true,
+            active_url: true,
+            after: true,
+            after_or_equal: true,
+            alpha: true,
+            alpha_dash: true,
+            alpha_num: true,
+            array: true,
+            before: true,
+            before_or_equal: true,
+            boolean: true,
+            date: true,
+            date_equals: true,
+            date_format: true,
+            different: true,
+            digits: true,
+            digits_between: true,
+            dimensions: true,
+            width: true,
+            height: true,
+            minWidth: true,
+            minHeight: true,
+            maxWidth: true,
+            maxHeight: true,
+            ratio: true,
+            distinct: true,
+            email: true,
+            exists: true,
+            file: true,
+            gt: true,
+            gte: true,
+            image: true,
+            in: true,
+            in_array: true,
+            integer: true,
+            ip: true,
+            ipv4: true,
+            ipv6: true,
+            json: true,
+            lt: true,
+            lte: true,
+            max: true,
+            mimetypes: true,
+            mimes: true,
+            min: true,
+            not_in: true,
+            nullable: true,
+            numeric: true,
+            regex: true,
+            required: true,
+            same: true,
+            size: true,
+            string: true,
+            timezone: true,
+            unique: true,
+            url: true,
+            uuid: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2096,8 +4248,13 @@ export default {
           tooltip: true,
           description: true,
         },
-        button: {
-          button: true,
+        options: {
+          buttonLabel: true,
+          buttonType: true,
+          submits: true,
+          resets: true,
+          href: true,
+          target: true,
         },
         decorators: {
           before: true,
@@ -2105,8 +4262,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2124,8 +4289,13 @@ export default {
           tooltip: true,
           description: true,
         },
-        button: {
-          button: true,
+        options: {
+          buttonLabel: true,
+          buttonType: true,
+          submits: true,
+          resets: true,
+          href: true,
+          target: true,
         },
         decorators: {
           before: true,
@@ -2133,8 +4303,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2152,8 +4330,13 @@ export default {
           tooltip: true,
           description: true,
         },
-        button: {
-          button: true,
+        options: {
+          buttonLabel: true,
+          buttonType: true,
+          submits: true,
+          resets: true,
+          href: true,
+          target: true,
         },
         decorators: {
           before: true,
@@ -2161,8 +4344,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2180,8 +4371,13 @@ export default {
           tooltip: true,
           description: true,
         },
-        button: {
-          button: true,
+        options: {
+          buttonLabel: true,
+          buttonType: true,
+          submits: true,
+          resets: true,
+          href: true,
+          target: true,
         },
         decorators: {
           before: true,
@@ -2189,8 +4385,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2208,8 +4412,13 @@ export default {
           tooltip: true,
           description: true,
         },
-        button: {
-          button: true,
+        options: {
+          buttonLabel: true,
+          buttonType: true,
+          submits: true,
+          resets: true,
+          href: true,
+          target: true,
         },
         decorators: {
           before: true,
@@ -2217,8 +4426,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2236,8 +4453,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2245,8 +4462,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2260,8 +4485,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2269,8 +4494,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2284,8 +4517,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2293,8 +4526,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2308,8 +4549,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2317,8 +4558,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2332,8 +4581,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2341,8 +4590,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2356,8 +4613,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2365,8 +4622,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2380,8 +4645,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2389,8 +4654,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2404,8 +4677,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2413,8 +4686,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2428,8 +4709,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2437,8 +4718,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2452,8 +4741,8 @@ export default {
           tooltip: true,
           description: true,
         },
-        content: {
-          static: true,
+        options: {
+          content: true,
         },
         decorators: {
           before: true,
@@ -2461,8 +4750,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2485,8 +4782,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2509,8 +4814,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2533,8 +4846,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2557,8 +4878,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2578,8 +4907,16 @@ export default {
           after: true,
         },
         layout: {
-          size: true,
-          columns: true,
+          size: {
+            sm: true,
+            md: true,
+            lg: true,
+          },
+          columns: {
+            container: true,
+            label: true,
+            wrapper: true,
+          },
         },
         conditions: {
           conditions: true,
@@ -2591,7 +4928,7 @@ export default {
 }
 ```
 
-### Themes
+## Themes
 
 Available themes (in Theme panel) can be configured with the following option:
 
@@ -3306,7 +5643,7 @@ export default {
 }
 ```
 
-### Custom Config
+## Custom Config
 
 Custom configuration can be applied to `<VueformBuilder>` individually which will be used instead of the default `builder.config.js`:
 
@@ -3327,13 +5664,3635 @@ Custom configuration can be applied to `<VueformBuilder>` individually which wil
 </script>
 ```
 
-## Upcoming Features
+# Adding Elements
 
-- adding custom elements with custom configuration props
-- nested & repeatable elements (multi-column containers)
+New elements can be registered in `builder.config.js` under `element.types`:
+
+``` js
+// builder.config.js
+
+export default {
+  element: {
+    types: {
+      logo: {
+        label: 'Logo',
+        description: 'Company logo',
+        icon: 'https://domain.com/logo-element-icon.svg',
+        category: 'static',
+        schema: {
+          type: 'static',
+          content: '<img src="https://domain.com/logo.svg" />'
+        },
+        sections: 'static',
+        separators: 'static',
+      },
+      // ...
+    }
+  }
+}
+```
+
+<a name="element-type-options" id="element-type-options"></a>
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `label*` | `string` | The label of the element in the element list. |
+| `description*` | `string` | The description of the element in the element list. |
+| `icon` | `string` | The url of the element's icon in the element list (if left empty a default icon will be displayed). It's recommended to use SVG to keep the UI high quality on each display. |
+| `category` | `string` | Under which category should the element appear in the element list (if using categories). |
+| `schema*` | `object` | The schema of the element that will be added. |
+| `sections*` | `string\|object` | This determines what configuration options the element has when selected. It can be a `string` with the name of an other element which's sections should be reused (eg `'text'`) or an `object` containing custom configuration options (more about it later). |
+| `separators*` | `string\|object` | Defines the separators between of configuration options (more about it later). |
+
+> \* - mandatory
+
+## Reusing Existing Element Types
+
+We can add elements that are based on existing elements but using a different schema. Eg. we have the `Select` element and we want to make it available with different default configuration.
+
+```js
+// The existing "Select" element's schema (default config)
+
+schema: {
+  type: 'select',
+  label: 'Select',
+  search: true,
+  native: false,
+  inputType: 'search',
+  autocomplete: 'off',
+  items: [
+    { value: 0, label: 'Label' },
+  ],
+}
+```
+```js
+// Our version of "Select" element's schema
+// (implementing a "User selector")
+
+schema: {
+  type: 'select',
+  label: 'Users',
+  native: false,
+  search: true,
+  resolveOnLoad: false,
+  minChars: 2,
+  delay: 300,
+  inputType: 'search',
+  autocomplete: 'off',
+  items: '/api/users',
+}
+```
+
+We can add this as a new element type the following way:
+
+``` js
+// builder.config.js
+
+export default {
+  element: {
+    types: {
+      user: { // <- the unique id of the element
+        label: 'User selector',
+        description: 'Select a user from the database',
+        icon: 'https://domain.com/user-element-icon.svg',
+        category: 'fields',
+        schema: { // <- default configation options
+          type: 'select',
+          label: 'Users',
+          native: false,
+          search: true,
+          resolveOnLoad: false,
+          minChars: 2,
+          delay: 300,
+          inputType: 'search',
+          autocomplete: 'off',
+          items: '/api/users',
+        },
+        sections: 'select', // <- using the configuration options of 'select'
+        separators: 'select', // <- using the configuration options of 'select'
+      },
+    }
+  }
+}
+```
+
+The new `User selector` element will be added to end of `Fields` element list and will inhert `select` element's config (`sections` & `separators` - more about it later).
+
+## Display Order
+
+If we want to change the display order of elements we can use the following unversal list in `builder.config.js`:
+
+``` js
+// builder.config.js
+
+export default {
+  element: {
+    types: {
+      user: {
+        // ...
+      }
+    }
+  },
+
+  elements: [
+    'text',
+    'number',
+    'email',
+    'phone',
+    'password',
+    'url',
+    'user', // <-- "User selector" added here so it will be displayed after "URL"
+    'location',
+    'textarea',
+    'editor',
+    'checkbox',
+    'checkboxgroup',
+    'checkboxBlocks',
+    'checkboxTabs',
+    'radio',
+    'radiogroup',
+    'radioBlocks',
+    'radioTabs',
+    'toggle',
+    'select',
+    'multiselect',
+    'tags',
+    'date',
+    'datetime',
+    'time',
+    'dates',
+    'dateRange',
+    'slider',
+    'rangeSlider',
+    'verticalSlider',
+    'file',
+    'multifile',
+    'image',
+    'multiImage',
+    'gallery',
+    'hidden',
+    'submit',
+    'reset',
+    'primaryButton',
+    'secondaryButton',
+    'dangerButton',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'p',
+    'quote',
+    'img',
+    'link',
+    'divider',
+    'html',
+    'container',
+    'container2',
+    'container3',
+    'container4',
+    'list',
+    'nestedList',
+  ]
+}
+```
+
+## Available Element Types
+
+Here's the list of available element types that can be used:
+
+| Key | Configuration panel example |
+| --- | --- |
+| `button` | Submit button |
+| `checkbox` | Checkbox |
+| `checkboxgroup` | Checkbox group  |
+| `date` | Date |
+| `dates` | Multiple dates |
+| `editor` | WYSIWYG editor |
+| `file` | File upload |
+| `hidden` | Hidden input |
+| `location` | Location |
+| `multifile` | Multi-file upload |
+| `multiselect` | Multiselect |
+| `container` | Container |
+| `radio` | Radio |
+| `radiogroup` | Radio group |
+| `select` | Select |
+| `slider` | Slider |
+| `html` | Static HTML |
+| `tags` | Tags |
+| `text` | Text input |
+| `textarea` | Textarea |
+| `toggle` | Toggle |
+
+They can be used in the `sections` and `separators` property of a new element type, as seen above, eg:
+
+``` js
+// builder.config.js
+
+export default {
+  element: {
+    types: {
+      user: {
+        label: 'User selector',
+        description: 'Select a user from the database',
+        icon: 'https://domain.com/user-element-icon.svg',
+        category: 'fields',
+        schema: {
+          // ...
+        },
+        sections: 'select', // <- element type
+        separators: 'select', // <- element type
+      },
+      // ...
+    }
+  }
+}
+```
+
+## Creating New Elements with Custom Configuration Panel
+
+If we want to add a custom element, first we have to register it for Vueform based on the docs in Vueform's [Creating Elements](https://vueform.com/docs/1.x/creating-elements#registering-elements) section. 
+
+Let's say we registered a new element called `LogoElement`. Now, we're able to add it to the builder:
+
+``` js
+// builder.config.js
+
+export default {
+  element: {
+    types: {
+      logo: {
+        label: 'Logo',
+        description: 'Company logo',
+        icon: 'https://domain.com/logo-element-icon.svg',
+        category: 'static',
+        schema: {
+          type: 'logo', // <- using our new `LogoElement` type
+        },
+        sections: {
+          // ...
+        },
+        separators: {
+          // ...
+        },
+      }
+    }
+  }
+}
+```
+
+The options are the same as discussed at the [top of this section](#element-type-options). The only difference is that this time we're going to use an `object` as the value for `sections` and `separators`. This is where we'll define what configuration options the element should have on the right panel when selected.
+
+### Defining Sections
+
+Each element has the following sections (it's recommended to follow this convention):
+
+``` js
+export default {
+  element: {
+    types: {
+      custom: {
+        // ...
+        sections: {
+          /**
+           * General properties like name, label, placeholder, description,
+           */
+          properties: {
+            // ...
+          },
+
+          /**
+           * Element specific properties like search options for select or
+           * date constraints for date element, etc. Put here everything
+           * that is unique to the element (other probably don't have).
+           */
+          options: {
+            // ...
+          },
+
+          /**
+           * Everything that is related to the element's data. Eg. default
+           * value, available options/items, etc. If the element is static
+           * eg. a button you can leave out this part.
+           */
+          data: {
+            // ...
+          },
+
+          /**
+           * Configuration of decorators of the element, eg. prefix/suffix,
+           * before/between/after contents.
+           */
+          decorators: {
+            // ...
+          },
+          
+          /**
+           * Everything that is related to the look of the element, eg.
+           * sizing, columns width, view options, etc.
+           */
+          layout: {
+            // ...
+          },
+
+          /**
+           * Configuration options related to validation rules, eg. field
+           * name & validation rules. If the element is static
+           * eg. a button you can leave out this part.
+           */
+          validation: {
+            // ...
+          },
+
+          /**
+           * It should contain everything related to rendering the element
+           * conditionally.
+           */
+          conditions: {
+            // ...
+          },
+
+          /**
+           * If the element has native attributes (like `disbled` or
+           * `readonly`) for `<input>` they can be put here.
+           */
+          attributes: {
+            // ...
+          },
+        },
+      },
+    },
+  },
+},
+```
+
+Sections must define a `name`, `label` and `fields` like:
+
+```js
+properties: {
+  name: 'properties',
+  label: 'Properties',
+  fields: {
+    // ...
+  }
+}
+```
+
+The **`fields`** contain configuration fields that are either provided by Vueform Builder or custom created.
+
+### Using Fields Provided by Vueform
+
+Our `LogoElement` is static so we don't need `data` and `validation` sections and to keep things simple we'll also exclude `attributes` section. We're left with following sections:
+- `properties`
+- `options`
+- `decorators`
+- `layout`
+- `conditions`
+
+Now we need to fill in the sections with actual configuration fields. Existing fields can be imported from `@vueform/builder`:
+
+``` js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  ConditionsField,
+} from '@vueform/builder'
+
+export default {
+  element: {
+    types: {
+      logo: {
+        label: 'Logo',
+        description: 'Company logo',
+        icon: 'https://domain.com/logo-element-icon.svg',
+        category: 'static',
+        schema: {
+          type: 'logo',
+        },
+        sections: {
+          properties: {
+            name: 'properties',
+            label: 'Properties',
+            fields: {
+              type: { type: TypeField, },
+              name: { type: NameField, },
+              label: { type: LabelField, },
+              tooltip: { type: InfoField, },
+              description: { type: DescriptionField, },
+            },
+          },
+          options: {
+            name: 'options',
+            label: 'Logo options',
+            fields: {
+              // ... custom fields will come here
+            },
+          },
+          decorators: {
+            name: 'decorators',
+            label: 'Decorators',
+            fields: {
+              before: { type: BeforeField, },
+              between: { type: BetweenField, },
+              after: { type: AfterField, },
+            },
+          },
+          layout: {
+            name: 'layout',
+            label: 'Layout',
+            fields: {
+              size: { type: SizeField, },
+              columns: { type: ColumnsField, },
+            },
+          },
+          conditions: {
+            name: 'conditions',
+            label: 'Conditions',
+            fields: {
+              conditions: { type: ConditionsField, },
+            },
+          },
+        },
+        separators: {
+          // ...
+        },
+      },
+    },
+  },
+},
+```
+
+> Every field must only be used under the section name it's supposed to be at. Eg. `ConditionsField` must be in `conditions` section, `ColumnsField` in `layout`, etc. You can find the full list of fields and their location at the [end of this chapter](#existing-element-configurations).
+
+Each new element **must** have at least a `TypeField` and `NameField` in `properties` everything else is in fact optional (but recommended).
+
+Note: custom element fields can later also be disabled in `builder.config.js` as [seen previously](#element-settings-panel):
+
+```js
+// builder.config.js
+
+export default {
+  element: {
+    props: {
+      logo: {
+        properties: {
+          label: false,
+          info: false,
+          description: false,
+        },
+        decorators: false,
+      }
+    }
+  }
+}
+```
+
+We can even disable our custom fields once we add them.
+
+### Creating Custom Fields
+
+We can create our own configuration field eg. a color selector for our `LogoElement` that can choose between "Black & white" and "Color" versions.
+
+To do this let's create a `LogoColorField.js` somewhere in our project:
+
+``` js
+// LogoColorField.js
+
+import { BaseField } from '@vueform/builder'
+
+export default class LogoColorField extends BaseField
+{
+  get schema() {
+    return {
+      color: {
+        type: 'select',
+        label: 'Logo color',
+        columns: { label: 6 },
+        items: {
+          'bw': 'Black & white',
+          'color': 'Color',
+        },
+      }
+    }
+  }
+}
+```
+
+This field is **going to set the `color` property of our `LogoElement` component**, so the `LogoElement` component should have a `color` property which defines which logo is rendered.
+
+> Fields can use Vueform's [schema object](https://vueform.com/docs/1.x/rendering-forms#using-schema-object) to define configuration options.
+
+Next add our custom field to our element definition:
+
+``` js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  ConditionsField,
+} from '@vueform/builder'
+
+import LogoColorField from './path/to/LogoColorField.js'
+
+export default {
+  element: {
+    types: {
+      logo: {
+        label: 'Logo',
+        description: 'Company logo',
+        icon: 'https://domain.com/logo-element-icon.svg',
+        category: 'static',
+        schema: {
+          type: 'logo',
+        },
+        sections: {
+          properties: {
+            name: 'properties',
+            label: 'Properties',
+            fields: {
+              type: { type: TypeField, },
+              name: { type: NameField, },
+              label: { type: LabelField, },
+              tooltip: { type: InfoField, },
+              description: { type: DescriptionField, },
+            },
+          },
+          options: {
+            name: 'options',
+            label: 'Logo options',
+            fields: {
+              color: { type: LogoColorField, }, // <- added here
+            },
+          },
+          decorators: {
+            name: 'decorators',
+            label: 'Decorators',
+            fields: {
+              before: { type: BeforeField, },
+              between: { type: BetweenField, },
+              after: { type: AfterField, },
+            },
+          },
+          layout: {
+            name: 'layout',
+            label: 'Layout',
+            fields: {
+              size: { type: SizeField, },
+              columns: { type: ColumnsField, },
+            },
+          },
+          conditions: {
+            name: 'conditions',
+            label: 'Conditions',
+            fields: {
+              conditions: { type: ConditionsField, },
+            },
+          },
+        },
+        separators: {
+          // ...
+        },
+      },
+    },
+  },
+},
+```
+
+Now if we drag the "Logo" element to our form and click on it, we'll see our custom config field showing up between other configuration options:
+
+![Logo Options](./assets/logo-options.png)
+
+### Adding Separators
+
+Separators can add dividers between configuration options. Eg. this would add a divider between **Name & Label** and **Info & Descrpition**:
+
+```js
+separators: {
+  properties: [
+    ['type', 'name'],
+    ['label', 'info'],
+    ['description'],
+  ],
+},
+```
+
+![Properties Separators](./assets/properties-separators.png)
+
+Fields should be groupped in an array that belong together so that dividers can be rendered between groups. This way of defining separators is required because config options can be turned on and off so it should know how to group certain options.
+
+Add a separator between `SizeField` and `ColumnsField` and move everything to the element definition. Here's the final result:
+
+``` js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  ConditionsField,
+} from '@vueform/builder'
+
+import LogoColorField from './path/to/LogoColorField.js'
+
+export default {
+  element: {
+    types: {
+      logo: {
+        label: 'Logo',
+        description: 'Company logo',
+        icon: 'https://domain.com/logo-element-icon.svg',
+        category: 'static',
+        schema: {
+          type: 'logo',
+        },
+        sections: {
+          properties: {
+            name: 'properties',
+            label: 'Properties',
+            fields: {
+              type: { type: TypeField, },
+              name: { type: NameField, },
+              label: { type: LabelField, },
+              tooltip: { type: InfoField, },
+              description: { type: DescriptionField, },
+            },
+          },
+          options: {
+            name: 'options',
+            label: 'Logo options',
+            fields: {
+              color: { type: LogoColorField, },
+            },
+          },
+          decorators: {
+            name: 'decorators',
+            label: 'Decorators',
+            fields: {
+              before: { type: BeforeField, },
+              between: { type: BetweenField, },
+              after: { type: AfterField, },
+            },
+          },
+          layout: {
+            name: 'layout',
+            label: 'Layout',
+            fields: {
+              size: { type: SizeField, },
+              columns: { type: ColumnsField, },
+            },
+          },
+          conditions: {
+            name: 'conditions',
+            label: 'Conditions',
+            fields: {
+              conditions: { type: ConditionsField, },
+            },
+          },
+        },
+        separators: {
+          properties: [
+            ['type', 'name'],
+            ['label', 'info'],
+            ['description'],
+          ],
+          layout: [
+            ['size'],
+            ['columns'],
+          ]
+        },
+      },
+    },
+  },
+},
+```
+
+## Existing Element Configurations
+
+Here's the full list of existing element configurations.
+
+
+### button
+
+Used by:
+- Submit button
+- Reset button
+- Primary button
+- Secondary button
+- Danger button
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  ButtonLabelField,
+  ButtonTypeField,
+  SubmitsField,
+  ResetsField,
+  HrefField,
+  TargetField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        buttonLabel: { type: ButtonLabelField },
+        buttonType: { type: ButtonTypeField },
+        submits: { type: SubmitsField },
+        resets: { type: ResetsField },
+        href: { type: HrefField },
+        target: { type: TargetField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['buttonLabel'],
+      ['buttonType'],
+      ['submits', 'resets'],
+      ['!', 'href', 'target'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### checkbox
+
+Used by:
+- Checkbox
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  TextField,
+  BoolValueField,
+  DefaultField_checkbox,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        text: { type: TextField },
+        boolValue: { type: BoolValueField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_checkbox },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['text'],
+      ['boolValue'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### checkboxgroup
+
+Used by:
+- Checkbox group
+- Checkbox blocks
+- Checkbox tabs
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  ItemsField,
+  DefaultField_checkboxgroup,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  ViewField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        items: { type: ItemsField },
+        default: { type: DefaultField_checkboxgroup },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        view: { type: ViewField },
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    data: {
+      ['items'],
+      ['default', 'submit'],
+    },
+    layout: {
+      ['view'],
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### date
+
+Used by:
+- Date
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  DateFormatField,
+  DateRestrictionsField,
+  DefaultField_date,
+  SubmitField,
+  AddonsField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  ReadonlyField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        format: { type: DateFormatField },
+        restrictions: { type: DateRestrictionsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_date },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['format'],
+      ['restrictions'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    decorators: {
+      ['addons'],
+      ['before', 'between', 'after'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id'],
+    },
+  }
+}
+```
+
+### dates
+
+Used by:
+- Multiple dates
+- Date range
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  DateModeField,
+  DateFormatField,
+  DateRestrictionsField,
+  DefaultField_dates,
+  SubmitField,
+  AddonsField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  ReadonlyField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        mode: { type: DateModeField },
+        format: { type: DateFormatField },
+        restrictions: { type: DateRestrictionsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_dates },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['mode'],
+      ['format'],
+      ['restrictions'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id'],
+    },
+  }
+}
+```
+
+### datetime
+
+Used by:
+- Datetime
+
+```js
+import {
+  Hour24Field,
+  SecondsField,
+  DateFormatField,
+  DateRestrictionsField,
+  DefaultField_datetime,
+  SubmitField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        hour24: { type: Hour24Field },
+        seconds: { type: SecondsField },
+        format: { type: DateFormatField },
+        restrictions: { type: DateRestrictionsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_datetime },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['hour24', 'seconds'],
+      ['format'],
+      ['restrictions'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    decorators: {
+      ['addons'],
+      ['before', 'between', 'after'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id'],
+    },
+  }
+}
+```
+
+### editor
+
+Used by:
+- WYSIWYG editor
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  EndpointField,
+  AcceptField,
+  ToolsField,
+  DefaultField_editor,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        endpoint: { type: EndpointField },
+        accept: { type: AcceptField },
+        tools: { type: ToolsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_editor },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['endpoint'],
+      ['accept'],
+      ['!', 'tools'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### file
+
+Used by:
+- File upload
+- Image upload
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  AutoUploadField,
+  DragAndDropField,
+  SoftRemoveField,
+  ClickableField,
+  FileUrlsField,
+  FileAcceptField,
+  FileEndpointsField,
+  ParamsField,
+  DefaultField,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  ViewField_file,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        autoUpload: { type: AutoUploadField },
+        dragAndDrop: { type: DragAndDropField },
+        softRemove: { type: SoftRemoveField },
+        clickable: { type: ClickableField },
+        urls: { type: FileUrlsField },
+        accept: { type: FileAcceptField },
+        endpoints: { type: FileEndpointsField },
+        params: { type: ParamsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        view: { type: ViewField_file },
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['autoUpload', 'dragAndDrop', 'softRemove', 'clickable'],
+      ['!', 'urls'],
+      ['!', 'accept'],
+      ['endpoints'],
+      ['!', 'params'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    layout: {
+      ['view'],
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### hidden
+
+Used by:
+- Hidden input
+
+```js
+import {
+  TypeField,
+  NameField,
+  MetaField,
+  DefaultField,
+  SubmitField,
+  ConditionsField,
+  IdField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        meta: { type: MetaField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField },
+        submit: { type: SubmitField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        id: { type: IdField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+  }
+}
+```
+
+### location
+
+Used by:
+- Location
+
+```js
+import {
+  TypeField,
+  NameField,
+  InputTypeField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  DefaultField_location,
+  SubmitField,
+  AddonsField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  ReadonlyField,
+  IdField,
+  AutocompleteField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        inputType: { type: InputTypeField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_location },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+        autocomplete: { type: AutocompleteField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name', 'inputType'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    decorators: {
+      ['addons'],
+      ['before', 'between', 'after'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id', 'autocomplete'],
+      ['attrs'],
+    },
+  }
+}
+```
+
+### multifile
+
+Used by:
+- Multi-file upload
+- Multi-image upload
+- Gallery
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  AutoUploadField,
+  DragAndDropField,
+  SoftRemoveField,
+  ClickableField,
+  FileUrlsField,
+  ControlsField,
+  StoreField,
+  FileAcceptField,
+  FileEndpointsField,
+  ParamsField,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  ViewField_file,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  FileRulesField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        autoUpload: { type: AutoUploadField },
+        dragAndDrop: { type: DragAndDropField },
+        softRemove: { type: SoftRemoveField },
+        clickable: { type: ClickableField },
+        urls: { type: FileUrlsField },
+        controls: { type: ControlsField },
+        store: { type: StoreField },
+        accept: { type: FileAcceptField },
+        endpoints: { type: FileEndpointsField },
+        params: { type: ParamsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        view: { type: ViewField_file },
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        fileRules: { type: FileRulesField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['autoUpload', 'dragAndDrop', 'softRemove', 'clickable'],
+      ['!', 'urls'],
+      ['!', 'controls'],
+      ['store'],
+      ['!', 'accept'],
+      ['endpoints'],
+      ['!', 'params'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    layout: {
+      ['view'],
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['fileRules'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### multiselect
+
+Used by:
+- Multiselect
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  NativeField,
+  SearchField,
+  CreateField,
+  SelectBehaviorField,
+  SelectUiField,
+  MaxOptionsField,
+  MultipleLabelField,
+  NoOptionsField,
+  NoResultsField,
+  SelectItemsField,
+  DefaultField_multiselect,
+  ObjectField,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        native: { type: NativeField },
+        search: { type: SearchField },
+        create: { type: CreateField },
+        behavior: { type: SelectBehaviorField },
+        ui: { type: SelectUiField },
+        max: { type: MaxOptionsField },
+        multipleLabel: { type: MultipleLabelField },
+        noOptions: { type: NoOptionsField },
+        noResults: { type: NoResultsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        items: { type: SelectItemsField },
+        default: { type: DefaultField_multiselect },
+        object: { type: ObjectField },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['native'],
+      ['search'],
+      ['!', 'create'],
+      ['!', 'behavior'],
+      ['ui'],
+      ['max'],
+      ['multipleLabel', 'noOptions', 'noResults'],
+    },
+    data: {
+      ['items'],
+      ['default', 'object', 'submit'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+      ['attrs'],
+    },
+  }
+}
+```
+
+### container
+
+Used by:
+- Container
+- 2 columns
+- 3 columns
+- 4 columns
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  NestedField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  ConditionsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        nested: { type: NestedField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+  }
+}
+```
+
+### radio
+
+Used by:
+- Radio
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  TextField,
+  RadioField,
+  DefaultField_radio,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        text: { type: TextField },
+        radio: { type: RadioField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_radio },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['text'],
+      ['radio'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### radiogroup
+
+Used by:
+- Radio group
+- Radio blocks
+- Radio tabs
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  ItemsField,
+  DefaultField_radiogroup,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  ViewField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        items: { type: ItemsField },
+        default: { type: DefaultField_radiogroup },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        view: { type: ViewField },
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    data: {
+      ['items'],
+      ['default', 'submit'],
+    },
+    layout: {
+      ['view'],
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### select
+
+Used by:
+- Select
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  NativeField,
+  SearchField,
+  CreateField,
+  SelectBehaviorField,
+  SelectUiField,
+  NoOptionsField,
+  NoResultsField,
+  SelectItemsField,
+  DefaultField_select,
+  ObjectField,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        native: { type: NativeField },
+        search: { type: SearchField },
+        create: { type: CreateField },
+        behavior: { type: SelectBehaviorField },
+        ui: { type: SelectUiField },
+        noOptions: { type: NoOptionsField },
+        noResults: { type: NoResultsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        items: { type: SelectItemsField },
+        default: { type: DefaultField_select },
+        object: { type: ObjectField },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['native'],
+      ['!', 'search'],
+      ['!', 'create'],
+      ['!', 'behavior'],
+      ['ui'],
+      ['noOptions', 'noResults'],
+    },
+    data: {
+      ['items'],
+      ['default', 'object', 'submit'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+      ['attrs'],
+    },
+  }
+}
+```
+
+### slider
+
+Used by:
+- Slider
+- Range slider
+- Vertical slider
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  MinField,
+  MaxField,
+  StepField,
+  OrientationField,
+  DirectionField,
+  TooltipsField,
+  TooltipFormatField,
+  DefaultField_slider,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        min: { type: MinField },
+        max: { type: MaxField },
+        step: { type: StepField },
+        orientation: { type: OrientationField },
+        direction: { type: DirectionField },
+        tooltips: { type: TooltipsField },
+        tooltipFormat: { type: TooltipFormatField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_slider },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['min', 'max', 'step'],
+      ['orientation', 'direction'],
+      ['!', 'tooltips'],
+      ['!', 'tooltipFormat'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+### static
+
+Used by:
+- Static HTML
+- H1 header
+- H2 header
+- H3 header
+- H4 header
+- Paragraph
+- Quote
+- Image
+- Link
+- Divider
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  ContentField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  ConditionsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        content: { type: ContentField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+  }
+}
+```
+
+### tags
+
+Used by:
+- Tags
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  SearchField,
+  CreateField,
+  SelectBehaviorField,
+  SelectUiField,
+  MaxOptionsField,
+  NoOptionsField,
+  NoResultsField,
+  SelectItemsField,
+  DefaultField_tags,
+  ObjectField,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        search: { type: SearchField },
+        create: { type: CreateField },
+        behavior: { type: SelectBehaviorField },
+        ui: { type: SelectUiField },
+        max: { type: MaxOptionsField },
+        noOptions: { type: NoOptionsField },
+        noResults: { type: NoResultsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        items: { type: SelectItemsField },
+        default: { type: DefaultField_tags },
+        object: { type: ObjectField },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['search'],
+      ['!', 'create'],
+      ['!', 'behavior'],
+      ['ui'],
+      ['max'],
+      ['noOptions', 'noResults'],
+    },
+    data: {
+      ['items'],
+      ['default', 'object', 'submit'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+      ['attrs'],
+    },
+  }
+}
+```
+
+### text
+
+Used by:
+- Text input
+- Number input
+- Email address
+- Phone number
+- Password
+- URL
+
+```js
+import {
+  TypeField,
+  NameField,
+  InputTypeField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  DefaultField,
+  SubmitField,
+  AddonsField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  ReadonlyField,
+  IdField,
+  AutocompleteField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        inputType: { type: InputTypeField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+        autocomplete: { type: AutocompleteField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name', 'inputType'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    decorators: {
+      ['addons'],
+      ['before', 'between', 'after'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id', 'autocomplete'],
+      ['attrs'],
+    },
+  }
+}
+```
+
+### textarea
+
+Used by:
+- Textarea
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  PlaceholderField,
+  DescriptionField,
+  AutogrowField,
+  RowsField,
+  DefaultField_textarea,
+  SubmitField,
+  AddonsField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  ReadonlyField,
+  IdField,
+  AttrsField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        autogrow: { type: AutogrowField },
+        rows: { type: RowsField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_textarea },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+        attrs: { type: AttrsField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    decorators: {
+      ['addons'],
+      ['before', 'between', 'after'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id'],
+      ['attrs'],
+    },
+  }
+}
+```
+
+### time
+
+Used by:
+- Time
+
+```js
+import {
+  Hour24Field,
+  SecondsField,
+  DateFormatField,
+  DefaultField_time,
+  SubmitField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        placeholder: { type: PlaceholderField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        hour24: { type: Hour24Field },
+        seconds: { type: SecondsField },
+        format: { type: DateFormatField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_time },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        addons: { type: AddonsField },
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['name'],
+      ['label', 'tooltip'],
+      ['placeholder'],
+      ['description'],
+    },
+    options: {
+      ['hour24', 'seconds'],
+      ['format'],
+    },
+    data: {
+      ['default', 'submit'],
+    },
+    decorators: {
+      ['addons'],
+      ['before', 'between', 'after'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'readonly', 'id'],
+    },
+  }
+}
+```
+
+### toggle
+
+Used by:
+- Toggle
+
+```js
+import {
+  TypeField,
+  NameField,
+  LabelField,
+  InfoField,
+  DescriptionField,
+  TextField,
+  LabelsField,
+  BoolValueField,
+  DefaultField_toggle,
+  SubmitField,
+  BeforeField,
+  BetweenField,
+  AfterField,
+  SizeField,
+  ColumnsField,
+  FieldNameField,
+  ValidationField,
+  ConditionsField,
+  DisabledField,
+  IdField,
+} from '@vueform/builder'
+
+export default {
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        name: { type: NameField },
+        label: { type: LabelField },
+        tooltip: { type: InfoField },
+        description: { type: DescriptionField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        text: { type: TextField },
+        labels: { type: LabelsField },
+        boolValue: { type: BoolValueField },
+      },
+    },
+    data: {
+      name: 'data',
+      label: 'Data',
+      fields: {
+        default: { type: DefaultField_toggle },
+        submit: { type: SubmitField },
+      },
+    },
+    decorators: {
+      name: 'decorators',
+      label: 'Decorators',
+      fields: {
+        before: { type: BeforeField },
+        between: { type: BetweenField },
+        after: { type: AfterField },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        size: { type: SizeField },
+        columns: { type: ColumnsField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        fieldName: { type: FieldNameField },
+        validation: { type: ValidationField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Conditions',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        disabled: { type: DisabledField },
+        id: { type: IdField },
+      },
+    },
+  },
+  separators: {
+    properties: {
+      ['type', 'name'],
+      ['label', 'tooltip'],
+      ['description'],
+    },
+    options: {
+      ['text'],
+      ['labels'],
+      ['boolValue'],
+    },
+    layout: {
+      ['size'],
+      ['columns'],
+    },
+    validation: {
+      ['fieldName'],
+      ['validation'],
+    },
+    attributes: {
+      ['disabled', 'id'],
+    },
+  }
+}
+```
+
+
+# Upcoming Features
+
+- repeatable elements (list)
 - form steps & tabs
 - a11y
+- translatable properties (eg. label, description)
+- tree/folder view
+- element search
+- "or" condition & condition groups
+- mobile / desktop view
 
-## Support
+# Support
 
 Regarding any questions or issues please contact me at adam@vueform.com.

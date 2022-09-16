@@ -1,3 +1,29 @@
+## v1.0.5
+
+> `2022-09-16`
+
+### 🎉 Feature
+- Update conditions when the target element's path/name changes or removed.
+- Added `delay` option that delays form re-rendering during text config changes.
+- Added feature level configuration for configuration groups (eg. `validation`).
+- Elements in containers now can be referenced for conditions.
+- Local storage self-cleanup when gets full (remove earliest histories).
+- Export existing field types.
+- Columns resizing performance optimizations.
+- Text type config udpate performance improvements.
+
+### 🐞 Bug Fixes
+- Fixed empty config panel appearing when selecting new element right after deselect.
+- Horiozontal presets are being removed when the element's column overrides form columns.
+- Multifile filesize min/max fields are lengthened for more convenient input.
+- Don't allow container dropping into itself.
+- Elements became unselectable if in a conditional container.
+- Container vertical align set to top.
+- File names can't start with integer and can't contain dot.
+- Unfocus selected element when loading a form.
+- Filter internally config option loads back state.
+- Config panel's datepicker text color in dark mode fix.
+
 ## v1.0.4
 
 > `2022-08-19`
