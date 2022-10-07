@@ -1,8 +1,24 @@
+## v1.0.7
+
+> `2022-10-07`
+
+### 🎉 Feature
+- A11y improvements.
+- Element features can be disabled.
+
+## v1.0.6
+
+> `2022-09-28`
+
+### 🎉 Feature
+- Loading performance improvement.
+
 ## v1.0.5
 
 > `2022-09-16`
 
 ### 🎉 Feature
+- **BREAKING:** Element names starting with `columns` got renamed to `containers`. Existing forms containing `group` or `object` elements should rename `builder.type` prop from `'columns*'` to `'container*'`.
 - Update conditions when the target element's path/name changes or removed.
 - Added `delay` option that delays form re-rendering during text config changes.
 - Added feature level configuration for configuration groups (eg. `validation`).
