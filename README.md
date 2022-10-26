@@ -6196,9 +6196,9 @@ To do this let's create a `LogoColorField.js` somewhere in our project:
 ``` js
 // LogoColorField.js
 
-import { BaseField } from '@vueform/builder'
+import { BaseElementField } from '@vueform/builder'
 
-export default class LogoColorField extends BaseField
+export default class LogoColorField extends BaseElementField
 {
   get schema() {
     return {
