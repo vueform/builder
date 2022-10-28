@@ -5795,7 +5795,7 @@ Separators can add dividers between configuration options. Eg. this would add a 
 separators: {
   properties: [
     ['type', 'name'],
-    ['label', 'info'],
+    ['label', 'tooltip'],
     ['description'],
   ],
 },
@@ -5882,7 +5882,7 @@ export default {
         separators: {
           properties: [
             ['type', 'name'],
-            ['label', 'info'],
+            ['label', 'tooltip'],
             ['description'],
           ],
           layout: [
