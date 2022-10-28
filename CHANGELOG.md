@@ -1,3 +1,19 @@
+## v1.0.8
+
+> `2022-10-28`
+
+### 🎉 Feature
+- Added list & nested list elements.
+- Optimized adding & resorting performance.
+- Added version to `$builder` prop.
+- Replace paths in relative validation rules (eg. same as, different) when the target path changes.
+- Added `autosave`, `history` and `maxHistory` config options.
+
+### 🐞 Bug Fixes
+- Hidden element is no longer resizable (as it doesn't have columns).
+- Remove `floating` option when switching back to `Default` auto-float.
+- Refocus element when moving with keyboard and its name changes.
+
 ## v1.0.7
 
 > `2022-10-07`
