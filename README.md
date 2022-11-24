@@ -229,7 +229,7 @@ export default {
   undo: true,
   modelPreview: true,
   leftPanel: ['elements'],
-  rightPanel: ['form', 'theme', 'export'],
+  rightPanel: ['form', 'theme', 'export', 'element-settings', 'model'],
 }
 ```
 
@@ -309,6 +309,8 @@ export default {
     'link',
     'divider',
     'html',
+    'tabs',
+    'steps',
     'container',
     'container2',
     'container3',
@@ -584,20 +586,22 @@ Element settings can be disabled for different elements under `element.props`. T
 export default {
   element: {
     props: {
+      // Disables placeholder options for each element
       default: {
-        placeholder: false,
+        properties: {
+          placeholder: false,
+        },
+        decorators: {
+          addons: false,
+          before: false,
+          between: false,
+          after: false,
+          tooltip: false,
+          description: false,
+        },
         // ...
       },
-      text: {
-        // ...
-      },
-      textarea: {
-        // ...
-      },
-      select: {
-        placeholder: true,
-        // ...
-      },
+
       // ...
     },
   },
@@ -606,7 +610,96 @@ export default {
 
 The `default` contains all the options of all the elements and can be used to disable properties globally, without having to go through each element and eg. disabling conditions for each.
 
-The `"ELEMENT_NAME"` (eg. `text`, `textarea` or `select`) sections contain configuration options for only that specific element. These can be used to disable config options for certain elements only and to override `default`.
+When disabling `default` options you have to explicitly disable options and **you can't disable option groups**:
+
+```js
+// builder.config.js
+
+export default {
+  element: {
+    props: {
+
+      // THIS WILL NOT WORK
+      default: {
+        properties: false
+      },
+
+      // THIS WILL WORK
+      default: {
+        properties: {
+          inputType: false,
+          label: false,
+          tooltip: false,
+          placeholder: false,
+          description: false,
+          meta: false,
+        }
+      },
+    },
+  },
+}
+```
+
+The named element sections (eg. `text`, `textarea` or `select`, etc.) contain configuration options for only that specific element. These can be used to disable config options for certain elements only and to override `default`.
+
+```js
+// builder.config.js
+
+export default {
+  element: {
+    props: {
+      // Disables placeholder options for all elements
+      default: {
+        properties: {
+          placeholder: false,
+        },
+        // ...
+      },
+
+      // Enables back placeholder options for `select` only
+      select: {
+        properties: {
+          placeholder: true,
+        },
+        // ...
+      },
+
+      // ...
+    },
+  },
+}
+```
+
+The only config you shouldn't disable ever is the `properties.type`. This is a core field that needs to be included in each element config panels.
+
+We can disable options groups or single options for elements:
+
+```js
+// builder.config.js
+
+export default {
+  element: {
+    props: {
+
+      // THIS WILL WORK
+      text: {
+        properties: false
+      },
+
+      // THIS WILL ALSO WORK
+      text: {
+        properties: {
+          inputType: false,
+          label: false,
+          tooltip: false,
+          placeholder: false,
+          description: false,
+        }
+      },
+    },
+  },
+}
+```
 
 Certain configuration options are broken down further into "sub-options", enabling to turn off features within configuration groups, eg. `validation`:
 
@@ -617,17 +710,20 @@ export default {
   element: {
     props: {
       default: {
-        // Turn off validation feature
-        // completely for each element
-        validation: false,
-
-        // Turn off only "min", "max" and
-        // "size" validation rules for each
-        // element that have them
         validation: {
-          min: false,
-          max: false,
-          size: false,
+          // Turn off validation feature
+          // completely for each element
+          validation: false,
+
+          // Turn off only "min", "max" and
+          // "size" validation rules for each
+          // element that have them
+          validation: {
+            min: false,
+            max: false,
+            size: false,
+            // ...
+          },
         }
       },
       // ...
@@ -1779,16 +1875,6 @@ export default {
             list: true,
             json: true,
             endpoint: true,
-            valueKey: true,
-            labelKey: true,
-            dataKey: true,
-            searchParam: true,
-            updateOnSearch: true,
-            delay: true,
-            minChars: true,
-            resolveOnLoad: true,
-            filterResults: true,
-            clearOnSearch: true,
           },
           default: true,
           submit: true,
@@ -1800,9 +1886,8 @@ export default {
         },
         layout: {
           view: {
-            file: true,
-            image: true,
-            gallery: true,
+            tabs: true,
+            blocks: true,
           },
           size: {
             sm: true,
@@ -1848,16 +1933,6 @@ export default {
             list: true,
             json: true,
             endpoint: true,
-            valueKey: true,
-            labelKey: true,
-            dataKey: true,
-            searchParam: true,
-            updateOnSearch: true,
-            delay: true,
-            minChars: true,
-            resolveOnLoad: true,
-            filterResults: true,
-            clearOnSearch: true,
           },
           default: true,
           submit: true,
@@ -1869,9 +1944,8 @@ export default {
         },
         layout: {
           view: {
-            file: true,
-            image: true,
-            gallery: true,
+            tabs: true,
+            blocks: true,
           },
           size: {
             sm: true,
@@ -2026,16 +2100,6 @@ export default {
             list: true,
             json: true,
             endpoint: true,
-            valueKey: true,
-            labelKey: true,
-            dataKey: true,
-            searchParam: true,
-            updateOnSearch: true,
-            delay: true,
-            minChars: true,
-            resolveOnLoad: true,
-            filterResults: true,
-            clearOnSearch: true,
           },
           default: true,
           submit: true,
@@ -2047,9 +2111,8 @@ export default {
         },
         layout: {
           view: {
-            file: true,
-            image: true,
-            gallery: true,
+            tabs: true,
+            blocks: true,
           },
           size: {
             sm: true,
@@ -2095,16 +2158,6 @@ export default {
             list: true,
             json: true,
             endpoint: true,
-            valueKey: true,
-            labelKey: true,
-            dataKey: true,
-            searchParam: true,
-            updateOnSearch: true,
-            delay: true,
-            minChars: true,
-            resolveOnLoad: true,
-            filterResults: true,
-            clearOnSearch: true,
           },
           default: true,
           submit: true,
@@ -2116,9 +2169,8 @@ export default {
         },
         layout: {
           view: {
-            file: true,
-            image: true,
-            gallery: true,
+            tabs: true,
+            blocks: true,
           },
           size: {
             sm: true,
@@ -3338,6 +3390,7 @@ export default {
             preview: true,
           },
           accept: {
+            types: true,
             mimes: true,
             extensions: true,
           },
@@ -3432,6 +3485,7 @@ export default {
             order: true,
           },
           accept: {
+            types: true,
             mimes: true,
             extensions: true,
           },
@@ -3535,6 +3589,7 @@ export default {
             order: true,
           },
           accept: {
+            types: true,
             mimes: true,
             extensions: true,
           },
@@ -5642,7 +5697,7 @@ export default {
 
 > Every field must only be used under the section name it's supposed to be at. Eg. `ConditionsField` must be in `conditions` section, `ColumnsField` in `layout`, etc. You can find the full list of fields and their location at the [end of this chapter](#existing-element-configurations).
 
-Each new element **must** have at least a `TypeField` and `NameField` in `properties` everything else is in fact optional (but recommended).
+Each new element **must** have at least a `TypeField` in `properties` everything else is in fact optional.
 
 Note: custom element fields can later also be disabled in `builder.config.js` as [seen previously](#element-settings-panel):
 
@@ -5699,6 +5754,8 @@ export default class LogoColorField extends BaseElementField
 This field is **going to set the `color` property of our `LogoElement` component**, so the `LogoElement` component should have a `color` property which defines which logo is rendered.
 
 > Fields can use Vueform's [schema object](https://vueform.com/docs/1.x/rendering-forms#using-schema-object) to define configuration options.
+
+> The `default` option behaves differently than in a regular schema. It will not load the default value of the config option when the panel is opened. It will be interpreted as a value which should **remove** the config option from the element's schema. For example if our logo element's color property is `bw` by default it will be `bw` without explicitly defining any color. This means that the `color` option field (the one we define above) should have `default: 'bw'` option which results in the `color` option being removed from the element's schema when `bw` is selected so we don't explicitly define an option unnecessarily.
 
 Next add our custom field to our element definition:
 
@@ -8792,16 +8849,25 @@ export default {
 ```
 
 
+## Accessibility
+
+The Builder was created with accessibility in mind and can be fully navigated with keyboard and has screen-reader support. Keyboard support is only available in browsers which have native support for `inert`:
+https://caniuse.com/?search=inert
+
+For browsers not supporting `inert` a polyfill can be added:
+https://github.com/WICG/inert
+
+Unfortunately the polyfill isn't perfect, so we recommend using Google Chrome, Edge or Safari when complete accessibility is required.
+
 # Upcoming Features
 
-- repeatable elements (list)
-- form steps & tabs
-- a11y
 - translatable properties (eg. label, description)
 - tree/folder view
 - element search
 - "or" condition & condition groups
 - mobile / desktop view
+- hooks & events
+- restrict container children types
 
 # Support
 

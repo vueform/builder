@@ -1,3 +1,41 @@
+## v1.0.10
+
+> `2022-11-24`
+
+### 🐞 Bug Fixes
+- Adding tabs & steps only worked with double click.
+
+## v1.0.9
+
+> `2022-11-21`
+
+### 🎉 Feature
+- **BREAKING**: if `rightPanel` and `leftPanel` are defined they must also contain `settings` and `model`, which are the settings panel for elements & tabs/steps the model preview.
+- Form steps & tabs have arrived. 🎉🎉🎉
+- New `tab` & `step` configuration similarly to `form`, `theme` or `export`.
+- Added columns counter to resizer.
+- Added toaster.
+- Notify user about adding element when the element is out of window.
+- A11y improvements.
+
+### 🐞 Bug Fixes
+- **BREAKING**: CSS class names are refactored - if you have overrides please check.
+- Don't display element border on hover when moving another element.
+- Optimized z-indexes for better performance.
+- Don't warn in model preview about static elements.
+- Save size when element is selected and using default columns.
+- Custom mimes & extensions could've been saved but were not loaded.
+- Pressing enter in certain elements caused removing or adding list elements.
+- Date range element was not configured for range.
+- In_array rule can only choose from lists.
+- Thrown error when clicking from select to slider.
+- Slider format decimals could be higher than 7 which thrown error.
+- Load the default Vueform theme if theme tab is disabled.
+- Do not remove other CSS vars when loading a single theme variable.
+- If renaming thrown error did not disappear when directly clicking to a new element.
+- Renaming an element with integer/numeric validators thrown error.
+- Removed expand / collapse all option from themes because opening all options at once is a too heavy load for a single click.
+
 ## v1.0.8
 
 > `2022-10-28`
