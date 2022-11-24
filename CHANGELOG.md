@@ -4,6 +4,7 @@
 
 ### 🐞 Bug Fixes
 - Adding tabs & steps only worked with double click.
+- Select page config on switching tab when hovering mouse.
 
 ## v1.0.9
 
