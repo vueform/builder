@@ -1,3 +1,24 @@
+## v1.0.11
+
+> `2022-12-14`
+
+### 🎉 Feature
+- Tree view is here 🎉🎉🎉 
+- Move elements between tabs / steps.
+
+### 🐞 Bug Fixes
+- Checkbox / Toggle True value didn't got saved if False value was updated immediately after.
+- Select elements in correct order with keyboard when has tabs / steps.
+- If form level sizes are disabled theme sizes will be hidden as well.
+- Load saved theme fix.
+- Export Download threw error.
+- Condition list failed to load if the form had a list without prototype.
+- Item source JSON got replaced with list when switched to list and switched back to JSON.
+- DataKey & queryParam options were not respected in endpoint items.
+- Date restrictions dates were not readable in dark theme.
+- Date config calendars were out of bounds.
+- Textaera's autogrow got saved as `true` when changing Rows.
+
 ## v1.0.10
 
 > `2022-11-24`

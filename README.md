@@ -228,7 +228,7 @@ export default {
   save: true,
   undo: true,
   modelPreview: true,
-  leftPanel: ['elements'],
+  leftPanel: ['elements', 'tree'],
   rightPanel: ['form', 'theme', 'export', 'element-settings', 'model'],
 }
 ```
