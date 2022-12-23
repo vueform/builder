@@ -1,3 +1,11 @@
+## v1.0.12
+
+> `2022-12-23`
+
+### 🐞 Bug Fixes
+- A11y fixes related to JAWS.
+- Adding element after resorting a list / multifile should add as last.
+
 ## v1.0.11
 
 > `2022-12-14`

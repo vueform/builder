@@ -8862,8 +8862,6 @@ Unfortunately the polyfill isn't perfect, so we recommend using Google Chrome, E
 # Upcoming Features
 
 - translatable properties (eg. label, description)
-- tree/folder view
-- element search
 - "or" condition & condition groups
 - mobile / desktop view
 - hooks & events
