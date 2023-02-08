@@ -1,3 +1,14 @@
+## v1.0.13
+
+> `2023-02-08`
+
+### 🎉 Feature
+- Advanced conditions editor & field selector.
+- Condition editing for required rule.
+
+### 🐞 Bug Fixes
+- Minor bug fixes.
+
 ## v1.0.12
 
 > `2022-12-23`
