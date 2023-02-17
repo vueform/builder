@@ -1,3 +1,10 @@
+## v1.0.14
+
+> `2023-02-17`
+
+### 🎉 Feature
+- Added `longFieldNames` config option.
+
 ## v1.0.13
 
 > `2023-02-08`

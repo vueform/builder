@@ -207,6 +207,7 @@ export default {
   autosave: 1000, // the ms to wait between last change and saving data to local storage & triggering `@save` event
   history: true, // whether it should store history
   maxHistory: -1, // the maximum number of history items to store, `-1` for unlimited
+  longFieldNames: false, // whether conditional field names should be full path or name only
 }
 ```
 
