@@ -19,7 +19,7 @@ Head to our [Installation guide](https://vueform.com/docs/1.x/installation#insta
 npm i git+https://github.com/vueform/vueform-builder-{YOUR_ID}.git
 ```
 
-Vueform Builder will be provided to you via a private GitHub repo.
+Vueform Builder will be provided to you via a private GitHub repo. If you're installing trial replace `{YOUR_ID}` with `trial`.
 
 #### 3. Create `builder.config.js`
 
