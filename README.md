@@ -230,7 +230,7 @@ export default {
   undo: true,
   modelPreview: true,
   leftPanel: ['elements', 'tree'],
-  rightPanel: ['form', 'theme', 'export', 'element-settings', 'model'],
+  rightPanel: ['form', 'theme', 'export', 'settings', 'model'],
 }
 ```
 
