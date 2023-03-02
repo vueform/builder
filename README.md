@@ -54,7 +54,9 @@ app.use(VueformBuilder, builderConfig)
 Add Vueform Builder styles to your main stylesheet:
 
 ```css
-@import "./path/to/node_modules/@vueform/builder/index.css";
+@import "@vueform/builder/index.css";
+/* or */
+/* @import "./path/to/node_modules/@vueform/builder/index.css"; */
 ```
 
 #### 6. Update `tailwind.config.js`
@@ -221,7 +223,17 @@ The following options are for configuring different aspects of the builder's lay
 export default {
   search: true,
   views: ['editor', 'preview', 'code'],
-  devices: ['desktop', 'tablet', 'mobile'],
+  devices: ['tablet', 'desktop'], // set to `false` to hide device selector and disable responsive column resizing
+  breakpoints: {
+    tablet: {
+      breakpoint: 'sm',
+      viewportSize: 640, // used only to inform users about the viewport size related to `tablet` view
+    },
+    desktop: {
+      breakpoint: 'lg',
+      viewportSize: 1024, // used only to inform users about the viewport size related to `desktop` view
+    },
+  }, // the breakpoints tied to devices
   darkMode: ['light', 'dark'],
   toggleLeft: true,
   toggleRight: true,
@@ -231,8 +243,33 @@ export default {
   modelPreview: true,
   leftPanel: ['elements', 'tree'],
   rightPanel: ['form', 'theme', 'export', 'settings', 'model'],
+  defaultWidth: 432,
 }
 ```
+
+#### Changing Device Breakpoints
+
+Vueform is using a mobile-first breakpoint system when it comes to resizing columns on different devices and viewport sizes. The default breakpoints are based on Tailwind CSS: https://tailwindcss.com/docs/responsive-design
+
+By default the `tablet` breakpoint will use `sm` and `desktop` will use `lg`, which means that column sizing made under `tablet` view will have effect on `sm` breakpoint and up and the same is true for `desktop` with `lg`. If you want to change these to eg. `tablet` -> `md` first you need to update the `breakpoints.tablet.breakpoint` to `md` in the config. Second you need to include the `scss` version of Vueform Builder's styles and set `$vfb-tablet-breakpoint` to `md` as well. Here's an example:
+
+```css
+/* Your original CSS import */
+
+@import "@vueform/builder/index.css";
+```
+
+Replace it with the following in a file where you can import `scss` and make sure you have an scss loader:
+
+```scss
+/* Using SCSS import instead of CSS with a custom variable */
+
+$vfb-tablet-breakpoint: 'md';
+
+@import "@vueform/builder/scss/index.scss";
+```
+
+If you want to change the breakpoint related to `desktop`, you can use `$vfb-desktop-breakpoint` variable.
 
 ## Elements
 
@@ -5422,6 +5459,8 @@ export default {
 }
 ```
 
+Containers and lists containing an element with disabled features will also have their features disabled. This is true for each from above except `edit`.
+
 ## Available Element Types
 
 Here's the list of available element types that can be used:
@@ -7453,7 +7492,7 @@ export default {
     },
     options: {
       ['native'],
-      ['search'],
+      ['!', 'search'],
       ['!', 'create'],
       ['!', 'behavior'],
       ['ui'],

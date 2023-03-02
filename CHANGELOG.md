@@ -1,3 +1,21 @@
+## v1.0.15
+
+> `2023-03-02`
+
+### 🎉 Feature
+- Added responsive columns resizing and working device selector.
+- New config options: `breakpoints`.
+- Disabling `remove`, `clone`, `move` or `resize` for certain elements will disable it for their parent containers and lists.
+- Added `HEIC/HEIF` extensions and mime types.
+- `Clear form` now resets the whole form to default state instead of just clearing elements.
+
+### 🐞 Bug Fixes
+- Load back non-numeric list keys to checkbox group's and radio group's items.
+- Refresh conditions for nested elements as well when switching to preview.
+- App froze when selecting `equal to` condition for an element which was refering an element in a nested list.
+- Tags options were not shown if tags was first clicked after a multiselect.
+- If a tab or step was selected when loading a form the config panel became unclickable.
+
 ## v1.0.14
 
 > `2023-02-17`
