@@ -1,3 +1,15 @@
+## v1.0.16
+
+> `2023-03-14`
+
+### 🎉 Feature
+- Localization feature added. Certain form properties now can be provided in multiple locales.
+- Added `locales`, `defaultLocale`, `fallbackLocale` and `emojiFlags` options to config.
+
+### 🐞 Bug Fixes
+- Don't submit page on Search elements enter.
+- Custom attributes frozen when single space was entered as key or value.
+
 ## v1.0.15
 
 > `2023-03-02`

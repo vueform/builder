@@ -19,7 +19,7 @@ Head to our [Installation guide](https://vueform.com/docs/1.x/installation#insta
 npm i git+https://github.com/vueform/vueform-builder-{YOUR_ID}.git
 ```
 
-Vueform Builder will be provided to you via a private GitHub repo. If you're installing trial replace `{YOUR_ID}` with `trial`.
+Vueform Builder will be provided to you via a private GitHub repo. If you're installing trial replace `{YOUR_ID}` with `trial`. If you don't have access, [read this first](https://vueform.com/builder).
 
 #### 3. Create `builder.config.js`
 
@@ -4613,7 +4613,7 @@ export default {
             'space-tags-lg': '0.1875rem',
             'floating-top': '0rem',
             'floating-top-sm': '0rem',
-            'floating-top-lg': '0.5625rem',
+            'floating-top-lg': '0.6875rem',
             'bg-input': '#ffffff',
             'bg-input-hover': '#ffffff',
             'bg-input-focus': '#ffffff',
@@ -4845,7 +4845,7 @@ export default {
             'space-tags-lg': '0.1875rem',
             'floating-top': '0rem',
             'floating-top-sm': '0rem',
-            'floating-top-lg': '0.5625rem',
+            'floating-top-lg': '0.6875rem',
             'bg-input': '#ffffff',
             'bg-input-focus': '#ffffff',
             'bg-input-hover': '#ffffff',
@@ -5215,6 +5215,79 @@ export default {
   ],
 }
 ```
+
+## Locales
+
+Certain element properties can be provided in multiple locales. We can enable this feature by defining the list of available locales in `builder.config.js`:
+
+```js
+// builder.config.js
+
+export default {
+  locales: {  // default `{}`
+    en: 'English',
+    de: 'German',
+    // ...
+  }
+}
+```
+
+When locales are enabled a language selector will appear next to the config panel and the fields which can be localized will have the locale's ISO code on their right:
+
+![Locales](./assets/screenshot-locales.png)
+
+The following properties can be localized:
+
+* **Properties**
+  * label
+  * tooltip
+  * placeholder
+  * floating
+  * description
+* **Options**
+  * text (checkbox, radio, toggle)
+  * on & off label (toggle)
+  * no options text & no results text (select, multiselect, tags)
+* **Data**
+  * data source / list / option labels (checkbox group, radio group, select, multiselect, tags)
+  * default (text, textarea, editor, hidden)
+* **Decorators**
+  * prefix
+  * suffix
+  * before
+  * between
+  * after
+
+We can set the default and fallback locale in our config (they both default to `en`):
+
+```js
+// builder.config.js
+
+export default {
+  locales: {
+    en: 'English',
+    de: 'German',
+    // ...
+  },
+  defaultLocale: 'en', // default 'en'
+  fallbackLocale: 'en', // default 'en'
+}
+```
+
+The flags are rendered using emojies which are available on most devices without having to add extra resources. This can be disabled:
+
+```js
+// builder.config.js
+
+export default {
+  // ...
+  emojiFlags: false, // default `true`
+}
+```
+
+When emoji flags are disabled ISO codes will appear instead of flags. They can be further customized with CSS with `.vfb-flag-{ISO}` classes.
+
+> If you've created a form with localized properties and then you disable the localization feature, make sure to convert back localized properties to plain before loading it back to the builder.
 
 ## Custom Config
 
@@ -7036,7 +7109,7 @@ import {
   TypeField,
   NameField,
   MetaField,
-  DefaultField,
+  DefaultField_multilingual,
   SubmitField,
   ConditionsField,
   IdField,
@@ -7058,7 +7131,7 @@ export default {
       name: 'data',
       label: 'Data',
       fields: {
-        default: { type: DefaultField },
+        default: { type: DefaultField_multilingual },
         submit: { type: SubmitField },
       },
     },
@@ -8395,7 +8468,7 @@ import {
   InfoField,
   PlaceholderField,
   DescriptionField,
-  DefaultField,
+  DefaultField_multilingual,
   SubmitField,
   AddonsField,
   BeforeField,
@@ -8432,7 +8505,7 @@ export default {
       name: 'data',
       label: 'Data',
       fields: {
-        default: { type: DefaultField },
+        default: { type: DefaultField_multilingual },
         submit: { type: SubmitField },
       },
     },
@@ -8901,9 +8974,6 @@ Unfortunately the polyfill isn't perfect, so we recommend using Google Chrome, E
 
 # Upcoming Features
 
-- translatable properties (eg. label, description)
-- "or" condition & condition groups
-- mobile / desktop view
 - hooks & events
 - restrict container children types
 
