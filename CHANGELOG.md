@@ -1,3 +1,17 @@
+## v1.0.17
+
+> `2023-04-07`
+
+### 🎉 Feature
+- Validation / Field name can also be localized.
+- Added placeholder for non-primary localizable config options.
+
+### 🐞 Bug Fixes
+- Drag element from container to tree empty tab/step fix.
+- Is empty condition fix.
+- Tags element search toggle fix.
+- Left panel CSS color fix when using dark mode and config panel is on the right.
+
 ## v1.0.16
 
 > `2023-03-14`
