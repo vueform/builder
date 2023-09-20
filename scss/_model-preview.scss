@@ -1,0 +1,70 @@
+.vfb-model-preview-container {
+  @apply absolute px-0 inset-0 overflow-y-auto overflow-x-hidden transition transform duration-150 bg-gray-900 dark:bg-dark-1000;
+}
+
+.vfb-model-preview-container-hidden {
+  @apply translate-x-full;
+
+  &.vfb-model-preview-container-left {
+    @apply -translate-x-full;
+  }
+}
+
+.vfb-model-preview-wrapper {
+  @apply flex flex-col items-start text-0.5md text-white text-0.5md;
+}
+
+.vfb-model-preview-warning {
+  @apply bg-red-100 text-red-500 mt-6 mx-6 px-4 py-3 rounded leading-tight overflow-x-scroll;
+  max-width: calc(100% - 44px);
+}
+
+.vfb-model-preview-warning-text {
+  @apply my-1;
+}
+
+.vfb-model-preview-warning-ul {
+  @apply list-disc pl-5 leading-tight;
+}
+
+.vfb-model-preview-warning-li {
+  @apply text-xs font-semibold -ml-1 pr-4 underline cursor-pointer;
+}
+
+.vfb-model-preview-tabs-container {
+  @apply flex pt-6 px-6 font-semibold;
+}
+
+.vfb-model-preview-tab {
+  @apply cursor-pointer;
+}
+
+.vfb-model-preview-tab-active {
+  @apply border-b border-primary-500;
+}
+
+.vfb-model-preview-tab-inactive {
+  @apply opacity-50;
+}
+
+.vfb-model-preview-tab-data {
+  @apply mr-4;
+}
+
+.vfb-model-preview-tab-request-data {
+}
+
+.vfb-model-preview-close {
+  @apply absolute w-10 h-10 top-3.5 right-2 flex items-center justify-center cursor-pointer transition opacity-50 hover:opacity-100;
+}
+
+.vfb-model-preview-close-icon {
+}
+
+.vfb-model-preview-code-container {
+  @apply overflow-x-auto w-full max-w-full;
+}
+
+.vfb-model-preview-code-reset {
+  @apply bg-white bg-opacity-10 px-4 py-1.5 rounded-lg transition hover:bg-opacity-20 ml-6 cursor-pointer;
+}

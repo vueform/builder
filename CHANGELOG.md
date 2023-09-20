@@ -1,3 +1,13 @@
+[//]: # (Don't use <tags>)
+
+## v1.1.0
+
+> `2023-09-17`
+
+### 🎉 Feature
+- Remote API key validation as primary domain validation method.
+- Removed `node-sass` dependency.
+
 ## v1.0.17
 
 > `2023-04-07`
@@ -234,19 +244,19 @@
 > `2022-07-29`
 
 ### 🎉 Feature
-  - Added config options: `search`, `views`, `devices`, `darkMode`, `toggleLeft`, `toggleRight`, `clear`, `save`, `undo`, `modelPreview`, `leftPanel`, `rightPanel`, `themes`, `formProps`, `themeProps`, `exportProps`, `categories`, `elements`
+- Added config options: `search`, `views`, `devices`, `darkMode`, `toggleLeft`, `toggleRight`, `clear`, `save`, `undo`, `modelPreview`, `leftPanel`, `rightPanel`, `themes`, `formProps`, `themeProps`, `exportProps`, `categories`, `elements`
 
 ### ⚠️ Breaking changes
-  - Classes renamed:
-    - `vfb-elements-search-container` > `vfb-elements-top-container`
-    - `vfb-elements-search-wrapper` > `vfb-elements-search-container`
-    - `vfb-elements-wrapper-with-search` > `vfb-elements-wrapper-with-keyword`
-    - `vfb-elements-wrapper-without-search` > `vfb-elements-wrapper-without-keyword`
-    - `vfb-form-settings-*` > `vfb-form-panel-*`
+- Classes renamed:
+- `vfb-elements-search-container` > `vfb-elements-top-container`
+- `vfb-elements-search-wrapper` > `vfb-elements-search-container`
+- `vfb-elements-wrapper-with-search` > `vfb-elements-wrapper-with-keyword`
+- `vfb-elements-wrapper-without-search` > `vfb-elements-wrapper-without-keyword`
+- `vfb-form-settings-*` > `vfb-form-panel-*`
 
 ## v1.0.1
 
 > `2022-07-25`
 
 ### 🎉 Feature
-  - Class name based styles.
+- Class name based styles.

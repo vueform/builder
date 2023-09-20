@@ -1,0 +1,124 @@
+.vfb-bottom-left-tools-container {
+  @apply absolute bottom-4 -right-4 transform translate-x-full flex flex-col;
+}
+
+.vfb-bottom-right-tools-container {
+  @apply absolute bottom-4 -left-4 transform -translate-x-full flex flex-col;
+}
+
+.vfb-top-left-tools-container {
+  @apply absolute top-4 -right-4 transform translate-x-full flex flex-col;
+}
+
+.vfb-top-right-tools-container {
+  @apply absolute top-4 -left-4 transform -translate-x-full flex flex-col;
+}
+
+.vfb-tool {
+  @apply relative flex flex-col bg-white shadow-lg rounded border border-gray-300 dark:bg-dark-700 dark:border-dark-700 dark:text-white;
+}
+
+.vfb-tool-device {
+  @apply mb-2;
+}
+
+.vfb-tool-save {
+  @apply mt-2;
+}
+
+.vfb-tool-toggle-left {
+}
+
+.vfb-tool-toggle-right {
+}
+
+.vfb-tool-undos {
+  @apply mb-2;
+}
+
+.vfb-tool-language-selector .vfb-tool-item {
+  @apply text-sm;
+}
+
+.vfb-tool-view {
+  @apply mb-2;
+}
+
+.vfb-tool-clear {
+  @apply mt-2;
+}
+
+.vfb-tool-dark-mode {
+}
+
+.vfb-tool-item {
+  @apply w-8 h-8 flex items-center justify-center text-xs relative cursor-pointer transition-colors;
+}
+
+.vfb-tool-item-single {
+  @apply rounded;
+}
+
+.vfb-tool-item-first {
+  @apply rounded-t;
+}
+
+.vfb-tool-item-last {
+  @apply rounded-b;
+}
+
+.vfb-tool-item-active {
+  @apply bg-gray-150 dark:bg-dark-550;
+}
+
+.vfb-tool-item-active-primary {
+  @apply bg-primary-500 text-white;
+}
+
+.vfb-tool-item-disabled {
+  @apply text-gray-300 dark:text-dark-550 cursor-not-allowed;
+}
+
+.vfb-tool-item-passive {
+  cursor: default !important;
+}
+
+.vfb-tool-item-hoverable {
+  @apply hover:bg-gray-100 dark:hover:bg-dark-600;
+}
+
+.vfb-tool-dropdown {
+  animation-duration: 0.30s;
+  animation-delay: 0;
+  animation-fill-mode: both;
+  animation-name: vfb-fade-in-down;
+  @apply absolute top-8 mt-1 left-0 right-0 flex flex-col bg-white shadow-lg rounded border border-gray-300 dark:bg-dark-700 dark:border-dark-700 dark:text-white;
+}
+
+.vfb-tool-dropdown-item {
+  @apply relative flex items-center justify-center w-full h-8 cursor-pointer text-sm rounded hover:bg-gray-100 dark:hover:bg-dark-600;
+}
+
+.vfb-tool-dropdown-item-active {
+  @apply bg-gray-100 dark:bg-dark-600 hover:bg-gray-100 dark:hover:bg-dark-600;
+}
+
+.vfb-tool-tooltip {
+  @apply absolute top-1/2 transform -translate-y-1/2 bg-black text-white bg-opacity-80 px-1.5 rounded text-sm hidden whitespace-nowrap;
+}
+
+.vfb-tool-item:hover .vfb-tool-tooltip {
+  @apply inline-block;
+}
+
+.vfb-tool-dropdown-item:hover .vfb-tool-tooltip {
+  @apply inline-block;
+}
+
+.vfb-tool-tooltip-right {
+  @apply translate-x-full -right-1.5;
+}
+
+.vfb-tool-tooltip-left {
+  @apply -translate-x-full -left-1.5;
+}

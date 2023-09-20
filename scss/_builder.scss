@@ -1,0 +1,115 @@
+.vfb-builder {
+  @apply h-full w-full flex min-h-98 overflow-y-hidden relative;
+}
+
+.vfb-left-container {
+  @apply w-76 vfb-config-form flex-grow-0 flex-shrink-0 bg-white relative transition-all duration-500 transform z-1 dark:bg-dark-800 dark:text-white;
+
+  &.vfb-left-container-before-load, 
+  &.vfb-left-container-hidden {
+    @apply -ml-76;
+  }
+
+  &.vfb-left-container-empty {
+    @apply w-0;
+
+    &.vfb-left-container-before-load {
+      @apply ml-0;
+    }
+  }
+
+  &.vfb-left-container-has-icons {
+    @apply w-88;
+
+    &.vfb-left-container-before-load,
+    &.vfb-left-container-hidden {
+      @apply -ml-88;
+    }
+  }
+
+  &.vfb-left-container-has-form {
+    @apply w-85;
+
+    &.vfb-left-container-before-load,
+    &.vfb-left-container-hidden {
+      @apply -ml-85;
+    }
+
+    &.vfb-left-container-has-icons {
+      @apply w-97;
+
+      &.vfb-left-container-before-load,
+      &.vfb-left-container-hidden {
+        @apply -ml-97;
+      }
+    }
+  }
+}
+
+.vfb-center-container {
+  @apply flex-1 bg-gray-100 relative dark:bg-dark-900 min-w-120;
+}
+
+.vfb-center-wrapper {
+  @apply absolute inset-0 overflow-y-auto px-16;
+}
+
+.vfb-center-loader-container {
+  @apply w-full flex flex-col items-center justify-center h-full dark:text-white;
+}
+
+.vfb-center-loader {
+  @apply mb-2;
+}
+
+.vfb-center-loader-text-container {
+  @apply text-center;
+}
+
+.vfb-right-container {
+  @apply w-76 vfb-config-form flex-grow-0 flex-shrink-0 bg-white relative transition-all duration-500 transform z-1 dark:bg-dark-800 dark:text-white;
+
+  &.vfb-right-container-before-load,
+  &.vfb-right-container-hidden {
+    @apply -mr-76;
+  }
+
+  &.vfb-right-container-empty {
+    @apply w-0;
+
+    &.vfb-right-container-before-load {
+      @apply mr-0;
+    }
+  }
+
+  &.vfb-right-container-has-icons {
+    @apply w-88;
+
+    &.vfb-right-container-before-load,
+    &.vfb-right-container-hidden {
+      @apply -ml-88;
+    }
+  }
+
+  &.vfb-right-container-has-form {
+    @apply w-85;
+
+    &.vfb-right-container-before-load,
+    &.vfb-right-container-hidden {
+      @apply -mr-85;
+    }
+
+    &.vfb-right-container-has-icons {
+      @apply w-97;
+
+      &.vfb-right-container-before-load,
+      &.vfb-right-container-hidden {
+        @apply -mr-97;
+      }
+    }
+  }
+}
+
+.vfb-right-wrapper {
+  @apply absolute inset-0 overflow-x-hidden;
+}

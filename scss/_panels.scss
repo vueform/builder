@@ -1,0 +1,114 @@
+.vfb-panels-container {
+}
+
+.vfb-panels-container-tabs {
+  .vfb-panels-tabs {
+    @apply flex items-center text-0.5md dark:text-white;
+  }
+
+  .vfb-panels-tab {
+    @apply flex-1 text-center py-2.5 cursor-pointer border-b border-r border-r-gray-200 dark:border-r-dark-600;
+
+    &.is-active {
+      @apply bg-white border-b-white dark:bg-dark-700 dark:border-b-dark-700;
+    }
+
+    &.is-inactive {
+      @apply bg-gray-100 border-b-gray-200 dark:bg-dark-750 dark:border-b-dark-600;
+    }
+
+    &.is-first {
+    }
+
+    &.is-last {
+      @apply border-r-0;
+    }
+  }
+
+  .vfb-panels-wrapper {
+    @apply absolute top-10.875 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden z-0;
+  }
+
+  .vfb-panel {
+    @apply px-5 pb-6;
+  }
+}
+
+.vfb-panels-container-icons {
+  @apply flex;
+
+  .vfb-panels-tabs {
+    @apply flex items-center flex-col w-12 absolute top-0 bottom-0 left-0 border-r border-gray-100 bg-white dark:bg-dark-750 dark:border-dark-750 z-1;
+  }
+
+  .vfb-panels-tab {
+    @apply relative vfb-tooltip-group flex h-12 w-12 items-center justify-center transition-colors text-lg border-x-3 border-transparent cursor-pointer;
+
+    &.is-active {
+      @apply border-l-primary-500 text-primary-500;
+    }
+
+    &.is-inactive {
+      @apply text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300;
+    }
+
+    &.is-first {
+    }
+
+    &.is-last {
+    }
+  }
+
+  .vfb-panels-wrapper {
+    @apply flex absolute top-0 left-12 right-0 bottom-0 overflow-y-auto overflow-x-hidden z-0;
+  }
+
+  .vfb-panel {
+    @apply px-5 pb-6 flex-1;
+  }
+}
+
+.vfb-right-container {
+  .vfb-panels-container-icons {
+    .vfb-panels-tabs {
+      @apply left-auto right-0 border-r-0 border-l;
+    }
+
+    .vfb-panels-tab {
+      &.is-active {
+        @apply border-l-transparent border-r-primary-500;
+      }
+    }
+
+    .vfb-panels-wrapper {
+      @apply left-auto right-12;
+    }
+  }
+}
+
+.vfb-panel-form {
+  @apply mt-px;
+}
+
+.vfb-panel-theme {
+  @apply mt-px h-full;
+}
+
+.vfb-panel-export {
+  @apply h-full;
+}
+
+.vfb-panels-forms-theme-size-selector-container {
+  @apply bg-white sticky -top-0.5 -mx-5 px-5 py-3 z-2 border-t border-b border-gray-200 dark:bg-dark-800 dark:border-dark-600;
+
+  &.vfb-panels-forms-theme-size-selector-container-no-themes {
+    @apply border-t-0 mt-0;
+  }
+
+  &.vfb-util-props-group {
+    @apply mt-0;
+  }
+}
+.vfb-panels-popovers {
+
+}

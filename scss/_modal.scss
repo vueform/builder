@@ -1,0 +1,53 @@
+.vfb-overlay {
+  animation-duration: 0.15s;
+  animation-delay: 0;
+  animation-fill-mode: both;
+  animation-name: vfb-fade-in;
+  @apply absolute z-999 bg-gray-900 bg-opacity-90 inset-0 overflow-y-auto py-10 dark:bg-dark-900 dark:bg-opacity-90;
+}
+
+.vfb-modal {
+  animation-duration: 0.30s;
+  animation-delay: 0;
+  animation-fill-mode: both;
+  animation-name: vfb-fade-in-up;
+  @apply max-w-modal bg-white mx-auto shadow-box-strong rounded-lg transition-transform transform -translate-y-1/4;
+}
+
+.vfb-modal-header {
+  @apply px-7 py-5 bg-gray-100 flex items-center justify-between rounded-t-lg;
+}
+
+.vfb-modal-title {
+  @apply text-xl font-semibold leading-none;
+}
+
+.vfb-modal-subtitle {
+  @apply text-gray-500 text-0.5md;
+}
+
+.vfb-modal-close {
+  @apply text-lg text-gray-500 transition-colors hover:text-gray-900;
+}
+
+.vfb-modal-content {
+  @apply px-8 py-6 mt-4;
+
+  form {
+    @apply -mt-4;
+  }
+}
+
+.vfb-modal-footer {
+
+}
+
+.vfb-modal-buttons {
+  @apply flex items-end justify-between pl-7 pr-3 py-5 border-t border-gray-200;
+}
+
+.vfb-modal-buttons-left {
+  & > div, & > button {
+    @apply mr-2;
+  }
+}

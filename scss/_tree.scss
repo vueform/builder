@@ -1,0 +1,238 @@
+.vfb-tree-container {
+  @apply absolute inset-0;
+}
+
+.vfb-tree-top {
+  @apply pt-4 px-5 pb-2 w-full flex;
+}
+
+.vfb-panels-container-tabs {
+  .vfb-tree-top {
+    @apply pt-3.5;
+  }
+
+  .vfb-tree-wrapper {
+    @apply top-14;
+  }
+}
+
+.vfb-tree-search-container {
+  @apply relative flex-1;
+}
+
+.vfb-tree-search-input {
+  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 w-full dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
+}
+
+.vfb-tree-search-icon {
+  @apply absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-400;
+}
+
+.vfb-tree-search-remove-icon-container {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer dark:text-dark-400;
+}
+
+.vfb-tree-search-remove-icon {
+  
+}
+
+.vfb-tree-toggle-all-container {
+  @apply flex-grow-0 flex-shrink-0 flex items-center justify-center ml-2 transition text-gray-400 hover:text-gray-500 text-0.5md vfb-tooltip-group relative cursor-pointer dark:text-dark-500 hover:dark:text-dark-400;
+}
+
+.vfb-tree-wrapper {
+  @apply absolute pt-1 top-14 bottom-0 left-0 right-0 overflow-y-auto px-5;
+}
+
+.vfb-tree-item-container {
+  @apply py-px;
+}
+
+.vfb-tree-item-container-child {
+  @apply relative;
+  
+  &:before {
+    content: "";
+    @apply h-px bg-gray-300 absolute -left-2 w-2.5 top-3.75 dark:bg-dark-600;
+  }
+}
+
+.vfb-tree-item-wrapper {
+  @apply relative flex items-center text-gray-800 dark:text-white -ml-0.5 -mr-0.5 px-0.5 py-0.5 border border-primary-500 z-1 bg-white bg-opacity-0 border-opacity-0 rounded-lg shadow-none dark:bg-dark-800 dark:bg-opacity-0;
+}
+
+.vfb-tree-item-wrapper-enabled {
+  @apply cursor-pointer hover:bg-opacity-100 hover:shadow-box-strong-small dark:hover:shadow-box-strong-small-dark;
+}
+
+.vfb-tree-item-wrapper-disabled {
+  @apply cursor-default;
+}
+
+.vfb-tree-item-wrapper-selected {
+  @apply text-primary-500 dark:text-primary-500;
+}
+
+.vfb-tree-item-area-top {
+  @apply absolute top-0 left-0 right-0 h-4 bg-green-500 bg-opacity-0 z-1;
+
+  &.vfb-tree-item-area-top-first-child {
+    @apply -top-3.75 h-8;
+
+    .vfb-tree-item-drag-line-top {
+      @apply top-3.25
+    }
+  }
+
+  &.vfb-tree-item-area-top-dragging-page {
+    @apply bottom-1/2 h-auto;
+  }
+
+  &.vfb-tree-item-area-top-adding-page {
+    @apply top-0 bottom-0 h-auto;
+
+    .vfb-tree-item-drag-line-top {
+      @apply top-8 mt-0.5 left-5 right-5;
+    }
+  }
+}
+
+.vfb-tree-item-drag-line-top {
+  @apply bg-primary-500 h-1 rounded-full absolute -top-0.5 left-0 right-0 pointer-events-none hidden;
+}
+
+.vfb-tree-item-area-bottom {
+  @apply absolute bottom-0 left-0 right-0 h-4 bg-blue-500 bg-opacity-0 z-1;
+
+  &.vfb-tree-item-area-bottom-with-children {
+    @apply h-2 bg-purple-500 bg-opacity-0 z-1;
+  }
+
+  &.vfb-tree-item-area-bottom-dragging-page {
+    @apply top-1/2 h-auto;
+  }
+}
+
+.vfb-tree-item-drag-line-bottom {
+  @apply bg-primary-500 h-1 rounded-full absolute -bottom-0.5 left-0 right-0 pointer-events-none hidden;
+}
+
+.vfb-tree-item-area-inside {
+  @apply absolute bottom-1.5 left-4 right-0 h-2.5 bg-red-500 bg-opacity-0 z-1;
+
+  &.vfb-tree-item-area-inside-empty {
+    @apply z-2;
+  }
+}
+
+.vfb-tree-item-drag-line-inside {
+  @apply bg-primary-500 h-1 rounded-full absolute -bottom-2 left-0 right-0 pointer-events-none hidden;
+}
+
+.vfb-tree-item-drag-line-visible {
+  @apply block;
+}
+
+.vfb-tree-item-icon-container {
+  @apply relative bg-gray-100 text-gray-500 rounded flex items-center justify-center text-xs w-6 h-6 flex-shrink-0 flex-grow-0 mr-2 dark:bg-dark-600 dark:text-dark-300;
+
+  &:before {
+    content: "";
+    @apply bg-white rounded w-6 h-6 absolute -z-1 dark:bg-dark-600;
+  }
+}
+
+.vfb-tree-item-icon-container-list,
+.vfb-tree-item-icon-container-repeat {
+  @apply bg-repeater-500 bg-opacity-12 text-repeater-500 dark:bg-repeater-500 dark:text-repeater-500 dark:bg-opacity-30;
+}
+
+.vfb-tree-item-wrapper-selected {
+  .vfb-tree-item-icon-container,
+  .vfb-tree-item-icon-container-repeat {
+    @apply text-primary-500 bg-primary-500 bg-opacity-20;
+  }
+
+  .vfb-tree-item-text-secondary {
+    @apply text-primary-500 text-opacity-70;
+  }
+}
+
+.vfb-tree-item-wrapper-being-moved {
+  @apply opacity-60 border-dashed border-gray-400 border;
+}
+
+.vfb-tree-item-icon {
+  @apply max-w-5 max-h-5;
+}
+
+.vfb-tree-item-icon-repeat {
+  @apply absolute -right-0.75 -bottom-0.75 text-0.5sm bg-white shadow-small rounded-full p-0.5 dark:bg-dark-600;
+}
+
+.vfb-tree-item-text {
+  @apply text-sm leading-3 overflow-hidden whitespace-nowrap text-ellipsis h-6.5 justify-center inline-flex flex-col pointer-events-none;
+}
+
+.vfb-tree-item-text-secondary {
+  @apply text-gray-500 text-xs italic dark:text-dark-500;
+}
+
+.vfb-tree-item-actions {
+  @apply text-0.5sm absolute py-1 px-1.5 right-1.5 top-1/2 transform -translate-y-1/2 hidden leading-none rounded-full bg-white bg-opacity-80 dark:bg-dark-800 dark:bg-opacity-80;
+
+  .vfb-tooltip {
+    @apply -bottom-1;
+  }
+}
+
+.vfb-tree-item-wrapper:hover {
+  .vfb-tree-item-actions {
+    @apply flex;
+  }
+}
+
+.vfb-tree-item-action {
+  @apply transition-colors text-gray-400 hover:text-gray-500 ml-1.5 vfb-tooltip-group dark:text-dark-500 dark:hover:text-dark-400;
+
+  .vfb-tooltip {
+    @apply -bottom-1;
+  }
+
+  &:first-of-type {
+    @apply ml-0;
+  }
+}
+
+.vfb-tree-item-children-toggle-wrapper {
+  @apply absolute -left-4 top-1.5 -ml-px mt-px p-1 cursor-pointer;
+}
+
+.vfb-tree-item-children-toggle {
+  @apply text-xxs border border-gray-400 w-2.25 h-2.25 flex items-center justify-center bg-white relative rounded-sm dark:bg-dark-500 dark:border-gray-500;
+  
+  &:after {
+    content: "";
+    @apply h-px absolute top-0.5 mt-px left-px right-px bg-gray-600 z-1 dark:bg-dark-1000;
+  }
+}
+
+.vfb-tree-item-children-toggle-collapsed {
+  &:before {
+    content: "";
+    @apply w-px absolute left-0.5 ml-px top-px bottom-px bg-gray-600 z-1 dark:bg-dark-1000;
+  }
+}
+
+.vfb-tree-item-children {
+  @apply ml-4 relative;
+
+  &:before {
+    content: "";
+    @apply absolute -left-2.25 -top-3 bottom-4.5 w-px bg-gray-300 dark:bg-dark-600;
+  }
+}
+
+.vfb-tree-no-results {
+  @apply text-gray-500 mt-1 ml-2;
+}

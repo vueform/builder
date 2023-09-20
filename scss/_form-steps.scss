@@ -1,0 +1,350 @@
+.vfb-steps-container {
+  @apply form-steps;
+
+  &:before {
+    @apply top-1.75 mt-12;
+  }
+
+  &.vfb-steps-container-editor {
+    
+    &:before {
+      background-color: var(--vf-primary);
+    }
+  }
+}
+
+.vfb-steps-container-sm {
+  @apply form-mb-gutter form-text-sm;
+}
+
+.vfb-steps-container-md {
+  @apply form-mb-gutter-lg form-text;
+}
+
+.vfb-steps-container-lg {
+  @apply form-mb-gutter-lg form-text-lg;
+}
+
+.vfb-steps-wrapper {
+  @apply flex justify-between overflow-x-auto pt-12 -mt-12;
+}
+
+.vfb-steps-remove-wrapper {
+  @apply flex justify-between absolute -left-6 top-11 mt-px vfb-tooltip-group;
+}
+
+.vfb-steps-remove-button {
+  @apply text-gray-300 cursor-pointer transition hover:text-gray-400;
+}
+
+.vfb-steps-add-wrapper {
+  @apply flex justify-between absolute -right-6 top-11 mt-px vfb-tooltip-group;
+}
+
+.vfb-steps-add-button {
+  @apply text-gray-300 text-sm cursor-pointer transition hover:text-gray-400;
+}
+
+.vfb-step-container {
+  @apply relative border-t border-b cursor-pointer border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0 p-0;
+
+  &.vfb-step-container-hover {
+    @apply border-opacity-100;
+    
+    .vfb-step-actions-container {
+      @apply flex opacity-100;
+    }
+  }
+
+  // Here to override .form-step
+  &.vfb-step-container-drop-left {
+    @apply relative;
+
+    &:after {
+      content: "";
+      @apply absolute left-0 top-0 bottom-0 right-auto w-0.5 bg-primary-500 rounded-full block;
+    }
+  }
+
+  // Here to override .form-step
+  &.vfb-step-container-drop-right {
+    @apply relative;
+
+    &:after {
+      content: "";
+      @apply absolute right-0 top-0 bottom-0 left-auto w-0.5 bg-primary-500 rounded-full block;
+    }
+  }
+}
+
+.vfb-step-container-drop-middle {
+  @apply bg-opacity-10 rounded;
+}
+
+.vfb-step-container-editor {
+  @apply border;
+  
+  &:hover,
+  &:focus,
+  &.vfb-step-container-moving {
+    @apply border-primary-500 border-opacity-100 outline-none;
+
+    .vfb-step-actions-container {
+      @apply flex opacity-100;
+    }
+  }
+
+  &.vfb-step-container-selected {
+    @apply border-opacity-100 bg-primary-500 bg-opacity-10;
+
+    .vfb-step-actions-container {
+      @apply flex opacity-100;
+    }
+  }
+
+  &.vfb-step-container-moving {
+    @apply border-transparent relative;
+
+    &:before {
+      content: "";
+      @apply absolute inset-0 border border-primary-500 border-dashed block;
+    }
+  }
+}
+
+.vfb-step-container-conditional {
+  @apply text-gray-400;
+}
+
+.vfb-step-container-active {
+}
+
+.vfb-step-container-inactive {
+}
+
+.vfb-step-container-invalid {
+}
+
+.vfb-step-container-valid {
+}
+
+.vfb-step-container-disabled {
+}
+
+.vfb-step-container-enabled {
+}
+
+.vfb-step-container-completed {
+}
+
+.vfb-step-container-incompleted {
+}
+
+.vfb-step-container-pending {
+}
+
+.vfb-step-overlay {
+  @apply absolute inset-0 bg-primary-500 transition rounded;
+}
+
+.vfb-step-overlay-drag-over {
+  @apply z-1;
+}
+
+.vfb-step-overlay-highlighted {
+  @apply bg-opacity-10;
+}
+
+.vfb-step-overlay-not-highlighted {
+  @apply bg-opacity-0;
+}
+
+.vfb-step-area-left {
+  @apply absolute left-0 top-0 bottom-0 right-1/2;
+}
+
+.vfb-step-area-left-drag-over {
+  @apply z-1;
+}
+
+.vfb-step-area-left-drag-line {
+  @apply absolute left-0 -top-3 bottom-3 w-0.5 bg-primary-500 -ml-px pointer-events-none rounded-full;
+}
+
+.vfb-step-area-right {
+  @apply absolute right-0 top-0 bottom-0 left-1/2;
+}
+
+.vfb-step-area-right-drag-over {
+  @apply z-1;
+}
+
+.vfb-step-area-right-drag-line {
+  @apply absolute right-0 -top-3 bottom-3 w-0.5 bg-primary-500 -mr-px pointer-events-none rounded-full;
+}
+
+.vfb-step-wrapper {
+  @apply min-w-6 block;
+}
+
+.vfb-step-wrapper-dragged {
+  @apply opacity-20;
+}
+
+.vfb-step-wrapper-active {
+  @apply form-border-color-primary;
+}
+
+.vfb-step-wrapper-inactive {
+  @apply border-transparent;
+}
+
+.vfb-step-wrapper-valid {
+}
+
+.vfb-step-wrapper-invalid {
+  @apply form-color-danger form-border-color-danger;
+}
+
+.vfb-step-label {
+  @apply relative block pt-5 px-2.5;
+}
+
+.vfb-step-label-first {
+  @apply pl-0;
+}
+
+.vfb-step-label-last {
+  @apply pr-0;
+}
+
+.vfb-step-edit-label-wrapper {
+  @apply inline-block relative flex-grow flex-shrink h-full pt-5 mx-2.5;
+}
+
+.vfb-step-edit-label-wrapper-first {
+  @apply ml-0;
+}
+
+.vfb-step-edit-label-wrapper-last {
+  @apply mr-0;
+}
+
+.vfb-step-edit-label-input {
+  @apply absolute bottom-0 left-0 right-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap;
+}
+
+.vfb-step-edit-label-sizer {
+  @apply invisible inline-block h-px relative -top-px whitespace-nowrap;
+}
+
+.vfb-step-actions-container {
+  @apply absolute transform text-white flex hidden z-1;
+}
+
+.vfb-step-actions-container-left {
+  @apply top-0 -left-px -translate-y-full flex-row;
+}
+
+.vfb-step-actions-container-right {
+  @apply top-0 -right-px -translate-y-full flex-row;
+}
+
+.vfb-step-action {
+  @apply w-4 h-4 flex items-center justify-center bg-primary-500 text-xs cursor-pointer transition-colors relative hover:bg-primary-600 vfb-tooltip-group;
+}
+
+.vfb-step-edit {
+}
+
+.vfb-step-conditions {
+}
+
+.vfb-step-remove {
+}
+
+.vfb-step-clear {
+}
+
+.vfb-steps-controls-container {
+}
+
+.vfb-steps-controls-container-editor {
+  @apply border border-primary-500 border-opacity-0 hover:border-opacity-100 cursor-pointer;
+}
+
+.vfb-steps-controls-container-select {
+  @apply border-opacity-100 bg-primary-500 bg-opacity-10;
+}
+
+.vfb-steps-controls-container-sm {
+  @apply form-mt-gutter form-text-sm;
+}
+
+.vfb-steps-controls-container-md {
+  @apply form-mt-gutter-lg form-text;
+}
+
+.vfb-steps-controls-container-lg {
+  @apply form-mt-gutter-lg form-text-lg;
+}
+
+.vfb-steps-controls-wrapper {
+  @apply flex justify-between;
+}
+
+.vfb-steps-controls-wrapper-editor {
+  @apply pointer-events-none;
+}
+
+.vfb-steps-control-button {
+  @apply form-border-width-btn form-shadow-btn disabled:pointer-events-none disabled:opacity-60 disabled:cursor-not-allowed;
+
+  &:focus {
+    @apply form-ring outline-0;
+  }
+}
+
+.vfb-steps-control-button-previous-enabled {
+  @apply form-bg-btn-secondary form-color-btn-secondary form-border-color-btn-secondary transition-transform transform hover:scale-105;
+}
+
+.vfb-steps-control-button-previous-disabled {
+  @apply form-bg-btn-secondary form-color-btn-secondary form-border-color-btn-secondary opacity-60 pointer-events-none;
+}
+
+.vfb-steps-control-button-next-enabled {
+  @apply form-bg-primary form-color-on-primary form-border-color-btn transition-transform transform hover:scale-105;
+}
+
+.vfb-steps-control-button-next-disabled {
+  @apply form-bg-primary form-color-on-primary form-border-color-btn opacity-60 pointer-events-none cursor-not-allowed;
+}
+
+.vfb-steps-control-button-next-loading {
+  @apply text-transparent form-bg-primary form-border-color-btn form-bg-spinner-on-primary opacity-60 pointer-events-none cursor-not-allowed;
+}
+
+.vfb-steps-control-button-finish-enabled {
+  @apply form-bg-primary form-color-on-primary form-border-color-btn transition-transform transform hover:scale-105;
+}
+
+.vfb-steps-control-button-finish-disabled {
+  @apply form-bg-primary form-color-on-primary form-border-color-btn opacity-60 pointer-events-none cursor-not-allowed;
+}
+
+.vfb-steps-control-button-finish-loading {
+  @apply text-transparent form-bg-primary form-border-color-btn form-bg-spinner-on-primary opacity-60 pointer-events-none cursor-not-allowed;
+}
+
+.vfb-steps-control-button-sm {
+  @apply form-p-btn-sm form-radius-btn-sm form-text-sm;
+}
+
+.vfb-steps-control-button-md {
+  @apply form-p-btn form-radius-btn form-text;
+}
+
+.vfb-steps-control-button-lg {
+  @apply form-p-btn-lg form-radius-btn-lg form-text-lg;
+}

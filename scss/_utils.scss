@@ -1,0 +1,397 @@
+.vfb-btn-primary {
+  &, &:before, &:after, &:root {
+    --vf-bg-btn: theme('colors.primary.500');
+    --vf-border-color-btn: theme('colors.primary.500');
+  }
+}
+
+.vfb-relative {
+  @apply relative;
+}
+
+.vfb-break-words {
+  word-break: break-word;
+}
+
+.vfb-learn-more {
+  @apply ml-2 leading-none text-0.5xs text-gray-400 border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
+}
+
+.vfb-field-note {
+  @apply -mt-1 text-right text-xs text-gray-400 dark:text-dark-400;
+}
+
+.vfb-info-container {
+  @apply relative;
+
+  &:hover .vfb-info-tooltip {
+    @apply block;
+  }
+}
+
+.vfb-info-icon {
+  @apply text-sm ml-0.5;
+}
+
+.vfb-info-tooltip {
+  @apply absolute top-6 right-1/2 transform translate-x-1/2 rounded px-2 py-1 bg-black bg-opacity-90 text-xs whitespace-nowrap text-center hidden;
+}
+
+.vfb-icon {
+  @apply inline-block text-inherit h-1em overflow-visible align-icon;
+}
+
+.vfb-hidden {
+  @apply hidden;
+}
+
+.vfb-util-grid-cols-12 {
+  @apply grid-cols-12;
+}
+
+.vfb-util-col-span-12 {
+  @apply col-span-12;
+}
+
+.vfb-util-col-span-6 {
+  @apply col-span-6;
+}
+
+.vfb-util-col-span-4 {
+  @apply col-span-4;
+}
+
+.vfb-util-col-span-3 {
+  @apply col-span-3;
+}
+
+.vfb-util-col-span-2 {
+  @apply col-span-2;
+}
+
+.vfb-util-col-span-1 {
+  @apply col-span-1;
+}
+
+.vfb-util-tabs-tiny {
+  @apply text-xs leading-tight;
+}
+
+.vfb-util-tabs-small {
+  @apply text-sm leading-tight;
+}
+
+.vfb-util-tabs-outline-gray-selected {
+  @apply bg-gray-100 text-black border-gray-300 dark:border-dark-600 dark:bg-dark-600 dark:bg-opacity-100 dark:text-white;
+}
+
+.vfb-util-tabs-outline-gray-unselected {
+  @apply bg-white text-gray-700 border-gray-300 dark:bg-dark-800 dark:text-white dark:border-dark-600;
+}
+
+.vfb-util-tabs-outline-selected {
+  @apply bg-primary-500 bg-opacity-20 text-primary-600 border-primary-500 dark:border-dark-600 dark:bg-dark-600 dark:bg-opacity-100 dark:text-white;
+}
+
+.vfb-util-tabs-outline-unselected {
+  @apply bg-white text-primary-500 border-primary-500 dark:bg-dark-800 dark:text-white dark:border-dark-600;
+}
+
+.vfb-util-number-input {
+  @apply form-pl-input-sm form-py-input-sm;
+}
+
+.vfb-util-number-addon {
+  @apply text-gray-500 dark:text-dark-400;
+}
+
+.vfb-util-colorpicker-input {
+  @apply relative;
+}
+
+.vfb-util-colorpicker-addon {
+  @apply absolute top-1.5 -right-0.5;
+}
+
+.vfb-util-props-group {
+  @apply my-4;
+}
+
+.vfb-util-props-list-el-input {
+  @apply border-b border-gray-200 dark:border-dark-600;
+}
+
+.vfb-util-props-list-el-input-default {
+  @apply focused:border-primary-500 focused:dark:border-dark-400;
+}
+
+.vfb-util-props-list-el-input-success {
+  @apply focused:border-primary-500 focused:dark:border-dark-400;
+}
+
+.vfb-util-props-list-el-select {
+  @apply border-b border-gray-200 dark:border-dark-600 -bottom-px relative;
+}
+
+.vfb-util-props-list-el-select-default {
+  @apply focused:border-primary-500 dark:bg-dark-800 dark:text-white focused:dark:border-dark-400;
+}
+
+.vfb-util-props-list-el-select-success {
+  @apply focused:border-primary-500 dark:bg-dark-800 dark:text-white focused:dark:border-dark-400;
+}
+
+.vfb-util-props-list-el-select-container {
+  @apply border-b border-gray-200 dark:border-dark-600 relative;
+}
+
+.vfb-util-props-list-el-select-container-default {
+  @apply focused:border-primary-500 focused:dark:border-dark-400;
+}
+
+.vfb-util-props-list-el-select-container-success {
+  @apply focused:border-primary-500 focused:dark:border-dark-400;
+}
+
+.vfb-util-props-list-label {
+  @apply mb-4 mt-3.5;
+}
+
+.vfb-util-props-list-add {
+  @apply absolute top-0 right-0;
+}
+
+.vfb-util-props-list-layout {
+  @apply relative;
+}
+
+.vfb-util-props-list-subtitle {
+  @apply uppercase text-gray-500 font-semibold mb-2 ml-2.5 mt-1 dark:text-dark-400;
+}
+
+.vfb-util-props-subtitle-no-m {
+  @apply uppercase text-gray-500 font-semibold dark:text-dark-400;
+}
+
+.vfb-util-props-subtitle {
+  @apply uppercase text-gray-500 font-semibold mb-2 dark:text-dark-400;
+}
+
+.vfb-util-props-separator-top {
+  @apply border-t border-gray-150 px-5 -mx-5 pt-4 mt-2 dark:border-dark-600;
+}
+
+.vfb-util-props-separator {
+  @apply border-b border-gray-150 px-5 -mx-5 pb-4 mb-2 dark:border-dark-600;
+}
+
+.vfb-util-props-multiline-label {
+  @apply items-start form-pt-input-border;
+}
+
+.vfb-util-props-toggle-wrapper {
+  @apply items-center justify-end form-h-input-sm;
+}
+
+.vfb-util-props-horizontal-label {
+  @apply items-center leading-tighter;
+}
+
+.vfb-util-props-tags {
+  @apply whitespace-normal break-all;
+}
+
+.vfb-util-props-horizontal-label-sm {
+  @apply text-type:form-pt-input-border-sm;
+}
+
+.vfb-util-props-horizontal-label-md {
+  @apply text-type:form-pt-input-border;
+}
+
+.vfb-util-props-horizontal-label-lg {
+  @apply text-type:form-pt-input-border-lg;
+}
+
+.vfb-util-props-not-horizontal-label-sm {
+  @apply form-pb-gutter/3-sm;
+}
+
+.vfb-util-props-not-horizontal-label-md {
+  @apply form-pb-gutter/3;
+}
+
+.vfb-util-props-not-horizontal-label-lg {
+  @apply form-pb-gutter/3-lg;
+}
+
+.vfb-util-columns-number {
+  @apply font-normal mb-2;
+}
+
+.vfb-util-columns-total {
+  @apply text-gray-400 mb-2;
+}
+
+.vfb-util-props-link {
+  @apply text-primary-500 border-b border-dotted border-primary-500;
+}
+
+.vfb-util-props-description {
+  @apply text-right text-gray-500 dark:text-dark-400 text-sm italic form-h-input-sm pb-px flex items-center;
+}
+
+.vfb-util-props-accepted-formats-container {
+  @apply text-sm -mt-3;
+}
+
+.vfb-util-props-accepted-return-formats-container {
+  @apply text-sm -mt-1;
+}
+
+.vfb-util-props-error {
+  @apply text-red-500 text-xs;
+}
+
+.vfb-util-color-preview {
+  @apply w-5 h-5 rounded pointer-events-none;
+}
+
+.vfb-util-prop-label-with-link {
+  @apply flex items-center;
+}
+
+.vfb-util-prop-element-with-link {
+  @apply flex items-center justify-between w-full;
+}
+
+.vfb-util-prop-language-container {
+  @apply bg-gray-100 p-2 rounded-lg;
+}
+
+.vfb-util-prop-language-value {
+  @apply bg-white;
+}
+
+.vfb-util-assistive-text {
+  @apply absolute -m-px w-px h-px overflow-hidden;
+  clip: rect(0 0 0 0);
+}
+
+.vfb-util-element-type {
+  & + div {
+    @apply -mt-2;
+  }
+}
+
+.vfb-tooltip-group:hover {
+  .vfb-tooltip {
+    @apply inline-block;
+  }  
+}
+
+.vfb-tooltip {
+  @apply absolute z-999 transform bg-black text-white bg-opacity-80 px-1.5 py-0.5 rounded text-sm leading-tighter hidden whitespace-nowrap text-center;
+
+  &.vfb-tooltip-smaller {
+    @apply px-1 text-0.5sm; 
+  }
+}
+
+.vfb-tooltip-top {
+  @apply -top-0.5 left-1/2 -translate-y-full -translate-x-1/2;
+
+  &.vfb-tooltip-closer {
+    @apply top-1; 
+  }
+}
+
+.vfb-tooltip-bottom {
+  @apply -bottom-0.5 left-1/2 translate-y-full -translate-x-1/2;
+
+  &.vfb-tooltip-further {
+    @apply -bottom-1;
+  }
+}
+
+.vfb-tooltip-left {
+  @apply top-1/2 -left-0.5 -translate-y-1/2 -translate-x-full;
+
+  &.vfb-tooltip-closer {
+    @apply left-1; 
+  }
+
+  &.vfb-tooltip-further {
+    @apply -left-1.5;
+  }
+}
+
+.vfb-tooltip-right {
+  @apply top-1/2 -right-0.5 -translate-y-1/2 translate-x-full;
+
+  &.vfb-tooltip-closer {
+    @apply right-1; 
+  }
+}
+
+.vfb-tooltip-top-left {
+  @apply -top-0.5 left-0 -translate-y-full translate-x-0;
+}
+
+.vfb-tooltip-top-right {
+  @apply -top-0.5 right-0 left-auto -translate-y-full translate-x-0;
+}
+
+.vfb-tooltip-bottom-left {
+  @apply -bottom-0.5 left-0 translate-y-full translate-x-0;
+
+  &.vfb-tooltip-closer {
+    @apply bottom-1; 
+  }
+}
+
+.vfb-tooltip-bottom-right {
+  @apply -bottom-0.5 right-0 left-auto translate-y-full translate-x-0;
+
+  &.vfb-tooltip-closer {
+    @apply bottom-1; 
+  }
+}
+
+.vfb-notification-container {
+  @apply absolute left-16 right-16 mx-1 bottom-4;
+}
+
+.vfb-notification {
+  @apply py-3 px-5 bg-white;
+}
+
+.vfb-text-button {
+  @apply px-0 rounded-none bg-transparent text-black border-transparent hover:scale-100 block;
+}
+
+.vfb-btn-primary,
+.vfb-btn-secondary,
+.vfb-btn-transparent {
+  @apply inline-block form-border-width-btn form-shadow-btn form-p-btn form-radius-btn form-text cursor-pointer focus:form-ring;
+}
+
+.vfb-btn-primary {
+  @apply form-bg-btn form-color-btn form-border-color-btn;
+}
+
+.vfb-btn-secondary {
+  @apply form-bg-btn-secondary form-color-btn-secondary form-border-color-btn-secondary;
+}
+
+.vfb-btn-transparent {
+  @apply form-color-btn-secondary border-transparent hover:text-gray-900;
+}
+
+.vfb-btn-sm {
+  @apply form-p-btn-sm form-text-sm form-radius-btn-sm;
+}
+
+.vfb-btn-xs {
+  @apply px-2 py-0.5 text-0.5sm rounded inline-block;
+}

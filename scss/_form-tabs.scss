@@ -1,0 +1,223 @@
+.vfb-tabs-container {
+  @apply flex items-end relative;
+}
+
+.vfb-tab-container-active {
+}
+
+.vfb-tabs-container-sm {
+  @apply form-mb-gutter form-text-sm;
+}
+
+.vfb-tabs-container-md {
+  @apply form-mb-gutter-lg form-text;
+}
+
+.vfb-tabs-container-lg {
+  @apply form-mb-gutter-lg form-text-lg;
+}
+
+.vfb-tabs-wrapper {
+  @apply flex justify-between flex-row overflow-x-auto pt-12 -mt-12;
+}
+
+.vfb-tabs-remove-wrapper {
+  @apply flex justify-between absolute -left-4 top-2.5 vfb-tooltip-group;
+}
+
+.vfb-tabs-remove-button {
+  @apply text-gray-300 cursor-pointer transition hover:text-gray-400;
+}
+
+.vfb-tabs-add-wrapper {
+  @apply flex justify-between absolute -right-4 top-2.5 vfb-tooltip-group;
+}
+
+.vfb-tabs-add-button {
+  @apply text-gray-300 text-sm cursor-pointer transition hover:text-gray-400;
+}
+
+.vfb-tab-container {
+  @apply relative cursor-pointer border border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0;
+
+  &.vfb-tab-container-hover {
+    @apply border-opacity-100;
+    
+    .vfb-tab-actions-container {
+      @apply flex opacity-100;
+    }
+  }
+}
+
+.vfb-tab-container-editor {
+  &:hover,
+  &:focus,
+  &.vfb-tab-container-moving {
+    @apply border-opacity-100 outline-none;
+
+    .vfb-tab-actions-container {
+      @apply flex opacity-100;
+    }
+  }
+
+  &.vfb-tab-container-selected {
+    @apply border-opacity-100 bg-primary-500 bg-opacity-10;
+
+    .vfb-tab-actions-container {
+      @apply flex opacity-100;
+    }
+  }
+
+  &.vfb-tab-container-moving {
+    @apply border-transparent relative;
+
+    &:before {
+      content: "";
+      @apply absolute inset-0 border border-primary-500 border-dashed;
+    }
+  }
+}
+
+.vfb-tab-container-drop-left {
+  @apply relative;
+
+  &:after {
+    content: "";
+    @apply absolute left-0 top-0 bottom-0 w-0.5 bg-primary-500 rounded-full;
+  }
+}
+
+.vfb-tab-container-drop-right {
+  @apply relative;
+
+  &:after {
+    content: "";
+    @apply absolute right-0 top-0 bottom-0 w-0.5 bg-primary-500 rounded-full;
+  }
+}
+
+.vfb-tab-container-drop-middle {
+  @apply bg-opacity-10 rounded;
+}
+
+.vfb-tab-container-conditional {
+  @apply text-gray-400;
+}
+
+.vfb-tab-overlay {
+  @apply absolute inset-0 bg-primary-500 transition rounded;
+}
+
+.vfb-tab-overlay-drag-over {
+  @apply z-1;
+}
+
+.vfb-tab-overlay-highlighted {
+  @apply bg-opacity-10;
+}
+
+.vfb-tab-overlay-not-highlighted {
+  @apply bg-opacity-0;
+}
+
+.vfb-tab-area-left {
+  @apply absolute left-0 top-0 bottom-0 right-1/2;
+}
+
+.vfb-tab-area-left-drag-over {
+  @apply z-1;
+}
+
+.vfb-tab-area-left-drag-line {
+  @apply absolute left-0 top-0 bottom-0 w-0.5 bg-primary-500 -ml-px pointer-events-none rounded-full;
+}
+
+.vfb-tab-area-right {
+  @apply absolute right-0 top-0 bottom-0 left-1/2;
+}
+
+.vfb-tab-area-right-drag-over {
+  @apply z-1;
+}
+
+.vfb-tab-area-right-drag-line {
+  @apply absolute right-0 top-0 bottom-0 w-0.5 bg-primary-500 -mr-px pointer-events-none rounded-full;
+}
+
+.vfb-tab-wrapper {
+  @apply block border-b-2 relative bg-transparent whitespace-nowrap;
+}
+
+.vfb-tab-wrapper-dragged {
+  @apply opacity-20;
+}
+
+.vfb-tab-wrapper-active {
+  @apply form-border-color-primary;
+}
+
+.vfb-tab-wrapper-inactive {
+  @apply border-transparent;
+}
+
+.vfb-tab-wrapper-valid {
+}
+
+.vfb-tab-wrapper-invalid {
+  @apply form-color-danger form-border-color-danger;
+}
+
+.vfb-tab-wrapper-sm {
+  @apply py-1.5 px-3.5;
+}
+
+.vfb-tab-wrapper-md {
+  @apply py-2 px-4;
+}
+
+.vfb-tab-wrapper-lg {
+  @apply py-2 px-4;
+}
+
+.vfb-tab-edit-label {
+}
+
+.vfb-tab-edit-label-wrapper {
+  @apply inline-block relative flex-grow flex-shrink h-full;
+}
+
+.vfb-tab-edit-label-input {
+  @apply absolute inset-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap;
+}
+
+.vfb-tab-edit-label-sizer {
+  @apply invisible whitespace-nowrap inline-block h-px relative -top-px;
+}
+
+.vfb-tab-actions-container {
+  @apply absolute transform text-white flex hidden z-1;
+}
+
+.vfb-tab-actions-container-left {
+  @apply top-0 -left-px -translate-y-full flex-row;
+}
+
+.vfb-tab-actions-container-right {
+  @apply top-0 -right-px -translate-y-full flex-row;
+}
+
+.vfb-tab-action {
+  @apply w-4 h-4 flex items-center justify-center bg-primary-500 text-xs cursor-pointer transition-colors relative hover:bg-primary-600 vfb-tooltip-group;
+}
+
+.vfb-tab-edit {
+}
+
+.vfb-tab-conditions {
+}
+
+.vfb-tab-remove {
+}
+
+.vfb-tab-clear {
+}
