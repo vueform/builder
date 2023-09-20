@@ -1,7 +1,4 @@
 {
-  "publishConfig": {
-    "registry": "https://registry.vueform.com"
-  },
   "private": false,
   "name": "@vueform/builder",
   "version": "1.1.0",
