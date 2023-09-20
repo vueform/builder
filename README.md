@@ -11,7 +11,7 @@ Documentation for Vueform Builder. Vueform Builder requires a separate license f
 
 #### 1. Install Vueform in your project
 
-Head to our [Installation guide](https://vueform.com/docs/1.x/installation#installation) and install Vueform in your project with `tailwind` theme.
+Head to our [Installation guide](https://vueform.com/docs/installation#installation) and install Vueform in your project with `tailwind` theme.
 
 #### 2. Add Vueform Builder
 
