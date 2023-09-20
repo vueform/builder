@@ -1,0 +1,306 @@
+.vfb-hidden-element-preview-text {
+  @apply w-full italic text-gray-400;
+}
+
+.vfb-preview-element-container {
+  @apply relative pointer-events-auto focus:outline-none;
+
+  &.vfb-preview-element-container-hover > .vfb-preview-element-overlay {
+    @apply border-primary-500;
+  }
+
+  &.vfb-preview-element-container-hover > .vfb-preview-element-resizer-icon {
+    @apply inline-block;
+  }
+
+  &.vfb-preview-element-container-hover > .vfb-preview-element-name-tag {
+    @apply inline-block;
+  }
+
+  &.vfb-preview-element-container-hover > .vfb-preview-element-actions-container-unselected {
+    @apply flex;
+  }
+}
+
+.vfb-preview-element-container-nested, 
+.vfb-preview-element-container-list {
+  transition: background 150ms;
+  padding: 18px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--vf-container-bg);
+  z-index: 0; // could fix tooltip hover issue
+  --vf-container-bg-neutral: rgb(86 136 179 / 10%);
+  --vf-container-bg-dynamic-1: rgb(0 208 255 / 12%);
+  --vf-container-bg-dynamic-2: rgb(2 45 215 / 12%);
+  --vf-container-bg-dynamic-3: rgb(255 0 244 / 15%);
+  --vf-container-bg-dynamic-4: rgb(255 0 0 / 20%);
+  --vf-container-bg-dynamic-5: rgb(0 0 0 / 12%);
+}
+
+.vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-neutral);
+}
+
+.vfb-preview-element-container-list,
+.vfb-preview-element-container-list .vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-dynamic-1);
+}
+
+.vfb-preview-element-container-list .vfb-preview-element-container-list,
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-dynamic-2);
+}
+
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list,
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-dynamic-3);
+}
+
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list,
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-dynamic-4);
+}
+
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list,
+.vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-dynamic-5);
+}
+
+.vfb-preview-element-container-no-visual-nesting {
+  padding: 18px 1px;
+  margin: 0 0;
+}
+
+.vfb-preview-element-container-sm {
+  @apply form-text-sm;
+}
+
+.vfb-preview-element-container-md {
+  @apply form-text;
+}
+
+.vfb-preview-element-container-lg {
+  @apply form-text-lg;
+}
+
+.vfb-preview-element-container-error {
+  @apply has-error;
+}
+
+.vfb-preview-element-container-conditional {
+  @apply opacity-60;
+
+  &.vfb-preview-element-container-nested-lvl1,
+  &.vfb-preview-element-container-nested-lvl2,
+  &.vfb-preview-element-container-nested-lvl3 {
+    @apply opacity-60;
+  }
+}
+
+.vfb-preview-element-container-editing {
+  @apply opacity-80;
+
+  .vfb-preview-element-overlay {
+    @apply border-dashed border;
+  }
+}
+
+.vfb-preview-element-outer-wrapper {
+  @apply grid grid-cols-12 flex-1;
+}
+
+.vfb-preview-element-inner-container {
+  @apply flex-1 grid grid-cols-12;
+}
+
+.vfb-preview-element-inner-wrapper-before {
+  @apply col-span-12;
+}
+
+.vfb-preview-element-inner-wrapper {
+}
+
+.vfb-preview-element-inner-wrapper-after {
+  @apply col-span-12;
+}
+
+.vfb-preview-element-overlay {
+  @apply absolute inset-0 border cursor-pointer;
+
+  &.vfb-preview-element-overlay-resizing {
+    @apply border-primary-500-imp;
+  }
+
+  &.vfb-preview-element-overlay-no-edit {
+    @apply cursor-default;
+  }
+}
+
+.vfb-preview-element-overlay-being-dragged {
+  @apply border-dashed opacity-90 border;
+}
+
+.vfb-preview-element-overlay-selected {
+  @apply border-primary-500 bg-primary-500 bg-opacity-10;
+}
+
+.vfb-preview-element-overlay-unselected {
+  @apply border-transparent;
+}
+
+.vfb-preview-element-resizer {
+  @apply absolute -right-1 w-2 top-0 bottom-0 cursor-ew-resize z-999;
+
+  &:active {
+    @apply opacity-0;
+  }
+}
+
+.vfb-preview-element-resizer-icon {
+  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition;
+}
+
+.vfb-preview-element-resizer-icon-unselected {
+  @apply hidden;
+}
+
+.vfb-preview-element-resizer-icon-resizing {
+  @apply w-auto h-4 text-sm px-0.5  whitespace-nowrap leading-none;
+}
+
+.vfb-preview-element-name-tag {
+  @apply absolute left-0 top-0 transform -translate-y-full bg-primary-500 text-white px-2 py-px text-xs;
+}
+
+.vfb-preview-element-name-tag-unselected {
+  @apply hidden;
+}
+
+.vfb-preview-element-area-top {
+  @apply absolute left-0 right-0 bottom-1/2;
+}
+
+.vfb-preview-element-area-top-sm {
+  @apply -top-1;
+}
+
+.vfb-preview-element-area-top-md {
+  @apply -top-2;
+}
+
+.vfb-preview-element-area-top-lg {
+  @apply -top-2;
+}
+
+.vfb-preview-element-area-bottom {
+  @apply absolute left-0 right-0 top-1/2;
+}
+
+.vfb-preview-element-area-bottom-sm {
+  @apply -bottom-1;
+}
+
+.vfb-preview-element-area-bottom-md {
+  @apply -bottom-2;
+}
+
+.vfb-preview-element-area-bottom-lg {
+  @apply -bottom-2;
+}
+
+.vfb-preview-element-area-middle {
+  @apply col-span-12;
+}
+
+.vfb-preview-element-middle-drag-label-container {
+  @apply absolute inset-0 z-1;
+}
+
+.vfb-preview-element-drag-label-wrapper {
+  @apply bg-primary-500 absolute h-1 rounded-full pointer-events-none hidden;
+
+  &.vfb-preview-element-drag-label-wrapper-visible {
+    @apply block;
+  }
+}
+
+.vfb-preview-element-drag-label-wrapper-top {
+  @apply -left-2 -right-2 -top-0.5;
+}
+
+.vfb-preview-element-container-drop-top {
+  & > .vfb-preview-element-area-top, & > div > .vfb-preview-element-drag-label-wrapper-top {
+    display: block !important;
+  }
+}
+
+.vfb-preview-element-drag-label-wrapper-bottom {
+  @apply -left-2 -right-2 -bottom-0.5;
+}
+
+.vfb-preview-element-container-drop-bottom {
+  & > .vfb-preview-element-area-bottom, & > div > .vfb-preview-element-drag-label-wrapper-bottom {
+    display: block !important;
+  }
+}
+
+.vfb-preview-element-drag-label-wrapper-middle {
+  @apply top-1/2 left-0 right-0 transform -translate-y-1/2;
+}
+
+.vfb-preview-element-container-drop-middle {
+  & > div > div > .vfb-preview-element-area-middle, & > div > div > div > div > .vfb-preview-element-drag-label-wrapper-middle {
+    display: block !important;
+  }
+}
+
+.vfb-preview-element-drag-label {
+  @apply bg-primary-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 pt-0.5 pb-0.75 rounded-full leading-none text-0.5sm text-white;
+}
+
+.vfb-preview-element-actions-container {
+  @apply absolute right-0 top-0 transform -translate-y-full text-white;
+}
+
+.vfb-preview-element-actions-container-selected {
+  @apply flex;
+}
+
+.vfb-preview-element-actions-container-unselected {
+  @apply hidden;
+}
+
+.vfb-preview-element-clone {
+  @apply w-4 h-4 flex items-center justify-center bg-primary-500 text-xxs cursor-pointer transition-colors hover:bg-primary-600 vfb-tooltip-group relative;
+}
+
+.vfb-preview-element-clone-disabled {
+  @apply bg-opacity-60 hover:bg-opacity-60 cursor-not-allowed;
+}
+
+.vfb-preview-element-remove {
+  @apply w-4 h-4 flex items-center justify-center bg-primary-500 text-xs ml-0.5 cursor-pointer transition-colors hover:bg-primary-600 vfb-tooltip-group relative;
+}
+
+.vfb-preview-element-remove-disabled {
+  @apply bg-opacity-60 hover:bg-opacity-60 cursor-not-allowed;
+}
+
+.vfb-preview-nested-element-wrapper {
+  @apply relative z-1 pointer-events-none;
+}
+
+.vfb-preview-nested-list-element-wrapper {
+  @apply relative z-1 pointer-events-none grid grid-cols-12 col-span-12 w-full;
+}
+
+.vfb-preview-wrapper-preview {
+  .vfb-preview-nested-element-wrapper {
+    @apply z-auto;
+  }
+
+  .vfb-preview-nested-list-element-wrapper {
+    @apply z-auto;
+  }
+}

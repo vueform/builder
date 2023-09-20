@@ -1,0 +1,185 @@
+.vfb-config-panel-container {
+  @apply overflow-y-auto overflow-x-hidden absolute inset-0 z-1 px-5 pb-6 bg-white transition transform duration-150 dark:bg-dark-800;
+}
+
+.vfb-config-panel-container-hidden {
+  @apply translate-x-full;
+
+  &.vfb-config-panel-container-left {
+    @apply -translate-x-full;
+  }
+}
+
+.vfb-config-panel-header-container {
+  @apply flex justify-between items-center px-5 py-4 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700;
+}
+
+.vfb-config-panel-header {
+  @apply flex items-center justify-between w-full;
+}
+
+.vfb-config-panel-header-wrapper-left {
+  @apply flex items-center;
+}
+
+.vfb-config-panel-header-wrapper-right {
+  @apply flex items-center;
+}
+
+.vfb-config-panel-header-close {
+  @apply mt-0.5 mr-2 text-gray-400 transition-colors hover:text-gray-800 cursor-pointer dark:text-dark-400 dark:hover:text-dark-300;
+}
+
+.vfb-config-panel-header-close-icon {
+
+}
+
+.vfb-config-panel-header-label {
+  @apply text-xl;
+}
+
+.vfb-config-panel-header-clone,
+.vfb-config-panel-header-remove,
+.vfb-config-panel-header-collapse {
+  @apply flex items-center justify-center h-full text-gray-500 transition-colors cursor-pointer hover:text-gray-600 dark:text-dark-400 hover:dark:text-dark-300;
+}
+
+
+.vfb-config-panel-header-clone,
+.vfb-config-panel-header-remove {
+  @apply mr-3;
+}
+
+.vfb-config-panel-header-clone {
+  @apply text-0.5md;
+}
+
+.vfb-config-panel-header-collapse-icon-open {
+  
+}
+
+.vfb-config-panel-header-collapse-icon-close {
+  
+}
+
+.vfb-config-form {
+  *, :before, :after, :root {
+    --vf-gutter-sm: 0.5rem;
+
+    --vf-min-height-input-sm: 2.125rem;
+
+    --vf-py-input-sm: 0.375rem;
+    --vf-px-input-sm: 0.675rem;
+
+    --vf-radius-input: 6px;
+
+    --vf-bg-input: var(--vf-gray-100);
+    --vf-bg-passive: var(--vf-gray-200);
+    --vf-border-color-passive: var(--vf-gray-200);
+    
+    --vf-border-color-input: var(--vf-gray-200);
+
+    --vf-color-input: var(--vf-gray-900);
+    --vf-color-placeholder: var(--vf-gray-400);
+
+    --vf-radius-checkbox-sm: 4px;
+  }
+}
+
+.dark {
+  .vfb-config-form {
+    *, :before, :after, :root {
+      --vf-primary: theme('colors.dark.550');
+      --vf-on-primary: #ffffff;
+      --vf-ring-color: #ffffff66;
+      --vf-bg-input: theme('colors.dark.700');
+      --vf-bg-passive: theme('colors.dark.600');
+      --vf-bg-selected: theme('colors.dark.550');
+      --vf-border-color-passive: theme('colors.dark.600');
+      
+      --vf-border-color-input: theme('colors.dark.700');
+      --vf-bg-icon: theme('colors.dark.500');
+
+      --vf-color-muted: theme('colors.dark.400');
+      --vf-color-input: #ffffff;
+      --vf-color-placeholder: theme('colors.dark.400');
+    }
+  }
+
+  .vfb-config-slider {
+    *, :before, :after, :root {
+      --vf-primary: theme('colors.primary.500');
+      --vf-bg-passive:theme('colors.dark.900');
+      --vf-bg-slider-handle: #ffffff;
+      --vf-shadow-handles: 0px 0px 0px 0px theme('colors.dark.900');
+      --vf-shadow-handles-hover: 0px 0px 0px 2px theme('colors.dark.500');
+      --vf-shadow-handles-focus: 0px 0px 0px 2px theme('colors.dark.300');
+    }
+  }
+
+  .vfb-config-toggle {
+    *, :before, :after, :root {
+      --vf-primary: theme('colors.primary.500');
+      --vf-bg-toggle-handle: #ffffff;
+      --vf-shadow-handles: 0px 0px 0px 0px theme('colors.dark.900');
+      --vf-shadow-handles-hover: 0px 0px 0px 2px theme('colors.dark.500');
+      --vf-shadow-handles-focus: 0px 0px 0px 2px theme('colors.dark.300');
+    }
+  }
+
+  .vfb-config-list-remove {
+    *, :before, :after, :root {
+      --vf-color-passive: #ffffff !important;
+    }
+  }
+
+  .vfb-config-datepicker {
+    .flatpickr-calendar {
+      &, *, :before, :after, :root {
+        --vf-color-input: #000000;
+      }
+    }
+  }
+}
+
+.vfb-config-toggle + .vfb-config-toggle {
+  @apply -mt-2;
+}
+
+.vfb-config-form-header {
+  @apply text-black -mx-5 -mt-px text-0.5md font-semibold px-5 py-2 flex items-center justify-between cursor-pointer col-span-12 border-t border-b border-gray-150 bg-gray-50 dark:bg-dark-700 dark:border-dark-600 dark:text-white;
+}
+
+.vfb-config-form-header-first {
+  @apply border-t-0-imp;
+}
+
+.vfb-config-form-header-non-collapsible {
+  @apply cursor-auto-imp;
+}
+
+.vfb-config-form-header-collapse-container {
+  @apply text-xs mr-1 order-2 text-gray-400 dark:text-dark-400;
+}
+
+.vfb-config-form-header-collapse-open {
+}
+
+.vfb-config-form-header-collapse-close {
+}
+
+.vfb-config-form-header-collapse-loading {
+  @apply animate-spin;
+}
+
+.vfb-config-panel-input-language {
+  @apply text-gray-400 font-bold text-0.5xs flex items-start pt-2.25 pr-1.5 uppercase order-1 cursor-text select-none dark:text-dark-400;
+
+  & + input, & + textarea {
+    @apply pr-1;
+  }
+}
+
+.vfb-config-panel-input-language-editor {
+  @apply text-gray-400 font-bold text-0.5xs uppercase cursor-text select-none bg-gray-100 bg-opacity-50 absolute bottom-1.5 right-2 leading-none p-0.5 dark:bg-dark-700 dark:text-dark-400;
+}

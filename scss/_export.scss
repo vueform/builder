@@ -1,0 +1,23 @@
+.vfb-export-container {
+  @apply max-w-100vw-194.5 mx-auto my-4;
+}
+
+.vfb-export-code {
+  @apply rounded-lg shadow-box-circle mx-auto;
+}
+
+.vfb-export-copy-container {
+  @apply hidden;
+}
+
+.vfb-export-copy-icon {
+  @apply mr-1;
+}
+
+.vfb-export-copied-container {
+  @apply hidden;
+}
+
+.vfb-export-copied-icon {
+  @apply mr-1;
+}

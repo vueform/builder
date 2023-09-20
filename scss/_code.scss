@@ -1,0 +1,350 @@
+.vfb-code-toolbar {
+  @apply relative;
+  
+  .vfb-toolbar {
+    @apply absolute top-4 right-6 opacity-0 transition hover:opacity-100;
+
+    button {
+      @apply text-white opacity-70 transition hover:opacity-100 font-semibold outline-none;
+    }
+  }
+
+  pre[data-nocopy] {
+    & + .toolbar {
+      @apply hidden;
+    }
+  }
+
+  pre:hover {
+    & + .vfb-toolbar {
+      @apply opacity-100;
+    }
+  }
+}
+
+.vfb-code {
+  @apply bg-gray-900 dark:bg-dark-1000;
+  
+  code, pre {
+    color: theme('colors.code.base');
+    background: none;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    font-size: 13px;
+    line-height: 1.625;
+    border-radius: 8px;
+  }
+
+  /* Code blocks */
+  pre {
+    overflow: auto;
+    padding: 1.5rem;
+
+    &.collapsed {
+      max-height: 600px;
+      overflow-y: hidden;
+      position: relative;
+      pointer-events: none;
+
+      &:before {
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 400;
+        content: "\f078";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.3);
+        transition: .3s background-color;
+        color: #fff;
+        text-align: center;
+        padding: 0.5rem 0;
+        cursor: pointer;
+        pointer-events: all;
+
+        &:hover {
+          background: rgba(0,0,0,0.4);
+        }
+      }
+
+      &.collapsed-long {
+        max-height: 1156px;
+      }
+    }
+  }
+
+  /* Inline code */
+  :not(pre) > code {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: theme('colors.code.comment');
+  }
+
+  .token.punctuation {
+    color: theme('colors.code.base');
+
+    & + .component-select {
+      // color: #46ffe2;
+      // color: #0ae6ff;
+      // color: theme('colors.code.blue');
+      // color: #bd93f9;
+      // color: #00e2ff;
+      color: theme('colors.code.green');
+    }
+  }
+
+  .namespace {
+    opacity: .7;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.constant,
+  .token.symbol,
+  .token.deleted {
+    color: theme('colors.code.blue');
+    // color: #ed3aa1;
+    // color: #ff5bb9;
+  }
+
+  .token.boolean,
+  .token.number {
+    color: theme('colors.code.light-purple');
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin {
+    color: theme('colors.code.teal');
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string,
+  .token.variable {
+    color: theme('colors.code.base');
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.function,
+  .token.class-name {
+    color: theme('colors.code.yellow');
+  }
+
+  .keyword-highlight {
+    padding: 0 2px;
+    position: relative;
+
+    &:after {
+      content: "";
+      background: currentColor;
+      position: absolute;
+      opacity: 0.25;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+  }
+
+  .token.keyword {
+    color: theme('colors.code.blue');
+  }
+
+  .token.regex,
+  .token.important {
+    color: theme('colors.code.orange');
+  }
+
+  .token.important,
+  .token.bold {
+    font-weight: bold;
+  }
+
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.entity {
+    cursor: help;
+  }
+
+  // Diff highlight
+
+  .token.inserted {
+    color: #95e3bfbf;
+    margin-left: -0.2rem;
+    margin-right: 0.2rem;
+
+    &:not(.prefix) {
+      background-color: #04784f80;
+      color: inherit;
+      display: block;
+      padding-left: 3.8rem;
+      margin-left: -3.8rem;
+      padding-right: 1.5rem;
+      margin-right: -1.5rem;
+    }
+
+    &.prefix {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  .token.deleted {
+    color: #af9c9c;
+    margin-left: -0.2rem;
+    margin-right: 0.2rem;
+
+    &:not(.prefix) {
+      background-color: #ef6b7f40;
+      color: inherit;
+      display: block;
+      padding-left: 3.8rem;
+      margin-left: -3.8rem;
+      padding-right: 1.5rem;
+      margin-right: -1.5rem;
+    }
+
+    &.prefix {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  pre.diff-highlight .inserted-sign .inserted-sign {
+    margin-top: -1.5rem;
+  }
+
+  pre.diff-highlight .deleted-sign .deleted-sign {
+    margin-top: -1.5rem;
+  }
+
+  // Inline highlight
+
+  mark {
+    color: inherit;
+    padding: 2px 4px;
+    border-radius: 3px;
+    position: relative;
+    background: none;
+    
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: currentColor;
+      opacity: 0.2;
+      border-radius: 3px;
+      pointer-events: none;
+      cursor: text;
+    }
+  }
+
+  // Line numbers
+
+  pre.line-numbers {
+    position: relative;
+    padding-left: 3.8rem;
+    counter-reset: linenumber;
+  }
+
+  pre.line-numbers > code {
+    position: relative;
+    white-space: inherit;
+  }
+
+  .line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: -1rem;
+    padding-top: 0.75rem;
+    font-size: 13px;
+    line-height: 1.625;
+    left: -3.8rem;
+    width: 3rem; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    // background: #11171F;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .line-numbers-rows > span {
+    display: block;
+    counter-increment: linenumber;
+  }
+
+  .line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #45576f;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
+  }
+
+  // Line highlight
+
+  pre[data-line] {
+    position: relative;
+  }
+
+  .line-highlight {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: inherit 0;
+    margin-top: 1.5rem;
+    background: #ffffff14;
+
+    pointer-events: none;
+
+    line-height: inherit;
+    white-space: pre;
+    @apply border-l-4 border-primary-500;
+  }
+
+  .line-numbers .line-highlight {
+    margin-top: 0.5rem;
+  }
+
+  pre[id].linkable-line-numbers span.line-numbers-rows {
+    pointer-events: all;
+  }
+  pre[id].linkable-line-numbers span.line-numbers-rows > span:before {
+    cursor: pointer;
+  }
+  pre[id].linkable-line-numbers span.line-numbers-rows > span:hover:before {
+    background-color: rgba(128, 128, 128, .2);
+  }
+}

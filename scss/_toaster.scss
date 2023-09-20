@@ -1,0 +1,54 @@
+.vfb-toaster-container {
+  @apply flex items-center justify-center sticky top-full pb-4 mx-16 transition duration-300 ease-toaster transform translate-y-full z-999;
+
+  &.vfb-toaster-container-visible {
+    @apply translate-y-0;
+  }
+}
+
+.vfb-toaster {
+  @apply text-white py-3 px-5 bg-black bg-opacity-80 overflow-hidden flex justify-between items-center rounded whitespace-nowrap opacity-100;
+
+  .vfb-toaster-error {
+    @apply bg-red-500;
+    box-shadow: 2px 2px 1px 0px rgba(126, 58, 58, 0.5);
+  }
+
+  .vfb-toaster-info {
+    @apply bg-blue-400;
+    box-shadow: 2px 2px 1px 0px rgba(96, 165, 250, 0.5);
+  }
+
+  .vfb-toaster-success {
+    @apply bg-primary-500;
+    box-shadow: 2px 2px 1px 0px rgba(31, 150, 118, 0.5);
+  }
+}
+
+.vfb-toaster-wrapper {
+  @apply flex items-center;
+}
+
+.vfb-toaster-icon {
+  @apply mr-3;
+}
+
+.vfb-toaster-close-wrapper {
+  @apply ml-4;
+}
+
+.vfb-toaster-close {
+  @apply uppercase cursor-pointer text-white opacity-70 font-semibold transition hover:opacity-90;
+}
+
+.vfb-toast-enter-active,
+.vfb-toast-leave-active {
+}
+
+.vfb-toast-enter,
+.vfb-toast-leave-to {
+}
+
+.vfb-toast-leave,
+.vfb-toast-enter-to {
+}

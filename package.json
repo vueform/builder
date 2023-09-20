@@ -1,0 +1,27 @@
+{
+  "publishConfig": {
+    "registry": "https://registry.vueform.com"
+  },
+  "private": false,
+  "name": "@vueform/builder",
+  "version": "1.1.0",
+  "description": "Vueform Builder development build.",
+  "homepage": "https://vueform.com",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "authors": [
+    {
+      "name": "Adam Berecz",
+      "email": "adam@vueform.com"
+    }
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "json5": "^2.2.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "prismjs": "^1.29.0",
+    "tailwindcss": "^3.3.3",
+    "vue": "^3.3.4"
+  }
+}

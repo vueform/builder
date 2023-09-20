@@ -1,0 +1,505 @@
+.vfb-clr-picker {
+  display: none;
+  flex-wrap: wrap;
+  position: absolute;
+  width: 200px;
+  z-index: 999;
+  border-radius: 10px;
+  background-color: #fff;
+  justify-content: space-between;
+  box-shadow: 0 0 5px rgba(0,0,0,.05), 0 5px 20px rgba(0,0,0,.1);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.vfb-clr-picker.vfb-clr-open {
+  display: flex;
+}
+
+.vfb-clr-gradient {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 15px;
+  border-radius: 3px 3px 0 0;
+  background-image: linear-gradient(rgba(0,0,0,0), #000), linear-gradient(90deg, #fff, currentColor);
+  cursor: pointer;
+}
+
+.vfb-clr-marker {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background-color: currentColor;
+  cursor: pointer;
+}
+
+.vfb-clr-picker input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+}
+
+.vfb-clr-picker input[type="range"]::-webkit-slider-thumb {
+  width: 8px;
+  height: 8px;
+  -webkit-appearance: none;
+}
+
+.vfb-clr-picker input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  border: 0;
+}
+
+.vfb-clr-picker input[type="range"]::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border: 0;
+}
+
+.vfb-clr-hue {
+  background-image: linear-gradient(to right, #f00 0%, #ff0 16.66%, #0f0 33.33%, #0ff 50%, #00f 66.66%, #f0f 83.33%, #f00 100%);
+}
+
+.vfb-clr-hue,
+.vfb-clr-alpha {
+  position: relative;
+  width: calc(100% - 40px);
+  height: 8px;
+  margin: 5px 20px;
+  border-radius: 4px;
+}
+
+.vfb-clr-alpha span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background-image: linear-gradient(90deg, rgba(0,0,0,0), currentColor);
+}
+
+.vfb-clr-hue input,
+.vfb-clr-alpha input {
+  position: absolute;
+  width: calc(100% + 16px);
+  height: 16px;
+  left: -8px;
+  top: -4px;
+  margin: 0;
+  background-color: transparent;
+  opacity: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.vfb-clr-hue div,
+.vfb-clr-alpha div {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 50%;
+  margin-left: -8px;
+  transform: translateY(-50%);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 1px #888;
+  pointer-events: none;
+}
+
+.vfb-clr-alpha div:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.vfb-clr-format {
+  display: none;
+  order: 1;
+  width: calc(100% - 40px);
+  margin: 0 20px 20px;
+}
+
+.vfb-clr-segmented {
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #999;
+  font-size: 12px;
+}
+
+.vfb-clr-segmented input,
+.vfb-clr-segmented legend {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vfb-clr-segmented label {
+  flex-grow: 1;
+  padding: 4px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.vfb-clr-segmented label:first-of-type {
+  border-radius: 10px 0 0 10px;
+}
+
+.vfb-clr-segmented label:last-of-type {
+  border-radius: 0 10px 10px 0;
+}
+
+.vfb-clr-segmented input:checked + label {
+  color: #fff;
+  background-color: #666;
+}
+
+.vfb-clr-swatches {
+  order: 2;
+  width: calc(100% - 32px);
+  margin: 0 16px;
+}
+
+.vfb-clr-swatches div {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  justify-content: center;
+}
+
+.vfb-clr-swatches button {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin: 0 4px 6px 4px;
+  border: 0;
+  border-radius: 50%;
+  color: inherit;
+  text-indent: -1000px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.vfb-clr-swatches button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: inherit;
+  background-color: currentColor;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+}
+
+input.vfb-clr-color {
+  order: 1;
+  width: calc(100% - 80px);
+  height: 32px;
+  margin: 15px 20px 20px 0;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  color: #444;
+  background-color: #fff;
+  font-family: sans-serif;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: none;
+}
+
+input.vfb-clr-color:focus {
+  outline: none;
+  border: 1px solid #1e90ff;
+}
+
+.vfb-clr-clear {
+  display: none;
+  order: 2;
+  height: 24px;
+  margin: 0 20px 20px auto;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background-color: #666;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.vfb-clr-preview {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin: 15px 0 20px 20px;
+  border: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.vfb-clr-preview:before,
+.vfb-clr-preview:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.vfb-clr-preview:after {
+  border: 0;
+  background-color: currentColor;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+}
+
+.vfb-clr-marker,
+.vfb-clr-hue div,
+.vfb-clr-alpha div,
+.vfb-clr-color {
+  box-sizing: border-box;
+}
+
+.vfb-clr-field {
+  display: inline-block;
+  position: relative;
+  color: transparent;
+}
+
+.vfb-clr-field button {
+  position: absolute;
+  width: 30px;
+  height: 100%;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  color: inherit;
+  text-indent: -1000px;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.vfb-clr-field button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: inherit;
+  background-color: currentColor;
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5);
+}
+
+.vfb-clr-alpha,
+.vfb-clr-alpha div,
+.vfb-clr-swatches button,
+.vfb-clr-preview:before,
+.vfb-clr-field button {
+  background-image: repeating-linear-gradient(45deg, #aaa 25%, transparent 25%, transparent 75%, #aaa 75%, #aaa), repeating-linear-gradient(45deg, #aaa 25%, #fff 25%, #fff 75%, #aaa 75%, #aaa);
+  background-position: 0 0, 4px 4px;
+  background-size: 8px 8px;
+}
+
+.vfb-clr-marker:focus {
+  outline: none;
+}
+
+.vfb-clr-keyboard-nav .vfb-clr-marker:focus,
+.vfb-clr-keyboard-nav .vfb-clr-hue input:focus + div,
+.vfb-clr-keyboard-nav .vfb-clr-alpha input:focus + div,
+.vfb-clr-keyboard-nav .vfb-clr-segmented input:focus + label {
+  outline: none;
+  box-shadow: 0 0 0 2px #1e90ff, 0 0 2px 2px #fff;
+}
+
+.vfb-clr-picker[data-alpha="false"] .vfb-clr-alpha {
+  display: none;
+}
+
+.vfb-clr-picker[data-minimal="true"] {
+  padding-top: 16px;
+}
+
+.vfb-clr-picker[data-minimal="true"] .vfb-clr-gradient,
+.vfb-clr-picker[data-minimal="true"] .vfb-clr-hue,
+.vfb-clr-picker[data-minimal="true"] .vfb-clr-alpha,
+.vfb-clr-picker[data-minimal="true"] .vfb-clr-color,
+.vfb-clr-picker[data-minimal="true"] .vfb-clr-preview {
+  display: none;
+}
+
+/** Dark theme **/
+
+.vfb-clr-dark {
+  background-color: #444;
+}
+
+.vfb-clr-dark .vfb-clr-segmented {
+  border-color: #777;
+}
+
+.vfb-clr-dark .vfb-clr-swatches button:after {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+}
+
+.vfb-clr-dark input.vfb-clr-color {
+  color: #fff;
+  border-color: #777;
+  background-color: #555;
+}
+
+.vfb-clr-dark input.vfb-clr-color:focus {
+  border-color: #1e90ff;
+}
+
+.vfb-clr-dark .vfb-clr-preview:after {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5);
+}
+
+.vfb-clr-dark .vfb-clr-alpha,
+.vfb-clr-dark .vfb-clr-alpha div,
+.vfb-clr-dark .vfb-clr-swatches button,
+.vfb-clr-dark .vfb-clr-preview:before {
+  background-image: repeating-linear-gradient(45deg, #666 25%, transparent 25%, transparent 75%, #888 75%, #888), repeating-linear-gradient(45deg, #888 25%, #444 25%, #444 75%, #888 75%, #888);
+}
+
+/** Polaroid theme **/
+
+.vfb-clr-picker.vfb-clr-polaroid {
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,.1), 0 5px 30px rgba(0,0,0,.2);
+}
+
+.vfb-clr-picker.vfb-clr-polaroid:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 10px;
+  left: 20px;
+  top: -10px;
+  border: solid transparent;
+  border-width: 0 8px 10px 8px;
+  border-bottom-color: currentColor;
+  box-sizing: border-box;
+  color: #fff;
+  filter: drop-shadow(0 -4px 3px rgba(0,0,0,.1));
+  pointer-events: none;
+}
+
+.vfb-clr-picker.vfb-clr-polaroid.vfb-clr-dark:before {
+  color: #444;
+}
+
+.vfb-clr-picker.vfb-clr-polaroid.vfb-clr-left:before {
+  left: auto;
+  right: 20px;
+}
+
+.vfb-clr-picker.vfb-clr-polaroid.vfb-clr-top:before {
+  top: auto;
+  bottom: -10px;
+  transform: rotateZ(180deg);
+}
+
+.vfb-clr-polaroid .vfb-clr-gradient {
+  width: calc(100% - 20px);
+  height: 120px;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+.vfb-clr-polaroid .vfb-clr-hue,
+.vfb-clr-polaroid .vfb-clr-alpha {
+  width: calc(100% - 30px);
+  height: 10px;
+  margin: 6px 15px;
+  border-radius: 5px;
+}
+
+.vfb-clr-polaroid .vfb-clr-hue div,
+.vfb-clr-polaroid .vfb-clr-alpha div {
+  box-shadow: 0 0 5px rgba(0,0,0,.2);
+}
+
+.vfb-clr-polaroid .vfb-clr-format {
+  width: calc(100% - 20px);
+  margin: 0 10px 15px;
+}
+
+.vfb-clr-polaroid .vfb-clr-swatches {
+  width: calc(100% - 12px);
+  margin: 0 6px;
+}
+.vfb-clr-polaroid .vfb-clr-swatches div {
+  padding-bottom: 10px;
+}
+
+.vfb-clr-polaroid .vfb-clr-swatches button {
+  width: 22px;
+  height: 22px;
+}
+
+.vfb-clr-polaroid input.vfb-clr-color {
+  width: calc(100% - 60px);
+  margin: 10px 10px 15px 0;
+}
+
+.vfb-clr-polaroid .vfb-clr-clear {
+  margin: 0 10px 15px auto;
+}
+
+.vfb-clr-polaroid .vfb-clr-preview {
+  margin: 10px 0 15px 10px;
+}
+
+/** Large theme **/
+
+.vfb-clr-picker.vfb-clr-large {
+  width: 275px;
+}
+
+.vfb-clr-large .vfb-clr-gradient {
+  height: 150px;
+}
+
+.vfb-clr-large .vfb-clr-swatches button {
+  width: 22px;
+  height: 22px;
+}

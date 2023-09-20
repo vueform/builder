@@ -1,0 +1,79 @@
+.vfb-fields-container {
+  @apply vfb-break-words w-max max-w-[576px] max-h-[400px] min-w-full;
+}
+
+.vfb-field-container-no-nesting {
+  @apply pl-0.5;
+}
+
+.vfb-field-input {
+  @apply z-1;
+}
+
+.vfb-field-label {
+  @apply absolute left-0 top-px bottom-0 right-4 flex items-center form-py-input overflow-hidden;
+}
+
+.vfb-field-wrapper {
+  @apply flex items-center w-full pl-2.5 leading-none;
+}
+
+.vfb-field-wrapper-root {
+  @apply pt-1.5 pb-0.5 font-semibold uppercase;
+}
+
+.vfb-field-wrapper-container {
+}
+
+.vfb-field-wrapper-disabled {
+  @apply opacity-50;
+}
+
+.vfb-field-spacing {
+  @apply whitespace-nowrap;
+}
+
+.vfb-field-selected {
+  &.vfb-field-pointed .vfb-field-icon,
+  &.vfb-field-pointed .vfb-field-chevron,
+  &.vfb-field-pointed .vfb-field-text,
+  &.vfb-field-pointed .vfb-field-text-secondary,
+  .vfb-field-icon,
+  .vfb-field-chevron,
+  .vfb-field-text,
+  .vfb-field-text-secondary {
+    @apply text-white dark:text-white;
+  }
+}
+
+.vfb-field-icon-container {
+  @apply relative bg-transparent text-gray-500 rounded flex items-center justify-center text-xs w-4.5 h-4.5 flex-shrink-0 flex-grow-0 mr-1.5;
+}
+
+.vfb-field-icon {
+  @apply max-w-5 max-h-5 text-primary-500;
+}
+
+.vfb-field-chevron-container {
+  @apply relative bg-transparent text-black rounded flex items-center justify-center text-xs w-4.5 h-4.5 flex-shrink-0 flex-grow-0 mr-px -ml-4.75;
+}
+
+.vfb-field-chevron-container-sub {
+  @apply relative;
+}
+
+.vfb-field-chevron {
+  @apply text-xxs;
+}
+
+.vfb-field-text {
+  @apply text-black justify-center overflow-x-hidden overflow-y-visible;
+}
+
+.vfb-field-text-primary {
+  @apply text-sm leading-tighter pr-1 h-4 whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+.vfb-field-text-secondary {
+  @apply text-gray-500 leading-none pb-px text-xs italic dark:text-dark-500 whitespace-nowrap pr-1 overflow-hidden text-ellipsis;
+}

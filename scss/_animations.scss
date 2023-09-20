@@ -1,0 +1,53 @@
+.vfb-util-flash {
+  transition: 0.1s;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: flash;
+}
+
+@keyframes flash {
+  from,
+  50%,
+  to {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+@keyframes vfb-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes vfb-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,15%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes vfb-fade-in-down {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,-15%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}

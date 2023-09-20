@@ -1,0 +1,9 @@
+.vfb-fade-in-enter-active {
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
+}
+.vfb-fade-in-enter-from,
+.vfb-fade-in-leave-to {
+  opacity: 0;
+}
