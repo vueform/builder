@@ -1,4 +1,5 @@
-import { onMounted, ref, computed, toRefs, watch, onBeforeUnmount, nextTick, inject, resolveComponent, } from 'vue'
+import { onMounted, ref, computed, toRefs, watch, nextTick, inject, resolveComponent, } from 'vue'
+import elementSelectorPlugin from './plugins/elementSelector'
 import _ from 'lodash'
 
 const asyncForEach = async (array, callback) => {
@@ -37,6 +38,7 @@ const getElementSchemaByPath = (schema, path) => {
 
 export default function () {
   return [
+    ...elementSelectorPlugin(),
     () => ({
       config(config) {
         config.presets = {
@@ -91,6 +93,20 @@ export default function () {
                 container: 'vfb-util-props-separator-top'
               }
             }
+          },
+          'prop-multiline': {
+            addClasses: {
+              ElementAddon: {
+                container: 'pt-2 mt-px'
+              },
+            },
+            replaceClasses: {
+              ElementAddon: {
+                container: {
+                  'items-center': 'items-start'
+                }
+              },
+            },
           },
           'prop-toggle': {
             addClasses: {

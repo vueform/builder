@@ -1,5 +1,15 @@
 [//]: # (Don't use <tags>)
 
+## v1.1.1
+
+> `2023-09-28`
+
+### 🎉 Feature
+- Added variable usage to elements with `items`.
+
+### 🐞 Bug Fixes
+- Fix error when clicking on element with `items` without having any specified in a multilingual setup.
+
 ## v1.1.0
 
 > `2023-09-17`
