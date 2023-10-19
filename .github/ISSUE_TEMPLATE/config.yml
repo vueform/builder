@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Documentation
+    url: https://builder.vueform.com/docs/saving
+    about: Learning material for Vueform Builder
+  - name: 💬 Discussions
+    url: https://github.com/vueform/builder/discussions
+    about: Use discussions if you have another issue, an idea for improvement or for asking questions.
