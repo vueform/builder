@@ -1,4 +1,4 @@
-[![Vuefom](./.github/assets/banner.svg)](https://builder.vueform.com?cid=builder)
+[![Vuefom](./.github/assets/banner.png)](https://builder.vueform.com?cid=builder)
 
 # Vueform Builder
 
