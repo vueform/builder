@@ -53,6 +53,10 @@ To manually install Vueform, use our [Installation Wizard](https://builder.vuefo
 
 For a detailed understanding of Vueform, its features, and how to use them, refer to our [Documentation](https://builder.vueform.com/docs/saving?cid=builder).
 
+## Demo
+
+See Vueform Builder in action: [demo](https://builder.vueform.com/demo?cid=builder).
+
 ## Follow Us
 
 <p>
