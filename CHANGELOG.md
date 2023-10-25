@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.1.3
+
+> `2023-10-25`
+
+### 🎉 Feature
+- Added `*.netlify.app` to free cloud hosting providers.
+
 ## v1.1.2
 
 > `2023-10-02`
