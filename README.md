@@ -57,6 +57,8 @@ For a detailed understanding of Vueform, its features, and how to use them, refe
 
 See Vueform Builder in action: [demo](https://builder.vueform.com/demo?cid=builder).
 
+[![Vuefom Builder](https://raw.githubusercontent.com/vueform/vueform/main/.github/assets/builder.gif)](https://builder.vueform.com/demo?cid=builder)
+
 ## Follow Us
 
 <p>
