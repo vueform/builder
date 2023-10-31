@@ -161,6 +161,18 @@
   @apply absolute top-0 right-0;
 }
 
+.vfb-util-props-separator-top {
+  .vfb-util-props-list-add {
+    @apply absolute top-4 right-5;
+  }
+}
+
+div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
+  border: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
 .vfb-util-props-list-layout {
   @apply relative;
 }

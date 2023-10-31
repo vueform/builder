@@ -1667,7 +1667,6 @@ export default function () {
         }
 
         watch(component.axios, (n) => {
-          console.log('changed')
           if (!n.__CUSTOM__) {
             component.axios.value = axios
           }

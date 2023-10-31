@@ -1,5 +1,14 @@
 [//]: # (Don't use <tags>)
 
+## v1.1.4
+
+> `2023-10-31`
+
+### 🎉 Feature
+- Added align left/right to button, toggle, checkbox & radio.
+- Added full width to button.
+- Static elements now use semantic HTML tags instead of having to type HTML code for eg. H1, Paragraph, Img, etc.
+
 ## v1.1.3
 
 > `2023-10-25`
