@@ -1,5 +1,19 @@
 [//]: # (Don't use <tags>)
 
+## v1.1.6
+
+> `2023-11-06`
+
+### 🎉 Feature
+- Add types for `vite`, main exports and config
+
+### 🐞 Bug Fixes
+- Columns fields collision (no more browser warn)
+- Disabled rules (eg. nullable) #1
+- Autosize textareas on reopen panel
+- Save on disabling `updateOnSearch`
+- Divider single size theme setting
+
 ## v1.1.5
 
 > `2023-11-02`

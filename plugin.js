@@ -932,6 +932,13 @@ export default function () {
             setTimeout(() => {
               onceOpened.value = onceOpened.value.concat([section])
               closedSections.value = closedSections.value.filter(s => s !== section)
+
+              nextTick(() => {
+                document.querySelectorAll('.vfb-panels-container textarea[data-autogrow]').forEach((textarea) => {
+                  component.form$.value.$vueform.services.autosize.update(textarea)
+                })
+              })
+
               context.emit('announce', 'EXPANDED')
             }, 0)
           } else {
