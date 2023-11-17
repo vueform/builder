@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.1.7
+
+> `2023-11-17`
+
+### 🐞 Bug Fixes
+- Don't rehighlight code on export view
+- Missing return from FileElement in plugin
+
 ## v1.1.6
 
 > `2023-11-06`

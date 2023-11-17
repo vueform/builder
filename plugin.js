@@ -1654,7 +1654,7 @@ export default function () {
       apply: ['FileElement'],
       setup(props, context, component) {
         if (!component.form$.value.builder) {
-          return
+          return component
         }
 
         const axios = {
