@@ -22,5 +22,3 @@ body:
       options:
         - label: Check existing [issues](https://github.com/vueform/builder/issues) and [ideas](https://github.com/vueform/builder/discussions/categories/ideas).
           required: true
-        - label: Check [roadmap](https://github.com/vueform/builder/discussions/categories/roadmap).
-          required: true
