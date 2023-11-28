@@ -1,5 +1,11 @@
 blank_issues_enabled: true
 contact_links:
+  - name: ❓ Ask a Question
+    url: https://github.com/vueform/builder/discussions/categories/questions
+    about: Not sure about something? Start a "New discussion" and get an answer
+  - name: 💡 Feature Idea
+    url: https://github.com/vueform/builder/discussions/categories/ideas
+    about: Suggest a feature that will improve Vueform Builder by starting a "New discussion"
   - name: 📚 Documentation
     url: https://builder.vueform.com/docs/saving
     about: Learning material for Vueform Builder
