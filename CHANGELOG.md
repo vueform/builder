@@ -1,5 +1,26 @@
 [//]: # (Don't use <tags>)
 
+## v1.1.10
+
+> `2024-02-09`
+
+### 🐞 Bug Fixes
+- Radio/checkboxgroup loading issue fix #40
+
+## v1.1.9
+
+> `2024-01-07`
+
+### 🎉 Feature
+- Localizable form fields.
+
+## v1.1.8
+
+> `2023-12-06`
+
+### 🎉 Feature
+- Added `*.azurewebsites.net` and `*.azurestaticapps.net` to allowed dev domains
+
 ## v1.1.7
 
 > `2023-11-17`

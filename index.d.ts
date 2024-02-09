@@ -89,6 +89,8 @@ declare module '@vueform/builder' {
   const BaseExportField: any;
   const BaseField: any;
   const BaseFormField: any;
+  const BaseMultilingualElementField: any;
+  const BaseMultilingualFormField: any;
   const BaseSelectOptionField: any;
   const BaseThemeField: any;
   const BeforeField: any;
@@ -251,6 +253,8 @@ declare module '@vueform/builder' {
     BaseExportField,
     BaseField,
     BaseFormField,
+    BaseMultilingualElementField,
+    BaseMultilingualFormField,
     BaseSelectOptionField,
     BaseThemeField,
     BeforeField,
