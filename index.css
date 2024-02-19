@@ -1322,7 +1322,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-btn-transparent {
-  @apply form-color-btn-secondary border-transparent hover:text-gray-900;
+  @apply form-color-btn-secondary border-transparent hover:text-gray-900 dark:hover:text-dark-200;
 }
 
 .vfb-btn-sm {
@@ -1428,34 +1428,34 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   animation-delay: 0;
   animation-fill-mode: both;
   animation-name: vfb-fade-in-up;
-  @apply max-w-modal bg-white mx-auto shadow-box-strong rounded-lg transition-transform transform -translate-y-1/4;
+  @apply max-w-modal bg-white mx-auto shadow-box-strong rounded-lg transition-transform transform -translate-y-1/4 dark:bg-dark-700;
 }
 
 .vfb-modal-header {
-  @apply px-7 py-5 bg-gray-100 flex items-center justify-between rounded-t-lg;
+  @apply px-7 py-5 bg-gray-100 flex items-center justify-between rounded-t-lg dark:bg-dark-600;
 }
 
 .vfb-modal-title {
-  @apply text-xl font-semibold leading-none;
+  @apply text-xl font-semibold leading-none dark:text-dark-100;
 }
 
 .vfb-modal-subtitle {
-  @apply text-gray-500 text-0.5md;
+  @apply text-gray-500 text-0.5md dark:text-dark-400;
 }
 
 .vfb-modal-close {
-  @apply text-lg text-gray-500 transition-colors hover:text-gray-900;
+  @apply text-lg text-gray-500 transition-colors hover:text-gray-900 dark:text-dark-400 dark:hover:text-dark-100;
 }
 
 .vfb-modal-content {
-  @apply px-8 py-6 mt-4;
+  @apply px-8 py-6 mt-4 dark:text-dark-100;
 }
 .vfb-modal-content form {
   @apply -mt-4;
 }
 
 .vfb-modal-buttons {
-  @apply flex items-end justify-between pl-7 pr-3 py-5 border-t border-gray-200;
+  @apply flex items-end justify-between pl-7 pr-3 py-5 border-t border-gray-200 dark:border-dark-500;
 }
 
 .vfb-modal-buttons-left > div, .vfb-modal-buttons-left > button {
@@ -1491,7 +1491,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-conditions-empty-subtitle {
-  @apply text-gray-500 leading-none mb-4;
+  @apply text-gray-500 leading-none mb-4 dark:text-dark-400;
 }
 
 .vfb-condition-list {
@@ -1499,7 +1499,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 .vfb-condition-list:before {
   content: "";
-  @apply w-px absolute top-0 bottom-11.5 left-4 ml-0.5 bg-gray-300;
+  @apply w-px absolute top-0 bottom-11.5 left-4 ml-0.5 bg-gray-300 dark:bg-dark-500;
 }
 
 .vfb-condition-list-item-and {
@@ -1507,11 +1507,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 .vfb-condition-list-item-and:before {
   content: "";
-  @apply absolute top-3 h-4 -left-10 w-10 bg-white;
+  @apply absolute top-3 h-4 -left-10 w-10 bg-white dark:bg-dark-700;
 }
 .vfb-condition-list-item-and:after {
   content: "and";
-  @apply absolute top-3.5 -left-10 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400;
+  @apply absolute top-3.5 -left-10 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400 dark:text-dark-400;
 }
 
 .vfb-condition-list-add {
@@ -1523,7 +1523,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 .vfb-condition-sublist:before {
   content: "";
-  @apply w-px absolute top-14 bottom-0 left-4 ml-0.5 bg-gray-300;
+  @apply w-px absolute top-14 bottom-0 left-4 ml-0.5 bg-gray-300 dark:bg-dark-500;
 }
 
 .vfb-condition-sublist-item-or {
@@ -1531,11 +1531,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 .vfb-condition-sublist-item-or:before {
   content: "";
-  @apply absolute top-3 h-4 left-0 w-10 bg-white;
+  @apply absolute top-3 h-4 left-0 w-10 bg-white dark:bg-dark-700;
 }
 .vfb-condition-sublist-item-or:after {
   content: "or";
-  @apply absolute top-3.5 left-0 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400;
+  @apply absolute top-3.5 left-0 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400 dark:text-dark-400;
 }
 
 .vfb-conditions-render {
@@ -1679,7 +1679,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-field-text-primary {
-  @apply text-sm leading-tighter pr-1 h-4 whitespace-nowrap overflow-hidden text-ellipsis;
+  @apply text-sm leading-tighter pr-1 h-4 whitespace-nowrap overflow-hidden text-ellipsis dark:text-dark-100;
 }
 
 .vfb-field-text-secondary {
@@ -1736,55 +1736,46 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply text-0.5md;
 }
 
-.vfb-config-form *, .vfb-config-form :before, .vfb-config-form :after, .vfb-config-form :root {
+*, :before, :after, :root {
+  --vf-dark-50: #EFEFEF;
+  --vf-dark-100: #DCDCDC;
+  --vf-dark-200: #BDBDBD;
+  --vf-dark-300: #A0A0A0;
+  --vf-dark-400: #848484;
+  --vf-dark-500: #737373;
+  --vf-dark-550: #555555;
+  --vf-dark-600: #393939;
+  --vf-dark-700: #323232;
+  --vf-dark-750: #292929;
+  --vf-dark-800: #262626;
+  --vf-dark-900: #191919;
+  --vf-dark-1000: #121212;
+}
+
+.vfb-config-form *, .vfb-config-form :before, .vfb-config-form :after {
   --vf-gutter-sm: 0.5rem;
   --vf-min-height-input-sm: 2.125rem;
   --vf-py-input-sm: 0.375rem;
   --vf-px-input-sm: 0.675rem;
   --vf-radius-input: 6px;
+  --vf-radius-checkbox-sm: 4px;
   --vf-bg-input: var(--vf-gray-100);
   --vf-bg-passive: var(--vf-gray-200);
   --vf-border-color-passive: var(--vf-gray-200);
   --vf-border-color-input: var(--vf-gray-200);
   --vf-color-input: var(--vf-gray-900);
   --vf-color-placeholder: var(--vf-gray-400);
-  --vf-radius-checkbox-sm: 4px;
 }
 
-.dark .vfb-config-form *, .dark .vfb-config-form :before, .dark .vfb-config-form :after, .dark .vfb-config-form :root {
-  --vf-primary: theme("colors.dark.550");
-  --vf-on-primary: #ffffff;
-  --vf-ring-color: #ffffff66;
-  --vf-bg-input: theme("colors.dark.700");
-  --vf-bg-passive: theme("colors.dark.600");
-  --vf-bg-selected: theme("colors.dark.550");
-  --vf-border-color-passive: theme("colors.dark.600");
-  --vf-border-color-input: theme("colors.dark.700");
-  --vf-bg-icon: theme("colors.dark.500");
-  --vf-color-muted: theme("colors.dark.400");
-  --vf-color-input: #ffffff;
-  --vf-color-placeholder: theme("colors.dark.400");
-}
-.dark .vfb-config-slider *, .dark .vfb-config-slider :before, .dark .vfb-config-slider :after, .dark .vfb-config-slider :root {
-  --vf-primary: theme("colors.primary.500");
-  --vf-bg-passive:theme("colors.dark.900");
-  --vf-bg-slider-handle: #ffffff;
-  --vf-shadow-handles: 0px 0px 0px 0px theme("colors.dark.900");
-  --vf-shadow-handles-hover: 0px 0px 0px 2px theme("colors.dark.500");
-  --vf-shadow-handles-focus: 0px 0px 0px 2px theme("colors.dark.300");
-}
-.dark .vfb-config-toggle *, .dark .vfb-config-toggle :before, .dark .vfb-config-toggle :after, .dark .vfb-config-toggle :root {
-  --vf-primary: theme("colors.primary.500");
-  --vf-bg-toggle-handle: #ffffff;
-  --vf-shadow-handles: 0px 0px 0px 0px theme("colors.dark.900");
-  --vf-shadow-handles-hover: 0px 0px 0px 2px theme("colors.dark.500");
-  --vf-shadow-handles-focus: 0px 0px 0px 2px theme("colors.dark.300");
-}
-.dark .vfb-config-list-remove *, .dark .vfb-config-list-remove :before, .dark .vfb-config-list-remove :after, .dark .vfb-config-list-remove :root {
-  --vf-color-passive: #ffffff !important;
-}
-.dark .vfb-config-datepicker .flatpickr-calendar, .dark .vfb-config-datepicker .flatpickr-calendar *, .dark .vfb-config-datepicker .flatpickr-calendar :before, .dark .vfb-config-datepicker .flatpickr-calendar :after, .dark .vfb-config-datepicker .flatpickr-calendar :root {
-  --vf-color-input: #000000;
+.dark .vfb-config-form *, .dark .vfb-config-form :before, .dark .vfb-config-form :after {
+  --vf-bg-input: var(--vf-dark-700);
+  --vf-bg-passive: var(--vf-dark-700);
+  --vf-bg-selected: var(--vf-dark-600);
+  --vf-color-input: var(--vf-dark-100);
+  --vf-color-placeholder: var(--vf-dark-500);
+  --vf-border-color-passive: var(--vf-dark-700);
+  --vf-border-color-input: var(--vf-dark-800);
+  --vf-border-color-checkbox: var(--vf-dark-800);
 }
 
 .vfb-config-toggle + .vfb-config-toggle {
@@ -2252,6 +2243,13 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply px-5 pb-6;
 }
 
+.vfb-panels-container-standalone .vfb-panels-wrapper {
+  @apply absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden z-0;
+}
+.vfb-panels-container-standalone .vfb-panel {
+  @apply px-5 pb-6;
+}
+
 .vfb-panels-container-icons {
   @apply flex;
 }
@@ -2315,6 +2313,16 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-preview-wrapper {
   @apply bg-white rounded-lg shadow-box-circle mx-auto w-full relative transition-all p-10;
+}
+
+.vfb-preview-wrapper-dark {
+  @apply bg-dark-900 text-white;
+}
+.vfb-preview-wrapper-dark .vfb-preview-empty-title {
+  @apply text-white;
+}
+.vfb-preview-wrapper-dark .vfb-preview-empty-description {
+  @apply text-dark-400;
 }
 
 .vfb-preview-drag-wrapper {
@@ -2758,6 +2766,14 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-center-wrapper {
   @apply absolute inset-0 overflow-y-auto px-16;
+}
+
+.dark .vfb-center-wrapper-dark {
+  @apply bg-[rgb(14,14,14)];
+}
+
+.vfb-center-wrapper-dark-changing * {
+  transition: none !important;
 }
 
 .vfb-center-loader-container {
@@ -3315,6 +3331,16 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   --vf-container-bg-dynamic-3: rgb(255 0 244 / 15%);
   --vf-container-bg-dynamic-4: rgb(255 0 0 / 20%);
   --vf-container-bg-dynamic-5: rgb(0 0 0 / 12%);
+}
+
+.vfb-preview-wrapper-dark .vfb-preview-element-container-nested,
+.vfb-preview-wrapper-dark .vfb-preview-element-container-list {
+  --vf-container-bg-neutral: rgb(255 255 255 / 10%);
+  --vf-container-bg-dynamic-1: rgb(0 208 255 / 20%);
+  --vf-container-bg-dynamic-2: rgb(2 215 130 / 20%);
+  --vf-container-bg-dynamic-3: rgb(0 255 12 / 20%);
+  --vf-container-bg-dynamic-4: rgb(0 3 255 / 20%);
+  --vf-container-bg-dynamic-5: rgb(0 0 0 / 20%);
 }
 
 .vfb-preview-element-container-nested {

@@ -397,7 +397,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-btn-transparent {
-  @apply form-color-btn-secondary border-transparent hover:text-gray-900;
+  @apply form-color-btn-secondary border-transparent hover:text-gray-900 dark:hover:text-dark-200;
 }
 
 .vfb-btn-sm {

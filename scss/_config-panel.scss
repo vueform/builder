@@ -62,8 +62,24 @@
   
 }
 
+*, :before, :after, :root {
+  --vf-dark-50: #EFEFEF;
+  --vf-dark-100: #DCDCDC;
+  --vf-dark-200: #BDBDBD;
+  --vf-dark-300: #A0A0A0;
+  --vf-dark-400: #848484;
+  --vf-dark-500: #737373;
+  --vf-dark-550: #555555;
+  --vf-dark-600: #393939;
+  --vf-dark-700: #323232;
+  --vf-dark-750: #292929;
+  --vf-dark-800: #262626;
+  --vf-dark-900: #191919;
+  --vf-dark-1000: #121212;
+}
+
 .vfb-config-form {
-  *, :before, :after, :root {
+  *, :before, :after {
     --vf-gutter-sm: 0.5rem;
 
     --vf-min-height-input-sm: 2.125rem;
@@ -72,6 +88,7 @@
     --vf-px-input-sm: 0.675rem;
 
     --vf-radius-input: 6px;
+    --vf-radius-checkbox-sm: 4px;
 
     --vf-bg-input: var(--vf-gray-100);
     --vf-bg-passive: var(--vf-gray-200);
@@ -81,63 +98,22 @@
 
     --vf-color-input: var(--vf-gray-900);
     --vf-color-placeholder: var(--vf-gray-400);
-
-    --vf-radius-checkbox-sm: 4px;
   }
 }
 
 .dark {
   .vfb-config-form {
-    *, :before, :after, :root {
-      --vf-primary: theme('colors.dark.550');
-      --vf-on-primary: #ffffff;
-      --vf-ring-color: #ffffff66;
-      --vf-bg-input: theme('colors.dark.700');
-      --vf-bg-passive: theme('colors.dark.600');
-      --vf-bg-selected: theme('colors.dark.550');
-      --vf-border-color-passive: theme('colors.dark.600');
-      
-      --vf-border-color-input: theme('colors.dark.700');
-      --vf-bg-icon: theme('colors.dark.500');
+    *, :before, :after {
+      --vf-bg-input: var(--vf-dark-700);
+      --vf-bg-passive: var(--vf-dark-700);
+      --vf-bg-selected: var(--vf-dark-600);
 
-      --vf-color-muted: theme('colors.dark.400');
-      --vf-color-input: #ffffff;
-      --vf-color-placeholder: theme('colors.dark.400');
-    }
-  }
+      --vf-color-input: var(--vf-dark-100);
+      --vf-color-placeholder: var(--vf-dark-500);
 
-  .vfb-config-slider {
-    *, :before, :after, :root {
-      --vf-primary: theme('colors.primary.500');
-      --vf-bg-passive:theme('colors.dark.900');
-      --vf-bg-slider-handle: #ffffff;
-      --vf-shadow-handles: 0px 0px 0px 0px theme('colors.dark.900');
-      --vf-shadow-handles-hover: 0px 0px 0px 2px theme('colors.dark.500');
-      --vf-shadow-handles-focus: 0px 0px 0px 2px theme('colors.dark.300');
-    }
-  }
-
-  .vfb-config-toggle {
-    *, :before, :after, :root {
-      --vf-primary: theme('colors.primary.500');
-      --vf-bg-toggle-handle: #ffffff;
-      --vf-shadow-handles: 0px 0px 0px 0px theme('colors.dark.900');
-      --vf-shadow-handles-hover: 0px 0px 0px 2px theme('colors.dark.500');
-      --vf-shadow-handles-focus: 0px 0px 0px 2px theme('colors.dark.300');
-    }
-  }
-
-  .vfb-config-list-remove {
-    *, :before, :after, :root {
-      --vf-color-passive: #ffffff !important;
-    }
-  }
-
-  .vfb-config-datepicker {
-    .flatpickr-calendar {
-      &, *, :before, :after, :root {
-        --vf-color-input: #000000;
-      }
+      --vf-border-color-passive: var(--vf-dark-700);
+      --vf-border-color-input: var(--vf-dark-800);
+      --vf-border-color-checkbox: var(--vf-dark-800);
     }
   }
 }

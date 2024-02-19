@@ -1,5 +1,17 @@
 [//]: # (Don't use <tags>)
 
+## v1.2.0
+
+> `2024-02-19`
+
+### 🎉 Feature
+- Dark mode 🌙
+- Define list of condition operators for custom elements.
+
+### 🐞 Bug Fixes
+- No padding on right panel fix #34
+- Condition selector for custom elements #38 #39
+
 ## v1.1.10
 
 > `2024-02-09`

@@ -71,7 +71,7 @@
 }
 
 .vfb-field-text-primary {
-  @apply text-sm leading-tighter pr-1 h-4 whitespace-nowrap overflow-hidden text-ellipsis;
+  @apply text-sm leading-tighter pr-1 h-4 whitespace-nowrap overflow-hidden text-ellipsis dark:text-dark-100;
 }
 
 .vfb-field-text-secondary {

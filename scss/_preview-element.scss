@@ -38,6 +38,18 @@
   --vf-container-bg-dynamic-5: rgb(0 0 0 / 12%);
 }
 
+.vfb-preview-wrapper-dark {
+  .vfb-preview-element-container-nested, 
+  .vfb-preview-element-container-list {
+    --vf-container-bg-neutral: rgb(255 255 255 / 10%);
+    --vf-container-bg-dynamic-1: rgb(0 208 255 / 20%);
+    --vf-container-bg-dynamic-2: rgb(2 215 130 / 20%);
+    --vf-container-bg-dynamic-3: rgb(0 255 12 / 20%);
+    --vf-container-bg-dynamic-4: rgb(0 3 255 / 20%);
+    --vf-container-bg-dynamic-5: rgb(0 0 0 / 20%);
+  }
+}
+
 .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-neutral);
 }

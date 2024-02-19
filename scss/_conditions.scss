@@ -36,7 +36,7 @@
 }
 
 .vfb-conditions-empty-subtitle {
-  @apply text-gray-500 leading-none mb-4;
+  @apply text-gray-500 leading-none mb-4 dark:text-dark-400;
 }
 
 .vfb-condition-list {
@@ -48,7 +48,7 @@
 
   &:before {
     content: "";
-    @apply w-px absolute top-0 bottom-11.5 left-4 ml-0.5 bg-gray-300;
+    @apply w-px absolute top-0 bottom-11.5 left-4 ml-0.5 bg-gray-300 dark:bg-dark-500;
   }
 }
 
@@ -57,12 +57,12 @@
 
   &:before {
     content: "";
-    @apply absolute top-3 h-4 -left-10 w-10 bg-white;
+    @apply absolute top-3 h-4 -left-10 w-10 bg-white dark:bg-dark-700;
   }
 
   &:after {
     content: "and";
-    @apply absolute top-3.5 -left-10 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400;
+    @apply absolute top-3.5 -left-10 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400 dark:text-dark-400;
   }
 }
 
@@ -76,7 +76,7 @@
 
   &:before {
     content: "";
-    @apply w-px absolute top-14 bottom-0 left-4 ml-0.5 bg-gray-300;
+    @apply w-px absolute top-14 bottom-0 left-4 ml-0.5 bg-gray-300 dark:bg-dark-500;
   }
 }
 
@@ -85,12 +85,12 @@
 
   &:before {
     content: "";
-    @apply absolute top-3 h-4 left-0 w-10 bg-white;
+    @apply absolute top-3 h-4 left-0 w-10 bg-white dark:bg-dark-700;
   }
 
   &:after {
     content: "or";
-    @apply absolute top-3.5 left-0 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400;
+    @apply absolute top-3.5 left-0 w-10 text-center leading-none uppercase text-0.5sm font-bold text-gray-400 dark:text-dark-400;
   }
 }
 

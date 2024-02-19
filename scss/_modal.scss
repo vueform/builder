@@ -11,27 +11,27 @@
   animation-delay: 0;
   animation-fill-mode: both;
   animation-name: vfb-fade-in-up;
-  @apply max-w-modal bg-white mx-auto shadow-box-strong rounded-lg transition-transform transform -translate-y-1/4;
+  @apply max-w-modal bg-white mx-auto shadow-box-strong rounded-lg transition-transform transform -translate-y-1/4 dark:bg-dark-700;
 }
 
 .vfb-modal-header {
-  @apply px-7 py-5 bg-gray-100 flex items-center justify-between rounded-t-lg;
+  @apply px-7 py-5 bg-gray-100 flex items-center justify-between rounded-t-lg dark:bg-dark-600;
 }
 
 .vfb-modal-title {
-  @apply text-xl font-semibold leading-none;
+  @apply text-xl font-semibold leading-none dark:text-dark-100;
 }
 
 .vfb-modal-subtitle {
-  @apply text-gray-500 text-0.5md;
+  @apply text-gray-500 text-0.5md dark:text-dark-400;
 }
 
 .vfb-modal-close {
-  @apply text-lg text-gray-500 transition-colors hover:text-gray-900;
+  @apply text-lg text-gray-500 transition-colors hover:text-gray-900 dark:text-dark-400 dark:hover:text-dark-100;
 }
 
 .vfb-modal-content {
-  @apply px-8 py-6 mt-4;
+  @apply px-8 py-6 mt-4 dark:text-dark-100;
 
   form {
     @apply -mt-4;
@@ -43,7 +43,7 @@
 }
 
 .vfb-modal-buttons {
-  @apply flex items-end justify-between pl-7 pr-3 py-5 border-t border-gray-200;
+  @apply flex items-end justify-between pl-7 pr-3 py-5 border-t border-gray-200 dark:border-dark-500;
 }
 
 .vfb-modal-buttons-left {

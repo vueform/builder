@@ -54,6 +54,14 @@
   @apply absolute inset-0 overflow-y-auto px-16;
 }
 
+.dark .vfb-center-wrapper-dark {
+  @apply bg-[rgb(14,14,14)];
+}
+
+.vfb-center-wrapper-dark-changing * {
+  transition: none !important;
+}
+
 .vfb-center-loader-container {
   @apply w-full flex flex-col items-center justify-center h-full dark:text-white;
 }

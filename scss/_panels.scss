@@ -34,6 +34,16 @@
   }
 }
 
+.vfb-panels-container-standalone {
+  .vfb-panels-wrapper {
+    @apply absolute top-0 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden z-0;
+  }
+
+  .vfb-panel {
+    @apply px-5 pb-6;
+  }
+}
+
 .vfb-panels-container-icons {
   @apply flex;
 
