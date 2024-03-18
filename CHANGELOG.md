@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.3.0
+
+> `2024-03-18`
+
+### 🎉 Feature
+- Simple preset added
+- Allow `formatLoad` on config elements' schema
+
 ## v1.2.0
 
 > `2024-02-19`

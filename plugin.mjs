@@ -772,6 +772,7 @@ export default function () {
               if (excludeFields.value.indexOf(`${sectionName}.${fieldName}`) === -1) {
                 fields.push(new field.type({
                   ...fieldOptions.value,
+                  extend: field.extend || {},
                   loading: formLoading,
                   emit: context.emit,
                   icon,
@@ -802,6 +803,7 @@ export default function () {
 
               let f = new field.type({
                 ...fieldOptions.value,
+                extend: field.extend || {},
                 loading: formLoading,
                 emit: context.emit,
                 icon,
@@ -886,7 +888,7 @@ export default function () {
           let target = section ? form.el$(section) : form
           let elements$ = section ? target.children$ : target.elements$.value
 
-          target.load(load)
+          target.load(load, true)
 
           Object.keys(elements$).forEach((elementName) => {
             let element$ = elements$[elementName]
