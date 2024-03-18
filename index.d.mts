@@ -63,7 +63,12 @@ interface BuilderConfig {
   element?: ElementPanelConfig;
   elements?: string[];
   excludeElements?: string[];
+  preset?: BuilderConfig;
   [key: string]: any;
+}
+
+declare module '@vueform/builder/presets/simple' {
+  export default BuilderConfig;
 }
 
 declare module '@vueform/builder' {

@@ -1,5 +1,5 @@
 import { onMounted, ref, computed, toRefs, watch, nextTick, inject, resolveComponent, } from 'vue'
-import elementSelectorPlugin from './plugins/elementSelector'
+import elementSelectorPlugin from './plugins/elementSelector/index.mjs'
 import _ from 'lodash'
 
 const asyncForEach = async (array, callback) => {
