@@ -31,7 +31,10 @@
     "./index.css": "./index.css",
     "./scss/*": "./scss/*",
     "./plugins/*": "./plugins/*",
-    "./presets/simple": "./presets/simple.mjs",
+    "./presets/simple": {
+      "types": "./presets/simple.d.mts",
+      "default": "./presets/simple.mjs"
+    },
     "./plugins/elementSelector": "./plugins/elementSelector/index.mjs",
     "./plugins/elementSelector/index": "./plugins/elementSelector/index.mjs",
     "./plugins/elementSelector/index.js": "./plugins/elementSelector/index.mjs",
