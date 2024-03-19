@@ -1,5 +1,5 @@
 import { onMounted, ref, computed, toRefs, watch, nextTick, inject, resolveComponent, } from 'vue'
-import elementSelectorPlugin from './plugins/elementSelector'
+import elementSelectorPlugin from './plugins/elementSelector/index.mjs'
 import _ from 'lodash'
 
 const asyncForEach = async (array, callback) => {
@@ -705,6 +705,11 @@ export default function () {
           type: Array,
           default: () => ([]),
         },
+        builderConfig: {
+          required: false,
+          type: Object,
+          default: () => ({}),
+        },
       },
       setup(props, context, component) {
         const { pluginSettings, } = toRefs(props)
@@ -772,6 +777,7 @@ export default function () {
               if (excludeFields.value.indexOf(`${sectionName}.${fieldName}`) === -1) {
                 fields.push(new field.type({
                   ...fieldOptions.value,
+                  extend: field.extend || {},
                   loading: formLoading,
                   emit: context.emit,
                   icon,
@@ -802,6 +808,7 @@ export default function () {
 
               let f = new field.type({
                 ...fieldOptions.value,
+                extend: field.extend || {},
                 loading: formLoading,
                 emit: context.emit,
                 icon,
@@ -886,7 +893,7 @@ export default function () {
           let target = section ? form.el$(section) : form
           let elements$ = section ? target.children$ : target.elements$.value
 
-          target.load(load)
+          target.load(load, true)
 
           Object.keys(elements$).forEach((elementName) => {
             let element$ = elements$[elementName]
@@ -1980,6 +1987,10 @@ export default function () {
 
         // ============== COMPUTED ==============
 
+        const names = computed(() => {
+          return component.form$.value.builderConfig.names
+        })
+
         const device = computed(() => {
           return component.el$.value.form$.device || 'default'
         })
@@ -2639,6 +2650,7 @@ export default function () {
 
         return {
           ...component,
+          names,
           ariaLabel,
           editing,
           resizing,

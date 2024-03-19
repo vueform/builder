@@ -63,6 +63,10 @@ interface BuilderConfig {
   element?: ElementPanelConfig;
   elements?: string[];
   excludeElements?: string[];
+  preset?: BuilderConfig;
+  names?: boolean;
+  transformElement?: boolean | function;
+  formDefaults?: object;
   [key: string]: any;
 }
 

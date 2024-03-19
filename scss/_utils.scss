@@ -113,6 +113,10 @@
   @apply absolute top-1.5 -right-0.5;
 }
 
+.vfb-util-props-group-container {
+  @apply col-span-12;
+}
+
 .vfb-util-props-group {
   @apply my-4;
 }

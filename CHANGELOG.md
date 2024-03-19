@@ -1,5 +1,17 @@
 [//]: # (Don't use <tags>)
 
+## v1.3.0
+
+> `2024-03-19`
+
+### 🎉 Feature
+- [Simple preset](https://builder.vueform.com/docs/presets#available-presets) added.
+- Allow `formatLoad` on config elements' schema.
+- Added `formDefaults`, `transformElement` and `names` options to config.
+- Element name increments now respect container element names.
+- Added placeholder for list/container elements.
+- All imports should now be proper modules.
+
 ## v1.2.0
 
 > `2024-02-19`

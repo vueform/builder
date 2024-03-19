@@ -36,6 +36,13 @@
   --vf-container-bg-dynamic-3: rgb(255 0 244 / 15%);
   --vf-container-bg-dynamic-4: rgb(255 0 0 / 20%);
   --vf-container-bg-dynamic-5: rgb(0 0 0 / 12%);
+
+  --vf-container-text-neutral: rgb(149 161 170);
+  --vf-container-text-dynamic-1: rgb(91, 153, 168);
+  --vf-container-text-dynamic-2: rgb(99 115 180);
+  --vf-container-text-dynamic-3: rgb(139 86 137);
+  --vf-container-text-dynamic-4: rgb(154 13 13);
+  --vf-container-text-dynamic-5: rgb(0 0 0 / 54%);
 }
 
 .vfb-preview-wrapper-dark {
@@ -47,36 +54,49 @@
     --vf-container-bg-dynamic-3: rgb(0 255 12 / 20%);
     --vf-container-bg-dynamic-4: rgb(0 3 255 / 20%);
     --vf-container-bg-dynamic-5: rgb(0 0 0 / 20%);
+
+    --vf-container-text-neutral: rgb(255 255 255 / 100%);
+    --vf-container-text-dynamic-1: rgb(0 208 255 / 100%);
+    --vf-container-text-dynamic-2: rgb(2 215 130 / 100%);
+    --vf-container-text-dynamic-3: rgb(0 255 12 / 100%);
+    --vf-container-text-dynamic-4: rgb(0 3 255 / 100%);
+    --vf-container-text-dynamic-5: rgb(0 0 0 / 100%);
   }
 }
 
 .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-neutral);
+  --vf-container-text: var(--vf-container-text-neutral);
 }
 
 .vfb-preview-element-container-list,
 .vfb-preview-element-container-list .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-dynamic-1);
+  --vf-container-text: var(--vf-container-text-dynamic-1);
 }
 
 .vfb-preview-element-container-list .vfb-preview-element-container-list,
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-dynamic-2);
+  --vf-container-text: var(--vf-container-text-dynamic-2);
 }
 
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list,
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-dynamic-3);
+  --vf-container-text: var(--vf-container-text-dynamic-3);
 }
 
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list,
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-dynamic-4);
+  --vf-container-text: var(--vf-container-text-dynamic-4);
 }
 
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list,
 .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-list .vfb-preview-element-container-nested {
   --vf-container-bg: var(--vf-container-bg-dynamic-5);
+  --vf-container-text: var(--vf-container-text-dynamic-5);
 }
 
 .vfb-preview-element-container-no-visual-nesting {
@@ -315,4 +335,13 @@
   .vfb-preview-nested-list-element-wrapper {
     @apply z-auto;
   }
+}
+
+.vfb-drag-placeholder-container {
+  color: var(--vf-container-text);
+  @apply col-span-12 text-[32px] flex items-center justify-center flex-col my-3 text-center;
+}
+
+.vfb-drag-placeholder-text {
+  @apply text-base mt-2 leading-tight;
 }
