@@ -1,6 +1,6 @@
 {
   "name": "@vueform/builder-nuxt",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Nuxt module for Vueform Builder",
   "repository": "vueform/builder-nuxt",
   "license": "MIT",
@@ -48,6 +48,6 @@
     "changelogen": "^0.5.5",
     "eslint": "^8.52.0",
     "nuxt": "^3.8.0",
-    "vitest": "^0.33.0"
+    "vitest": "^0.34.0"
   }
 }

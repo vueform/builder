@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.3.2
+
+> `2024-04-09`
+
+### 🎉 Feature
+- Allow `.webcontainer.io`
+
 ## v1.3.1
 
 > `2024-03-20`
