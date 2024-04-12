@@ -2255,6 +2255,7 @@ const h1 = {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
         content: { type: ContentField, },
+        description: { type: DescriptionField, },
       },
     },
     layout: {
@@ -2282,6 +2283,10 @@ const h1 = {
     }
   },
   separators: {
+    properties: [
+      ['type', 'tag', 'content'],
+      ['description'],
+    ],
     layout: [
       ['align'],
       ['space'],
@@ -2337,6 +2342,7 @@ const p = {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
         content: { type: ContentField_p, },
+        description: { type: DescriptionField, },
       },
     },
     layout: {
@@ -2365,8 +2371,8 @@ const p = {
   },
   separators: {
     properties: [
-      ['type', 'tag'],
-      ['content'],
+      ['type', 'tag', 'content'],
+      ['description'],
     ],
     layout: [
       ['align'],
@@ -2395,6 +2401,7 @@ const img = {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
         img: { type: ImgField_simple, },
+        description: { type: DescriptionField, },
       },
     },
     layout: {
@@ -2432,6 +2439,7 @@ const img = {
     properties: [
       ['type', 'tag'],
       ['img'],
+      ['description'],
     ],
     layout: [
       ['align'],
@@ -2465,6 +2473,7 @@ const link = {
         tag: { type: TagField_simple, },
         content: { type: ContentField, extend: { rows: 1, label: 'Link text', columns: { label: 4 }, floating: false, placeholder: null } },
         link: { type: LinkField_simple, },
+        description: { type: DescriptionField, },
       },
     },
     layout: {
@@ -2492,6 +2501,10 @@ const link = {
     }
   },
   separators: {
+    properties: [
+      ['type', 'tag', 'content', 'link'],
+      ['description'],
+    ],
     layout: [
       ['align'],
       ['space'],

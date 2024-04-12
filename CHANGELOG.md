@@ -1,5 +1,15 @@
 [//]: # (Don't use <tags>)
 
+## v1.4.0
+
+> `2024-04-12`
+
+### 🎉 Feature
+- Added AI Assistant.
+
+### 🐞 Bug Fixes
+- Escape double quote in inline export attributes #55
+
 ## v1.3.2
 
 > `2024-04-09`
