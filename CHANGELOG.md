@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.4.1
+
+> `2024-04-15`
+
+### 🐞 Bug Fixes
+- Escape HTML content in code export view.
+
 ## v1.4.0
 
 > `2024-04-12`
