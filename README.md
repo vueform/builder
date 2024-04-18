@@ -22,28 +22,23 @@ Enable developers & non-tech workforce to build even the most complex forms with
 
 ## Get Started
 
-Jump right into the project with ease using one of our boilerplates.
+Create a Vueform Builder instance on your machine using your favourite package manager:
 
-<table>
-  <tbody>
-    <tr>
-      <td>
-        <h4><img src="https://raw.githubusercontent.com/vueform/builder/main/.github/assets/vite.svg" height="21" /> Vite</h4>
-      </td>
-      <td>
-         <h4><a href="https://github.com/vueform/builder-vite-starter">@vueform/builder-vite-starter</a></h4>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <h4><img src="https://raw.githubusercontent.com/vueform/builder/main/.github/assets/nuxt.svg" height="21" /> Nuxt</h4>
-      </td>
-      <td>
-         <h4><a href="https://github.com/vueform/builder-nuxt-starter">@vueform/builder-nuxt-starter</a></h4>
-      </td>
-    </tr>
-  </tbody>
-</table>
+```bash
+npm create vueform@latest -- --builder
+```
+
+```bash
+yarn create vueform --builder
+```
+
+```bash
+pnpm create vueform --builder
+```
+
+```bash
+bun create vueform --builder
+```
 
 #### Manual Installation
 
