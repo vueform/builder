@@ -818,8 +818,6 @@ const ColumnsField_simple = class extends BaseElementField {
       }
     }
 
-    console.log(update, remove)
-
     this.update(update, remove)
   }
 
@@ -2600,13 +2598,6 @@ const submit = {
     buttonLabel: 'Submit',
     submits: true,
   },
-  schema: {
-    type: 'button',
-    buttonLabel: 'Submit',
-    onClick() {
-      alert(2)
-    }
-  },
   sections: {
     properties: {
       name: 'properties',
@@ -2648,6 +2639,34 @@ const submit = {
       ['size'],
     ],
   }
+}
+
+const captcha = {
+  label: 'Captcha',
+  description: 'Prevents submission by robots',
+  icon: ['fas', 'user-robot'],
+  category: 'page',
+  schema: {
+    type: 'captcha',
+  },
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField },
+        label: { type: LabelField, },
+        description: { type: DescriptionField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        name: { type: NameField, extend: { disabled: true, } },
+      }
+    }
+  },
 }
 
 const steps = {
@@ -2940,6 +2959,7 @@ const config = {
     'h3',
     'divider',
     'spacer',
+    'captcha',
     'submit',
     'steps',
     'container',
@@ -3183,6 +3203,7 @@ const config = {
       image,
       multifile,
       multiImage,
+      captcha,
       submit,
       h1,
       h2,

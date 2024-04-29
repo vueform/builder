@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.4.2
+
+> `2024-04-29`
+
+### 🎉 Feature
+- New Captcha element.
+
 ## v1.4.1
 
 > `2024-04-15`
