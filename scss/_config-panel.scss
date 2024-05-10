@@ -38,6 +38,10 @@
   @apply text-xl;
 }
 
+.vfb-config-panel-header-warning {
+  @apply text-red-500 text-[12px] ml-1.5 mt-1 cursor-pointer relative;
+}
+
 .vfb-config-panel-header-clone,
 .vfb-config-panel-header-remove,
 .vfb-config-panel-header-collapse {
@@ -92,6 +96,7 @@
 
     --vf-bg-input: var(--vf-gray-100);
     --vf-bg-passive: var(--vf-gray-200);
+    --vf-bg-selected: var(--vf-gray-200);
     --vf-border-color-passive: var(--vf-gray-200);
     
     --vf-border-color-input: var(--vf-gray-200);
@@ -158,4 +163,20 @@
 
 .vfb-config-panel-input-language-editor {
   @apply text-gray-400 font-bold text-0.5xs uppercase cursor-text select-none bg-gray-100 bg-opacity-50 absolute bottom-1.5 right-2 leading-none p-0.5 dark:bg-dark-700 dark:text-dark-400;
+}
+
+.vfb-config-panel-warning {
+  @apply bg-red-100 text-red-500 my-4 px-4 py-3 rounded leading-tight overflow-x-auto;
+}
+
+.vfb-config-panel-warning-text {
+  @apply my-1;
+}
+
+.vfb-config-panel-warning-ul {
+  @apply list-disc pl-5 leading-tight;
+}
+
+.vfb-config-panel-warning-li {
+  @apply text-xs font-semibold -ml-1 pr-4 underline cursor-pointer;
 }

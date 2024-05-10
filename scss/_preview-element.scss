@@ -138,6 +138,10 @@
   }
 }
 
+.vfb-preview-element-warning {
+  @apply absolute inset-0 bg-red-500 bg-opacity-20;
+}
+
 .vfb-preview-element-outer-wrapper {
   @apply grid grid-cols-12 flex-1;
 }

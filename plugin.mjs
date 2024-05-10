@@ -450,6 +450,10 @@ export default function () {
           required: false,
           type: String,
         },
+        modelDuplicates: {
+          required: false,
+          type: Array,
+        },
       },
       setup(props, context, component) {
         const { builder, schema, draggedSchema, tabs, steps } = toRefs(props)
@@ -2098,6 +2102,14 @@ export default function () {
           return component.form$.value.pageType
         })
 
+        const duplicates = computed(() => {
+          return component.form$.value.modelDuplicates.filter(d => d.dataPath === component.el$.value.dataPath)
+        })
+
+        const hasWarning = computed(() => {
+          return duplicates.value.length
+        })
+
         // =============== METHODS ==============
 
 
@@ -2669,6 +2681,7 @@ export default function () {
           hideDragLine,
           lastWidth,
           childRestrictions,
+          hasWarning,
           handleOverlayClick,
           handleCloneClick,
           handleRemoveClick,

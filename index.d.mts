@@ -135,6 +135,7 @@ declare module '@vueform/builder' {
   const DisabledField: any;
   const DragAndDropField: any;
   const EndpointField: any;
+  const ExcludeCountriesField: any;
   const ExportApiField: any;
   const ExportDownloadField: any;
   const ExportOutputField: any;
@@ -164,6 +165,7 @@ declare module '@vueform/builder' {
   const HrefField: any;
   const IdField: any;
   const ImgField: any;
+  const IncludeCountriesField: any;
   const InfoField: any;
   const InitialField: any;
   const InputTypeField: any;
@@ -228,6 +230,7 @@ declare module '@vueform/builder' {
   const TooltipFormatField: any;
   const TooltipsField: any;
   const TypeField: any;
+  const UnmaskField: any;
   const ValidationField: any;
   const ViewField: any;
   const ViewField_file: any;
@@ -299,6 +302,7 @@ declare module '@vueform/builder' {
     DisabledField,
     DragAndDropField,
     EndpointField,
+    ExcludeCountriesField,
     ExportApiField,
     ExportDownloadField,
     ExportOutputField,
@@ -328,6 +332,7 @@ declare module '@vueform/builder' {
     HrefField,
     IdField,
     ImgField,
+    IncludeCountriesField,
     InfoField,
     InitialField,
     InputTypeField,
@@ -392,6 +397,7 @@ declare module '@vueform/builder' {
     TooltipFormatField,
     TooltipsField,
     TypeField,
+    UnmaskField,
     ValidationField,
     ViewField,
     ViewField_file,

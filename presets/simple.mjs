@@ -40,6 +40,8 @@ import {
   TypeField,
   ValidationField,
   ViewField,
+  IncludeCountriesField,
+  ExcludeCountriesField,
 } from './../'
 
 /**
@@ -66,6 +68,7 @@ const rules = [
   'before',
   'before_or_equal',
   'boolean',
+  'completed',
   'date',
   'date_equals',
   'date_format',
@@ -941,13 +944,14 @@ const email = {
 
 const phone = {
   label: 'Phone',
-  description: 'Input field that expects a phone number',
+  description: 'Phone number with country selector',
   icon: ['fas', 'phone-rotary'],
   category: 'fields',
   schema: {
-    type: 'text',
+    type: 'phone',
     label: 'Phone',
-    mask: { mask: '+1 (000) 000 0000', label: 'US Phone number', placeholder: true },
+    allowIncomplete: true,
+    unmask: true,
   },
   sections: {
     properties: {
@@ -955,13 +959,17 @@ const phone = {
       label: 'Properties',
       fields: {
         type: { type: TypeField },
-        inputType: { type: InputTypeField_simple },
-        mask: { type: PhoneMask_simple },
         label: { type: LabelField },
         description: { type: DescriptionField },
         placeholder: { type: PlaceholderField },
-        addons: { type: AddonsField },
-        readonly: { type: ReadonlyField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Phone options',
+      fields: {
+        include: { type: IncludeCountriesField, },
+        exclude: { type: ExcludeCountriesField, },
       },
     },
     layout: {
@@ -996,12 +1004,6 @@ const phone = {
     }
   },
   separators: {
-    properties: [
-      ['mask'],
-      ['type', 'label', 'description', 'placeholder'],
-      ['addons'],
-      ['readonly',]
-    ],
     layout: [
       ['columns'],
       ['size'],

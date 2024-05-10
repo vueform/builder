@@ -1,5 +1,16 @@
 [//]: # (Don't use <tags>)
 
+## v1.4.3
+
+> `2024-05-10`
+
+### 🎉 Feature
+- New Phone element.
+- Show warning at the element when data paths are duplicated #54.
+
+### 🐞 Bug Fixes
+- Increment child names when cloning containers #54.
+
 ## v1.4.2
 
 > `2024-04-29`
