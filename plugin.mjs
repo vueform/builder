@@ -738,7 +738,7 @@ export default function () {
 
         // ============== INJECTS ===============
 
-        const config$ = inject('config$')
+        const config$ = inject('builderConfig$')
 
         const storage$ = inject('storage$')
 
@@ -1969,7 +1969,7 @@ export default function () {
           return component
         }
 
-        const config$ = inject('config$')
+        const config$ = inject('builderConfig$')
 
         // ================ DATA ================
 

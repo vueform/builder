@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.4.5
+
+> `2024-07-05`
+
+### 🎉 Feature
+- New Signature element.
+
 ## v1.4.4
 
 > `2024-05-13`

@@ -77,6 +77,7 @@ declare module '@vueform/builder' {
   const themes: any;
   const defineConfig: any;
   const AcceptField: any;
+  const AcceptImagesField: any;
   const AddonsField: any;
   const AddTextField: any;
   const AfterField: any;
@@ -88,6 +89,7 @@ declare module '@vueform/builder' {
   const AttrsField_static: any;
   const AutocompleteField: any;
   const AutogrowField: any;
+  const AutoloadField: any;
   const AutoUploadField: any;
   const BaseElementField: any;
   const BaseExportField: any;
@@ -102,7 +104,11 @@ declare module '@vueform/builder' {
   const BoolValueField: any;
   const ButtonLabelField: any;
   const ButtonTypeField: any;
+  const CanClearField: any;
+  const CanDropField: any;
+  const CanUndoField: any;
   const ClickableField: any;
+  const ColorsField: any;
   const ColumnsField: any;
   const ConditionsField: any;
   const ContentField: any;
@@ -145,6 +151,7 @@ declare module '@vueform/builder' {
   const FileEndpointsField: any;
   const FileRulesField: any;
   const FileUrlsField: any;
+  const FontsField: any;
   const FormColumnsField: any;
   const FormDisplayErrorsField: any;
   const FormDisplayMessagesField: any;
@@ -161,6 +168,7 @@ declare module '@vueform/builder' {
   const FormWidthField: any;
   const FullField: any;
   const GroupsField: any;
+  const HeightField: any;
   const Hour24Field: any;
   const HrefField: any;
   const IdField: any;
@@ -169,14 +177,21 @@ declare module '@vueform/builder' {
   const InfoField: any;
   const InitialField: any;
   const InputTypeField: any;
+  const InvertColorsField: any;
   const ItemsField: any;
   const LabelField: any;
   const LabelsField: any;
+  const LineField: any;
   const LinkField: any;
   const MaxField: any;
+  const MaxFontSizeField: any;
   const MaxOptionsField: any;
+  const MaxSizeField: any;
+  const MaxWidthField: any;
   const MetaField: any;
   const MinField: any;
+  const MinFontSizeField: any;
+  const ModesField: any;
   const MultipleLabelField: any;
   const NameField: any;
   const NativeField: any;
@@ -191,6 +206,7 @@ declare module '@vueform/builder' {
   const PageLabelsField: any;
   const ParamsField: any;
   const PlaceholderField: any;
+  const PlaceholderField_signature: any;
   const RadioField: any;
   const ReadonlyField: any;
   const ResetsField: any;
@@ -226,11 +242,16 @@ declare module '@vueform/builder' {
   const ThemeThemeField: any;
   const ThemeToolsField: any;
   const ThemeToolsHiddenField: any;
+  const TitleSignatureDrawField: any;
+  const TitleSignatureTypeField: any;
+  const TitleSignatureUploadField: any;
   const ToolsField: any;
   const TooltipFormatField: any;
   const TooltipsField: any;
   const TypeField: any;
   const UnmaskField: any;
+  const UploadHeightField: any;
+  const UploadWidthField: any;
   const ValidationField: any;
   const ViewField: any;
   const ViewField_file: any;
@@ -244,6 +265,7 @@ declare module '@vueform/builder' {
     themes,
     defineConfig,
     AcceptField,
+    AcceptImagesField,
     AddonsField,
     AddTextField,
     AfterField,
@@ -255,6 +277,7 @@ declare module '@vueform/builder' {
     AttrsField_static,
     AutocompleteField,
     AutogrowField,
+    AutoloadField,
     AutoUploadField,
     BaseElementField,
     BaseExportField,
@@ -269,7 +292,11 @@ declare module '@vueform/builder' {
     BoolValueField,
     ButtonLabelField,
     ButtonTypeField,
+    CanClearField,
+    CanDropField,
+    CanUndoField,
     ClickableField,
+    ColorsField,
     ColumnsField,
     ConditionsField,
     ContentField,
@@ -312,6 +339,7 @@ declare module '@vueform/builder' {
     FileEndpointsField,
     FileRulesField,
     FileUrlsField,
+    FontsField,
     FormColumnsField,
     FormDisplayErrorsField,
     FormDisplayMessagesField,
@@ -328,6 +356,7 @@ declare module '@vueform/builder' {
     FormWidthField,
     FullField,
     GroupsField,
+    HeightField,
     Hour24Field,
     HrefField,
     IdField,
@@ -336,14 +365,21 @@ declare module '@vueform/builder' {
     InfoField,
     InitialField,
     InputTypeField,
+    InvertColorsField,
     ItemsField,
     LabelField,
     LabelsField,
+    LineField,
     LinkField,
     MaxField,
+    MaxFontSizeField,
     MaxOptionsField,
+    MaxSizeField,
+    MaxWidthField,
     MetaField,
     MinField,
+    MinFontSizeField,
+    ModesField,
     MultipleLabelField,
     NameField,
     NativeField,
@@ -358,6 +394,7 @@ declare module '@vueform/builder' {
     PageLabelsField,
     ParamsField,
     PlaceholderField,
+    PlaceholderField_signature,
     RadioField,
     ReadonlyField,
     ResetsField,
@@ -393,11 +430,16 @@ declare module '@vueform/builder' {
     ThemeThemeField,
     ThemeToolsField,
     ThemeToolsHiddenField,
+    TitleSignatureDrawField,
+    TitleSignatureTypeField,
+    TitleSignatureUploadField,
     ToolsField,
     TooltipFormatField,
     TooltipsField,
     TypeField,
     UnmaskField,
+    UploadHeightField,
+    UploadWidthField,
     ValidationField,
     ViewField,
     ViewField_file,

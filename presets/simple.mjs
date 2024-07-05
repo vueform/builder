@@ -42,6 +42,28 @@ import {
   ViewField,
   IncludeCountriesField,
   ExcludeCountriesField,
+
+  FontsField,
+  AutoloadField,
+  ModesField,
+  ColorsField,
+  InvertColorsField,
+  MaxSizeField,
+  MaxFontSizeField,
+  MinFontSizeField,
+  CanClearField,
+  CanDropField,
+  CanUndoField,
+  LineField,
+  HeightField,
+  MaxWidthField,
+  UploadWidthField,
+  UploadHeightField,
+  AcceptImagesField,
+  TitleSignatureDrawField,
+  TitleSignatureTypeField,
+  TitleSignatureUploadField,
+  PlaceholderField_signature,
 } from './../'
 
 /**
@@ -1004,6 +1026,90 @@ const phone = {
     }
   },
   separators: {
+    layout: [
+      ['columns'],
+      ['size'],
+    ],
+    validation: [
+      ['validation'],
+      ['fieldName'],
+    ]
+  }
+}
+
+const signature = {
+  label: 'Signature',
+  description: 'Draw, type or upload signature',
+  icon: ['fas', 'signature'],
+  category: 'fields',
+  schema: {
+    type: 'signature',
+    label: 'Signature',
+  },
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'Properties',
+      fields: {
+        type: { type: TypeField, },
+        label: { type: LabelField, },
+        description: { type: DescriptionField, },
+        placeholder: { type: PlaceholderField_signature, },
+        disabled: { type: DisabledField },
+        readonly: { type: ReadonlyField },
+      },
+    },
+    options: {
+      name: 'options',
+      label: 'Options',
+      fields: {
+        accept: { type: AcceptImagesField, },
+        maxSize: { type: MaxSizeField, },
+        height: { type: HeightField, },
+        maxWidth: { type: MaxWidthField, },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'Layout',
+      fields: {
+        columns: { type: ColumnsField_simple },
+        size: { type: SizeField },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'Validation',
+      fields: {
+        validation: { type: ValidationField },
+        fieldName: { type: FieldNameField },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'Logic',
+      fields: {
+        conditions: { type: ConditionsField },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'Attributes',
+      fields: {
+        name: { type: NameField, extend: { disabled: true, } },
+      }
+    }
+  },
+  separators: {
+    properties: [
+      ['type', 'label', 'description', 'placeholder'],
+      ['disabled', 'readonly',]
+    ],
+    options: [
+      ['accept'],
+      ['maxSize'],
+      ['height', 'maxWidth'],
+    ],
     layout: [
       ['columns'],
       ['size'],
@@ -2933,6 +3039,7 @@ const config = {
     'number',
     'email',
     'phone',
+    'signature',
     'p',
     'img',
     'link',
@@ -3002,6 +3109,13 @@ const config = {
         },
       },
       phone: {
+        validation: {
+          validation:  onlyRules([
+            'required',
+          ])
+        },
+      },
+      signature: {
         validation: {
           validation:  onlyRules([
             'required',
@@ -3183,6 +3297,7 @@ const config = {
       number,
       email,
       phone,
+      signature,
       password,
       url,
       location,
