@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.4.6
+
+> `2024-07-18`
+
+### 🎉 Feature
+- Send element list with AI assistant call #70.
+
 ## v1.4.5
 
 > `2024-07-05`
