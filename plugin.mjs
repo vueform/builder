@@ -714,6 +714,11 @@ export default function () {
           type: Object,
           default: () => ({}),
         },
+        rows: {
+          required: false,
+          type: Array,
+          default: () => ([]),
+        },
       },
       setup(props, context, component) {
         const { pluginSettings, } = toRefs(props)
@@ -1982,6 +1987,7 @@ export default function () {
 
         const editing = ref(false)
         const resizing = ref(false)
+        const multiResizing = ref(false)
 
         let deviceSizeMap = ref({
           default: 'default',
@@ -1989,7 +1995,17 @@ export default function () {
           desktop: config$.value.breakpoints?.desktop.breakpoint
         })
 
+        const nextElement$ = ref(null)
+
         // ============== COMPUTED ==============
+
+        const autoflow = computed(() => {
+          return config$.value.autoflow
+        })
+
+        const defaultWidths = computed(() => {
+          return component.form$.value.columns || {}
+        })
 
         const names = computed(() => {
           return component.form$.value.builderConfig.names
@@ -2001,6 +2017,10 @@ export default function () {
 
         const size = computed(() => {
           return deviceSizeMap.value[device.value]
+        })
+
+        const rows = computed(() => {
+          return component.form$.value.rows
         })
 
         const sizes = computed(() => {
@@ -2069,7 +2089,11 @@ export default function () {
         })
 
         const canResize = computed(() => {
-          return !childRestrictions.value.resize && component.el$.value.builder?.resize !== false
+          return !childRestrictions.value.resize && component.el$.value.builder?.resize !== false && (autoflow.value || (!component.el$.value.isObjectType && !component.el$.value.isGroupType && !component.el$.value.isListType))
+        })
+
+        const canMultiResize = computed(() => {
+          return autoflow.value && row.value.indexOf(path.value) !== row.value.length - 1
         })
 
         const canDragInside = computed(() => {
@@ -2108,6 +2132,43 @@ export default function () {
 
         const hasWarning = computed(() => {
           return duplicates.value.length
+        })
+
+        const currentColumns = computed(() => {
+          let columns = component.el$.value.columnsClassesService.cols
+          let currentColumns
+
+          const part = autoflow.value ? 'container' : 'wrapper'
+
+          const defaultColumn = defaultWidths.value?.[size]?.[part] || defaultWidths.value?.[part] || 12
+
+          // If the size already exists
+          if (columns[size.value]) {
+            currentColumns = columns[size.value][part] || defaultColumn
+
+          // If it does not exist, get one from the lower screen sizes
+          } else {
+            let sizeList = [...sizes.value].reverse()
+            let index = sizeList.indexOf(size.value)
+
+            sizeList.forEach((s, i) => {
+              if (i > index && !currentColumns) {
+                if (columns[s]) {
+                  currentColumns = columns[s][part]
+                }
+              }
+            })
+
+            if (!currentColumns) {
+              currentColumns = columns.default[part] || defaultColumn
+            }
+          }
+
+          return currentColumns
+        })
+
+        const row = computed(() => {
+          return rows.value.find(r => r.indexOf(path.value) !== -1) || [] 
         })
 
         // =============== METHODS ==============
@@ -2181,32 +2242,7 @@ export default function () {
         }
 
         const startResizing = () => {
-          let columns = component.el$.value.columnsClassesService.cols
-          let container
-
-          // If the size already exists
-          if (columns[size.value]) {
-            container = columns[size.value].container
-
-          // If it does not exist, get one from the lower screen sizes
-          } else {
-            let sizeList = [...sizes.value].reverse()
-            let index = sizeList.indexOf(size.value)
-
-            sizeList.forEach((s, i) => {
-              if (i > index && !container) {
-                if (columns[s]) {
-                  container = columns[s].container
-                }
-              }
-            })
-
-            if (!container) {
-              container = columns.default.container
-            }
-          }
-
-          lastWidth.value = container
+          lastWidth.value = currentColumns.value
           startingWidth.value = lastWidth.value
           resizing.value = true
 
@@ -2249,57 +2285,59 @@ export default function () {
         }
 
         const updateWidth = (width, shouldAnnounce = true) => {
-          if (width !== lastWidth.value) {
-            lastWidth.value = width
+          if (width === lastWidth.value) {
+            return
+          }
+          
+          lastWidth.value = width
 
-            let columns = component.el$.value.columns
+          let columns = component.el$.value.columns
 
-            if (size.value === 'default') {
-              if (columns && typeof columns === 'object') {
-                if (columns.container || columns.label || columns.wrapper) {
-                  columns.container = width
-                } else {
-                  if (!columns.default) {
-                    columns.default = {}
-                  }
-
-                  columns.default.container = width
-                }
+          if (size.value === 'default') {
+            if (columns && typeof columns === 'object') {
+              if (columns.container || columns.label || columns.wrapper) {
+                columns[autoflow.value ? 'container' : 'wrapper'] = width
               } else {
-                columns = { container: width }
+                if (!columns.default) {
+                  columns.default = {}
+                }
+
+                columns.default[autoflow.value ? 'container' : 'wrapper'] = width
               }
             } else {
-              if (columns && typeof columns === 'object') {
-                if (!columns[size.value]) {
-                  if (columns.container || columns.label || columns.wrapper) {
-                    columns = {
-                      default: columns,
-                      [size.value]: {
-                        container: width
-                      }
-                    }
-                  } else {
-                    columns[size.value] = {
-                      container: width
+              columns = { [autoflow.value ? 'container' : 'wrapper']: width }
+            }
+          } else {
+            if (columns && typeof columns === 'object') {
+              if (!columns[size.value]) {
+                if (columns.container || columns.label || columns.wrapper) {
+                  columns = {
+                    default: columns,
+                    [size.value]: {
+                      [autoflow.value ? 'container' : 'wrapper']: width
                     }
                   }
                 } else {
-                  columns[size.value].container = width
+                  columns[size.value] = {
+                    [autoflow.value ? 'container' : 'wrapper']: width
+                  }
                 }
               } else {
-                columns = {
-                  [size.value]: {
-                    container: width,
-                  }
+                columns[size.value][autoflow.value ? 'container' : 'wrapper'] = width
+              }
+            } else {
+              columns = {
+                [size.value]: {
+                  [autoflow.value ? 'container' : 'wrapper']: width,
                 }
               }
             }
+          }
 
-            component.el$.value.updateColumns(columns)
+          component.el$.value.updateColumns(columns)
 
-            if (shouldAnnounce) {
-              announce('WIDTH_CHANGED', { width, })
-            }
+          if (shouldAnnounce) {
+            announce('WIDTH_CHANGED', { width, })
           }
         }
 
@@ -2352,6 +2390,10 @@ export default function () {
 
         const announce = (msg, params) => {
           component.el$.value.announce(msg, params)
+        }
+
+        const getNextElementInRow = () => {
+          return component.form$.value.el$(row.value[row.value.indexOf(path.value) + 1])
         }
 
         const handleOverlayClick = () => {
@@ -2429,9 +2471,12 @@ export default function () {
 
           let path = e.path || e?.composedPath()
 
+          const target = path[1]
+          const container = autoflow.value ? path[2] : path[5]
+
           elementWidth.value = {
-            from: path[1].getBoundingClientRect().x,
-            to: path[1].getBoundingClientRect().x + path[2].getBoundingClientRect().width
+            from: target.getBoundingClientRect().x,
+            to: target.getBoundingClientRect().x + container.getBoundingClientRect().width
           }
 
           resizing.value = true
@@ -2458,6 +2503,97 @@ export default function () {
         const handleResizeDragEnd = (e) => {
           resizing.value = false
           saveColums()
+        }
+
+        const handleResizeMultiDragMouseDown = (e) => {
+          nextElement$.value = getNextElementInRow()
+
+          if (!nextElement$.value) {
+            return
+          }
+
+          focused.value = true
+          nextElement$.value.container.focused = true
+        }
+
+        const handleResizeMultiDragMouseUp = (e) => {
+          focused.value = false
+          nextElement$.value.container.focused = false
+        }
+
+        const handleResizeMultiDragStart = (e) => {
+          nextElement$.value = getNextElementInRow()
+
+          if (!nextElement$.value) {
+            return
+          }
+
+          e.dataTransfer.effectAllowed = 'move'
+
+          lastWidth.value = currentColumns.value
+          startingWidth.value = lastWidth.value
+
+          nextElement$.value.container.startingWidth = nextElement$.value.container.currentColumns
+
+          focused.value = true
+          nextElement$.value.container.focused = true
+
+          let path = e.path || e?.composedPath()
+
+          const target = path[1]
+          const container = path[2]
+
+          elementWidth.value = {
+            from: target.getBoundingClientRect().x,
+            to: target.getBoundingClientRect().x + container.getBoundingClientRect().width
+          }
+
+          multiResizing.value = true
+        }
+
+        const handleResizeMultiDrag = (e) => {
+          if (!nextElement$.value) {
+            return
+          }
+
+          focused.value = true
+          nextElement$.value.container.focused = true
+
+          let end = elementWidth.value.to - elementWidth.value.from
+          let current = e.x - elementWidth.value.from
+          let width = Math.round(current / end * 12)
+
+          if (width < 1) {
+            width = 1
+          }
+
+          if (width > 11) {
+            width = 11
+          }
+
+          if (!(e.x === 0 && e.y === 0)) {
+            updateWidth(width, false)
+
+            const otherChange = nextElement$.value.container.startingWidth + (width - startingWidth.value) * -1
+
+            nextElement$.value.container.updateWidth(otherChange > 1 ? otherChange : 1)
+          }
+        }
+
+        const handleResizeMultiDragEnd = (e) => {
+          if (!nextElement$.value) {
+            return
+          }
+
+          focused.value = false
+          nextElement$.value.container.focused = false
+
+          multiResizing.value = false
+          saveColums()
+
+          const otherChange = nextElement$.value.container.startingWidth + (lastWidth.value - startingWidth.value) * -1
+
+          nextElement$.value.$emit('resize-element', nextElement$.value.path, otherChange > 1 ? otherChange : 1)
         }
 
         const handleFocus = () => {
@@ -2662,14 +2798,19 @@ export default function () {
 
         return {
           ...component,
+          autoflow,
           names,
           ariaLabel,
           editing,
           resizing,
+          multiResizing,
           moving,
           highlighted,
           hovered,
           focused,
+          startingWidth,
+          elementWidth,
+          lastWidth,
           isSelected,
           canRemove,
           canClone,
@@ -2678,10 +2819,13 @@ export default function () {
           canResize,
           canDragInside,
           canDragSibling,
+          canMultiResize,
           hideDragLine,
           lastWidth,
           childRestrictions,
           hasWarning,
+          currentColumns,
+          updateWidth,
           handleOverlayClick,
           handleCloneClick,
           handleRemoveClick,
@@ -2696,6 +2840,11 @@ export default function () {
           handleResizeDragStart,
           handleResizeDrag,
           handleResizeDragEnd,
+          handleResizeMultiDragStart,
+          handleResizeMultiDrag,
+          handleResizeMultiDragEnd,
+          handleResizeMultiDragMouseDown,
+          handleResizeMultiDragMouseUp,
         }
       }
     })

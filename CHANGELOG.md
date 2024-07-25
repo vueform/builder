@@ -1,4 +1,14 @@
 [//]: # (Don't use <tags>)
+## v1.5.0
+
+> `2024-07-24`
+
+### 🎉 Feature
+- The drag and drop feature got a major improvement!
+- Drag elements next to other elements.
+- When elements are dropped above or below an element it will dropped into the previous / next row, instead of next to the target element.
+- A new handle appears between elements in the same row that can resize two adjacent elements simultaneously.
+- Added `autoflow` config option, which is when disabled all elements take up a full row while the inputs can still be resized.
 
 ## v1.4.6
 

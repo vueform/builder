@@ -843,6 +843,14 @@ const ColumnsField_simple = class extends BaseElementField {
       }
     }
 
+    if (update.columns?.wrapper) {
+      update.columns.wrapper = parseInt(update.columns.wrapper)
+    }
+
+    if (update.columns?.label) {
+      update.columns.label = parseInt(update.columns.label)
+    }
+
     this.update(update, remove)
   }
 
@@ -853,7 +861,7 @@ const ColumnsField_simple = class extends BaseElementField {
 
     load.columns_wrapper.label = this.elementSchema.columns?.label ? 'Left' : 'Top'
     load.columns_wrapper.size = this.elementSchema.columns?.label || 6
-    load.columns_wrapper.wrapper = this.elementSchema.columns?.wrapper || false
+    load.columns_wrapper.wrapper = !!this.elementSchema.columns?.wrapper
     load.columns_wrapper.shrink = this.elementSchema.columns?.wrapper || 6
 
     return load

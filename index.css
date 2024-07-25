@@ -3473,13 +3473,16 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-preview-element-container {
   @apply relative pointer-events-auto focus:outline-none;
 }
-.vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-overlay {
+.vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-overlay, .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container > .vfb-preview-element-inner-wrapper > .vfb-preview-element-inner-overlay {
   @apply border-primary-500;
 }
-.vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-resizer-icon {
+.vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-resizer-icon, .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container > .vfb-preview-element-inner-wrapper > .vfb-preview-element-resizer-icon {
   @apply inline-block;
 }
 .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-name-tag {
+  @apply inline-block;
+}
+.vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-columns-display, .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container > .vfb-preview-element-inner-wrapper > .vfb-preview-element-columns-display {
   @apply inline-block;
 }
 .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-actions-container-unselected {
@@ -3522,6 +3525,12 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   --vf-container-text-dynamic-3: rgb(0 255 12 / 100%);
   --vf-container-text-dynamic-4: rgb(0 3 255 / 100%);
   --vf-container-text-dynamic-5: rgb(0 0 0 / 100%);
+}
+.vfb-preview-wrapper-dark .vfb-preview-element-multi-resizer-handle {
+  @apply bg-dark-500;
+}
+.vfb-preview-wrapper-dark .vfb-preview-element-columns-display {
+  @apply text-black;
 }
 
 .vfb-preview-element-container-nested {
@@ -3580,6 +3589,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply has-error;
 }
 
+.vfb-preview-element-container-empty {
+  @apply flex;
+}
+
 .vfb-preview-element-container-conditional {
   @apply opacity-60;
 }
@@ -3610,6 +3623,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply col-span-12;
 }
 
+.vfb-preview-element-inner-wrapper {
+  @apply relative;
+}
+
 .vfb-preview-element-inner-wrapper-after {
   @apply col-span-12;
 }
@@ -3636,6 +3653,36 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply border-transparent;
 }
 
+.vfb-preview-element-inner-overlay {
+  @apply absolute inset-0 border cursor-pointer z-1;
+}
+.vfb-preview-element-inner-overlay.vfb-preview-element-inner-overlay-no-edit {
+  @apply cursor-default;
+}
+
+.vfb-preview-element-inner-overlay-selected {
+  @apply border-primary-500;
+}
+
+.vfb-preview-element-inner-overlay-unselected {
+  @apply border-transparent;
+}
+
+.vfb-preview-element-multi-resizer {
+  @apply w-4 absolute right-[calc((var(--vf-gutter)/2+0.5rem)*-1)] -bottom-2 -top-2 z-2 cursor-ew-resize flex items-stretch justify-stretch;
+}
+.vfb-preview-element-multi-resizer:hover + .vfb-preview-element-multi-resizer-handle {
+  @apply block;
+}
+
+.vfb-preview-element-multi-resizer-handle {
+  @apply absolute right-[calc((var(--vf-gutter)/2+0.0675rem)*-1)] -top-2 -bottom-2 hidden bg-gray-300 rounded-full w-0.5;
+}
+
+.vfb-preview-element-multi-resizer-handle-resizing {
+  @apply block;
+}
+
 .vfb-preview-element-resizer {
   @apply absolute -right-1 w-2 top-0 bottom-0 cursor-ew-resize z-999;
 }
@@ -3644,15 +3691,19 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-resizer-icon {
-  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition;
+  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition z-1;
 }
 
 .vfb-preview-element-resizer-icon-unselected {
   @apply hidden;
 }
 
-.vfb-preview-element-resizer-icon-resizing {
-  @apply w-auto h-4 text-sm px-0.5  whitespace-nowrap leading-none;
+.vfb-preview-element-columns-display {
+  @apply absolute left-0 -translate-x-1/2 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition w-auto h-4 text-sm px-0.5 whitespace-nowrap leading-none z-1;
+}
+
+.vfb-preview-element-columns-display-unselected {
+  @apply hidden;
 }
 
 .vfb-preview-element-name-tag {
@@ -3681,6 +3732,58 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-preview-element-area-bottom {
   @apply absolute left-0 right-0 top-1/2;
+}
+
+.vfb-preview-element-area-bottom-sm {
+  @apply -bottom-1;
+}
+
+.vfb-preview-element-area-bottom-md {
+  @apply -bottom-2;
+}
+
+.vfb-preview-element-area-bottom-lg {
+  @apply -bottom-2;
+}
+
+.vfb-preview-element-area-right {
+  @apply absolute z-1 w-[10%] min-w-2;
+}
+
+.vfb-preview-element-area-right-with-children {
+  @apply w-3;
+}
+
+.vfb-preview-element-area-right-sm {
+  @apply -bottom-1 -top-1 right-0;
+}
+
+.vfb-preview-element-area-right-md {
+  @apply -bottom-2 -top-2 right-0;
+}
+
+.vfb-preview-element-area-right-lg {
+  @apply -bottom-2 -top-2 right-0;
+}
+
+.vfb-preview-element-area-left {
+  @apply absolute z-1 w-[10%] min-w-2;
+}
+
+.vfb-preview-element-area-left-with-children {
+  @apply w-3;
+}
+
+.vfb-preview-element-area-left-sm {
+  @apply -bottom-1 -top-1 left-0;
+}
+
+.vfb-preview-element-area-left-md {
+  @apply -bottom-2 -top-2 left-0;
+}
+
+.vfb-preview-element-area-left-lg {
+  @apply -bottom-2 -top-2 left-0;
 }
 
 .vfb-preview-element-area-bottom-sm {
@@ -3726,6 +3829,28 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   display: block !important;
 }
 
+.vfb-preview-element-drag-label-wrapper-right {
+  @apply -top-2 -bottom-2 right-0 h-auto w-1 z-1;
+}
+.vfb-preview-element-drag-label-wrapper-right .vfb-preview-element-drag-label {
+  @apply whitespace-nowrap transform text-[12px];
+}
+
+.vfb-preview-element-container-drop-right > .vfb-preview-element-area-right, .vfb-preview-element-container-drop-right > div > .vfb-preview-element-drag-label-wrapper-right {
+  display: block !important;
+}
+
+.vfb-preview-element-drag-label-wrapper-left {
+  @apply -top-2 -bottom-2 left-0 h-auto w-1 z-1;
+}
+.vfb-preview-element-drag-label-wrapper-left .vfb-preview-element-drag-label {
+  @apply whitespace-nowrap transform text-[12px];
+}
+
+.vfb-preview-element-container-drop-left > .vfb-preview-element-area-left, .vfb-preview-element-container-drop-left > div > .vfb-preview-element-drag-label-wrapper-left {
+  display: block !important;
+}
+
 .vfb-preview-element-drag-label-wrapper-middle {
   @apply top-1/2 left-0 right-0 transform -translate-y-1/2;
 }
@@ -3735,7 +3860,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-drag-label {
-  @apply bg-primary-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 pt-0.5 pb-0.75 rounded-full leading-none text-0.5sm text-white;
+  @apply bg-primary-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 pt-0.5 pb-0.75 rounded-full leading-none text-0.5sm text-white whitespace-nowrap;
 }
 
 .vfb-preview-element-actions-container {
