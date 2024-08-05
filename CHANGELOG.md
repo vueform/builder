@@ -1,4 +1,18 @@
 [//]: # (Don't use <tags>)
+
+## v1.6.0
+
+> `2024-08-05`
+
+### 🎉 Feature
+- Builder localization.
+- Hungarian, Japan, Dutch and Japanese locales.
+
+### 🐞 Bug Fixes
+- Trigger `@save` event on AI generate.
+- Don't close the element panel on Escape when conditions modal is open.
+- Select endpoint fix.
+
 ## v1.5.0
 
 > `2024-07-24`
@@ -9,6 +23,7 @@
 - When elements are dropped above or below an element it will dropped into the previous / next row, instead of next to the target element.
 - A new handle appears between elements in the same row that can resize two adjacent elements simultaneously.
 - Added `autoflow` config option, which is when disabled all elements take up a full row while the inputs can still be resized.
+- Made Tab and Step labels localizable.
 
 ## v1.4.6
 

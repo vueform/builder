@@ -159,15 +159,12 @@ declare module '@vueform/builder' {
   const FormFloatPlaceholderField: any;
   const FormForceLabelsField: any;
   const FormFormKeyField: any;
-  const FormI18nField: any;
-  const FormLocaleField: any;
   const FormNameField: any;
   const FormNestingField: any;
   const FormSizeField: any;
   const FormValidationField: any;
   const FormWidthField: any;
   const FullField: any;
-  const GroupsField: any;
   const HeightField: any;
   const Hour24Field: any;
   const HrefField: any;
@@ -347,15 +344,12 @@ declare module '@vueform/builder' {
     FormFloatPlaceholderField,
     FormForceLabelsField,
     FormFormKeyField,
-    FormI18nField,
-    FormLocaleField,
     FormNameField,
     FormNestingField,
     FormSizeField,
     FormValidationField,
     FormWidthField,
     FullField,
-    GroupsField,
     HeightField,
     Hour24Field,
     HrefField,

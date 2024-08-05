@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { toRefs, markRaw, ref, computed, nextTick, onMounted } from 'vue'
+import { toRefs, markRaw, ref, computed, nextTick, onMounted, inject } from 'vue'
 import TextElement from './TextElement.vue'
 import TextareaElement from './TextareaElement.vue'
 import ElementSelectOption from './ElementSelectOption.vue'
@@ -58,6 +58,7 @@ export default function () {
           return component
         }
 
+        const tags = inject('tags')
 
         // ================ DATA ================
 
@@ -130,11 +131,11 @@ export default function () {
                 search: true,
                 items: fields.value,
                 autocomplete: 'off',
-                placeholder: 'Search field',
+                placeholder: tags.element_selector_placeholder,
                 trackBy: 'searchLabel',
                 caret: false,
                 object: true,
-                noResultsText: 'No elements found',
+                noResultsText: tags.element_selector_no_results,
                 addClass: {
                   select: {
                     search: 'vfb-field-input',

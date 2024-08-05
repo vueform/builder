@@ -1,6 +1,7 @@
+/*@localize*/
+
 import {
   AddonsField,
-  AddTextField,
   AlignField,
   AlignField_toggle,
   AlignField_checkbox,
@@ -163,27 +164,6 @@ const InputTypeField_simple = class extends BaseElementField {
   }
 }
 
-const PhoneMask_simple = class extends BaseElementField {
-  objectValue = true
-
-  get schema () {
-    return {
-      mask: {
-        type: 'select',
-        label: 'Number type',
-        columns: { label: 4 },
-        object: true,
-        valueProp: 'mask',
-        native: false,
-        items: [
-          { mask: '{+1} (000) 000 0000', label: 'US Phone number', placeholder: true },
-          { mask: '+0000000[00000000]', label: 'International', placeholder: true },
-        ]
-      }
-    }
-  }
-}
-
 const ItemsField_simple = class extends BaseMultilingualElementField
 {
   name = 'ItemsField'
@@ -192,9 +172,9 @@ const ItemsField_simple = class extends BaseMultilingualElementField
     return {
       items: {
         type: this.multilingual ? 't-textarea' : 'textarea',
-        placeholder: 'First item\nSecond item',
+        placeholder: this.tags.simple_items_items_placeholder,
         floating: false,
-        label: 'Enter one option per line',
+        label: this.tags.simple_items_items_label,
         addClasses: {
           ElementLabel: {
             container: 'order-2 p-0 mt-1.5 text-gray-500 dark:text-dark-400'
@@ -233,7 +213,7 @@ const SearchField_simple = class extends BaseElementField
     return {
       search: {
         type: 'toggle',
-        label: 'Enable search',
+        label: this.tags.simple_search_search_label,
         columns: { label: 6 },
         presets: ['prop-toggle'],
       }
@@ -253,22 +233,12 @@ const TextField_simple_checkbox = class extends BaseElementField
           'heading', 'quote', 'code', 'attach', 'bullet-list', 'number-list',
           'decrease-nesting', 'increase-nesting', 'undo', 'redo', 'strike'
         ],
-        label: 'Text',
-        placeholder: this.multilingual && this.locale.value !== this.fallbackLocale ? `Defaults to ${this.fallbackLocaleName}` : undefined,
+        label: this.tags.simple_text_text_label,
+        placeholder: this.multilingual && this.locale.value !== this.fallbackLocale ? `${this.tags.field_placeholder_defaults_to} ${this.fallbackLocaleName}` : undefined,
         floating: false,
         columns: { label: 4 },
         presets: ['prop-multiline'],
         rows: 1,
-        onMounted: (el$) => {
-          setTimeout(() => {
-            el$.autosize()
-          }, 0)
-        },
-        onUpdated: (el$) => {
-          setTimeout(() => {
-            el$.autosize()
-          }, 0)
-        },
       }
     }
   }
@@ -292,8 +262,8 @@ const CreateField_simple = class extends BaseElementField
     return {
       create: {
         type: 'toggle',
-        label: 'Allow new option',
-        info: 'New option can be added by hitting `enter` after typing a non-existing option.',
+        label: this.tags.simple_create_create_label,
+        info: this.tags.simple_create_create_info,
         columns: { label: 6 },
         presets: ['prop-toggle'],
         conditions: [
@@ -322,9 +292,9 @@ const NoResultsField_simple = class extends BaseMultilingualElementField
     return {
       noResultsText: {
         type: this.multilingual ? 't-textarea' : 'textarea',
-        label: 'No results text',
-        info: 'Displayed when the search does not give any result.',
-        placeholder: this.multilingual && this.locale.value !== this.fallbackLocale ? `Defaults to ${this.fallbackLocaleName}` : 'No options found',
+        label: this.tags.simple_no_results_no_results_text_label,
+        info: this.tags.simple_no_results_no_results_text_info,
+        placeholder: this.multilingual && this.locale.value !== this.fallbackLocale ? `${this.tags.field_placeholder_defaults_to} ${this.fallbackLocaleName}` : this.tags.simple_no_results_no_results_text_placeholder,
         floating: false,
         rows: 1,
         columns: { label: 6 },
@@ -354,7 +324,7 @@ const DateFormatField_simple = class extends BaseElementField
     return {
       displayFormat: {
         type: 'select',
-        label: 'Date format',
+        label: this.tags.simple_date_format_display_format_label,
         items: [
           'DD/MM/YYYY',
           'DD-MM-YYYY',
@@ -381,7 +351,7 @@ const DateFormatField_datetime_simple = class extends BaseElementField
     return {
       displayFormat: {
         type: 'select',
-        label: 'Date format',
+        label: this.tags.simple_date_format_datetime_display_format_label,
         items: [
           'DD/MM/YYYY HH:mm',
           'DD-MM-YYYY HH:mm',
@@ -413,19 +383,19 @@ const DateRestrictionsField_simple = class extends BaseElementField
         schema: {
           min: {
             type: 'date',
-            label: 'Min date',
+            label: this.tags.simple_date_restrictions_min_label,
             columns: { label: 5 },
             addClass: 'vfb-config-datepicker',
           },
           max: {
             type: 'date',
-            label: 'Max date',
+            label: this.tags.simple_date_restrictions_max_label,
             columns: { label: 5 },
             addClass: 'vfb-config-datepicker',
           },
           disables: {
             type: 'dates',
-            label: 'Disabled dates',
+            label: this.tags.simple_date_restrictions_disables_label,
             columns: { label: 5 },
             addClass: 'vfb-config-datepicker',
           }
@@ -445,11 +415,11 @@ const TooltipPositionField_simple = class extends BaseElementField
         type: 'radiogroup',
         presets: ['tabs-tiny', 'tabs-2'],
         view: 'tabs',
+        label: this.tags.simple_tooltip_position_tooltip_position_label,
         items: {
-          top: 'Top',
-          bottom: 'Bottom',
+          top: this.tags.simple_tooltip_position_tooltip_position_item_top,
+          bottom: this.tags.simple_tooltip_position_tooltip_position_item_bottom,
         },
-        label: 'Tooltip position',
         columns: { label: 6 },
         default: 'top',
       },
@@ -470,15 +440,15 @@ const FileAcceptField_simple_image = class extends BaseElementField
         schema: {
           subtitle: {
             type: 'static',
-            content: 'Accept',
+            content: this.tags.simple_file_accept_subtitle_content,
             presets: ['prop-subtitle'],
           },
           acceptMimes: {
             type: 'tags',
-            label: 'MIME types',
+            label: this.tags.simple_file_accept_accept_mimes_label,
             columns: { label: 4 },
             appendNewOption: false,
-            info: 'Allowed MIME types extensions.',
+            info: this.tags.simple_file_accept_accept_mimes_info,
             create: true,
             closeOnSelect: false,
             replaceClasses: {
@@ -503,10 +473,10 @@ const FileAcceptField_simple_image = class extends BaseElementField
           },
           accept: {
             type: 'tags',
-            label: 'Extensions',
+            label: this.tags.simple_file_accept_accept_label,
             columns: { label: 4 },
             appendNewOption: false,
-            info: 'Allowed file extensions.',
+            info: this.tags.simple_file_accept_accept_info,
             create: true,
             closeOnSelect: false,
             replaceClasses: {
@@ -574,7 +544,7 @@ const ContentField_p = class extends BaseElementField {
     return {
       content: {
         type: 'editor',
-        placeholder: 'Write here...',
+        placeholder: this.tags.simple_content_content_placeholder,
         floating: 'Content',
         hideTools: [
           'heading', 'quote', 'code', 'attach', 'bullet-list', 'number-list',
@@ -597,8 +567,8 @@ const ImgField_simple = class extends BaseElementField {
         schema: {
           src: {
             type: 'textarea',
-            label: 'Image url',
-            placeholder: 'https://your-image-url',
+            label: this.tags.simple_img_src_label,
+            placeholder: this.tags.simple_img_src_placeholder,
             floating: false,
             columns: { label: 4 },
             rows: 1,
@@ -615,8 +585,8 @@ const ImgField_simple = class extends BaseElementField {
           },
           width: {
             type: 'text',
-            label: 'Width',
-            placeholder: 'auto',
+            label: this.tags.simple_img_width_label,
+            placeholder: this.tags.simple_img_width_placeholder,
             floating: false,
             addons: {
               after: 'px',
@@ -625,9 +595,9 @@ const ImgField_simple = class extends BaseElementField {
           },
           height: {
             type: 'text',
-            label: 'Height',
-            info: 'Will not affect actual height, it\'s only for SEO compilance. Height is calculated based on width to avoid distortion.',
-            placeholder: 'auto',
+            label: this.tags.simple_img_height_label,
+            info: this.tags.simple_img_height_info,
+            placeholder: this.tags.simple_img_height_placeholder,
             floating: false,
             addons: {
               after: 'px',
@@ -653,8 +623,8 @@ const ImgPropsField_simple = class extends BaseElementField {
           alt: {
             type: 'textarea',
             rows: 1,
-            label: 'Alt. text',
-            info: 'Text to render when the image is not available.',
+            label: this.tags.simple_img_props_alt_label,
+            info: this.tags.simple_img_props_alt_info,
             columns: { label: 4 },
             onMounted: (el$) => {
               setTimeout(() => {
@@ -670,8 +640,8 @@ const ImgPropsField_simple = class extends BaseElementField {
           title: {
             type: 'textarea',
             rows: 1,
-            label: 'Title',
-            info: 'Tooltip text when you hover the image.',
+            label: this.tags.simple_img_props_title_label,
+            info: this.tags.simple_img_props_title_info,
             columns: { label: 4 },
             onMounted: (el$) => {
               setTimeout(() => {
@@ -703,8 +673,8 @@ const LinkField_simple = class extends BaseElementField {
           href: {
             type: 'textarea',
             rows: 1,
-            label: 'Link',
-            placeholder: 'https://...',
+            label: this.tags.simple_link_href_label,
+            placeholder: this.tags.simple_link_href_placeholder,
             floating: false,
             columns: { label: 4 },
             onMounted: (el$) => {
@@ -720,13 +690,13 @@ const LinkField_simple = class extends BaseElementField {
           },
           target: {
             type: 'select',
-            label: 'Open in',
+            label: this.tags.simple_link_target_label,
             default: '_self',
             floating: false,
             columns: { label: 4 },
             items: {
-              '_self': 'Same tab',
-              '_blank': 'New tab',
+              '_self': this.tags.simple_link_target_item_self,
+              '_blank': this.tags.simple_link_target_item_blank,
             }
           },
         }
@@ -747,7 +717,7 @@ const ColumnsField_simple = class extends BaseElementField {
         schema: {
           wrapper: {
             type: 'toggle',
-            label: 'Shrink element',
+            label: this.tags.simple_columns_wrapper_label,
             presets: ['prop-toggle'],
             columns: {
               label: 8
@@ -757,7 +727,7 @@ const ColumnsField_simple = class extends BaseElementField {
             type: 'radiogroup',
             presets: ['tabs-tiny', `tabs-3`],
             view: 'tabs',
-            label: 'Element size',
+            label: this.tags.simple_columns_shrink_label,
             items: {
               3: '1/4',
               4: '1/3',
@@ -774,11 +744,11 @@ const ColumnsField_simple = class extends BaseElementField {
             type: 'radiogroup',
             presets: ['tabs-tiny', `tabs-2`, 'separator-top'],
             view: 'tabs',
-            label: 'Label position',
-            items: [
-              'Left',
-              'Top',
-            ],
+            label: this.tags.simple_columns_label_label,
+            items: {
+              Left: this.tags.simple_columns_label_item_left,
+              Top: this.tags.simple_columns_label_item_top,
+            },
             columns: {
               label: 8
             },
@@ -787,7 +757,7 @@ const ColumnsField_simple = class extends BaseElementField {
             type: 'radiogroup',
             presets: ['tabs-tiny', `tabs-3`],
             view: 'tabs',
-            label: 'Label size',
+            label: this.tags.simple_columns_size_label,
             items: {
               3: '1/4',
               4: '1/3',
@@ -868,22 +838,51 @@ const ColumnsField_simple = class extends BaseElementField {
   }
 }
 
+const AddTextField = class extends BaseElementField
+{
+  name = 'AddTextField'
+
+  watchers = {
+    [`${this.section}.addText`]: [
+      [
+        'controls_wrapper.add', async (el$, value) => {
+          if (!value) {
+            el$.clear()
+          }
+        }
+      ],
+    ]
+  }
+
+  get schema () {
+    return {
+      addText: {
+        type: 'text',
+        label: this.tags.simple_add_text_add_text_label,
+        columns: { label: 4 },
+        placeholder: this.tags.simple_add_text_add_text_placeholder,
+        floating: false,
+      },
+    }
+  }
+}
+
 /**
  * Element definitions
  */
 const text = {
-  label: 'Short text',
-  description: 'Single line input',
+  label: 'simple_text_label',
+  description: 'simple_text_description',
   icon: ['fas', 'font-case'],
   category: 'fields',
   schema: {
     type: 'text',
-    label: 'Text',
+    label: 'simple_text_field_label',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         inputType: { type: InputTypeField_simple },
@@ -897,7 +896,7 @@ const text = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -905,7 +904,7 @@ const text = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -913,14 +912,14 @@ const text = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -945,8 +944,8 @@ const text = {
 
 const number = {
   ...text,
-  label: 'Number',
-  description: 'Input field that only allows numbers',
+  label: 'simple_number_label',
+  description: 'simple_number_description',
   icon: ['fas', 'number'],
   category: 'fields',
   schema: {
@@ -954,39 +953,39 @@ const number = {
     inputType: 'number',
     rules: ['nullable', 'numeric'],
     autocomplete: 'off',
-    label: 'Number',
+    label: 'simple_number_field_label',
   },
 }
 
 const email = {
   ...text,
-  label: 'Email',
-  description: 'Input field that expects an email',
+  label: 'simple_email_label',
+  description: 'simple_email_description',
   icon: ['fas', 'at'],
   category: 'fields',
   schema: {
     type: 'text',
     inputType: 'email',
     rules: ['nullable', 'email'],
-    label: 'Email',
+    label: 'simple_email_field_label',
   },
 }
 
 const phone = {
-  label: 'Phone',
-  description: 'Phone number with country selector',
+  label: 'simple_phone_label',
+  description: 'simple_phone_description',
   icon: ['fas', 'phone-rotary'],
   category: 'fields',
   schema: {
     type: 'phone',
-    label: 'Phone',
+    label: 'simple_phone_field_label',
     allowIncomplete: true,
     unmask: true,
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -996,7 +995,7 @@ const phone = {
     },
     options: {
       name: 'options',
-      label: 'Phone options',
+      label: 'simple_section_options',
       fields: {
         include: { type: IncludeCountriesField, },
         exclude: { type: ExcludeCountriesField, },
@@ -1004,7 +1003,7 @@ const phone = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1012,7 +1011,7 @@ const phone = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1020,14 +1019,14 @@ const phone = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1046,18 +1045,18 @@ const phone = {
 }
 
 const signature = {
-  label: 'Signature',
-  description: 'Draw, type or upload signature',
+  label: 'simple_signature_label',
+  description: 'simple_signature_description',
   icon: ['fas', 'signature'],
   category: 'fields',
   schema: {
     type: 'signature',
-    label: 'Signature',
+    label: 'simple_signature_field_label',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField, },
         label: { type: LabelField, },
@@ -1069,7 +1068,7 @@ const signature = {
     },
     options: {
       name: 'options',
-      label: 'Options',
+      label: 'simple_section_options',
       fields: {
         accept: { type: AcceptImagesField, },
         maxSize: { type: MaxSizeField, },
@@ -1079,7 +1078,7 @@ const signature = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1087,7 +1086,7 @@ const signature = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1095,14 +1094,14 @@ const signature = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1131,66 +1130,66 @@ const signature = {
 
 const password = {
   ...text,
-  label: 'Password',
-  description: 'Input field that hides characters',
+  label: 'simple_password_label',
+  description: 'simple_password_description',
   icon: ['fas', 'lock'],
   category: 'fields',
   schema: {
     type: 'text',
     inputType: 'password',
-    label: 'Password',
+    label: 'simple_password_field_label',
   },
 }
 
 const url = {
   ...text,
-  label: 'URL',
-  description: 'Input field that expects an URL',
+  label: 'simple_url_label',
+  description: 'simple_url_description',
   icon: ['fas', 'link'],
   category: 'fields',
   schema: {
     type: 'text',
     inputType: 'url',
     rules: ['nullable', 'url'],
-    placeholder: 'eg. http(s)://domain.com',
+    placeholder: 'simple_url_field_placeholder',
     floating: false,
-    label: 'URL',
+    label: 'simple_url_field_label',
   },
 }
 
 const location = {
   ...text,
-  label: 'Location',
-  description: 'Google places location input',
+  label: 'simple_location_label',
+  description: 'simple_location_description',
   icon: ['fas', 'map-marker-alt'],
   category: 'fields',
   schema: {
     type: 'location',
-    label: 'Location',
+    label: 'simple_location_field_label',
   },
 }
 
 const textarea = {
   ...text,
-  label: 'Long text',
-  description: 'Multi-line input',
+  label: 'simple_textarea_label',
+  description: 'simple_textarea_description',
   icon: ['fas', 'align-left'],
   category: 'fields',
   schema: {
     type: 'textarea',
-    label: 'Textarea',
+    label: 'simple_textarea_field_label',
   },
 }
 
 const editor = {
   ...text,
-  label: 'Text editor',
-  description: 'Text editor that allows formatting',
+  label: 'simple_editor_label',
+  description: 'simple_editor_description',
   icon: ['fas', 'italic'],
   category: 'fields',
   schema: {
     type: 'editor',
-    label: 'Editor',
+    label: 'simple_editor_field_label',
     hideTools: [
       'strike',
       'heading',
@@ -1208,18 +1207,18 @@ const editor = {
 }
 
 const checkbox = {
-  label: 'Decision box',
-  description: 'When something needs to be accepted',
+  label: 'simple_checkbox_label',
+  description: 'simple_checkbox_description',
   icon: ['fas', 'check-square'],
   category: 'fields',
   schema: {
     type: 'checkbox',
-    text: 'Decision box',
+    text: 'simple_checkbox_field_label',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         text: { type: TextField_simple_checkbox, },
@@ -1231,7 +1230,7 @@ const checkbox = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         align: { type: AlignField_checkbox, },
@@ -1240,7 +1239,7 @@ const checkbox = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1248,14 +1247,14 @@ const checkbox = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1279,23 +1278,23 @@ const checkbox = {
 }
 
 const checkboxgroup = {
-  label: 'Multiple choice',
-  description: 'Accept multiple options',
+  label: 'simple_checkboxgroup_label',
+  description: 'simple_checkboxgroup_description',
   icon: ['fas', 'tasks'],
   category: 'fields',
   schema: {
     type: 'checkboxgroup',
     items: [
-      'Option 1',
-      'Option 2',
-      'Option 3',
+      'simple_default_option_1',
+      'simple_default_option_2',
+      'simple_default_option_3',
     ],
-    label: 'Multiple choice',
+    label: 'simple_checkboxgroup_field_label',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -1305,14 +1304,14 @@ const checkboxgroup = {
     },
     options: {
       name: 'options',
-      label: 'Options',
+      label: 'simple_section_options',
       fields: {
         items: { type: ItemsField_simple, },
       },
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         view: { type: ViewField, },
@@ -1321,7 +1320,7 @@ const checkboxgroup = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1329,14 +1328,14 @@ const checkboxgroup = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1361,34 +1360,34 @@ const checkboxgroup = {
 
 const radiogroup = {
   ...checkboxgroup,
-  label: 'Single choice',
-  description: 'Accept a single option',
+  label: 'simple_radiogroup_label',
+  description: 'simple_radiogroup_description',
   icon: ['fas', 'list-ul'],
   category: 'fields',
   schema: {
     type: 'radiogroup',
     items: [
-      'Option 1',
-      'Option 2',
-      'Option 3',
+      'simple_default_option_1',
+      'simple_default_option_2',
+      'simple_default_option_3',
     ],
-    label: 'Single choice',
+    label: 'simple_radiogroup_field_label',
   },
 }
 
 const toggle = {
-  label: 'Toggle switch',
-  description: 'Toggle / switch button',
+  label: 'simple_toggle_label',
+  description: 'simple_toggle_description',
   icon: ['fas', 'toggle-on'],
   category: 'fields',
   schema: {
     type: 'toggle',
-    text: 'Toggle',
+    text: 'simple_toggle_field_text',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -1401,7 +1400,7 @@ const toggle = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         align: { type: AlignField_toggle, },
@@ -1410,7 +1409,7 @@ const toggle = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1418,14 +1417,14 @@ const toggle = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1450,28 +1449,28 @@ const toggle = {
 }
 
 const select = {
-  label: 'Dropdown',
-  description: 'Select input',
+  label: 'simple_select_label',
+  description: 'simple_select_description',
   icon: ['fas', 'caret-square-down'],
   category: 'fields',
   schema: {
     type: 'select',
     items: [
-      'Option 1',
-      'Option 2',
-      'Option 3',
+      'simple_default_option_1',
+      'simple_default_option_2',
+      'simple_default_option_3',
     ],
     search: true,
     native: false,
     strict: false,
-    label: 'Select',
+    label: 'simple_select_field_label',
     inputType: 'search',
     autocomplete: 'off',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -1485,14 +1484,14 @@ const select = {
     },
     options: {
       name: 'options',
-      label: 'Options',
+      label: 'simple_section_options',
       fields: {
         items: { type: ItemsField_simple, },
       },
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1500,7 +1499,7 @@ const select = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1508,14 +1507,14 @@ const select = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1539,8 +1538,8 @@ const select = {
 }
 
 const tags = {
-  label: 'Tags',
-  description: 'Select multiple tags',
+  label: 'simple_tags_label',
+  description: 'simple_tags_description',
   icon: ['fas', 'tags'],
   category: 'fields',
   schema: {
@@ -1550,18 +1549,18 @@ const tags = {
     strict: false,
     hideSelected: false,
     items: [
-      'Option 1',
-      'Option 2',
-      'Option 3',
+      'simple_default_option_1',
+      'simple_default_option_2',
+      'simple_default_option_3',
     ],
-    label: 'Tags',
+    label: 'simple_tags_field_label',
     inputType: 'search',
     autocomplete: 'off',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -1575,14 +1574,14 @@ const tags = {
     },
     options: {
       name: 'options',
-      label: 'Options',
+      label: 'simple_section_options',
       fields: {
         items: { type: ItemsField_simple, },
       },
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1590,7 +1589,7 @@ const tags = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1598,14 +1597,14 @@ const tags = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1629,19 +1628,19 @@ const tags = {
 }
 
 const date = {
-  label: 'Date',
-  description: 'Datepicker input',
+  label: 'simple_date_label',
+  description: 'simple_date_description',
   icon: ['fas', 'calendar'],
   category: 'fields',
   schema: {
     type: 'date',
-    label: 'Date',
-    displayFormat: 'DD/MM/YYYY',
+    label: 'simple_date_field_label',
+    displayFormat: 'simple_date_field_display_format',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         inputType: { type: InputTypeField_simple },
@@ -1657,7 +1656,7 @@ const date = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1665,7 +1664,7 @@ const date = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1673,14 +1672,14 @@ const date = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1706,21 +1705,21 @@ const date = {
 }
 
 const datetime = {
-  label: 'Date-time',
-  description: 'Date & time picker input',
+  label: 'simple_datetime_label',
+  description: 'simple_datetime_description',
   icon: ['fas', 'datetime'],
   category: 'fields',
   schema: {
     type: 'date',
-    label: 'Datetime',
+    label: 'simple_datetime_field_label',
     time: true,
-    displayFormat: 'DD/MM/YYYY HH:mm',
+    displayFormat: 'simple_datetime_field_display_format',
     hour24: false,
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         inputType: { type: InputTypeField_simple },
@@ -1737,7 +1736,7 @@ const datetime = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1745,7 +1744,7 @@ const datetime = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1753,14 +1752,14 @@ const datetime = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1786,13 +1785,13 @@ const datetime = {
 }
 
 const time = {
-  label: 'Time',
-  description: 'Time picker input',
+  label: 'simple_time_label',
+  description: 'simple_time_description',
   icon: ['fas', 'clock'],
   category: 'fields',
   schema: {
     type: 'date',
-    label: 'Time',
+    label: 'simple_time_field_label',
     time: true,
     date: false,
     hour24: false,
@@ -1800,7 +1799,7 @@ const time = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         inputType: { type: InputTypeField_simple },
@@ -1816,7 +1815,7 @@ const time = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1824,7 +1823,7 @@ const time = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1832,14 +1831,14 @@ const time = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1865,43 +1864,43 @@ const time = {
 
 const dates = {
   ...date,
-  label: 'Multiple dates',
-  description: 'Date picker that allows multiple dates',
+  label: 'simple_dates_label',
+  description: 'simple_dates_description',
   icon: ['fas', 'dates'],
   category: 'fields',
   schema: {
     type: 'dates',
-    label: 'Dates',
+    label: 'simple_dates_field_label',
   },
 }
 
 const dateRange = {
   ...date,
-  label: 'Date range',
-  description: 'Date picker that allows date range',
+  label: 'simple_dateRange_label',
+  description: 'simple_dateRange_description',
   icon: ['fas', 'date-range'],
   category: 'fields',
   schema: {
     type: 'dates',
-    label: 'Date range',
+    label: 'simple_dateRange_field_label',
     mode: 'range',
   },
 }
 
 const slider = {
-  label: 'Slider',
-  description: 'Horizontal slider',
+  label: 'simple_slider_label',
+  description: 'simple_slider_description',
   icon: ['fas', 'slider'],
   category: 'fields',
   schema: {
     type: 'slider',
-    label: 'Slider',
+    label: 'simple_slider_field_label',
     default: 30,
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -1918,7 +1917,7 @@ const slider = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -1926,7 +1925,7 @@ const slider = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -1934,14 +1933,14 @@ const slider = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -1968,19 +1967,19 @@ const slider = {
 }
 
 const rangeSlider = {
-  label: 'Range slider',
-  description: 'Horizontal slider with range',
+  label: 'simple_rangeSlider_label',
+  description: 'simple_rangeSlider_description',
   icon: ['fas', 'range-slider'],
   category: 'fields',
   schema: {
     type: 'slider',
     default: [30, 70],
-    label: 'Range slider',
+    label: 'simple_rangeSlider_field_label',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -1997,7 +1996,7 @@ const rangeSlider = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -2005,7 +2004,7 @@ const rangeSlider = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField },
         fieldName: { type: FieldNameField },
@@ -2013,14 +2012,14 @@ const rangeSlider = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2047,13 +2046,13 @@ const rangeSlider = {
 }
 
 const file = {
-  label: 'File upload',
-  description: 'File upload input',
+  label: 'simple_file_label',
+  description: 'simple_file_description',
   icon: ['fas', 'file'],
   category: 'fields',
   schema: {
     type: 'file',
-    label: 'File',
+    label: 'simple_file_field_label',
     uploadTempEndpoint: false,
     removeTempEndpoint: false,
     removeEndpoint: false,
@@ -2064,7 +2063,7 @@ const file = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -2075,7 +2074,7 @@ const file = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField, },
@@ -2083,7 +2082,7 @@ const file = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField, },
         fieldName: { type: FieldNameField,  },
@@ -2091,14 +2090,14 @@ const file = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField, },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2123,14 +2122,14 @@ const file = {
 
 const image = {
   ...file,
-  label: 'Image upload',
-  description: 'File upload with image only',
+  label: 'simple_image_label',
+  description: 'simple_image_description',
   icon: ['fas', 'image'],
   category: 'fields',
   schema: {
     type: 'file',
     view: 'image',
-    label: 'Image',
+    label: 'simple_image_field_label',
     accept: 'image/*',
     uploadTempEndpoint: false,
     removeTempEndpoint: false,
@@ -2141,7 +2140,7 @@ const image = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -2152,7 +2151,7 @@ const image = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField, },
@@ -2160,7 +2159,7 @@ const image = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField, },
         fieldName: { type: FieldNameField,  },
@@ -2168,14 +2167,14 @@ const image = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField, },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2199,13 +2198,13 @@ const image = {
 }
 
 const multifile = {
-  label: 'Multi-file upload',
-  description: 'Multi-file upload input',
+  label: 'simple_multifile_label',
+  description: 'simple_multifile_description',
   icon: ['fas', 'copy'],
   category: 'fields',
   schema: {
     type: 'multifile',
-    label: 'Multi-file',
+    label: 'simple_multifile_field_label',
     uploadTempEndpoint: false,
     removeTempEndpoint: false,
     removeEndpoint: false,
@@ -2216,7 +2215,7 @@ const multifile = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -2227,7 +2226,7 @@ const multifile = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField, },
@@ -2235,7 +2234,7 @@ const multifile = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField, },
         fieldName: { type: FieldNameField,  },
@@ -2243,14 +2242,14 @@ const multifile = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField, },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2274,13 +2273,13 @@ const multifile = {
 }
 
 const multiImage = {
-  label: 'Multi-image upload',
-  description: 'Multi-file upload with images only',
+  label: 'simple_multiImage_label',
+  description: 'simple_multiImage_description',
   icon: ['fas', 'images'],
   category: 'fields',
   schema: {
     type: 'multifile',
-    label: 'Multi-image',
+    label: 'simple_multiImage_field_label',
     view: 'image',
     accept: 'image/*',
     uploadTempEndpoint: false,
@@ -2293,7 +2292,7 @@ const multiImage = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -2304,7 +2303,7 @@ const multiImage = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField, },
@@ -2312,7 +2311,7 @@ const multiImage = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField, },
         fieldName: { type: FieldNameField,  },
@@ -2320,14 +2319,14 @@ const multiImage = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField, },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2351,20 +2350,20 @@ const multiImage = {
 }
 
 const h1 = {
-  label: 'Form heading',
-  description: 'Heading for form',
+  label: 'simple_h1_label',
+  description: 'simple_h1_description',
   icon: ['fas', 'h1'],
   category: 'page',
   schema: {
     type: 'static',
     tag: 'h1',
-    content: 'Heading 1',
+    content: 'simple_h1_field_content',
     align: 'left',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2374,7 +2373,7 @@ const h1 = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         align: { type: AlignField, },
         space: { type: SpaceField, },
@@ -2383,14 +2382,14 @@ const h1 = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2411,47 +2410,47 @@ const h1 = {
 
 const h2 = {
   ...h1,
-  label: 'Section heading',
-  description: 'Heading for sections',
+  label: 'simple_h2_label',
+  description: 'simple_h2_description',
   icon: ['fas', 'h2'],
   category: 'page',
   schema: {
     type: 'static',
     tag: 'h2',
-    content: 'Heading 2',
+    content: 'simple_h2_field_content',
     align: 'left',
   },
 }
 
 const h3 = {
   ...h1,
-  label: 'Subheading',
-  description: 'Heading for subsections',
+  label: 'simple_h3_label',
+  description: 'simple_h3_description',
   icon: ['fas', 'h3'],
   category: 'page',
   schema: {
     type: 'static',
     tag: 'h3',
-    content: 'Heading 3',
+    content: 'simple_h3_field_content',
     align: 'left',
   },
 }
 
 const p = {
-  label: 'Paragraph',
-  description: 'Formattable text',
+  label: 'simple_p_label',
+  description: 'simple_p_description',
   icon: ['fas', 'paragraph'],
   category: 'fields',
   schema: {
     type: 'static',
     tag: 'p',
-    content: 'Paragraph',
+    content: 'simple_p_field_content',
     align: 'left',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2461,7 +2460,7 @@ const p = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         align: { type: AlignField, },
         space: { type: SpaceField, },
@@ -2470,14 +2469,14 @@ const p = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2497,20 +2496,20 @@ const p = {
 }
 
 const img = {
-  label: 'Image',
-  description: 'Display an image',
+  label: 'simple_img_label',
+  description: 'simple_img_description',
   icon: ['fas', 'image-polaroid'],
   category: 'fields',
   schema: {
     type: 'static',
     tag: 'img',
-    src: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    src: 'simple_img_field_src',
     align: 'left',
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2520,7 +2519,7 @@ const img = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         align: { type: AlignField, },
         space: { type: SpaceField, },
@@ -2528,7 +2527,7 @@ const img = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
@@ -2543,7 +2542,7 @@ const img = {
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2567,13 +2566,13 @@ const img = {
 }
 
 const link = {
-  label: 'Link',
-  description: 'Link to another website',
+  label: 'simple_link_label',
+  description: 'simple_link_description',
   icon: ['fas', 'external-link-square'],
   category: 'fields',
   schema: {
     type: 'static',
-    content: 'Link',
+    content: 'simple_link_field_content',
     tag: 'a',
     target: '_blank',
     align: 'left',
@@ -2581,7 +2580,7 @@ const link = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2592,7 +2591,7 @@ const link = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         align: { type: AlignField, },
         space: { type: SpaceField, },
@@ -2601,14 +2600,14 @@ const link = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2628,8 +2627,8 @@ const link = {
 }
 
 const divider = {
-  label: 'Divider',
-  description: 'Adds visual separation',
+  label: 'simple_divider_label',
+  description: 'simple_divider_description',
   icon: ['fas', 'horizontal-rule'],
   category: 'page',
   schema: {
@@ -2639,21 +2638,21 @@ const divider = {
   sections: {
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         space: { type: SpaceField, },
       },
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2666,8 +2665,8 @@ const divider = {
 }
 
 const spacer = {
-  label: 'Spacer',
-  description: 'Empty space between elements',
+  label: 'simple_spacer_label',
+  description: 'simple_spacer_description',
   icon: ['fas', 'arrows-alt-v'],
   category: 'page',
   schema: {
@@ -2678,21 +2677,21 @@ const spacer = {
   sections: {
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         space: { type: SpaceField, },
       },
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2705,19 +2704,19 @@ const spacer = {
 }
 
 const submit = {
-  label: 'Submit',
-  description: 'Triggers form submission',
+  label: 'simple_submit_label',
+  description: 'simple_submit_description',
   icon: ['fas', 'check'],
   category: 'page',
   schema: {
     type: 'button',
-    buttonLabel: 'Submit',
+    buttonLabel: 'simple_submit_field_button_label',
     submits: true,
   },
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
@@ -2726,7 +2725,7 @@ const submit = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         full: { type: FullField, },
         align: { type: AlignField, },
@@ -2735,14 +2734,14 @@ const submit = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2758,8 +2757,8 @@ const submit = {
 }
 
 const captcha = {
-  label: 'Captcha',
-  description: 'Prevents submission by robots',
+  label: 'simple_captcha_label',
+  description: 'simple_captcha_description',
   icon: ['fas', 'user-robot'],
   category: 'page',
   schema: {
@@ -2768,7 +2767,7 @@ const captcha = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField, },
@@ -2777,7 +2776,7 @@ const captcha = {
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2786,8 +2785,8 @@ const captcha = {
 }
 
 const steps = {
-  label: 'Pages',
-  description: 'Break the form into steps',
+  label: 'simple_steps_label',
+  description: 'simple_steps_description',
   icon: ['fas', 'page-break'],
   category: 'page',
   schema: {
@@ -2796,7 +2795,7 @@ const steps = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         label: { type: PageLabelField, },
         label2: { type: PageLabelField, },
@@ -2804,7 +2803,7 @@ const steps = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         buttons: { type: PageButtonsField, },
         labels: { type: PageLabelsField, },
@@ -2827,8 +2826,8 @@ const steps = {
 }
 
 const container = {
-  label: 'Group',
-  description: 'A container to group elements',
+  label: 'simple_container_label',
+  description: 'simple_container_description',
   icon: ['fas', 'object'],
   category: 'page',
   disabled: false,
@@ -2838,7 +2837,7 @@ const container = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
@@ -2847,7 +2846,7 @@ const container = {
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField },
@@ -2855,14 +2854,14 @@ const container = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2877,8 +2876,8 @@ const container = {
 }
 
 const list = {
-  label: 'Repeat element',
-  description: 'Repeat a single element',
+  label: 'simple_list_label',
+  description: 'simple_list_description',
   icon: ['fas', 'list'],
   category: 'page',
   schema: {
@@ -2888,17 +2887,17 @@ const list = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
         description: { type: DescriptionField },
-        addText: { type: AddTextField, extend: { conditions: [], label: 'Button text', placeholder: '+ Add', floating: false, info: null, } },
+        addText: { type: AddTextField },
       },
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField, },
@@ -2906,7 +2905,7 @@ const list = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField, },
         fieldName: { type: FieldNameField,  },
@@ -2914,14 +2913,14 @@ const list = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField, },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -2944,8 +2943,8 @@ const list = {
 }
 
 const nestedList = {
-  label: 'Repeat group',
-  description: 'Repeat multiple element in a group',
+  label: 'simple_nestedList_label',
+  description: 'simple_nestedList_description',
   icon: ['fas', 'th-list'],
   category: 'page',
   schema: {
@@ -2962,17 +2961,17 @@ const nestedList = {
   sections: {
     properties: {
       name: 'properties',
-      label: 'Properties',
+      label: 'simple_section_properties',
       fields: {
         type: { type: TypeField },
         label: { type: LabelField },
         description: { type: DescriptionField },
-        addText: { type: AddTextField, extend: { conditions: [], label: 'Button text', placeholder: '+ Add', floating: false, info: null, } },
+        addText: { type: AddTextField },
       },
     },
     layout: {
       name: 'layout',
-      label: 'Layout',
+      label: 'simple_section_layout',
       fields: {
         columns: { type: ColumnsField_simple },
         size: { type: SizeField, },
@@ -2980,7 +2979,7 @@ const nestedList = {
     },
     validation: {
       name: 'validation',
-      label: 'Validation',
+      label: 'simple_section_validation',
       fields: {
         validation: { type: ValidationField, },
         fieldName: { type: FieldNameField,  },
@@ -2988,14 +2987,14 @@ const nestedList = {
     },
     conditions: {
       name: 'conditions',
-      label: 'Logic',
+      label: 'simple_section_conditions',
       fields: {
         conditions: { type: ConditionsField, },
       },
     },
     attributes: {
       name: 'attributes',
-      label: 'Attributes',
+      label: 'simple_section_attributes',
       fields: {
         name: { type: NameField, extend: { disabled: true, } },
       }
@@ -3024,15 +3023,14 @@ const config = {
   views: ['editor', 'preview'],
   leftPanel: ['elements', ],
   rightPanel: ['tree', 'settings'],
-  defaultName: 'Form',
   categories: [
     {
       key: 'fields',
-      label: 'Fields',
+      label: 'simple_category_fields',
     },
     {
       key: 'page',
-      label: 'Page',
+      label: 'simple_category_page',
     }
   ],
   darkMode: [],
@@ -3350,7 +3348,6 @@ export default config
 
 export {
   InputTypeField_simple,
-  PhoneMask_simple,
   ItemsField_simple,
   SearchField_simple,
   TextField_simple_checkbox,

@@ -357,7 +357,7 @@
 }
 
 .vfb-tool-ai-new-tag {
-  @apply absolute -bottom-[1.3875rem] left-1/2 transform -translate-x-1/2 bg-purple-500 text-white leading-none uppercase text-[11px] font-bold px-0.75 py-0.5 rounded;
+  @apply absolute -bottom-[1.3875rem] left-1/2 transform -translate-x-1/2 bg-purple-500 text-white leading-none uppercase text-[11px] font-bold px-0.75 py-0.5 rounded whitespace-nowrap;
 }
 
 .vfb-icon.vfb-tool-ai-new-tag-caret {
@@ -965,8 +965,13 @@ input.vfb-clr-color:focus {
   word-break: break-word;
 }
 
-.vfb-learn-more {
-  @apply ml-2 leading-none text-0.5xs text-gray-400 border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
+.vfb-learn-more,
+.form-contains-link a.vfb-learn-more {
+  @apply leading-none text-0.5xs relative -top-0.5 text-gray-400 whitespace-nowrap border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
+}
+
+.vfb-dotted-link {
+  @apply text-primary-500 border-b border-dotted border-primary-500;
 }
 
 .vfb-field-note {
@@ -1026,10 +1031,18 @@ input.vfb-clr-color:focus {
 
 .vfb-util-tabs-tiny {
   @apply text-xs leading-tight;
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
+}
+
+.vfb-util-tabs-tiny-text {
+  @apply whitespace-nowrap overflow-hidden;
 }
 
 .vfb-util-tabs-small {
   @apply text-sm leading-tight;
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
 }
 
 .vfb-util-tabs-outline-gray-selected {
@@ -1066,6 +1079,16 @@ input.vfb-clr-color:focus {
 
 .vfb-util-props-group-container {
   @apply col-span-12;
+}
+
+.vfb-util-props-group-container {
+  @apply col-span-12;
+}
+.vfb-util-props-group-container label.text-type\:form-pt-input-border-sm {
+  @apply pr-2 break-words block;
+}
+.vfb-util-props-group-container label.text-type\:form-pt-input-border-sm:not(.vfb-prop-multiline) {
+  @apply p-0 leading-none flex items-center pr-2 break-all;
 }
 
 .vfb-util-props-group {
@@ -1222,10 +1245,6 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply w-5 h-5 rounded pointer-events-none;
 }
 
-.vfb-util-prop-label-with-link {
-  @apply flex items-center;
-}
-
 .vfb-util-prop-element-with-link {
   @apply flex items-center justify-between w-full;
 }
@@ -1347,6 +1366,16 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-btn-xs {
   @apply px-2 py-0.5 text-0.5sm rounded inline-block;
+}
+
+.vfb-no-px {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.vfb-px-1 {
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
 }
 
 .vfb-util-flash {
@@ -1725,7 +1754,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-conditions-render-expected {
-  @apply text-primary-600 font-semibold;
+  @apply font-semibold;
 }
 
 .vfb-conditions-render-or {

@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@vueform/builder",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Vueform Builder development build.",
   "homepage": "https://vueform.com",
   "license": "SEE LICENSE IN LICENSE.txt",
@@ -30,6 +30,9 @@
     },
     "./index.css": "./index.css",
     "./scss/*": "./scss/*",
+    "./locales/*.mjs": "./locales/*/index.mjs",
+    "./locales/*.js": "./locales/*/index.mjs",
+    "./locales/*": "./locales/*/index.mjs",
     "./plugins/*": "./plugins/*",
     "./presets/simple": {
       "types": "./presets/simple.d.mts",

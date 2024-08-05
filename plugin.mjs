@@ -99,6 +99,12 @@ export default function () {
               ElementAddon: {
                 container: 'pt-2 mt-px'
               },
+              ElementLabel: {
+                container: 'vfb-prop-multiline'
+              },
+              ElementLabel: {
+                container: 'vfb-prop-multiline'
+              },
             },
             replaceClasses: {
               ElementAddon: {
@@ -357,6 +363,14 @@ export default function () {
             },
           },
           'tabs-tiny': {
+            addClasses: {
+              RadiogroupRadio: {
+                text: 'vfb-util-tabs-tiny-text',
+              },
+              CheckboxgroupCheckbox: {
+                text: 'vfb-util-tabs-tiny-text',
+              },
+            },
             replaceClasses: {
               RadiogroupRadio: {
                 wrapper_sm: {
@@ -465,6 +479,8 @@ export default function () {
         // =============== INJECT ===============
 
         const subscribeOnce = inject('subscribeOnce')
+
+        const tags = inject('tags')
 
         // ================ DATA ================
 
@@ -646,6 +662,7 @@ export default function () {
 
         return {
           ...component,
+          tags,
           isEmpty,
           droppingFirst,
           hasPages,
@@ -724,7 +741,9 @@ export default function () {
         const { pluginSettings, } = toRefs(props)
 
         if (!pluginSettings.value) {
-          return component
+          return {
+            ...component,
+          }
         }
 
         const form = component
@@ -746,6 +765,10 @@ export default function () {
         const config$ = inject('builderConfig$')
 
         const storage$ = inject('storage$')
+
+        const settingsLocale = inject('settingsLocale')
+
+        const tags = inject('tags')
 
         // ================ DATA ================
 
@@ -797,6 +820,8 @@ export default function () {
                   closeAll,
                   openAll,
                   config$: config$.value,
+                  tags,
+                  settingsLocale: settingsLocale.value,
                 }))
               }
             })
@@ -828,6 +853,8 @@ export default function () {
                 closeAll,
                 openAll,
                 config$: config$.value,
+                tags,
+                settingsLocale: settingsLocale.value,
               })
 
               if (excludeFields.value.indexOf(`${sectionName}.${fieldName}`) === -1) {
@@ -1046,6 +1073,7 @@ export default function () {
 
         return {
           ...form,
+          tags,
           vueform,
           onceOpened,
           closedSections,
@@ -1117,6 +1145,8 @@ export default function () {
 
         const announce = inject('announce')
 
+        const tags = inject('tags')
+
         // ================ DATA ================
 
         const wrapper = ref(null)
@@ -1168,6 +1198,7 @@ export default function () {
 
         return {
           ...component,
+          tags,
           wrapper,
           handleRenamePage,
           handleAddClick,
@@ -1188,9 +1219,11 @@ export default function () {
           return component
         }
 
+        const tags = inject('tags')
+
         // ================ DATA ================
 
-        const removeConfirm = ref('This will also remove all elements within the tab. Are you sure?')
+        const removeConfirm = computed(() => tags.tabs_remove_confirm)
 
         // ============== COMPUTED ==============
         
@@ -1210,6 +1243,7 @@ export default function () {
 
         return {
           ...component,
+          tags,
           removeConfirm,
           pageLabel,
           pages$,
@@ -1224,9 +1258,11 @@ export default function () {
           return component
         }
 
+        const tags = inject('tags')
+
         // ================ DATA ================
 
-        const removeConfirm = ref('This will also remove all elements within the step. Are you sure?')
+        const removeConfirm = computed(() => tags.steps_remove_confirm)
 
         // ============== COMPUTED ==============
         
@@ -1246,6 +1282,7 @@ export default function () {
 
         return {
           ...component,
+          tags,
           removeConfirm,
           pageLabel,
           pages$,
@@ -1710,6 +1747,8 @@ export default function () {
 
         const { element, initial } = toRefs(props)
 
+        const tags = inject('tags')
+
         const hasPrototype = computed(() => {
           return (component.isObject.value && component.prototype.value.schema) ||
                 (!component.isObject.value && element && element.value?.type)
@@ -1723,7 +1762,7 @@ export default function () {
           // let name = element.value?.builder?.type || element.value.type
           // return `${component.form$.value.elementTypes[name].label} (repeat)`
 
-          return `(repeat)`
+          return tags.list_repeat_child_name
         })
 
         const reset = (setDefault = true) => {
@@ -1976,6 +2015,8 @@ export default function () {
 
         const config$ = inject('builderConfig$')
 
+        const tags = inject('tags')
+
         // ================ DATA ================
 
         const hovered = ref(false)
@@ -2135,6 +2176,10 @@ export default function () {
         })
 
         const currentColumns = computed(() => {
+          if (!component.el$.value.columnsClassesService) {
+            return 12
+          }
+
           let columns = component.el$.value.columnsClassesService.cols
           let currentColumns
 
@@ -2798,6 +2843,7 @@ export default function () {
 
         return {
           ...component,
+          tags,
           autoflow,
           names,
           ariaLabel,

@@ -57,7 +57,7 @@
 }
 
 .vfb-tool-ai-new-tag {
-  @apply absolute -bottom-[1.3875rem] left-1/2 transform -translate-x-1/2 bg-purple-500 text-white leading-none uppercase text-[11px] font-bold px-0.75 py-0.5 rounded;
+  @apply absolute -bottom-[1.3875rem] left-1/2 transform -translate-x-1/2 bg-purple-500 text-white leading-none uppercase text-[11px] font-bold px-0.75 py-0.5 rounded whitespace-nowrap;
 }
 
 .vfb-icon.vfb-tool-ai-new-tag-caret {
