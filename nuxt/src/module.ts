@@ -42,6 +42,7 @@ export default defineNuxtModule<ModuleOptions>({
         'axios',
         'json5',
         'prismjs',
+        '@vueform/country-phones',
       ]
     }
 

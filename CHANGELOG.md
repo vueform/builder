@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.6.1
+
+> `2024-08-07`
+
+### 🐞 Bug Fixes
+- Include `@vueform/country-phones` in Vite plugin
+- Import locale modules in index.
+
 ## v1.6.0
 
 > `2024-08-05`

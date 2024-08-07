@@ -6,6 +6,7 @@ module.exports = function vitePluginVueform() {
         include: [
           'json5',
           'prismjs',
+          '@vueform/country-phones',
         ]
       }
     })
