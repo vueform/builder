@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.6.2
+
+> `2024-08-15`
+
+### 🎉 Feature
+- Optional Import / Export button that can be enabled in `builder.config.js` with `import: true`.
+
 ## v1.6.1
 
 > `2024-08-07`

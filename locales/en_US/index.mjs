@@ -1362,5 +1362,12 @@ export default {
 	"view_view_item_gallery": "Gallery",
 	"view_view_item_image": "Image",
 	"view_view_item_tabs": "Tabs",
-	"view_view_label": "View &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">learn more</a>"
+	"view_view_label": "View &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">learn more</a>",
+	"tool_import": "Export / import",
+	"import_modal_title": "Import / Export",
+	"import_modal_subtitle": "The following JSON represents the current state of the builder. Save it to import back later.",
+	"import_modal_button_save": "Save & import",
+	"import_modal_button_download": "Download as JSON",
+	"import_modal_button_cancel": "Cancel",
+	"import_modal_json_error": "Not a valid JSON."
 };

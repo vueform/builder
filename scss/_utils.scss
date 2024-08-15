@@ -43,7 +43,15 @@
 }
 
 .vfb-icon {
-  @apply inline-block text-inherit h-1em overflow-visible align-icon;
+  @apply inline-block text-inherit overflow-visible align-icon;
+}
+
+.vfb-icon-md {
+  @apply h-1em;
+}
+
+.vfb-icon-lg {
+  @apply h-[1.2em];
 }
 
 .vfb-hidden {

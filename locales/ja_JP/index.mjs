@@ -1362,5 +1362,12 @@ export default {
 	"view_view_item_gallery": "ギャラリー",
 	"view_view_item_image": "画像",
 	"view_view_item_tabs": "タブ",
-	"view_view_label": "表示 &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">詳細</a>"
+	"view_view_label": "表示 &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">詳細</a>",
+  "tool_import": "エクスポート / インポート",
+  "import_modal_title": "インポート / エクスポート",
+  "import_modal_subtitle": "以下のJSONは、現在のビルダーの状態を表しています。後でインポートできるように保存してください。",
+  "import_modal_button_save": "保存してインポート",
+  "import_modal_button_download": "JSONとしてダウンロード",
+  "import_modal_button_cancel": "キャンセル",
+  "import_modal_json_error": "無効なJSONです。"
 };

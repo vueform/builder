@@ -1362,5 +1362,12 @@ export default {
 	"view_view_item_gallery": "Galéria",
 	"view_view_item_image": "Kép",
 	"view_view_item_tabs": "Lapok",
-	"view_view_label": "Nézet &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">tudj meg többet</a>"
+	"view_view_label": "Nézet &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">tudj meg többet</a>",
+  "tool_import": "Exportálás / importálás",
+  "import_modal_title": "Importálás / Exportálás",
+  "import_modal_subtitle": "A következő JSON a szerkesztő aktuális állapotát képviseli. Mentse el, hogy később visszaimportálhassa.",
+  "import_modal_button_save": "Mentés és importálás",
+  "import_modal_button_download": "Letöltés JSON formátumban",
+  "import_modal_button_cancel": "Mégse",
+  "import_modal_json_error": "Érvénytelen JSON."
 };

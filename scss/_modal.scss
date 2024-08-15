@@ -151,6 +151,27 @@
   @apply mt-4 text-[14px] text-gray-700 underline dark:text-dark-400;
 }
 
+.vfb-modal-import {
+  @apply mb-12;
+}
+
+.vfb-modal-import-wrapper {
+  @apply w-[calc(100%+4rem)] -ml-8 -mt-10 -mb-6 flex flex-col;
+}
+
+.vfb-modal-import-textarea {
+  @apply w-full px-5 py-4 border-gray-300 min-h-[400px] text-[13px] shadow-inner box-border m-0 font-mono leading-normal;
+}
+
+.vfb-modal-import-error {
+  @apply w-full bg-red-500 bg-opacity-20 text-red-500 px-6 py-2 box-border;
+}
+
+.vfb-modal-import-btn-disabled {
+  @apply opacity-60 pointer-events-none;
+}
+
+
 @keyframes vfb-ai-loader-rotate {
   0% {
     transform: translate(-50%, -50%) rotateZ(0deg);

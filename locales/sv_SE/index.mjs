@@ -1362,5 +1362,12 @@ export default {
 	"view_view_item_gallery": "Galleri",
 	"view_view_item_image": "Bild",
 	"view_view_item_tabs": "Flikar",
-	"view_view_label": "Visa &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">läs mer</a>"
+	"view_view_label": "Visa &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">läs mer</a>",
+  "tool_import": "Exportera / importera",
+  "import_modal_title": "Importera / Exportera",
+  "import_modal_subtitle": "Följande JSON representerar det aktuella tillståndet för byggverktyget. Spara den för att importera senare.",
+  "import_modal_button_save": "Spara och importera",
+  "import_modal_button_download": "Ladda ner som JSON",
+  "import_modal_button_cancel": "Avbryt",
+  "import_modal_json_error": "Ogiltig JSON."
 };

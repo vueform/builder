@@ -1362,5 +1362,12 @@ export default {
 	"view_view_item_gallery": "Galerij",
 	"view_view_item_image": "Afbeelding",
 	"view_view_item_tabs": "Tabbladen",
-	"view_view_label": "Bekijk &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">lees meer</a>"
+	"view_view_label": "Bekijk &nbsp;<a href=\"https://vueform.com/reference/1.x/%elementType%-element#views\" target=\"_blank\" class=\"vfb-learn-more\">lees meer</a>",
+  "tool_import": "Exporteren / importeren",
+  "import_modal_title": "Importeren / Exporteren",
+  "import_modal_subtitle": "De volgende JSON vertegenwoordigt de huidige staat van de builder. Sla deze op om later te kunnen importeren.",
+  "import_modal_button_save": "Opslaan en importeren",
+  "import_modal_button_download": "Download als JSON",
+  "import_modal_button_cancel": "Annuleren",
+  "import_modal_json_error": "Ongeldige JSON."
 };
