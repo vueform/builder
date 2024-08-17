@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.6.3
+
+> `2024-08-17`
+
+### 🎉 Feature
+- Ability to replace theme sections.
+
 ## v1.6.2
 
 > `2024-08-15`
