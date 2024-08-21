@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.6.4
+
+> `2024-08-21`
+
+### 🎉 Feature
+- Added `openOnAdd` config option to automatically open config panel for added elements.
+
 ## v1.6.3
 
 > `2024-08-17`
