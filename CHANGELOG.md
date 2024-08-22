@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.6.5
+
+> `2024-08-22`
+
+### 🐞 Bug Fixes
+- Fixes for `themes` config option.
+
 ## v1.6.4
 
 > `2024-08-21`

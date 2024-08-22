@@ -557,6 +557,7 @@ export default function () {
           await component.validate()
 
           if (component.invalid.value) {
+            component.scrollToFirstInvalid()
             return
           }
 
