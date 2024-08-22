@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.6.6
+
+> `2024-08-22`
+
+### 🐞 Bug Fixes
+- Condition modal i18n tag fixes.
+
 ## v1.6.5
 
 > `2024-08-22`
