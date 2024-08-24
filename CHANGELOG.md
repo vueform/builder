@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.7.0
+
+> `2024-08-24`
+
+### 🎉 Feature
+- Conditional readonly / disabled props.
+
 ## v1.6.6
 
 > `2024-08-22`

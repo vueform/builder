@@ -1369,5 +1369,9 @@ export default {
   "import_modal_button_save": "Mentés és importálás",
   "import_modal_button_download": "Letöltés JSON formátumban",
   "import_modal_button_cancel": "Mégse",
-  "import_modal_json_error": "Érvénytelen JSON."
+  "import_modal_json_error": "Érvénytelen JSON.",
+	"validation_disabled_conditions_display_empty_text": "Nincs feltétel a letiltottak számára",
+	"validation_readonly_conditions_display_empty_text": "Nincs feltétel csak olvasásra",
+	"condition_modal_title_disabled": "/ letiltott",
+	"condition_modal_title_readonly": "/ csak olvasható"
 };

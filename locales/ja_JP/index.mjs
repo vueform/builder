@@ -1369,5 +1369,9 @@ export default {
   "import_modal_button_save": "保存してインポート",
   "import_modal_button_download": "JSONとしてダウンロード",
   "import_modal_button_cancel": "キャンセル",
-  "import_modal_json_error": "無効なJSONです。"
+  "import_modal_json_error": "無効なJSONです。",
+	"validation_disabled_conditions_display_empty_text": "無効条件はありません",
+	"validation_readonly_conditions_display_empty_text": "読み取り専用の条件はありません",
+	"condition_modal_title_disabled": "/ 無効",
+	"condition_modal_title_readonly": "/ 読み取り専用"
 };

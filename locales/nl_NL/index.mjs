@@ -1369,5 +1369,9 @@ export default {
   "import_modal_button_save": "Opslaan en importeren",
   "import_modal_button_download": "Download als JSON",
   "import_modal_button_cancel": "Annuleren",
-  "import_modal_json_error": "Ongeldige JSON."
+  "import_modal_json_error": "Ongeldige JSON.",
+	"validation_disabled_conditions_display_empty_text": "Geen voorwaarden voor uitgeschakelden",
+	"validation_readonly_conditions_display_empty_text": "Geen voorwaarden voor alleen-lezen",
+	"condition_modal_title_disabled": "/ uitgeschakeld",
+	"condition_modal_title_readonly": "/ alleen-lezen"
 };

@@ -1369,5 +1369,9 @@ export default {
   "import_modal_button_save": "Spara och importera",
   "import_modal_button_download": "Ladda ner som JSON",
   "import_modal_button_cancel": "Avbryt",
-  "import_modal_json_error": "Ogiltig JSON."
+  "import_modal_json_error": "Ogiltig JSON.",
+	"validation_disabled_conditions_display_empty_text": "Inga villkor för inaktiverade",
+	"validation_readonly_conditions_display_empty_text": "Inga villkor för skrivskyddat",
+	"condition_modal_title_disabled": "/ inaktiverad",
+	"condition_modal_title_readonly": "/ skrivskyddad"
 };

@@ -1369,5 +1369,9 @@ export default {
 	"import_modal_button_save": "Save & import",
 	"import_modal_button_download": "Download as JSON",
 	"import_modal_button_cancel": "Cancel",
-	"import_modal_json_error": "Not a valid JSON."
+	"import_modal_json_error": "Not a valid JSON.",
+	"validation_disabled_conditions_display_empty_text": "No conditions for disabled",
+	"validation_readonly_conditions_display_empty_text": "No conditions for readonly",
+	"condition_modal_title_disabled": "/ disabled",
+	"condition_modal_title_readonly": "/ readonly"
 };
