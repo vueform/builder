@@ -291,7 +291,7 @@
   white-space: nowrap;
 }
 :not(pre) > code.vfb-inline-code:not(.no-quote):before, :not(pre) > code.vfb-inline-code:not(.no-quote):after {
-  content: "`";
+  content: "";
   display: inline-block;
   width: 0.375em;
 }

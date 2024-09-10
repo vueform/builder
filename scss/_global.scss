@@ -10,7 +10,7 @@
   white-space: nowrap;
   
   &:not(.no-quote):before, &:not(.no-quote):after {
-    content: "`";
+    content: "";
     display: inline-block;
     width: 0.375em;
   }

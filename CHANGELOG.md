@@ -1,5 +1,17 @@
 [//]: # (Don't use <tags>)
 
+## v1.7.1
+
+> `2024-09-10`
+
+### 🎉 Feature
+- Added `@reset` event that receives the builder instance as first param.
+- Allow extending `form` and `export` config fields.
+
+### 🐞 Bug Fixes
+- Removed backtick from code tags.
+- Export `en_US` builder locale.
+
 ## v1.7.0
 
 > `2024-08-24`
