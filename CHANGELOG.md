@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.7.2
+
+> `2024-09-11`
+
+### 🐞 Bug Fixes
+- Form and Export settings merge error fix.
+
 ## v1.7.1
 
 > `2024-09-10`
