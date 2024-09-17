@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.7.3
+
+> `2024-09-17`
+
+### 🎉 Feature
+- Registering custom operators.
+
 ## v1.7.2
 
 > `2024-09-11`
