@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.7.4
+
+> `2024-09-17`
+
+### 🎉 Feature
+- Subscribe to custom modal `close` event.
+- Added `web.app` to trial domains.
+
 ## v1.7.3
 
 > `2024-09-17`
