@@ -771,6 +771,8 @@ export default function () {
 
         const tags = inject('tags')
 
+        const elementTypes = inject('elementTypes')
+
         // ================ DATA ================
 
         const vueform = ref({
@@ -823,6 +825,7 @@ export default function () {
                   config$: config$.value,
                   tags,
                   settingsLocale: settingsLocale.value,
+                  elementTypes: elementTypes.value,
                 }))
               }
             })
@@ -856,6 +859,7 @@ export default function () {
                 config$: config$.value,
                 tags,
                 settingsLocale: settingsLocale.value,
+                elementTypes: elementTypes.value,
               })
 
               if (excludeFields.value.indexOf(`${sectionName}.${fieldName}`) === -1) {
@@ -1802,6 +1806,34 @@ export default function () {
       }
     }),
     () => ({
+      apply: ['MatrixElement'],
+      setup(props, context, component) {
+        if (!component.form$.value.builder) {
+          return component
+        }
+
+        const resolvedColumns = computed(() => {
+          return component.resolvedColumns.value.map((c) => ({
+            ...c,
+            available: component.form$.value.editorMode ? true : c.available,
+          }))
+        })
+
+        const resolvedRows = computed(() => {
+          return component.resolvedRows.value.map((c) => ({
+            ...c,
+            available: component.form$.value.editorMode ? true : c.available,
+          }))
+        })
+
+        return {
+          ...component,
+          resolvedColumns,
+          resolvedRows,
+        } 
+      }
+    }),
+    () => ({
       apply: ['ObjectElement', 'GroupElement'],
       setup(props, context, component) {
         if (!component.form$.value.builder) {
@@ -2135,7 +2167,7 @@ export default function () {
         })
 
         const canMultiResize = computed(() => {
-          return autoflow.value && row.value.indexOf(path.value) !== row.value.length - 1
+          return autoflow.value && row.value.indexOf(path.value) !== row.value.length - 1 && !childRestrictions.value.resize && component.el$.value.builder?.resize !== false && component.form$.value.editorMode && config$.value.multiResize
         })
 
         const canDragInside = computed(() => {
@@ -2844,6 +2876,8 @@ export default function () {
 
         return {
           ...component,
+          rows,
+          row,
           tags,
           autoflow,
           names,

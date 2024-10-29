@@ -221,6 +221,10 @@
   @apply border-transparent;
 }
 
+.vfb-preview-element-inert-wrapper {
+  @apply h-full;
+}
+
 .vfb-preview-element-multi-resizer {
   @apply w-4 absolute right-[calc((var(--vf-gutter)/2+0.5rem)*-1)] -bottom-2 -top-2 z-2 cursor-ew-resize flex items-stretch justify-stretch;
 

@@ -77,7 +77,31 @@
 }
 
 .vfb-element-container {
-  @apply flex items-center -ml-2.5 -mr-2.5 px-2.5 py-2.5 my-2 border border-primary-500 bg-primary-500 bg-opacity-0 border-opacity-0 duration-300 rounded-lg transition-shadow shadow-none duration-300;
+  @apply flex items-center -ml-2.5 -mr-2.5 px-2.5 py-2.5 my-2 border border-primary-500 bg-primary-500 bg-opacity-0 border-opacity-0 duration-300 rounded-lg transition-shadow shadow-none relative;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    .vfb-element-actions {
+      @apply opacity-100;
+    }
+
+    .vfb-element-action {
+      @apply block;
+    }
+  }
+}
+
+.vfb-element-actions {
+  @apply transition-opacity duration-300 opacity-0 absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-300 bg-white px-3 py-2 rounded dark:bg-dark-800 flex items-center justify-center gap-4;
+}
+
+.vfb-element-action {
+  @apply hidden;
+}
+
+.vfb-element-action-icon {
+  @apply transition-colors hover:text-gray-500 dark:text-dark-500 dark:hover:text-dark-200;
 }
 
 .vfb-element-container-enabled {

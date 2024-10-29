@@ -65,6 +65,21 @@ import {
   TitleSignatureTypeField,
   TitleSignatureUploadField,
   PlaceholderField_signature,
+  MatrixInputTypeField,
+  MatrixItemsField,
+  MatrixColsField,
+  MatrixRowsField,
+  ViewField_matrix,
+  MatrixMinWidthField,
+  MatrixMaxWidthField,
+  MatrixGapField,
+  PaddingField,
+  HideRowsField,
+  RowWrapField,
+  StickyRowsField,
+  HideColsField,
+  ColWrapField,
+  StickyColsField,
 } from './../'
 
 /**
@@ -3016,6 +3031,159 @@ const nestedList = {
   }
 }
 
+const matrix = {
+  label: 'simple_matrix_label',
+  description: 'simple_matrix_description',
+  icon: ['fas', 'matrix'],
+  category: 'fields',
+  schema: {
+    type: 'matrix',
+    cols: [
+      {
+        label: 'matrix_cols_1',
+        value: 'column_1',
+      },
+      {
+        label: 'matrix_cols_2',
+        value: 'column_2',
+      },
+    ],
+    rows: [
+      {
+        label: 'matrix_rows_1',
+        value: 'row_1',
+      },
+      {
+        label: 'matrix_rows_2',
+        value: 'row_2',
+      },
+    ],
+  },
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'simple_section_properties',
+      fields: {
+        type: { type: TypeField, },
+        label: { type: LabelField, },
+        description: { type: DescriptionField, },
+        disabled: { type: DisabledField, },
+        readonly: { type: ReadonlyField, },
+      },
+    },
+    columns: {
+      name: 'columns',
+      label: 'simple_section_columns',
+      fields: {
+        inputType: { type: MatrixInputTypeField, },
+        items: { type: MatrixItemsField, },
+        cols: { type: MatrixColsField, },
+      },
+    },
+    rows: {
+      name: 'rows',
+      label: 'simple_section_rows',
+      fields: {
+        rows: { type: MatrixRowsField, },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'simple_section_layout',
+      fields: {
+        view: { type: ViewField_matrix, },
+        minWidth: { type: MatrixMinWidthField, },
+        maxWidth: { type: MatrixMaxWidthField, },
+        gap: { type: MatrixGapField, },
+        padding: { type: PaddingField, },
+        hideRows: { type: HideRowsField, },
+        rowWrap: { type: RowWrapField, },
+        stickyRows: { type: StickyRowsField, },
+        hideCols: { type: HideColsField, },
+        colWrap: { type: ColWrapField, },
+        stickyCols: { type: StickyColsField, },
+        columns: { type: ColumnsField_simple, },
+        size: { type: SizeField, },
+      },
+    },
+    validation: {
+      name: 'validation',
+      label: 'simple_section_validation',
+      fields: {
+        validation: { type: ValidationField, },
+        fieldName: { type: FieldNameField, },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'simple_section_conditions',
+      fields: {
+        conditions: { type: ConditionsField, },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'simple_section_attributes',
+      fields: {
+        name: { type: NameField, },
+      },
+    },
+  },
+  separators: {
+    properties: [
+      ['name', 'label', 'description'],
+      ['disabled', 'readonly'],
+    ],
+    columns: [
+      ['inputType', 'items'],
+      ['!', 'cols'],
+    ],
+    rows: [
+      ['rows'],
+    ],
+    layout: [
+      ['view'],
+      ['minWidth', 'maxWidth'],
+      ['!', 'gap'],
+      ['!', 'padding'],
+      ['!', 'hideRows', 'rowWrap', 'stickyRows'],
+      ['!', 'hideCols', 'colWrap', 'stickyCols'],
+      ['!', 'columns'],
+      ['size'],
+    ],
+    validation: [
+      ['validation'],
+      ['fieldName'],
+    ],
+    attributes: [
+      ['name'],
+    ]
+  }
+}
+
+const matrixMulti = {
+  ...matrix,
+  label: 'simple_matrix_multi_label',
+  description: 'simple_matrix_multi_description',
+  icon: ['fas', 'matrix-multi'],
+  schema: {
+    ...matrix.schema,
+    inputType: { type: 'checkbox' },
+  }
+}
+
+const table = {
+  ...matrix,
+  label: 'simple_table_label',
+  description: 'simple_table_description',
+  icon: ['far', 'table'],
+  schema: {
+    ...matrix.schema,
+    inputType: { type: 'text' },
+    presets: ['matrix-table'],
+  }
+}
+
 /**
  * Config object
  */
@@ -3052,6 +3220,9 @@ const config = {
     'checkboxgroup',
     'radiogroup',
     'checkbox',
+    'matrix',
+    'matrixMulti',
+    'table',
     'select',
     'tags',
     'toggle',
@@ -3178,6 +3349,27 @@ const config = {
         },
       },
       radiogroup: {
+        validation: {
+          validation: onlyRules([
+            'required',
+          ])
+        },
+      },
+      matrix: {
+        validation: {
+          validation: onlyRules([
+            'required',
+          ])
+        },
+      },
+      matrixMulti: {
+        validation: {
+          validation: onlyRules([
+            'required',
+          ])
+        },
+      },
+      table: {
         validation: {
           validation: onlyRules([
             'required',
@@ -3312,6 +3504,9 @@ const config = {
       checkbox,
       checkboxgroup,
       radiogroup,
+      matrix,
+      matrixMulti,
+      table,
       toggle,
       select,
       tags,

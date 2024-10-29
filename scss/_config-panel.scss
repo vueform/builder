@@ -27,28 +27,46 @@
 }
 
 .vfb-config-panel-header-close {
-  @apply mt-0.5 mr-2 text-gray-400 transition-colors hover:text-gray-800 cursor-pointer dark:text-dark-400 dark:hover:text-dark-300;
+  @apply mt-1 mr-2 text-gray-400 transition-colors hover:text-gray-800 cursor-pointer dark:text-dark-400 dark:hover:text-dark-300;
 }
 
 .vfb-config-panel-header-close-icon {
 
 }
 
+.vfb-config-panel-header-label-wrapper {
+  @apply flex flex-col justify-center min-h-[2rem];
+}
+
 .vfb-config-panel-header-label {
   @apply text-xl;
+}
+
+.vfb-config-panel-header-description {
+  @apply text-gray-500 text-xs leading-none;
+}
+
+.vfb-config-panel-header-label-wrapper {
+  &.has-subtitle {
+    .vfb-config-panel-header-label {
+      @apply text-lg leading-none;
+    }
+  }
 }
 
 .vfb-config-panel-header-warning {
   @apply text-red-500 text-[12px] ml-1.5 mt-1 cursor-pointer relative;
 }
 
+.vfb-config-panel-header-save,
 .vfb-config-panel-header-clone,
 .vfb-config-panel-header-remove,
 .vfb-config-panel-header-collapse {
-  @apply flex items-center justify-center h-full text-gray-500 transition-colors cursor-pointer hover:text-gray-600 dark:text-dark-400 hover:dark:text-dark-300;
+  @apply flex items-center justify-center h-full text-gray-500 transition-colors cursor-pointer hover:text-gray-600 dark:text-dark-400 hover:dark:text-dark-300 vfb-tooltip-group relative;
 }
 
 
+.vfb-config-panel-header-save,
 .vfb-config-panel-header-clone,
 .vfb-config-panel-header-remove {
   @apply mr-3;
@@ -123,7 +141,7 @@
   }
 }
 
-.vfb-config-toggle + .vfb-config-toggle {
+.vfb-config-toggle + .vfb-config-toggle:not(.vfb-util-props-separator-top) {
   @apply -mt-2;
 }
 

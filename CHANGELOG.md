@@ -1,5 +1,16 @@
 [//]: # (Don't use <tags>)
 
+## v1.8.0
+
+> `2024-10-29`
+
+### 🎉 Feature
+- New Matrix element.
+- Allow users to save custom elements.
+
+### 🐞 Bug Fixes
+- Don't show resizer between elements in preview mode #85.
+
 ## v1.7.4
 
 > `2024-09-17`

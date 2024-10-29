@@ -104,12 +104,15 @@ declare module '@vueform/builder' {
   const BoolValueField: any;
   const ButtonLabelField: any;
   const ButtonTypeField: any;
+  const CanAddField: any;
   const CanClearField: any;
   const CanDropField: any;
+  const CanRemoveField: any;
   const CanUndoField: any;
   const ClickableField: any;
   const ColorsField: any;
   const ColumnsField: any;
+  const ColWrapField: any;
   const ConditionsField: any;
   const ContentField: any;
   const ControlsField: any;
@@ -166,6 +169,8 @@ declare module '@vueform/builder' {
   const FormWidthField: any;
   const FullField: any;
   const HeightField: any;
+  const HideColsField: any;
+  const HideRowsField: any;
   const Hour24Field: any;
   const HrefField: any;
   const IdField: any;
@@ -180,6 +185,15 @@ declare module '@vueform/builder' {
   const LabelsField: any;
   const LineField: any;
   const LinkField: any;
+  const MatrixColsField: any;
+  const MatrixGapField: any;
+  const MatrixInputTypeField: any;
+  const MatrixItemsField: any;
+  const MatrixMaxField: any;
+  const MatrixMaxWidthField: any;
+  const MatrixMinField: any;
+  const MatrixMinWidthField: any;
+  const MatrixRowsField: any;
   const MaxField: any;
   const MaxFontSizeField: any;
   const MaxOptionsField: any;
@@ -197,6 +211,7 @@ declare module '@vueform/builder' {
   const NoResultsField: any;
   const ObjectField: any;
   const OrientationField: any;
+  const PaddingField: any;
   const PageButtonsField: any;
   const PageConditionsField: any;
   const PageLabelField: any;
@@ -208,6 +223,8 @@ declare module '@vueform/builder' {
   const ReadonlyField: any;
   const ResetsField: any;
   const RowsField: any;
+  const RowWrapField: any;
+  const ScrollableField: any;
   const SearchField: any;
   const SearchField_tags: any;
   const SecondsField: any;
@@ -220,6 +237,8 @@ declare module '@vueform/builder' {
   const SoftRemoveField: any;
   const SpaceField: any;
   const StepField: any;
+  const StickyColsField: any;
+  const StickyRowsField: any;
   const StoreField: any;
   const StoreOrderField: any;
   const SubmitField: any;
@@ -252,6 +271,7 @@ declare module '@vueform/builder' {
   const ValidationField: any;
   const ViewField: any;
   const ViewField_file: any;
+  const ViewField_matrix: any;
 
   function defineConfig(options: BuilderConfig): BuilderConfig;
 
@@ -289,12 +309,15 @@ declare module '@vueform/builder' {
     BoolValueField,
     ButtonLabelField,
     ButtonTypeField,
+    CanAddField,
     CanClearField,
     CanDropField,
+    CanRemoveField,
     CanUndoField,
     ClickableField,
     ColorsField,
     ColumnsField,
+    ColWrapField,
     ConditionsField,
     ContentField,
     ControlsField,
@@ -351,6 +374,8 @@ declare module '@vueform/builder' {
     FormWidthField,
     FullField,
     HeightField,
+    HideColsField,
+    HideRowsField,
     Hour24Field,
     HrefField,
     IdField,
@@ -365,6 +390,15 @@ declare module '@vueform/builder' {
     LabelsField,
     LineField,
     LinkField,
+    MatrixColsField,
+    MatrixGapField,
+    MatrixInputTypeField,
+    MatrixItemsField,
+    MatrixMaxField,
+    MatrixMaxWidthField,
+    MatrixMinField,
+    MatrixMinWidthField,
+    MatrixRowsField,
     MaxField,
     MaxFontSizeField,
     MaxOptionsField,
@@ -382,6 +416,7 @@ declare module '@vueform/builder' {
     NoResultsField,
     ObjectField,
     OrientationField,
+    PaddingField,
     PageButtonsField,
     PageConditionsField,
     PageLabelField,
@@ -393,6 +428,8 @@ declare module '@vueform/builder' {
     ReadonlyField,
     ResetsField,
     RowsField,
+    RowWrapField,
+    ScrollableField,
     SearchField,
     SearchField_tags,
     SecondsField,
@@ -405,6 +442,8 @@ declare module '@vueform/builder' {
     SoftRemoveField,
     SpaceField,
     StepField,
+    StickyColsField,
+    StickyRowsField,
     StoreField,
     StoreOrderField,
     SubmitField,
@@ -437,6 +476,7 @@ declare module '@vueform/builder' {
     ValidationField,
     ViewField,
     ViewField_file,
+    ViewField_matrix,
 
   }
 
