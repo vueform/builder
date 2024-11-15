@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.8.1
+
+> `2024-11-16`
+
+### 🐞 Bug Fixes
+- Adding empty nested list fix #88
+
 ## v1.8.0
 
 > `2024-10-29`
