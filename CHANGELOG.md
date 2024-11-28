@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.8.2
+
+> `2024-11-28`
+
+### 🎉 Feature
+- Added option to disable incrementing child names. Use `builder.incrementChildName = false` in the element's schema.
+
 ## v1.8.1
 
 > `2024-11-16`
