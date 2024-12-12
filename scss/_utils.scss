@@ -340,7 +340,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tooltip {
-  @apply absolute z-999 transform bg-black text-white bg-opacity-80 px-1.5 py-0.5 rounded text-sm leading-tighter hidden whitespace-nowrap text-center;
+  @apply absolute z-999 transform bg-black text-white bg-opacity-80 px-1.5 py-0.5 rounded text-sm leading-tighter hidden whitespace-nowrap text-center select-none;
 
   &.vfb-tooltip-smaller {
     @apply px-1 text-0.5sm; 
@@ -352,6 +352,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
   &.vfb-tooltip-closer {
     @apply top-1; 
+  }
+
+  &.vfb-tooltip-further {
+    @apply -bottom-1;
   }
 }
 
@@ -397,6 +401,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   &.vfb-tooltip-closer {
     @apply bottom-1; 
   }
+
+  &.vfb-tooltip-further {
+    @apply -bottom-1.5;
+  }
 }
 
 .vfb-tooltip-bottom-right {
@@ -404,6 +412,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
   &.vfb-tooltip-closer {
     @apply bottom-1; 
+  }
+
+  &.vfb-tooltip-further {
+    @apply -bottom-1.5;
   }
 }
 

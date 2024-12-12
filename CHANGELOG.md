@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.9.0
+
+> `2024-12-12`
+
+### 🎉 Feature
+- New Grid element.
+- No more min width for elements (11 * gutter) because of grid gap.
+
 ## v1.8.2
 
 > `2024-11-28`

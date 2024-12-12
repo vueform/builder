@@ -91,6 +91,7 @@ declare module '@vueform/builder' {
   const AutogrowField: any;
   const AutoloadField: any;
   const AutoUploadField: any;
+  const BaseCellField: any;
   const BaseElementField: any;
   const BaseExportField: any;
   const BaseField: any;
@@ -109,7 +110,10 @@ declare module '@vueform/builder' {
   const CanDropField: any;
   const CanRemoveField: any;
   const CanUndoField: any;
+  const CellAlignField: any;
+  const CellValignField: any;
   const ClickableField: any;
+  const ColHeaderField: any;
   const ColorsField: any;
   const ColumnsField: any;
   const ColWrapField: any;
@@ -168,6 +172,7 @@ declare module '@vueform/builder' {
   const FormValidationField: any;
   const FormWidthField: any;
   const FullField: any;
+  const GridField: any;
   const HeightField: any;
   const HideColsField: any;
   const HideRowsField: any;
@@ -199,9 +204,11 @@ declare module '@vueform/builder' {
   const MaxOptionsField: any;
   const MaxSizeField: any;
   const MaxWidthField: any;
+  const MaxWidthField_grid: any;
   const MetaField: any;
   const MinField: any;
   const MinFontSizeField: any;
+  const MinWidthField_grid: any;
   const ModesField: any;
   const MultipleLabelField: any;
   const NameField: any;
@@ -222,6 +229,7 @@ declare module '@vueform/builder' {
   const RadioField: any;
   const ReadonlyField: any;
   const ResetsField: any;
+  const RowHeaderField: any;
   const RowsField: any;
   const RowWrapField: any;
   const ScrollableField: any;
@@ -272,6 +280,7 @@ declare module '@vueform/builder' {
   const ViewField: any;
   const ViewField_file: any;
   const ViewField_matrix: any;
+  const ViewField_grid: any;
 
   function defineConfig(options: BuilderConfig): BuilderConfig;
 
@@ -296,6 +305,7 @@ declare module '@vueform/builder' {
     AutogrowField,
     AutoloadField,
     AutoUploadField,
+    BaseCellField,
     BaseElementField,
     BaseExportField,
     BaseField,
@@ -314,7 +324,10 @@ declare module '@vueform/builder' {
     CanDropField,
     CanRemoveField,
     CanUndoField,
+    CellAlignField,
+    CellValignField,
     ClickableField,
+    ColHeaderField,
     ColorsField,
     ColumnsField,
     ColWrapField,
@@ -373,6 +386,7 @@ declare module '@vueform/builder' {
     FormValidationField,
     FormWidthField,
     FullField,
+    GridField,
     HeightField,
     HideColsField,
     HideRowsField,
@@ -404,9 +418,11 @@ declare module '@vueform/builder' {
     MaxOptionsField,
     MaxSizeField,
     MaxWidthField,
+    MaxWidthField_grid,
     MetaField,
     MinField,
     MinFontSizeField,
+    MinWidthField_grid,
     ModesField,
     MultipleLabelField,
     NameField,
@@ -427,6 +443,7 @@ declare module '@vueform/builder' {
     RadioField,
     ReadonlyField,
     ResetsField,
+    RowHeaderField,
     RowsField,
     RowWrapField,
     ScrollableField,
@@ -477,6 +494,7 @@ declare module '@vueform/builder' {
     ViewField,
     ViewField_file,
     ViewField_matrix,
+    ViewField_grid,
 
   }
 

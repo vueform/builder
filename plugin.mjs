@@ -25,9 +25,26 @@ const getElementSchemaByPath = (schema, path) => {
       return schema[currentPath]
     } else if (pathLength > level) {
       let base = schema[pathParts[level - 1]]
-      let childSchema = base.type === 'list'
-        ? { 0: base.element }
-        : base.schema
+      let childSchema = base.schema
+      
+      if (base.type === 'list') {
+        childSchema = { 0: base.element }
+      }
+
+      if (base.type === 'grid') {
+        childSchema = base.grid.reduce((prev, curr) => ({
+          ...prev,
+          ...curr.reduce((p, c) => ({
+            ...p,
+            ...(!c || typeof c !== 'object' || (Array.isArray(c) && (!c[0] || typeof c[0] !== 'object'))
+              ? {}
+              : Array.isArray(c)
+                ? { [c[0].name]: c[0] }
+                : { [c.name]: c }
+            )
+          }), {}),
+        }), {})
+      }
 
       return returnSchema(childSchema, level + 1)
     }
@@ -398,6 +415,29 @@ export default function () {
               },
             },
           },
+          'cell-editor': {
+            addClasses: {
+              Vueform: {
+                form: 'h-full',
+              },
+              FormElements: {
+                container: 'h-full',
+              },
+              ElementLayout: {
+                outerWrapper: 'h-full',
+                innerWrapperBefore: 'hidden',
+                innerWrapperAfter: 'hidden',
+              },
+            },
+            removeClasses: {
+              TextareaElement: {
+                inputContainer: ['form-border-width-input'],
+                inputContainer_md: ['form-radius-large'],
+                inputContainer_focused: ['form-focus'],
+                input: ['h-full'],
+              }
+            },
+          }
         }
 
         return config
@@ -430,6 +470,11 @@ export default function () {
           required: false,
           type: Boolean,
           default: false,
+        },
+        builder$: {
+          required: false,
+          type: Object,
+          default: () => ({}),
         },
         nesting: {
           required: false,
@@ -1834,6 +1879,461 @@ export default function () {
       }
     }),
     () => ({
+      apply: ['GridElement'],
+      emits: ['resize-column', 'update-cell'],
+      setup(props, context, component) {
+        if (!component.form$.value.builder) {
+          return component
+        }
+
+        let startingMousePosition = 0
+
+        const {
+          draggingElement,
+          widths,
+          cols,
+          rows,
+          minWidth,
+          maxWidth,
+          grid,
+        } = toRefs(props)
+
+        const {
+          path,
+          gridStyle: gridStyleBase,
+          el$,
+          cells: cellsBase,
+          form$,
+          children$,
+        } = component
+
+        const hoveredCell = ref(null)
+
+        const editingCell = ref(null)
+
+        const internalWidths = ref([])
+
+        const startingWidths = ref([])
+
+        const resizingCells = ref(false)
+
+        const resizerVisible = ref(false)
+
+        const hoverTimeout = ref(null)
+
+        const editCell$ = ref(null)
+
+        const cellContent = ref({})
+
+        const cellValue = ref(null)
+
+        const selectedAlign = ref(null)
+
+        const selectedValign = ref(null)
+
+        const align$ = ref(null)
+
+        const valign$ = ref(null)
+
+        const isBold = ref(false)
+
+        // ============== COMPUTED ==============
+
+        const gridStyle = computed(() => {
+          const colWidths = []
+
+          for (let c = 0; c < parseInt(cols.value); c++) {
+            const internal = internalWidths.value[c]
+
+            colWidths.push(internal
+              ? typeof internal === 'number'
+                ? `${internal}px`
+                : internal
+              : widths.value[c] || '1fr')
+          }
+
+          return {
+            'grid-template-columns': colWidths.join(' '),
+            'grid-template-rows': `repeat(${rows.value}, auto)`,
+            'min-width': typeof minWidth.value === 'number'
+              ? `${minWidth.value}px`
+              : minWidth.value,
+            'max-width': typeof maxWidth.value === 'number'
+              ? maxWidth.value > 0 ? `${maxWidth.value}px` : undefined
+              : maxWidth.value,
+          }
+        })
+
+        const cellWidths = computed(() => {
+          const cellWidths = {}
+          const currentWidths = [...Array.from({length:cols.value}).map((v, i) => {
+            return widths.value[i] || null
+          })]
+
+          cells.value.forEach(({ row, col, colStart, colEnd }) => {
+            let colFixedSize = 0
+            let colDynamicSize = 0
+
+            const widthList = resizingCells.value
+              ? internalWidths.value
+              : currentWidths
+
+            widthList.forEach((width, i) => {
+              if (i < colStart || i > colEnd) {
+                return
+              }
+
+              if (width) {
+                colFixedSize += parseInt(width.toString().replace('px', ''))
+              } else {
+                colDynamicSize++
+              }
+            })
+
+            let colWidth = colDynamicSize || `${colFixedSize}px`
+
+            if (colFixedSize && colDynamicSize) {
+              colWidth = `${colDynamicSize} + ${colFixedSize}px`
+            }
+
+            cellWidths[`${row}_${col}`] = colWidth
+          })
+
+          return cellWidths
+        })
+
+        const cells = computed(() => {
+          let cells = cellsBase.value
+
+          if (editingCell.value) {
+            const [row, col] = editingCell.value.split('_')
+
+            cells = cells.map((cell) => {
+              if (cell.row !== parseInt(row) || cell.col !== parseInt(col)) {
+                return cell
+              }
+
+              let content = cellValue.value
+
+              if (content === null) {
+                content = ''
+              }
+
+              if (isBold.value) {
+                content = `<b>${content}</b>`
+              }
+
+              content = content.replace(/\n/g, '<br>')
+
+              if (/<br>$/.test(content)) {
+                content += '&nbsp;'
+              }
+
+              return {
+                ...cell,
+                content,
+              }
+            })
+          }
+
+          return cells
+        })
+
+        const inertCells = computed(() => {
+          if (!form$.value.editorMode || !form$.value.draggingElement) {
+            return {}
+          }
+
+          return cells.value.reduce((prev, curr) => {
+            const child$ = children$.value[curr.name] || {}
+
+            return {
+              ...prev,
+              [curr.name]: !child$.beingDragged && !child$.isGroupType && !child$.isObjectType && !child$.isListType
+            }
+          }, {})
+        })
+
+        const isDark = computed(() => {
+          return form$.value.builder$.darkMode === 'dark'
+        })
+
+        // ============== METHODS ===============
+
+        const selectAlign = (align) => {
+          selectedAlign.value = align
+        }
+
+        const selectValign = (valign) => {
+          selectedValign.value = valign
+        }
+
+        const closeAlign = () => {
+          align$.value[0].close()
+        }
+
+        const closeValign = () => {
+          valign$.value[0].close()
+        }
+
+        const createWidthsFrom = (widths, defaultValue = null) => {
+          return [...Array.from({ length: cols.value })
+            .map((v, i) => parseInt(widths?.[i]?.replace('px', '')) || null)]
+        }
+
+        const handleDragEnter = (rowIndex, colIndex) => {
+          hoveredCell.value = `${rowIndex}_${colIndex}`
+        }
+
+        const handleDragLeave = (rowIndex, colIndex) => {
+          if (hoveredCell.value === `${rowIndex}_${colIndex}`) {
+            hoveredCell.value = null
+          }
+        }
+
+        const handleDrop = (e, rowIndex, colIndex) => {
+          e.preventDefault()
+
+          hoveredCell.value = null
+
+          const originalPath = e.dataTransfer.getData('path') || undefined
+          const position = `cell_${rowIndex}_${colIndex}`
+
+          if (originalPath) {
+            component.el$.value.$emit('move-element', originalPath, position, path.value)
+          } else {
+            const schema = JSON.parse(e.dataTransfer.getData('schema'))
+
+            component.el$.value.$emit('add-element', schema, position, path.value)
+          }
+        }
+
+        const handleColumnDragStart = ({ colStart, colEnd, rowStart, rowEnd, col, row }, e) => {
+          resizingCells.value = true
+
+          internalWidths.value = createWidthsFrom(widths.value)
+          startingWidths.value = [...internalWidths.value]
+
+          startingMousePosition = Math.round(e.screenX)
+
+          const cell = el$.value.$el.querySelector(`[data-col="${col}"][data-row="${row}"]`)
+          const { width } = cell.getBoundingClientRect()
+
+          let dynamicWidth = width
+          let dynamicWidthCells = 0
+
+          for (let c = colStart; c <= colEnd; c++) {
+            if (!startingWidths.value[c]) {
+              dynamicWidthCells += 1
+            } else {
+              dynamicWidth -= startingWidths.value[c]
+            }
+          }
+
+          for (let c = colStart; c <= colEnd; c++) {
+            startingWidths.value[c] = startingWidths.value[c] || parseFloat((dynamicWidth / dynamicWidthCells).toFixed(1))
+          }
+        }
+
+        const handleColumnDrag = ({ colStart, colEnd }, e) => {
+          if (!e.screenX) {
+            return
+          }
+
+          const distance = Math.round(e.screenX) - startingMousePosition
+          const portion = parseFloat((distance / (colEnd - colStart + 1)).toFixed())
+
+          for (let c = colStart; c <= colEnd; c++) {
+            internalWidths.value[c] = `${parseFloat((startingWidths.value[c] + portion).toFixed(1))}px`
+          }
+        }
+
+        const handleColumnDragEnd = ({ colStart, colEnd }, e) => {
+          resizingCells.value = false
+
+          const cols = Array.from({ length: colEnd - colStart + 1 }, (v, i) => i + colStart);
+
+          context.emit('resize-column', path.value, cols, internalWidths.value.map(w => typeof w === 'number' ? `${w}px` : w))
+
+          internalWidths.value = []
+        }
+
+        const handleColumnDragMouseDown = () => {
+          if (hoverTimeout.value) {
+            clearTimeout(hoverTimeout.value)
+          }
+
+          resizerVisible.value = true
+        }
+
+        const handleColumnDragMouseUp = () => {
+          if (hoverTimeout.value) {
+            clearTimeout(hoverTimeout.value)
+          }
+
+          resizerVisible.value = false
+        }
+
+        const handleColumnDragMouseLeave = () => {
+          resizerVisible.value = false
+        }
+
+        const handleColumnDragDoubleClick = ({ colStart, colEnd }) => {
+          context.emit('resize-column', path.value, [...Array.from({ length: colEnd - colStart +1 }).map((v, i) => i + colStart)], [
+            ...Array.from({length:cols.value}).map((c, i) => i >= colStart && i <= colEnd ? null : c)
+          ])
+
+          resizerVisible.value = true
+        }
+
+        const handleEditCellOutsideClick = (e) => {
+          if (!editingCell.value) {
+            return
+          }
+
+          let [row, col] = editingCell.value.split('_')
+
+          const cell = el$.value.$el.querySelector(`[data-row="${row}"][data-col="${col}"]`)
+
+          closeAlign()
+          closeValign()
+
+          if (e.target === editCell$.value[0].el$('content').input) {
+            return
+          }
+
+          if (e.target === cell || (cell.contains(e.target) && e.target.dataset.resizer === undefined)) {
+            e.preventDefault()
+            editCell$.value[0].el$('content').input.focus()
+            return
+          }
+
+          if (cell.contains(e.target) && e.target.dataset.resizer) {
+            return
+          }
+
+          row = parseInt(row)
+          col = parseInt(col)
+
+          let content = cellValue.value
+
+          if (isBold.value) {
+            content = `<b>${content !== '' && content !== null ? content : ''}</b>`
+          }
+          
+          if (content === '') {
+            content = null
+          }
+
+          context.emit('update-cell', path.value, row, col, {
+            content,
+            align: selectedAlign.value,
+            valign: selectedValign.value,
+          })
+
+          editingCell.value = null
+
+          document.removeEventListener('mousedown', handleEditCellOutsideClick)
+        }
+
+        const handleEditCellClick = ({ row, col }) => {
+          editingCell.value = `${row}_${col}`
+
+          let value = grid.value[row][col] || ''
+
+          if (Array.isArray(value)) {
+            selectedAlign.value = value[3] || null
+            selectedValign.value = value[4] || null
+            value = value[0]
+          } else {
+            selectedAlign.value = null
+            selectedValign.value = null
+          }
+
+          if (typeof value === 'number') {
+            value = value.toString()
+          }
+
+          if (value === null || value === undefined) {
+            value = ''
+          }
+
+          value = value?.replace(/<br>/g, '\n')
+
+          if (/^<b>/.test(value)) {
+            isBold.value = true
+            value = value
+              .replace(/^<b>/, '')
+              .replace(/<\/b>$/, '')
+          } else {
+            isBold.value = false
+          }
+
+          if (value === '') {
+            value = null
+          }
+
+          cellValue.value = value
+          cellContent.value.content = value
+
+          nextTick(() => {
+            editCell$.value[0].el$('content').input.focus()
+
+            document.addEventListener('mousedown', handleEditCellOutsideClick)
+
+          })
+        }
+
+        const handleCellUpdate = (n, o, el$, { row, col }) => {
+          cellValue.value = n
+        }
+
+        const handleBoldClick = () => {
+          closeAlign()
+          closeValign()
+
+          isBold.value = !isBold.value
+        }
+
+        return {
+          ...component,
+          cells,
+          editCell$,
+          cellContent,
+          resizingCells,
+          resizerVisible,
+          gridStyle,
+          cellWidths,
+          hoveredCell,
+          editingCell,
+          inertCells,
+          isDark,
+          handleDragEnter,
+          handleDragLeave,
+          handleDrop,
+          handleColumnDragStart,
+          handleColumnDrag,
+          handleColumnDragEnd,
+          handleColumnDragMouseDown,
+          handleColumnDragMouseUp,
+          handleColumnDragDoubleClick,
+          handleColumnDragMouseLeave,
+          handleEditCellClick,
+          handleCellUpdate,
+          selectedAlign,
+          selectedValign,
+          align$,
+          valign$,
+          selectAlign,
+          selectValign,
+          closeAlign,
+          closeValign,
+          isBold,
+          handleBoldClick,
+        } 
+      }
+    }),
+    () => ({
       apply: ['ObjectElement', 'GroupElement'],
       setup(props, context, component) {
         if (!component.form$.value.builder) {
@@ -1875,10 +2375,10 @@ export default function () {
     }),
 
     () => ({
-      apply: ['FormElements', 'Vueform', 'GroupElement', 'ObjectElement', 'ListElement'],
+      apply: ['FormElements', 'Vueform', 'GroupElement', 'ObjectElement', 'ListElement', 'GridElement'],
       emits: [
         'add-element', 'move-element', 'select-element', 'clone-element', 'remove-element', 'resize-element', 'set-dragged-schema', 'announce',
-        'start-moving',
+        'start-moving', 'resize-column', 'update-cell',
       ],
       props: {
         editorMode: {
@@ -1913,6 +2413,8 @@ export default function () {
         const handleSetDraggedSchema = (schema) => { context.emit('set-dragged-schema', schema) }
         const handleAnnounce = (msg, params) => { context.emit('announce', msg, params) }
         const handleStartMoving = (path, source) => { context.emit('start-moving', path, source) }
+        const handleResizeColumn = (path, colIndex, width) => { context.emit('resize-column', path, colIndex, width) }
+        const handleUpdateCell = (path, row, col, content) => { context.emit('update-cell', path, row, col, content) }
 
         return {
           ...component,
@@ -1925,6 +2427,8 @@ export default function () {
           handleSetDraggedSchema,
           handleAnnounce,
           handleStartMoving,
+          handleResizeColumn,
+          handleUpdateCell,
         } 
       }
     }),
@@ -2151,7 +2655,11 @@ export default function () {
         })
 
         const canClone = computed(() => {
-          return !childRestrictions.value.clone && component.el$.value.builder?.clone !== false && component.el$.value.cloneable
+          return !childRestrictions.value.clone && component.el$.value.builder?.clone !== false && component.el$.value.cloneable && !component.el$.value.parent?.isGridType
+        })
+
+        const canEditCells = computed(() => {
+          return !childRestrictions.value.editCell && component.el$.value.builder?.editCell !== false
         })
 
         const canEdit = computed(() => {
@@ -2163,11 +2671,11 @@ export default function () {
         })
 
         const canResize = computed(() => {
-          return !childRestrictions.value.resize && component.el$.value.builder?.resize !== false && (autoflow.value || (!component.el$.value.isObjectType && !component.el$.value.isGroupType && !component.el$.value.isListType))
+          return !childRestrictions.value.resize && component.el$.value.builder?.resize !== false && (autoflow.value || (!component.el$.value.isObjectType && !component.el$.value.isGroupType && !component.el$.value.isListType)) && !component.el$.value.parent?.isGridType
         })
 
         const canMultiResize = computed(() => {
-          return autoflow.value && row.value.indexOf(path.value) !== row.value.length - 1 && !childRestrictions.value.resize && component.el$.value.builder?.resize !== false && component.form$.value.editorMode && config$.value.multiResize
+          return autoflow.value && row.value.indexOf(path.value) !== row.value.length - 1 && !childRestrictions.value.resize && component.el$.value.builder?.resize !== false && component.form$.value.editorMode && config$.value.multiResize && !component.el$.value.parent?.isGridType
         })
 
         const canDragInside = computed(() => {
@@ -2186,6 +2694,10 @@ export default function () {
 
         const canDragSibling = computed(() => {
           return (!component.el$.value.draggedSchema || ['tabs', 'steps'].indexOf(component.el$.value.draggedSchema.type) === -1)
+        })
+
+        const hideColumns = computed(() => {
+          return component.el$.value.parent?.isGridType
         })
 
         const hideDragLine = computed(() => {
@@ -2259,6 +2771,7 @@ export default function () {
             move: false,
             edit: false,
             resize: false,
+            editCells: false,
           }
 
           if (!schema || ['object', 'group', 'list'].indexOf(schema.type) === -1) {
@@ -2282,6 +2795,7 @@ export default function () {
                   move: childSchema.builder?.move === false,
                   edit: childSchema.builder?.edit === false,
                   resize: childSchema.builder?.resize === false,
+                  editCells: childSchema.builder?.editCells === false,
                 }
 
               Object.keys(restrictions).forEach((key) => {
@@ -2483,6 +2997,18 @@ export default function () {
           component.form$.value.$emit('select-page', null)
         }
 
+        const handleEditCellsClick = () => {
+          if (!canEdit.value) {
+            return
+          }
+
+          component.el$.value.$emit('select-element', path.value)
+
+          nextTick(() => {
+            document.getElementById('vfb-edit-cells-button')?.click()
+          })
+        }
+
         const handleCloneClick = () => {
           component.el$.value.$emit('clone-element', path.value)
         }
@@ -2500,6 +3026,9 @@ export default function () {
           e.dataTransfer.setData('path', path.value)
 
           component.el$.value.$emit('set-dragged-schema', schema)
+        }
+
+        const handleDrag = (e) => {
         }
 
         const handleDragEnd = (e) => {
@@ -2895,12 +3424,14 @@ export default function () {
           isSelected,
           canRemove,
           canClone,
+          canEditCells,
           canEdit,
           canMove,
           canResize,
           canDragInside,
           canDragSibling,
           canMultiResize,
+          hideColumns,
           hideDragLine,
           lastWidth,
           childRestrictions,
@@ -2926,6 +3457,8 @@ export default function () {
           handleResizeMultiDragEnd,
           handleResizeMultiDragMouseDown,
           handleResizeMultiDragMouseUp,
+          handleDrag,
+          handleEditCellsClick,
         }
       }
     })

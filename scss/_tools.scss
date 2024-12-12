@@ -143,3 +143,47 @@
 .vfb-tool-tooltip-left {
   @apply -translate-x-full -left-1.5;
 }
+
+.vfb-aligns-container {
+  @apply flex items-center justify-center h-[28px] w-[38px] text-sm rounded-md cursor-pointer relative;
+}
+
+.vfb-aligns-container-disabled {
+  @apply opacity-40 pointer-events-none;
+}
+
+.vfb-aligns-caret-wrapper {
+  @apply ml-[5px] text-xs;
+}
+
+.vfb-aligns-caret {
+  @apply transform rotate-180;
+}
+
+.vfb-aligns-dropdown {
+  @apply shadow-box-strong-small absolute top-7 left-0 px-1 py-1 flex gap-0.5 rounded z-1;
+}
+
+.vfb-aligns-item {
+  @apply relative h-[28px] w-[28px] px-1.5 py-1 flex items-center justify-center rounded-md;
+}
+
+.vfb-aligns-class-default-container {
+  @apply text-gray-500 hover:bg-[#1118270d] dark:text-dark-400 dark:hover:bg-dark-600;
+}
+
+.vfb-aligns-class-default-container-open {
+  @apply bg-[#1118270d] dark:bg-dark-600;
+}
+
+.vfb-aligns-class-default-dropdown {
+  @apply bg-white dark:bg-dark-700;
+}
+
+.vfb-aligns-class-default-item-unselected {
+  @apply hover:bg-[#1118270d] dark:hover:bg-dark-500 dark:hover:bg-opacity-30;
+}
+
+.vfb-aligns-class-default-item-selected {
+  @apply bg-primary-500 text-primary-700 bg-opacity-40 dark:text-white dark:text-opacity-80;
+}

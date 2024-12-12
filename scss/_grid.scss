@@ -1,0 +1,265 @@
+.vfb-grid-modal-overlay {
+  @apply pb-10; 
+}
+
+.vfb-grid-modal {
+  @apply w-[566px] rounded-none flex flex-col relative;
+}
+
+.vfb-grid-modal-nav {
+  @apply absolute left-1/2 -bottom-10 transform -translate-x-1/2 bg-black bg-opacity-50 text-white rounded-lg py-1 px-2;
+}
+
+.vfb-grid-modal-close {
+  @apply bg-black bg-opacity-50 transition-all hover:bg-opacity-90 cursor-pointer text-white w-5 h-5 rounded-full flex items-center justify-center absolute -right-2.5 -top-2.5 z-1;
+}
+
+.vfb-grid-modal-toolbar {
+  @apply bg-white px-3 py-2 flex items-center relative dark:bg-dark-800;
+}
+
+.vfb-grid-modal-input-wrapper {
+  @apply border border-gray-300 border-solid flex-grow-0 rounded flex items-center text-xs box-border px-1 text-gray-500 vfb-tooltip-group relative dark:text-dark-400 dark:border-dark-550;
+}
+
+.vfb-grid-modal-input-button {
+  @apply rounded flex items-center justify-center w-[18px] h-[18px] cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-600;
+}
+
+.vfb-grid-modal-input {
+  @apply text-gray-800 text-base border-0 pl-0.5 pr-0.5 h-[26px] w-[24px] box-border bg-transparent text-center outline-none dark:text-dark-100;
+}
+
+.vfb-grid-modal-input-times {
+  @apply text-gray-400 text-xs flex items-center justify-center mx-1.5 dark:text-dark-400;
+}
+
+.vfb-grid-modal-separator {
+  @apply w-px h-[24px] bg-gray-300 mx-1.5 dark:bg-dark-550;
+
+  &.between-rows-merge {
+    @apply ml-3;
+  }
+
+  &.between-redo-save {
+    @apply mr-3;
+  }
+}
+
+.vfb-grid-modal-action-button {
+  @apply text-gray-500 flex items-center justify-center w-[28px] h-[28px] text-sm rounded-md cursor-pointer hover:bg-[#1118270d] vfb-tooltip-group relative dark:text-dark-400 dark:hover:bg-dark-600;
+}
+
+.vfb-grid-modal-action-button-disabled {
+  @apply opacity-40 pointer-events-none;
+}
+
+.vfb-grid-modal-action-button-active {
+  @apply bg-[#1118270d] dark:bg-dark-600;
+}
+
+.vfb-grid-modal-merge {
+  @apply text-base;
+}
+
+.vfb-grid-modal-split {
+  @apply text-base ml-0.5;
+}
+
+.vfb-grid-modal-clear {
+  @apply ml-0.5;
+}
+
+.vfb-grid-modal-redo {
+  @apply ml-0.5;
+}
+
+.vfb-grid-modal-reset {
+  @apply -ml-1.5 mr-1.5;
+}
+
+.vfb-grid-modal-save {
+  @apply bg-primary-500 bg-opacity-20 text-primary-500 hover:bg-primary-500 hover:text-white flex items-center justify-center w-[28px] h-[28px] text-sm px-1 py-1 rounded-md cursor-pointer vfb-tooltip-group relative;
+}
+
+.vfb-grid-modal-canvas {
+  @apply bg-gray-200 p-10 h-[566px] flex items-start justify-start overflow-auto relative dark:bg-dark-1000;
+
+  &.is-h-centered {
+    @apply justify-center;
+  }
+
+  &.is-v-centered {
+    @apply items-center;
+  }
+}
+
+.vfb-grid-modal-grid-overlay-container {
+  @apply absolute inset-10 flex items-start justify-start;
+
+  &.is-h-centered {
+    @apply justify-center;
+  }
+
+  &.is-v-centered {
+    @apply items-center;
+  }
+}
+
+.vfb-grid-modal-grid-overlay {
+  @apply grid gap-px p-px relative h-full w-full box-border;
+}
+
+.vfb-grid-modal-remove-line {
+  @apply absolute bg-gray-500 bg-opacity-10 text-gray-300 z-1 flex items-center justify-center;
+}
+
+.vfb-grid-modal-add-line {
+  @apply absolute bg-gray-500 bg-opacity-10 z-1 flex;
+}
+
+.vfb-grid-modal-add-line-stroke {
+  @apply bg-primary-500;
+
+  &.is-vertical {
+    @apply h-full w-px;
+  }
+
+  &.is-horizontal {
+    @apply h-px w-full;
+  }
+}
+
+.vfb-grid-modal-grid-overlay-cell {
+  @apply min-h-[2rem] min-w-[2rem] flex py-1 px-1 box-border text-gray-500 text-xs relative;
+}
+
+.vfb-grid-modal-add-line-button {
+  @apply z-1 absolute -bottom-[11px] cursor-pointer bg-primary-500 text-white w-[21px] h-[21px] flex items-center justify-center text-xs vfb-tooltip-group opacity-0 hover:opacity-100;
+
+  &.is-row {
+    @apply -bottom-[11px];
+  }
+  
+  &.is-col {
+    @apply -right-[11px];
+  }
+
+  &.is-first-row {
+    @apply -top-[11px] bottom-auto;
+  }
+
+  &.is-first-col {
+    @apply -left-[11px] right-auto;
+  }
+
+  &.is-on-left {
+    @apply -left-[21px] rounded-l;
+  }
+
+  &.is-on-right {
+    @apply -right-[21px] rounded-r;
+  }
+
+  &.is-on-top {
+    @apply -top-[21px] rounded-t;
+  }
+
+  &.is-on-bottom {
+    @apply -bottom-[21px] rounded-b;
+  }
+}
+
+.vfb-grid-modal-remove-line-button {
+  @apply z-1 absolute transform cursor-pointer bg-red-500 text-white w-[21px] h-[21px] flex items-center justify-center text-xs vfb-tooltip-group opacity-0 hover:opacity-100;
+
+  &.is-row {
+    @apply top-1/2 -translate-y-1/2;
+  }
+
+  &.is-col {
+    @apply left-1/2 -translate-x-1/2 ;
+  }
+
+  &.is-on-left {
+    @apply -left-[21px] rounded-l;
+  }
+
+  &.is-on-right {
+    @apply -right-[21px] rounded-r;
+  }
+
+  &.is-on-top {
+    @apply -top-[21px] rounded-t;
+  }
+
+  &.is-on-bottom {
+    @apply -bottom-[21px] rounded-b;
+  }
+}
+
+.vfb-grid-modal-grid {
+  @apply grid bg-gray-300 gap-px p-px cursor-crosshair relative h-full w-full shadow-box-strong-small box-border;
+
+  &.is-dark {
+    @apply dark:bg-dark-550;
+  }
+}
+
+.vfb-grid-modal-grid-selector-box {
+  @apply absolute border border-dashed border-primary-500 bg-primary-500 bg-opacity-20 z-1;
+}
+
+.vfb-grid-modal-grid-cell {
+  @apply bg-white min-h-[2rem] min-w-[2rem] flex py-1 px-1 box-border text-gray-500 text-xs vfb-tooltip-group relative user-select-none;
+
+  &.is-dark {
+    @apply dark:bg-dark-800 dark:text-dark-100;
+  }
+
+  &.is-selected {
+    @apply bg-[rgb(254_202_202_/_1)];
+
+    &.is-dark {
+      @apply dark:bg-[rgb(254_202_202_/_1)];
+    }
+  }
+
+  &.is-left,
+  &.is-justify {
+    @apply justify-start;
+  }
+
+  &.is-center {
+    @apply justify-center;
+  }
+
+  &.is-right {
+    @apply justify-end;
+  }
+
+  &.is-top,
+  &.is-baseline {
+    @apply items-start;
+  }
+
+  &.is-middle {
+    @apply items-center;
+  }
+
+  &.is-bottom {
+    @apply items-end;
+  }
+}
+
+.vfb-grid-modal-grid-cell-icon {
+  @apply pointer-events-none;
+}
+
+.vfb-grid-modal-grid-cell-label {
+  @apply max-w-[66%] max-h-[66%] overflow-hidden text-ellipsis;
+}
+
+.vfb-grid-modal-grid-cell-tooltip {
+  @apply max-w-[400px] [&_div]:overflow-hidden [&_div]:text-ellipsis;
+}

@@ -205,13 +205,15 @@ export default function () {
                     }
                   })
                 },
-                onClose(a,b) {
-                  selectingElement.value = false
+                // onClose(a,b) {
+                //   nextTick(() => {
+                //     selectingElement.value = false
 
-                  nextTick(() => {
-                    setCaretPosition(component.input.value, cursorPosition.value)
-                  })
-                }
+                //     nextTick(() => {
+                //       setCaretPosition(component.input.value, cursorPosition.value)
+                //     })
+                //   })
+                // }
               },
             }
           }
@@ -244,6 +246,18 @@ export default function () {
           }
         }
 
+        const getCharacterBeforeCursor = (el) => {
+          let lastChar = null
+          const cursorPosition = el.selectionStart
+          const value = el.value
+
+          if (cursorPosition > 0) {
+            lastChar = value[cursorPosition - 1]
+          }
+
+          return lastChar
+        }
+
         /**
          * Flattens the tree to be consumable by SelectElement.
          * 
@@ -271,7 +285,7 @@ export default function () {
 
             paths.push(field)
 
-            if (['group', 'object', 'tabs', 'steps', 'root'].indexOf(el.type) !== -1) {
+            if (['group', 'object', 'table', 'tabs', 'steps', 'root'].indexOf(el.type) !== -1) {
               paths = paths.concat(flattenTree(el.children || [], level + 1) || [])
             }
 
@@ -290,9 +304,32 @@ export default function () {
          * 
          * @returns {void}
          */
-        const closeOnBackspace = (e) => {
+        const handleSearchKeydown = (e) => {
           if (e.key === 'Backspace' && e.target.value == '') {
             e.preventDefault()
+            selectingElement.value = false
+
+            nextTick(() => {
+              setCaretPosition(component.input.value, cursorPosition.value)
+            })
+          }
+
+          if (e.key === 'Escape') {
+            setTimeout(() => {
+              elementSelector$.value.el$('field').input.focus()
+            }, 0)
+          }
+        }
+
+        /**
+         * Close the dropdown on Escape if it is empy.
+         * 
+         * @returns {void}
+         */
+        const handleSearchKeyup = (e) => {
+          if (e.key === 'Escape') {
+            e.preventDefault()
+            e.stopPropagation()
             selectingElement.value = false
 
             nextTick(() => {
@@ -308,17 +345,19 @@ export default function () {
          * @returns {void}
          */
         const handleKeydown = (e) => {
-          if (e.key === '{') {
+          if (e.key === '{' || (e.key === 'ArrowDown' && getCharacterBeforeCursor(e.target) === '{')) {
             selectingElement.value = true
 
             cursorPosition.value = e.target.selectionStart + 1
 
             setTimeout(() => {
               let field$ = elementSelector$.value.el$('field')
+
               field$.input.focus()
               field$.input.open()
 
-              field$.input.input.addEventListener('keydown', closeOnBackspace)
+              field$.input.input.addEventListener('keydown', handleSearchKeydown)
+              field$.input.input.addEventListener('keyup', handleSearchKeyup)
             }, 0)
           } else {
             context.emit('keydown', e, component.el$)

@@ -80,6 +80,10 @@ import {
   HideColsField,
   ColWrapField,
   StickyColsField,
+  GridField,
+  ViewField_grid,
+  MinWidthField_grid,
+  MaxWidthField_grid,
 } from './../'
 
 /**
@@ -3184,6 +3188,79 @@ const table = {
   }
 }
 
+const grid = {
+  label: 'simple_grid_label',
+  description: 'simple_grid_description',
+  icon: ['fas', 'grid'],
+  category: 'page',
+  schema: {
+    type: 'grid',
+    cols: 2,
+    rows: 2,
+    grid: [
+      [[null],[null]],
+      [[null],[null]],
+    ],
+  },
+  sections: {
+    properties: {
+      name: 'properties',
+      label: 'simple_section_properties',
+      fields: {
+        type: { type: TypeField, },
+        label: { type: LabelField, },
+        description: { type: DescriptionField, },
+      },
+    },
+    layout: {
+      name: 'layout',
+      label: 'simple_section_layout',
+      fields: {
+        grid: { type: GridField, },
+        minWidth: { type: MinWidthField_grid, },
+        maxWidth: { type: MaxWidthField_grid, },
+        view: { type: ViewField_grid, },
+        columns: { type: ColumnsField_simple, },
+        size: { type: SizeField, },
+      },
+    },
+    conditions: {
+      name: 'conditions',
+      label: 'simple_section_conditions',
+      fields: {
+        conditions: { type: ConditionsField, },
+      },
+    },
+    attributes: {
+      name: 'attributes',
+      label: 'simple_section_attributes',
+      fields: {
+        name: { type: NameField, extend: { disabled: true, } },
+      }
+    }
+  },
+  separators: {
+    layout: [
+      ['grid'],
+      ['!', 'minWidth', 'maxWidth'],
+      ['view'],
+      ['columns'],
+      ['size'],
+    ],
+  },
+}
+
+const gridTable = {
+  ...grid,
+  label: 'simple_grid_table_label',
+  description: 'simple_grid_table_description',
+  icon: ['far', 'table-cells-large'],
+  schema: {
+    ...grid.schema,
+    presets: ['grid-table'],
+  }
+}
+
 /**
  * Config object
  */
@@ -3249,6 +3326,8 @@ const config = {
     'submit',
     'steps',
     'container',
+    'grid',
+    'gridTable',
     'list',
     'nestedList',
   ],
@@ -3535,6 +3614,8 @@ const config = {
       container,
       list,
       nestedList,
+      grid,
+      gridTable,
     }
   }
 }

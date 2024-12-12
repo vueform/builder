@@ -444,6 +444,50 @@
   @apply -translate-x-full -left-1.5;
 }
 
+.vfb-aligns-container {
+  @apply flex items-center justify-center h-[28px] w-[38px] text-sm rounded-md cursor-pointer relative;
+}
+
+.vfb-aligns-container-disabled {
+  @apply opacity-40 pointer-events-none;
+}
+
+.vfb-aligns-caret-wrapper {
+  @apply ml-[5px] text-xs;
+}
+
+.vfb-aligns-caret {
+  @apply transform rotate-180;
+}
+
+.vfb-aligns-dropdown {
+  @apply shadow-box-strong-small absolute top-7 left-0 px-1 py-1 flex gap-0.5 rounded z-1;
+}
+
+.vfb-aligns-item {
+  @apply relative h-[28px] w-[28px] px-1.5 py-1 flex items-center justify-center rounded-md;
+}
+
+.vfb-aligns-class-default-container {
+  @apply text-gray-500 hover:bg-[#1118270d] dark:text-dark-400 dark:hover:bg-dark-600;
+}
+
+.vfb-aligns-class-default-container-open {
+  @apply bg-[#1118270d] dark:bg-dark-600;
+}
+
+.vfb-aligns-class-default-dropdown {
+  @apply bg-white dark:bg-dark-700;
+}
+
+.vfb-aligns-class-default-item-unselected {
+  @apply hover:bg-[#1118270d] dark:hover:bg-dark-500 dark:hover:bg-opacity-30;
+}
+
+.vfb-aligns-class-default-item-selected {
+  @apply bg-primary-500 text-primary-700 bg-opacity-40 dark:text-white dark:text-opacity-80;
+}
+
 .vfb-fade-in-enter-active {
   transition-property: opacity;
   transition-timing-function: ease-in-out;
@@ -1287,7 +1331,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tooltip {
-  @apply absolute z-999 transform bg-black text-white bg-opacity-80 px-1.5 py-0.5 rounded text-sm leading-tighter hidden whitespace-nowrap text-center;
+  @apply absolute z-999 transform bg-black text-white bg-opacity-80 px-1.5 py-0.5 rounded text-sm leading-tighter hidden whitespace-nowrap text-center select-none;
 }
 .vfb-tooltip.vfb-tooltip-smaller {
   @apply px-1 text-0.5sm;
@@ -1298,6 +1342,9 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 .vfb-tooltip-top.vfb-tooltip-closer {
   @apply top-1;
+}
+.vfb-tooltip-top.vfb-tooltip-further {
+  @apply -bottom-1;
 }
 
 .vfb-tooltip-bottom {
@@ -1338,12 +1385,18 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-tooltip-bottom-left.vfb-tooltip-closer {
   @apply bottom-1;
 }
+.vfb-tooltip-bottom-left.vfb-tooltip-further {
+  @apply -bottom-1.5;
+}
 
 .vfb-tooltip-bottom-right {
   @apply -bottom-0.5 right-0 left-auto translate-y-full translate-x-0;
 }
 .vfb-tooltip-bottom-right.vfb-tooltip-closer {
   @apply bottom-1;
+}
+.vfb-tooltip-bottom-right.vfb-tooltip-further {
+  @apply -bottom-1.5;
 }
 
 .vfb-notification-container {
@@ -1897,6 +1950,238 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-field-text-secondary {
   @apply text-gray-500 leading-none pb-px text-xs italic dark:text-dark-500 whitespace-nowrap pr-1 overflow-hidden text-ellipsis;
+}
+
+.vfb-grid-modal-overlay {
+  @apply pb-10;
+}
+
+.vfb-grid-modal {
+  @apply w-[566px] rounded-none flex flex-col relative;
+}
+
+.vfb-grid-modal-nav {
+  @apply absolute left-1/2 -bottom-10 transform -translate-x-1/2 bg-black bg-opacity-50 text-white rounded-lg py-1 px-2;
+}
+
+.vfb-grid-modal-close {
+  @apply bg-black bg-opacity-50 transition-all hover:bg-opacity-90 cursor-pointer text-white w-5 h-5 rounded-full flex items-center justify-center absolute -right-2.5 -top-2.5 z-1;
+}
+
+.vfb-grid-modal-toolbar {
+  @apply bg-white px-3 py-2 flex items-center relative dark:bg-dark-800;
+}
+
+.vfb-grid-modal-input-wrapper {
+  @apply border border-gray-300 border-solid flex-grow-0 rounded flex items-center text-xs box-border px-1 text-gray-500 vfb-tooltip-group relative dark:text-dark-400 dark:border-dark-550;
+}
+
+.vfb-grid-modal-input-button {
+  @apply rounded flex items-center justify-center w-[18px] h-[18px] cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-600;
+}
+
+.vfb-grid-modal-input {
+  @apply text-gray-800 text-base border-0 pl-0.5 pr-0.5 h-[26px] w-[24px] box-border bg-transparent text-center outline-none dark:text-dark-100;
+}
+
+.vfb-grid-modal-input-times {
+  @apply text-gray-400 text-xs flex items-center justify-center mx-1.5 dark:text-dark-400;
+}
+
+.vfb-grid-modal-separator {
+  @apply w-px h-[24px] bg-gray-300 mx-1.5 dark:bg-dark-550;
+}
+.vfb-grid-modal-separator.between-rows-merge {
+  @apply ml-3;
+}
+.vfb-grid-modal-separator.between-redo-save {
+  @apply mr-3;
+}
+
+.vfb-grid-modal-action-button {
+  @apply text-gray-500 flex items-center justify-center w-[28px] h-[28px] text-sm rounded-md cursor-pointer hover:bg-[#1118270d] vfb-tooltip-group relative dark:text-dark-400 dark:hover:bg-dark-600;
+}
+
+.vfb-grid-modal-action-button-disabled {
+  @apply opacity-40 pointer-events-none;
+}
+
+.vfb-grid-modal-action-button-active {
+  @apply bg-[#1118270d] dark:bg-dark-600;
+}
+
+.vfb-grid-modal-merge {
+  @apply text-base;
+}
+
+.vfb-grid-modal-split {
+  @apply text-base ml-0.5;
+}
+
+.vfb-grid-modal-clear {
+  @apply ml-0.5;
+}
+
+.vfb-grid-modal-redo {
+  @apply ml-0.5;
+}
+
+.vfb-grid-modal-reset {
+  @apply -ml-1.5 mr-1.5;
+}
+
+.vfb-grid-modal-save {
+  @apply bg-primary-500 bg-opacity-20 text-primary-500 hover:bg-primary-500 hover:text-white flex items-center justify-center w-[28px] h-[28px] text-sm px-1 py-1 rounded-md cursor-pointer vfb-tooltip-group relative;
+}
+
+.vfb-grid-modal-canvas {
+  @apply bg-gray-200 p-10 h-[566px] flex items-start justify-start overflow-auto relative dark:bg-dark-1000;
+}
+.vfb-grid-modal-canvas.is-h-centered {
+  @apply justify-center;
+}
+.vfb-grid-modal-canvas.is-v-centered {
+  @apply items-center;
+}
+
+.vfb-grid-modal-grid-overlay-container {
+  @apply absolute inset-10 flex items-start justify-start;
+}
+.vfb-grid-modal-grid-overlay-container.is-h-centered {
+  @apply justify-center;
+}
+.vfb-grid-modal-grid-overlay-container.is-v-centered {
+  @apply items-center;
+}
+
+.vfb-grid-modal-grid-overlay {
+  @apply grid gap-px p-px relative h-full w-full box-border;
+}
+
+.vfb-grid-modal-remove-line {
+  @apply absolute bg-gray-500 bg-opacity-10 text-gray-300 z-1 flex items-center justify-center;
+}
+
+.vfb-grid-modal-add-line {
+  @apply absolute bg-gray-500 bg-opacity-10 z-1 flex;
+}
+
+.vfb-grid-modal-add-line-stroke {
+  @apply bg-primary-500;
+}
+.vfb-grid-modal-add-line-stroke.is-vertical {
+  @apply h-full w-px;
+}
+.vfb-grid-modal-add-line-stroke.is-horizontal {
+  @apply h-px w-full;
+}
+
+.vfb-grid-modal-grid-overlay-cell {
+  @apply min-h-[2rem] min-w-[2rem] flex py-1 px-1 box-border text-gray-500 text-xs relative;
+}
+
+.vfb-grid-modal-add-line-button {
+  @apply z-1 absolute -bottom-[11px] cursor-pointer bg-primary-500 text-white w-[21px] h-[21px] flex items-center justify-center text-xs vfb-tooltip-group opacity-0 hover:opacity-100;
+}
+.vfb-grid-modal-add-line-button.is-row {
+  @apply -bottom-[11px];
+}
+.vfb-grid-modal-add-line-button.is-col {
+  @apply -right-[11px];
+}
+.vfb-grid-modal-add-line-button.is-first-row {
+  @apply -top-[11px] bottom-auto;
+}
+.vfb-grid-modal-add-line-button.is-first-col {
+  @apply -left-[11px] right-auto;
+}
+.vfb-grid-modal-add-line-button.is-on-left {
+  @apply -left-[21px] rounded-l;
+}
+.vfb-grid-modal-add-line-button.is-on-right {
+  @apply -right-[21px] rounded-r;
+}
+.vfb-grid-modal-add-line-button.is-on-top {
+  @apply -top-[21px] rounded-t;
+}
+.vfb-grid-modal-add-line-button.is-on-bottom {
+  @apply -bottom-[21px] rounded-b;
+}
+
+.vfb-grid-modal-remove-line-button {
+  @apply z-1 absolute transform cursor-pointer bg-red-500 text-white w-[21px] h-[21px] flex items-center justify-center text-xs vfb-tooltip-group opacity-0 hover:opacity-100;
+}
+.vfb-grid-modal-remove-line-button.is-row {
+  @apply top-1/2 -translate-y-1/2;
+}
+.vfb-grid-modal-remove-line-button.is-col {
+  @apply left-1/2 -translate-x-1/2;
+}
+.vfb-grid-modal-remove-line-button.is-on-left {
+  @apply -left-[21px] rounded-l;
+}
+.vfb-grid-modal-remove-line-button.is-on-right {
+  @apply -right-[21px] rounded-r;
+}
+.vfb-grid-modal-remove-line-button.is-on-top {
+  @apply -top-[21px] rounded-t;
+}
+.vfb-grid-modal-remove-line-button.is-on-bottom {
+  @apply -bottom-[21px] rounded-b;
+}
+
+.vfb-grid-modal-grid {
+  @apply grid bg-gray-300 gap-px p-px cursor-crosshair relative h-full w-full shadow-box-strong-small box-border;
+}
+.vfb-grid-modal-grid.is-dark {
+  @apply dark:bg-dark-550;
+}
+
+.vfb-grid-modal-grid-selector-box {
+  @apply absolute border border-dashed border-primary-500 bg-primary-500 bg-opacity-20 z-1;
+}
+
+.vfb-grid-modal-grid-cell {
+  @apply bg-white min-h-[2rem] min-w-[2rem] flex py-1 px-1 box-border text-gray-500 text-xs vfb-tooltip-group relative user-select-none;
+}
+.vfb-grid-modal-grid-cell.is-dark {
+  @apply dark:bg-dark-800 dark:text-dark-100;
+}
+.vfb-grid-modal-grid-cell.is-selected {
+  @apply bg-[rgb(254_202_202_/_1)];
+}
+.vfb-grid-modal-grid-cell.is-selected.is-dark {
+  @apply dark:bg-[rgb(254_202_202_/_1)];
+}
+.vfb-grid-modal-grid-cell.is-left, .vfb-grid-modal-grid-cell.is-justify {
+  @apply justify-start;
+}
+.vfb-grid-modal-grid-cell.is-center {
+  @apply justify-center;
+}
+.vfb-grid-modal-grid-cell.is-right {
+  @apply justify-end;
+}
+.vfb-grid-modal-grid-cell.is-top, .vfb-grid-modal-grid-cell.is-baseline {
+  @apply items-start;
+}
+.vfb-grid-modal-grid-cell.is-middle {
+  @apply items-center;
+}
+.vfb-grid-modal-grid-cell.is-bottom {
+  @apply items-end;
+}
+
+.vfb-grid-modal-grid-cell-icon {
+  @apply pointer-events-none;
+}
+
+.vfb-grid-modal-grid-cell-label {
+  @apply max-w-[66%] max-h-[66%] overflow-hidden text-ellipsis;
+}
+
+.vfb-grid-modal-grid-cell-tooltip {
+  @apply max-w-[400px] [&_div]:overflow-hidden [&_div]:text-ellipsis;
 }
 
 .vfb-config-panel-container {
@@ -3594,6 +3879,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   cursor: pointer;
   background: var(--vf-container-bg);
   z-index: 0;
+}
+
+.vfb-preview-grid-element-cell-placeholder,
+.vfb-preview-element-container-nested,
+.vfb-preview-element-container-list {
   --vf-container-bg-neutral: rgb(86 136 179 / 10%);
   --vf-container-bg-dynamic-1: rgb(0 208 255 / 12%);
   --vf-container-bg-dynamic-2: rgb(2 45 215 / 12%);
@@ -3608,6 +3898,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   --vf-container-text-dynamic-5: rgb(0 0 0 / 54%);
 }
 
+.vfb-preview-wrapper-dark .vfb-preview-grid-element-cell-placeholder,
 .vfb-preview-wrapper-dark .vfb-preview-element-container-nested,
 .vfb-preview-wrapper-dark .vfb-preview-element-container-list {
   --vf-container-bg-neutral: rgb(255 255 255 / 10%);
@@ -3628,6 +3919,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 .vfb-preview-wrapper-dark .vfb-preview-element-columns-display {
   @apply text-black;
+}
+
+.vfb-preview-element-container-nested {
+  --vf-container-bg: var(--vf-container-bg-neutral);
+  --vf-container-text: var(--vf-container-text-neutral);
 }
 
 .vfb-preview-element-container-nested {
@@ -3705,11 +4001,19 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-warning {
-  @apply absolute inset-0 bg-red-500 bg-opacity-20;
+  @apply absolute inset-0 bg-red-500 bg-opacity-20 z-1 pointer-events-none;
 }
 
 .vfb-preview-element-outer-wrapper {
   @apply grid grid-cols-12 flex-1;
+}
+
+.vfb-preview-element-outer-wrapper-not-dragging {
+  @apply relative z-[-1];
+}
+
+.vfb-preview-element-outer-wrapper-dragging {
+  @apply relative z-1;
 }
 
 .vfb-preview-element-inner-container {
@@ -3855,6 +4159,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply w-3;
 }
 
+.vfb-preview-element-area-right-grid {
+  @apply w-4;
+}
+
 .vfb-preview-element-area-right-sm {
   @apply -bottom-1 -top-1 right-0;
 }
@@ -3873,6 +4181,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-preview-element-area-left-with-children {
   @apply w-3;
+}
+
+.vfb-preview-element-area-left-grid {
+  @apply w-4;
 }
 
 .vfb-preview-element-area-left-sm {
@@ -3900,7 +4212,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-area-middle {
-  @apply col-span-12;
+  @apply col-span-12 contents;
 }
 
 .vfb-preview-element-middle-drag-label-container {
@@ -3965,7 +4277,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-actions-container {
-  @apply absolute right-0 top-0 transform -translate-y-full text-white;
+  @apply absolute right-0 top-0 transform -translate-y-full text-white z-2;
 }
 
 .vfb-preview-element-actions-container-selected {
@@ -3974,6 +4286,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-preview-element-actions-container-unselected {
   @apply hidden;
+}
+
+.vfb-preview-element-edit-cells {
+  @apply w-4 h-4 flex items-center justify-center bg-primary-500 text-xs mr-0.5 cursor-pointer transition-colors hover:bg-primary-600 vfb-tooltip-group relative;
 }
 
 .vfb-preview-element-clone {
@@ -4014,4 +4330,208 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-drag-placeholder-text {
   @apply text-base mt-2 leading-tight;
+}
+
+.vfb-preview-element-container-grid {
+  @apply p-4;
+}
+
+.vfb-preview-grid-element-wrapper-no-scroll {
+  @apply overflow-x-visible;
+}
+
+.vfb-preview-grid-element-wrapper {
+  @apply relative z-1 pointer-events-none;
+}
+.vfb-preview-grid-element-wrapper.vfb-preview-grid-element-wrapper-dragging {
+  @apply pointer-events-auto;
+}
+
+.vfb-preview-grid-element-cell-editing {
+  @apply cursor-text pointer-events-auto flex z-[1001];
+}
+.vfb-preview-grid-element-cell-editing.is-middle {
+  @apply items-center;
+}
+.vfb-preview-grid-element-cell-editing.is-bottom {
+  @apply items-end;
+}
+
+.vfb-preview-grid-element-column-resizer-container {
+  @apply pointer-events-auto absolute top-0 bottom-0 w-2 cursor-col-resize z-1 items-center justify-center flex text-gray-500;
+}
+.vfb-preview-grid-element-column-resizer-container:hover .vfb-preview-grid-element-column-resizer-wrapper {
+  @apply flex;
+}
+.vfb-preview-grid-element-column-resizer-container.is-sm {
+  @apply right-[calc((var(--vf-gutter-sm)/2+0.25rem)*-1)];
+}
+.vfb-preview-grid-element-column-resizer-container.is-md {
+  @apply right-[calc((var(--vf-gutter)/2+0.25rem)*-1)];
+}
+.vfb-preview-grid-element-column-resizer-container.is-lg {
+  @apply right-[calc((var(--vf-gutter-lg)/2+0.25rem)*-1)];
+}
+
+.vfb-preview-grid-element-column-resizer-wrapper {
+  @apply h-4 w-[8px] items-center justify-between hidden pointer-events-none;
+}
+
+.vfb-preview-grid-element-column-resizer-bar {
+  @apply h-3.5 w-0.5 rounded bg-gray-500;
+}
+.vfb-preview-grid-element-column-resizer-bar.is-dark {
+  @apply bg-dark-200;
+}
+
+.vfb-preview-grid-element-width-tooltip {
+  @apply pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black bg-opacity-60 rounded px-1 py-0.5 leading-none text-sm z-[1000];
+}
+
+.vfb-preview-grid-element-text-wrapper {
+  @apply pointer-events-auto relative cursor-text form-color-input;
+}
+
+.vfb-preview-grid-element-cell-edit-container {
+  @apply absolute inset-0;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-container {
+  @apply absolute -top-2 left-0 transform -translate-y-full py-0.5 px-0.5 shadow-box-strong rounded flex flex-row items-start gap-0.5 z-[3] bg-gray-800;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-container.is-dark {
+  @apply bg-dark-800;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-block {
+  @apply py-0.5 px-0.5 bg-opacity-80 rounded-sm gap-1 flex flex-row bg-gray-700;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-block.is-dark {
+  @apply bg-dark-700;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-bold {
+  @apply flex items-center justify-center w-[28px] h-[28px] text-sm rounded-md cursor-pointer vfb-tooltip-group relative z-1 pointer-events-auto;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-bold.is-active {
+  @apply bg-gray-600 text-white;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-bold.is-active.is-dark {
+  @apply bg-dark-600 text-white;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-bold.is-inactive {
+  @apply hover:bg-gray-600 hover:bg-opacity-80 text-gray-100;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-bold.is-inactive.is-dark {
+  @apply hover:bg-dark-600 hover:bg-opacity-80 text-dark-100;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-container {
+  @apply text-gray-200 hover:bg-gray-600 hover:bg-opacity-80;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-container.is-dark {
+  @apply text-dark-200 hover:bg-dark-600 hover:bg-opacity-80;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-container-open {
+  @apply bg-gray-600;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-container-open.is-dark {
+  @apply bg-dark-600;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-dropdown {
+  @apply bg-gray-800;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-dropdown.is-dark {
+  @apply bg-dark-800;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-item-unselected {
+  @apply hover:bg-gray-700;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-item-unselected.is-dark {
+  @apply hover:bg-dark-700;
+}
+
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-item-selected {
+  @apply bg-gray-700;
+}
+.vfb-preview-grid-element-cell-edit-toolbar-aligns-item-selected.is-dark {
+  @apply bg-dark-700;
+}
+
+.vfb-preview-grid-element-cell-editor-top {
+  @apply h-full items-start;
+}
+
+.vfb-preview-grid-element-cell-editor-middle {
+  @apply h-full items-center;
+}
+
+.vfb-preview-grid-element-cell-editor-bottom {
+  @apply h-full items-end;
+}
+
+.vfb-preview-grid-element-cell-editor-baseline {
+  @apply h-full items-stretch;
+}
+
+.vfb-preview-grid-element-cell-editor-left {
+  text-align: left !important;
+}
+
+.vfb-preview-grid-element-cell-editor-center {
+  text-align: center !important;
+}
+
+.vfb-preview-grid-element-cell-editor-right {
+  text-align: right !important;
+}
+
+.vfb-preview-grid-element-cell-editor-rounded {
+  @apply rounded-md;
+}
+
+.vfb-preview-grid-element-cell-editor-bold {
+  @apply font-bold;
+}
+
+.vfb-preview-grid-element-cell-placeholder {
+  @apply w-full h-full flex items-center justify-center text-center rounded-md px-2.5 text-sm select-none whitespace-nowrap z-1 pointer-events-auto cursor-text;
+  background: var(--vf-container-bg-neutral);
+  color: var(--vf-container-text-neutral);
+}
+.vfb-preview-grid-element-cell-placeholder.is-sm {
+  @apply form-min-h-input-height-sm;
+}
+.vfb-preview-grid-element-cell-placeholder.is-md {
+  @apply form-min-h-input-height;
+}
+.vfb-preview-grid-element-cell-placeholder.is-lg {
+  @apply form-min-h-input-height-lg;
+}
+
+.vfb-preview-grid-element-cell-drag-area {
+  @apply absolute inset-0 bg-primary-500 flex items-center justify-center text-center border border-dashed border-primary-500 bg-opacity-20 text-primary-500 text-opacity-50 z-1 rounded-md text-2xl;
+}
+.vfb-preview-grid-element-cell-drag-area.is-hovered {
+  @apply opacity-100;
+}
+.vfb-preview-grid-element-cell-drag-area.is-not-hovered {
+  @apply opacity-0;
+}
+
+.vfb-preview-grid-element-cell-drag-icon {
+  @apply pointer-events-none;
+}
+
+.vfb-preview-grid-element-wrapper-spreadsheet .vfb-preview-grid-element-column-resizer-container {
+  @apply -right-1;
+}
+.vfb-preview-grid-element-wrapper-spreadsheet .vfb-preview-grid-element-cell-placeholder {
+  @apply rounded-none bg-transparent;
+}
+.vfb-preview-grid-element-wrapper-spreadsheet .vfb-preview-grid-element-cell-drag-area {
+  @apply -inset-px text-base rounded-none;
 }
