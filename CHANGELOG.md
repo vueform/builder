@@ -1,5 +1,16 @@
 [//]: # (Don't use <tags>)
 
+## v1.9.1
+
+> `2025-01-03`
+
+### 🎉 Feature
+- Translatable static content & label.
+- Changed import tool & lang selector display order.
+
+### 🐞 Bug Fixes
+- Selected element deps deconstruct fix.
+
 ## v1.9.0
 
 > `2024-12-12`
