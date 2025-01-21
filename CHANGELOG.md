@@ -1,5 +1,19 @@
 [//]: # (Don't use <tags>)
 
+## v1.9.2
+
+> `2025-01-21`
+
+### 🎉 Feature
+- Now only `p` and `blockquote` tag static fields has rich text editor.
+
+### 🐞 Bug Fixes
+- Disable scrolling up to top on next steps.
+- Infinite step label watcher loop fix, that likely caused #99.
+- Step previous label placeholder fix.
+- Items editing without view field fix #102.
+- Page label label fix #100.
+
 ## v1.9.1
 
 > `2025-01-03`
