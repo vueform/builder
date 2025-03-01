@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.9.3
+
+> `2025-03-01`
+
+### 🐞 Bug Fixes
+- Localize page label in tree.
+- Reinit validation rules in preview mode too when they change.
+
 ## v1.9.2
 
 > `2025-01-21`

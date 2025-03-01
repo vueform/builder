@@ -1541,5 +1541,5 @@ export default {
   "grid_modal_undo_tooltip": "Undo",
   "grid_modal_redo_tooltip": "Redo",
   "grid_modal_save_tooltip": "Save",
-  "grid_modal_close_confirm": "You have unsaved changes. Do you want to close the window?",
+  "grid_modal_close_confirm": "You have unsaved changes. Do you want to close the window?"
 };
