@@ -1,5 +1,18 @@
 [//]: # (Don't use <tags>)
 
+## v1.9.4
+
+> `2025-03-04`
+
+### 🎉 Feature
+- Sanitize props that end up in `v-html`
+- Config option for custom AI endpoint
+- New element char limit from config #118
+
+### 🐞 Bug Fixes
+- Respect col widths when adding/removing specific cols
+- Grid border fix when cells are <100% #116 (fix released in vueform/vueform)
+
 ## v1.9.3
 
 > `2025-03-01`

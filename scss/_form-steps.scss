@@ -48,6 +48,10 @@
 .vfb-step-container {
   @apply relative border-t border-b cursor-pointer border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0 p-0;
 
+  &.form-step {
+    @apply p-0;
+  }
+
   &.vfb-step-container-hover {
     @apply border-opacity-100;
     

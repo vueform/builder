@@ -2013,7 +2013,7 @@ export default function () {
                 return cell
               }
 
-              let content = cellValue.value
+              let content = form$.value.$vueform.sanitize(cellValue.value)
 
               if (content === null) {
                 content = ''
