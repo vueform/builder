@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.9.5
+
+> `2025-05-20`
+
+### 🐞 Bug Fixes
+- Prevented IME composition from adding new items (e.g., radio options when typing in Japanese)
+
 ## v1.9.4
 
 > `2025-03-04`
