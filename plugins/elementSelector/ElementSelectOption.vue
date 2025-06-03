@@ -71,7 +71,13 @@ export default {
 
 <style>
 .vfb-element-selector-plugin {
-  @apply absolute top-full left-0 right-0 w-full bg-white z-999;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #ffffff;
+  z-index: 999;
 }
 
 .vfb-element-selector-plugin *,
@@ -84,14 +90,16 @@ export default {
 }
 
 .vfb-element-selector-plugin .vfb-fields-container {
-  @apply w-full overflow-x-scroll;
+  width: 100%;
+  overflow-x: scroll;
 }
 
 .vfb-element-selector-plugin .vfb-fields-plugin {
-  @apply border-t-0 w-auto;
+  border-top: 0;
+  width: auto;
 }
 
 .vfb-element-selector-plugin .vfb-field-text {
-  @apply overflow-x-visible;
+  overflow-x: visible;
 }
 </style>

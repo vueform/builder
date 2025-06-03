@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@vueform/builder",
-  "version": "1.9.5",
+  "version": "1.10.0",
   "description": "Vueform Builder development build.",
   "homepage": "https://vueform.com",
   "license": "SEE LICENSE IN LICENSE.txt",
@@ -28,6 +28,8 @@
       "types": "./index.d.mts",
       "default": "./index.mjs"
     },
+    "./vueform.css": "./vueform.css",
+    "./tailwind.css": "./tailwind.css",
     "./index.css": "./index.css",
     "./scss/*": "./scss/*",
     "./locales/*.mjs": "./locales/*/index.mjs",

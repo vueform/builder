@@ -13,7 +13,7 @@
   word-break: break-word;
 }
 
-.vfb-learn-more,
+a.vfb-learn-more,
 .form-contains-link a.vfb-learn-more {
   @apply leading-none text-0.5xs relative -top-0.5 text-gray-400 whitespace-nowrap border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
 }
@@ -86,7 +86,10 @@
   @apply col-span-1;
 }
 
-.vfb-util-tabs-tiny {
+.vfb-util-tabs-tiny,
+.form-text-sm.vfb-util-tabs-tiny,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-tiny,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-tiny {
   @apply text-xs leading-tight;
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
@@ -96,30 +99,45 @@
   @apply whitespace-nowrap overflow-hidden;
 }
 
-.vfb-util-tabs-small {
+.vfb-util-tabs-tiny-label {
+  @apply leading-none;
+}
+
+.vfb-util-tabs-small,
+.form-text-sm.vfb-util-tabs-small,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-small,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-small {
   @apply text-sm leading-tight;
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
 }
 
-.vfb-util-tabs-outline-gray-selected {
+.vfb-util-tabs-outline-gray-selected,
+.vf-checkbox-tabs-sm.vfb-util-tabs-outline-gray-selected,
+.vf-radio-tabs-sm.vfb-util-tabs-outline-gray-selected {
   @apply bg-gray-100 text-black border-gray-300 dark:border-dark-600 dark:bg-dark-600 dark:bg-opacity-100 dark:text-white;
 }
 
-.vfb-util-tabs-outline-gray-unselected {
+.vfb-util-tabs-outline-gray-unselected,
+.vf-checkbox-tabs-sm.vfb-util-tabs-outline-gray-unselected,
+.vf-radio-tabs-sm.vfb-util-tabs-outline-gray-unselected {
   @apply bg-white text-gray-700 border-gray-300 dark:bg-dark-800 dark:text-white dark:border-dark-600;
 }
 
-.vfb-util-tabs-outline-selected {
+.vfb-util-tabs-outline-selected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-selected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-selected {
   @apply bg-primary-500 bg-opacity-20 text-primary-600 border-primary-500 dark:border-dark-600 dark:bg-dark-600 dark:bg-opacity-100 dark:text-white;
 }
 
-.vfb-util-tabs-outline-unselected {
+.vfb-util-tabs-outline-unselected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-unselected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-unselected {
   @apply bg-white text-primary-500 border-primary-500 dark:bg-dark-800 dark:text-white dark:border-dark-600;
 }
 
 .vfb-util-number-input {
-  @apply form-pl-input-sm form-py-input-sm;
+  @apply form-pl-input-sm form-py-input-sm pr-0;
 }
 
 .vfb-util-number-addon {
@@ -136,10 +154,10 @@
 
 .vfb-util-props-group-container {
   @apply col-span-12;
-}
 
-.vfb-util-props-group-container {
-  @apply col-span-12;
+  input[type="text"], input[type="search"] {
+    @apply w-[inherit];
+  }
 
   label.text-type\:form-pt-input-border-sm {
     @apply pr-2 break-words block;
@@ -154,8 +172,25 @@
   @apply my-4;
 }
 
+.vfb-util-props-list-el-input,
+.vfb-util-props-list-el-input-default,
+.vfb-util-props-list-el-input-success,
+.vfb-util-props-list-el-select,
+.vfb-util-props-list-el-select-default,
+.vfb-util-props-list-el-select-success,
+.vfb-util-props-list-el-select-container,
+.vfb-util-props-list-el-select-container-default,
+.vfb-util-props-list-el-select-container-success {
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  outline: none !important;
+}
+
 .vfb-util-props-list-el-input {
-  @apply border-b border-gray-200 dark:border-dark-600;
+  @apply border-gray-200 dark:border-dark-600;
 }
 
 .vfb-util-props-list-el-input-default {
@@ -179,7 +214,7 @@
 }
 
 .vfb-util-props-list-el-select-container {
-  @apply border-b border-gray-200 dark:border-dark-600 relative;
+  @apply border-gray-200 dark:border-dark-600 relative;
 }
 
 .vfb-util-props-list-el-select-container-default {
@@ -190,17 +225,28 @@
   @apply focused:border-primary-500 focused:dark:border-dark-400;
 }
 
-.vfb-util-props-list-label {
-  @apply mb-4 mt-3.5;
+.vfb-util-props-list-label,
+.vf-label.vfb-util-props-list-label {
+  @apply mb-4 mt-3.5 pb-0;
 }
 
 .vfb-util-props-list-add {
   @apply absolute top-0 right-0;
 }
 
+.vfb-util-props-list-item,
+.vf-row.vfb-util-props-list-item {
+  gap: 0;
+} 
+
+.vfb-util-props-list-in-object-add,
+.vf-btn-list-add.vf-btn-list-add-sm.vfb-util-props-list-in-object-add {
+  @apply -mt-1.25;
+}
+
 .vfb-util-props-separator-top {
   .vfb-util-props-list-add {
-    @apply absolute top-4 right-5;
+    @apply absolute top-3 right-0;
   }
 }
 
@@ -238,15 +284,22 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply items-start form-pt-input-border;
 }
 
-.vfb-util-props-toggle-wrapper {
+.vfb-util-props-toggle-wrapper,
+.vf-toggle-wrapper.vfb-util-props-toggle-wrapper {
   @apply items-center justify-end form-h-input-sm;
+}
+
+.vfb-util-props-toggle-label,
+.vf-label.vfb-util-props-toggle-label {
+  @apply flex items-center;
 }
 
 .vfb-util-props-horizontal-label {
   @apply items-center leading-tighter;
 }
 
-.vfb-util-props-tags {
+.vfb-util-props-tags,
+.vfb-util-props-tags .vf-multiselect-tag-wrapper {
   @apply whitespace-normal break-all;
 }
 
@@ -465,4 +518,183 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-px-1 {
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
+}
+
+.vfb-matrix-condition-button {
+  position: relative;
+
+  &:hover {
+    .vfb-matrix-condition-button-tooltip {
+      opacity: 1;
+    }
+  }
+}
+
+.vfb-matrix-condition-button-tooltip {
+  @apply absolute left-1/2 -bottom-1 text-xs whitespace-nowrap transform -translate-x-1/2 translate-y-full bg-black bg-opacity-60 rounded px-1 transition-opacity opacity-0;
+}
+
+.vfb-matrix-condition-button-count {
+  @apply bg-gray-200 rounded-full w-4 h-4 flex items-center justify-center text-[10px] leading-none absolute -right-2 -top-2 text-black;
+}
+
+.vfb-config-list-remove {
+  @apply dark:bg-dark-500;
+}
+
+.vfb-toggle-next-closer {
+  @apply -mb-2;
+}
+
+.vfb-mx-px {
+  @apply mx-px;
+}
+
+.vfb-mb-1 {
+  @apply mb-1;
+}
+
+.vfb-mb-2 {
+  @apply mb-2;
+}
+
+.vfb-mt-1\.5 {
+  @apply mt-1.5;
+}
+
+.vfb-mt-2 {
+  @apply mt-2;
+}
+
+.vfb-items-endpoint-input {
+  @apply -mt-2;
+}
+
+.vfb-opacity-60 {
+  opacity: 0.6;
+}
+
+.vfb-pointer-events-none {
+  pointer-events: none;
+}
+
+.vfb-border-t-0 {
+  border-top: 0 !important;
+}
+
+.vfb-columns-current {
+  @apply w-full flex justify-between items-center;
+}
+
+.vfb-columns-viewport {
+  @apply text-xs;
+}
+
+.vfb-color-muted {
+  @apply form-color-muted;
+}
+
+.vfb-full {
+  width: 100%;
+}
+
+.vfb-text-center {
+  text-align: center;
+}
+
+.vfb-cursor-pointer {
+  cursor: pointer;
+}
+
+.vfb-theme-option {
+  @apply w-full flex items-center justify-between;
+}
+
+.vfb-theme-option-delete {
+  @apply text-xxs opacity-40 transition-all hover:opacity-100;
+}
+
+.vfb-validation-rule-helper {
+  @apply form-px-input mt-1 form-color-muted text-sm;
+}
+
+.vfb-form-width-checkbox-container {
+  @apply flex items-center h-[36px];
+}
+
+.vfb-col-span-12 {
+  grid-column: span 12 / span 12 !important;
+}
+
+.vfb-multiline-addon,
+.vf-addon.vf-addon-before.vfb-multiline-addon,
+.vf-addon.vf-addon-before.vf-addon-sm.vfb-multiline-addon {
+  @apply pt-2 mt-px items-start;
+}
+
+.vfb-border-0 {
+  border: 0;
+}
+
+.vfb-radius-0 {
+  border-radius: 0;
+}
+
+.vfb-outline-none {
+  outline: none !important;
+}
+
+.vfb-h-auto {
+  height: auto;
+}
+
+.vfb-matrix-list-add,
+.vf-btn-list-add.vfb-matrix-list-add {
+  @apply w-full text-center py-[0.375rem] form-radius-input form-p-btn mt-0;
+}
+
+.vfb-matrix-list-add-empty,
+.vf-btn-list-add.vfb-matrix-list-add.vfb-matrix-list-add-empty {
+  @apply -mt-4 relative -top-0.5;
+}
+
+.vfb-matrix-list-list {
+  @apply form-mb-gutter-sm;
+}
+
+.vfb-matrix-list-item {
+  @apply p-4 form-radius-input form-border-width-input form-border-color-input bg-white dark:bg-dark-800 dark:border-dark-600 ghost:opacity-0;
+}
+
+.vfb-matrix-list-handle,
+.vf-list-handle.vfb-matrix-list-handle {
+  @apply left-1.5 top-4;
+}
+
+.vfb-matrix-item-list-label {
+  @apply mb-2 font-semibold;
+}
+
+.vfb-matrix-item-list-handle {
+  @apply left-px;
+}
+
+.vfb-matrix-item-list-item {
+  @apply ghost:opacity-0;
+}
+
+.vfb-props-form-elements {
+  gap: 0 !important;
+}
+
+.vfb-props-form-element-label {
+  @apply leading-snug;
+}
+
+.vfb-h-full {
+  height: 100%;
+}
+
+.vfb-simple-items-label {
+  @apply order-2 p-0 mt-1.5 text-gray-500 dark:text-dark-400;
 }

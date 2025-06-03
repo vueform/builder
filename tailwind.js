@@ -58,6 +58,7 @@ const builder = plugin((context) => {
         98: '24.5rem',
       },
       minWidth: {
+        2: '0.5rem',
         6: '1.5rem',
         120: '30rem',
       },

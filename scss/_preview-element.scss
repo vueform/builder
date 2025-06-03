@@ -173,7 +173,7 @@
 }
 
 .vfb-preview-element-outer-wrapper {
-  @apply grid grid-cols-12 flex-1;
+  @apply grid grid-cols-12 flex-1 h-full;
 }
 
 .vfb-preview-element-outer-wrapper-not-dragging {
@@ -285,7 +285,7 @@
 }
 
 .vfb-preview-element-name-tag {
-  @apply absolute left-0 top-0 transform -translate-y-full bg-primary-500 text-white px-2 py-px text-xs;
+  @apply absolute left-0 top-0 transform -translate-y-full bg-primary-500 text-white px-2 py-px text-xs leading-[1rem];
 }
 
 .vfb-preview-element-name-tag-unselected {

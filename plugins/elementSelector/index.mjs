@@ -4,32 +4,102 @@ import TextElement from './TextElement.vue'
 import TextareaElement from './TextareaElement.vue'
 import ElementSelectOption from './ElementSelectOption.vue'
 
+const extendTemplates = (templates, originalTemplates) => {
+  Object.entries(templates).forEach(([name, overidingTemplate]) => {
+    const originalTemplate = originalTemplates[name]
+
+    if (!originalTemplate) {
+      return 
+    }
+
+    const originalData = originalTemplate.data() || {}
+
+    const overridingData = overidingTemplate.data() || {}
+
+    overidingTemplate.data = () => ({
+      ...originalData,
+      ...overridingData,
+      defaultClasses: {
+        ...(originalData.defaultClasses || {}),
+        ...(overridingData.defaultClasses || {}),
+      }
+    })
+
+    templates[name] = overidingTemplate
+  })
+
+  return templates
+}
+
 export default function () {
   return [
     () => ({
       config(config) {
-        // Can be used on Text & Textarea elements with `view: 'elementSelector'`
-        config.theme.templates.TextElement_elementSelector = markRaw(TextElement)
-        config.theme.templates.TextareaElement_elementSelector = markRaw(TextareaElement)
+        const templates = extendTemplates({
+          TextElement,
+          TextareaElement,
+        }, config.theme.templates)
 
-        // Add an extra class to Text & Textarea elements
-        config.theme.classes.TextElement.inputContainer_elementSelector = 'relative'
-        config.theme.classes.TextareaElement.inputContainer_elementSelector = 'relative'
-
-        let TextElement_$inputContainer = config.theme.classes.TextElement.$inputContainer
-        let TextareaElement_$inputContainer = config.theme.classes.TextareaElement.$inputContainer
-
-        // Add those extra classes to $inputContainer
-        config.theme.classes.TextElement.$inputContainer = (classes, el$) => {
-          return TextElement_$inputContainer(classes, el$).concat(
-            el$.elementSelector ? classes.inputContainer_elementSelector : null
-          )
+        config.theme.templates = {
+          ...config.theme.templates,
+          TextElement_elementSelector: templates.TextElement,
+          TextareaElement_elementSelector: templates.TextareaElement,
         }
 
-        config.theme.classes.TextareaElement.$inputContainer = (classes, el$) => {
-          return TextareaElement_$inputContainer(classes, el$).concat(
-            el$.elementSelector ? classes.inputContainer_elementSelector : null
-          )
+        // Add an extra class to Text & Textarea elements
+        if (config.theme.classes.TextElement) {
+          config.theme.classes.TextElement.inputContainer_elementSelector = 'vfb-relative'
+          config.theme.classes.TextareaElement.inputContainer_elementSelector = 'vfb-relative'
+
+          let TextElement_$inputContainer = config.theme.classes.TextElement.$inputContainer
+          let TextareaElement_$inputContainer = config.theme.classes.TextareaElement.$inputContainer
+
+          // Add those extra classes to $inputContainer
+          config.theme.classes.TextElement.$inputContainer = (classes, el$) => {
+            return TextElement_$inputContainer(classes, el$).concat(
+              el$.elementSelector ? classes.inputContainer_elementSelector : null
+            )
+          }
+
+          config.theme.classes.TextareaElement.$inputContainer = (classes, el$) => {
+            return TextareaElement_$inputContainer(classes, el$).concat(
+              el$.elementSelector ? classes.inputContainer_elementSelector : null
+            )
+          }
+        } else {
+          const textData = config.theme.templates.TextElement_elementSelector.data()
+
+          config.theme.templates.TextElement_elementSelector.data = () => {
+            return {
+              ...textData,
+              defaultClasses: {
+                ...textData.defaultClasses,
+                inputContainer_elementSelector: 'vfb-relative',
+                $inputContainer: (classes, el$) => {
+                  return textData.defaultClasses.$inputContainer(classes, el$).concat(
+                    el$.elementSelector ? classes.inputContainer_elementSelector : null
+                  )
+                }
+              }
+            }
+          }
+
+          const textareaData = config.theme.templates.TextareaElement_elementSelector.data()
+
+          config.theme.templates.TextareaElement_elementSelector.data = () => {
+            return {
+              ...textareaData,
+              defaultClasses: {
+                ...textareaData.defaultClasses,
+                inputContainer_elementSelector: 'vfb-relative',
+                $inputContainer: (classes, el$) => {
+                  return textareaData.defaultClasses.$inputContainer(classes, el$).concat(
+                    el$.elementSelector ? classes.inputContainer_elementSelector : null
+                  )
+                }
+              }
+            }
+          }
         }
 
         return config

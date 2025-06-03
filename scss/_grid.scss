@@ -263,3 +263,22 @@
 .vfb-grid-modal-grid-cell-tooltip {
   @apply max-w-[400px] [&_div]:overflow-hidden [&_div]:text-ellipsis;
 }
+
+.vf-grid-table {
+  .vf-grid-field-wrapper > .vfb-preview-element-container > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container {
+    & > .vfb-preview-element-inner-wrapper-before,
+    & > .vfb-preview-element-inner-wrapper-after {
+      display: none;
+    }
+  }
+}
+
+.vf-matrix-table,
+.vf-grid-table {
+  .vf-matrix-cell-wrapper > .vfb-preview-element-container > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container {
+    & > .vfb-preview-element-inner-wrapper-before,
+    & > .vfb-preview-element-inner-wrapper-after {
+      display: none;
+    }
+  }
+}

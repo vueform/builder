@@ -196,7 +196,7 @@ const ItemsField_simple = class extends BaseMultilingualElementField
         label: this.tags.simple_items_items_label,
         addClasses: {
           ElementLabel: {
-            container: 'order-2 p-0 mt-1.5 text-gray-500 dark:text-dark-400'
+            container: 'vfb-simple-items-label'
           }
         },
         formatLoad(v) {
@@ -470,20 +470,7 @@ const FileAcceptField_simple_image = class extends BaseElementField
             info: this.tags.simple_file_accept_accept_mimes_info,
             create: true,
             closeOnSelect: false,
-            replaceClasses: {
-              ElementLabel: {
-                container: {
-                  'items-center': 'items-start form-pt-input-border'
-                }
-              },
-              TagsElement: {
-                select: {
-                  tag: {
-                    'whitespace-nowrap': 'whitespace-normal break-all'
-                  }
-                }
-              }
-            },
+            presets: ['prop-multiline'],
             items: imageMimes,
             object: true,
             conditions: [
@@ -498,13 +485,7 @@ const FileAcceptField_simple_image = class extends BaseElementField
             info: this.tags.simple_file_accept_accept_info,
             create: true,
             closeOnSelect: false,
-            replaceClasses: {
-              ElementLabel: {
-                container: {
-                  'items-center': 'items-start form-pt-input-border'
-                }
-              },
-            },
+            presets: ['prop-multiline'],
             items: imageExtensions,
             object: true,
             conditions: [

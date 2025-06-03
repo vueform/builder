@@ -8,6 +8,8 @@
 
   .vfb-panels-tab {
     @apply flex-1 text-center py-2.5 cursor-pointer border-b border-r border-r-gray-200 dark:border-r-dark-600;
+    border-bottom-style: solid;
+    border-right-style: solid;
 
     &.is-active {
       @apply bg-white border-b-white dark:bg-dark-700 dark:border-b-dark-700;
@@ -121,4 +123,8 @@
 }
 .vfb-panels-popovers {
 
+}
+
+.vfb-panel-header-no-mt {
+  margin-top: -1rem !important;
 }

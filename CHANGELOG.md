@@ -1,5 +1,19 @@
 [//]: # (Don't use <tags>)
 
+## v1.10.0
+
+> `2025-06-03`
+
+### 🎉 Feature
+- Removed Tailwind CSS as a dependency. Now the builder can be used with `vueform` theme.
+- Added provide `builder$` so that the builder instance is available in every child
+- Made button label property translatable
+
+### 🐞 Bug Fixes
+- Moving elements in tree fix #126
+- Remove unstyled color picker #108
+- Load builder only on mounted to avoid FOUC in Firefox
+
 ## v1.9.5
 
 > `2025-05-20`

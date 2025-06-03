@@ -16,6 +16,7 @@
 
 .vfb-tool {
   @apply relative flex flex-col bg-white shadow-lg rounded border border-gray-300 dark:bg-dark-700 dark:border-dark-700 dark:text-white;
+  border-style: solid;
 }
 
 .vfb-tool-device {

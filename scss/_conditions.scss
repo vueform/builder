@@ -70,6 +70,10 @@
   @apply relative -ml-12;
 }
 
+.vfb-condition-list-remove {
+  @apply dark:bg-dark-500;
+}
+
 
 .vfb-condition-sublist {
   @apply relative;

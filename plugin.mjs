@@ -62,39 +62,30 @@ export default function () {
           ...config.presets,
           'preview-form': {},
           
+          // @class
           'props-form': {
-            removeClasses: {
-              FormElements: {
-                container_sm: ['form-gap-y-gutter-sm'],
-              },
-            },
-            replaceClasses: {
-              ToggleElement: {
-                wrapper: {
-                  'items-start': 'vfb-util-props-toggle-wrapper'
-                }
-              },
-              TagsElement: {
-                select: {
-                  tag: {
-                    'whitespace-nowrap': 'vfb-util-props-tags'
-                  }
-                }
-              }
-            },
             addClasses: {
+              FormElements: {
+                container_sm: 'vfb-props-form-elements'
+              },
               ElementLabel: {
-                wrapper: 'leading-snug'
+                wrapper: 'vfb-props-form-element-label'
               },
               SliderElement: {
                 container: 'vfb-config-slider',
               },
               ToggleElement: {
                 container: 'vfb-config-toggle',
+                wrapper: 'vfb-util-props-toggle-wrapper',
               },
               ListElement: {
                 remove: 'vfb-config-list-remove',
               },
+              TagsElement: {
+                select: {
+                  tag: 'vfb-util-props-tags'
+                }
+              }
             },
           },
           'separator': {
@@ -114,27 +105,17 @@ export default function () {
           'prop-multiline': {
             addClasses: {
               ElementAddon: {
-                container: 'pt-2 mt-px'
+                container: 'vfb-multiline-addon'
               },
               ElementLabel: {
                 container: 'vfb-prop-multiline'
-              },
-              ElementLabel: {
-                container: 'vfb-prop-multiline'
-              },
-            },
-            replaceClasses: {
-              ElementAddon: {
-                container: {
-                  'items-center': 'items-start'
-                }
               },
             },
           },
           'prop-toggle': {
             addClasses: {
               ElementLabel: {
-                container: 'flex items-center'
+                container: 'vfb-util-props-toggle-label'
               },
             },
           },
@@ -165,78 +146,29 @@ export default function () {
                 container: 'vfb-util-props-list-label',
               },
               ListElement: {
-                add: 'vfb-util-props-list-add'
+                add: 'vfb-util-props-list-add',
+                listItem_sm: 'vfb-util-props-list-item'
               },
               ElementLayout: {
                 container: 'vfb-util-props-list-layout',
               }
             },
-            removeClasses: {
+          },
+          'prop-list-in-object': {
+            addClasses: {
               ListElement: {
-                listItem_sm: ['form-gap-gutter-sm'],
-              }
+                add: 'vfb-util-props-list-in-object-add'
+              },
             },
           },
           'prop-list-object': {
-            removeClasses: {
+            addClasses: {
               ObjectElement: {
-                wrapper_sm: ['form-gap-gutter-sm'],
+                wrapper_sm: 'vfb-util-props-list-item',
               }
             },
           },
           'prop-list-el': {
-            removeClasses: {
-              TextElement: {
-                inputContainer: ['form-border-width-input'],
-                inputContainer_sm: ['form-radius-input-sm'],
-                inputContainer_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                inputContainer_success: ['form-bg-input-success', 'focused:form-ring'],
-              },
-              TTextElement: {
-                inputContainer: ['form-border-width-input'],
-                inputContainer_sm: ['form-radius-input-sm'],
-                inputContainer_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                inputContainer_success: ['form-bg-input-success', 'focused:form-ring'],
-              },
-              TextareaElement: {
-                inputContainer: ['form-border-width-input'],
-                inputContainer_sm: ['form-radius-large-sm'],
-                inputContainer_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                inputContainer_success: ['form-bg-input-success', 'focused:form-ring'],
-              },
-              TTextareaElement: {
-                inputContainer: ['form-border-width-input'],
-                inputContainer_sm: ['form-radius-large-sm'],
-                inputContainer_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                inputContainer_success: ['form-bg-input-success', 'focused:form-ring'],
-              },
-              DateElement: {
-                inputContainer: ['form-border-width-input'],
-                inputContainer_sm: ['form-radius-input-sm'],
-                inputContainer_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                inputContainer_success: ['form-bg-input-success', 'focused:form-ring'],
-              },
-              SelectElement: {
-                input: ['form-border-width-input'],
-                input_sm: ['form-radius-input-sm'],
-                input_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                input_success: ['form-bg-input-success', 'focused:form-ring'],
-                select: {
-                  container: ['form-border-width-input'],
-                  container_sm: ['form-radius-input-sm'],
-                  container_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                  container_success: ['form-bg-input-success', 'focused:form-ring'],
-                }
-              },
-              TagsElement: {
-                select: {
-                  container: ['form-border-width-input'],
-                  container_sm: ['form-radius-input-sm'],
-                  container_default: ['form-bg-input', 'hover:form-bg-input-hover', 'focused:form-bg-input-focus', 'focused:form-ring'],
-                  container_success: ['form-bg-input-success', 'focused:form-ring'],
-                }
-              },
-            },
             addClasses: {
               TextElement: {
                 inputContainer: 'vfb-util-props-list-el-input',
@@ -300,16 +232,12 @@ export default function () {
             }
           },
           'number': {
-            replaceClasses: {
+            addClasses: {
               TextElement: {
-                input_sm: {
-                  'form-p-input-sm': 'vfb-util-number-input'
-                }
+                input_sm: 'vfb-util-number-input'
               },
               ElementAddon: {
-                container: {
-                  'form-color-addon': 'vfb-util-number-addon'
-                }
+                container: 'vfb-util-number-addon'
               }
             },
           },
@@ -382,60 +310,75 @@ export default function () {
           'tabs-tiny': {
             addClasses: {
               RadiogroupRadio: {
+                wrapper_sm: 'vfb-util-tabs-tiny',
                 text: 'vfb-util-tabs-tiny-text',
               },
               CheckboxgroupCheckbox: {
+                wrapper_sm: 'vfb-util-tabs-tiny',
                 text: 'vfb-util-tabs-tiny-text',
-              },
-            },
-            replaceClasses: {
-              RadiogroupRadio: {
-                wrapper_sm: {
-                  'form-text-sm': 'vfb-util-tabs-tiny'
-                }
-              },
-              CheckboxgroupCheckbox: {
-                wrapper_sm: {
-                  'form-text-sm': 'vfb-util-tabs-tiny'
-                }
               },
               ElementLabel: {
-                wrapper: {
-                  'leading-snug': 'leading-none'
-                }
+                wrapper: 'vfb-util-tabs-tiny-label',
               }
             },
           },
           'tabs-small': {
-            replaceClasses: {
+            addClasses: {
               RadiogroupRadio: {
-                wrapper_sm: {
-                  'form-text-sm': 'vfb-util-tabs-small'
-                }
+                wrapper_sm: 'vfb-util-tabs-small'
               },
             },
           },
           'cell-editor': {
             addClasses: {
               Vueform: {
-                form: 'h-full',
+                form: 'vfb-h-full',
               },
               FormElements: {
-                container: 'h-full',
+                container: 'vfb-h-full',
               },
               ElementLayout: {
-                outerWrapper: 'h-full',
-                innerWrapperBefore: 'hidden',
-                innerWrapperAfter: 'hidden',
+                outerWrapper: 'vfb-h-full',
+                innerWrapperBefore: 'vfb-hidden',
+                innerWrapperAfter: 'vfb-hidden',
+              },
+              TextareaElement: {
+                inputContainer: 'vfb-border-0',
+                inputContainer_md: 'vfb-radius-0',
+                inputContainer_focused: 'vfb-outline-none',
+                input: 'vfb-h-auto',
+              }
+            },
+          },
+          'matrix-list': {
+            addClasses: {
+              ListElement: {
+                add: 'vfb-matrix-list-add',
+                list_sm: 'vfb-matrix-list-list',
+                listItem: 'vfb-matrix-list-item',
+                handle: 'vfb-matrix-list-handle'
+              }
+            },
+            overrideClasses: {
+              ListElement: {
+                add_empty: 'vfb-matrix-list-add-empty',
+                $add: (classes, { Size, value }) => ([
+                  classes.add,
+                  classes[`add_${Size}`],
+                  !value?.length ? classes.add_empty : null,
+                ]),
               },
             },
-            removeClasses: {
-              TextareaElement: {
-                inputContainer: ['form-border-width-input'],
-                inputContainer_md: ['form-radius-large'],
-                inputContainer_focused: ['form-focus'],
-                input: ['h-full'],
-              }
+          },
+          'matrix-item-list': {
+            addClasses: {
+              ElementLabel: {
+                container: 'vfb-matrix-item-list-label'
+              },
+              ListElement: {
+                handle: 'vfb-matrix-item-list-handle',
+                listItem: 'vfb-matrix-item-list-item',
+              },
             },
           }
         }
@@ -1720,9 +1663,9 @@ export default function () {
           required: false,
           type: Object,
           default: () => ({
-            container: 'col-span-12',
-            innerContainer: 'col-span-12',
-            wrapper: 'col-span-12',
+            container: 'vfb-col-span-12',
+            innerContainer: 'vfb-col-span-12',
+            wrapper: 'vfb-col-span-12',
           })
         },
         visible: {

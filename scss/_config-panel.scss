@@ -172,10 +172,10 @@
 }
 
 .vfb-config-panel-input-language {
-  @apply text-gray-400 font-bold text-0.5xs flex items-start pt-2.25 pr-1.5 uppercase order-1 cursor-text select-none dark:text-dark-400;
+  @apply text-gray-400 font-bold text-0.5xs flex items-start pt-2.25 pr-1.5 uppercase order-1 cursor-text select-none leading-none dark:text-dark-400;
 
   & + input, & + textarea {
-    @apply pr-1;
+    @apply pr-1 w-[inherit];
   }
 }
 

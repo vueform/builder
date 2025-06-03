@@ -106,8 +106,13 @@
   @apply flex items-center justify-center flex-col mt-[3px] mb-4;
 }
 
+.vf-btn.vfb-modal-ai-submit,
 .form-p-btn.vfb-modal-ai-submit {
-  @apply bg-gradient-to-r from-sky-400 to-primary-500 rounded-lg py-2.5;
+  @apply bg-gradient-to-r from-sky-400 to-primary-500 rounded-lg py-2.5 flex items-center font-semibold;
+}
+
+.vfb-modal-ai-submit-icon {
+  @apply mr-2;
 }
 
 .vfb-modal-ai-loader {
@@ -160,7 +165,7 @@
 }
 
 .vfb-modal-import-textarea {
-  @apply w-full px-5 py-4 border-gray-300 min-h-[400px] text-[13px] shadow-inner box-border m-0 font-mono leading-normal;
+  @apply w-full px-5 py-4 border-gray-300 min-h-[400px] text-[13px] shadow-inner box-border m-0 font-mono leading-normal dark:bg-dark-800 dark:text-white;
 }
 
 .vfb-modal-import-error {
@@ -169,6 +174,10 @@
 
 .vfb-modal-import-btn-disabled {
   @apply opacity-60 pointer-events-none;
+}
+
+.vfb-modal-custom-element-note {
+  @apply bg-gray-100 px-3 py-2 rounded-lg border border-gray-300 text-gray-700 mt-2 dark:bg-dark-500 dark:border-dark-500 dark:text-white;
 }
 
 
