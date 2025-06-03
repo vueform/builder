@@ -622,6 +622,13 @@ input::placeholder,textarea::placeholder{
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
+  text-align: left;
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity));
+}
+.vfb-builder:is(.dark *){
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .vfb-builder *, .vfb-builder ::before, .vfb-builder ::after {
@@ -6945,6 +6952,8 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding: 2.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity));
   --tw-shadow: 0px 0px 20px 0 rgba(0,0,0,0.08);
   --tw-shadow-colored: 0px 0px 20px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -6953,17 +6962,31 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   transition-duration: 150ms;
 }
 
-.vfb-preview-wrapper-dark{
+.vfb-preview-wrapper:is(.dark *){
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity));
+}
+
+.vfb-preview-wrapper-dark,
+.vfb-preview-wrapper.vfb-preview-wrapper-dark{
   --tw-bg-opacity: 1;
   background-color: rgb(25 25 25 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
-.vfb-preview-wrapper-dark .vfb-preview-empty-title{
+
+.vfb-preview-wrapper-dark:is(.dark *),
+.vfb-preview-wrapper.vfb-preview-wrapper-dark:is(.dark *){
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
-.vfb-preview-wrapper-dark .vfb-preview-empty-description{
+.vfb-preview-wrapper-dark .vfb-preview-empty-title,
+.vfb-preview-wrapper.vfb-preview-wrapper-dark .vfb-preview-empty-title{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.vfb-preview-wrapper-dark .vfb-preview-empty-description,
+.vfb-preview-wrapper.vfb-preview-wrapper-dark .vfb-preview-empty-description{
   --tw-text-opacity: 1;
   color: rgb(132 132 132 / var(--tw-text-opacity));
 }
@@ -7045,6 +7068,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-preview-form-with-tabs{
   margin-top: -0.5rem;
+}
+
+.vfb-preview-form {
+  @q;
 }
 
 .vfb-preview-container-default .col-span-1, .vfb-preview-container-default .vf-col-1,

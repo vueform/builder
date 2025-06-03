@@ -7,11 +7,12 @@
 }
 
 .vfb-preview-wrapper {
-  @apply bg-white rounded-lg shadow-box-circle mx-auto w-full relative transition-all p-10;
+  @apply bg-white rounded-lg shadow-box-circle mx-auto w-full relative transition-all p-10 text-gray-900 dark:text-gray-900;
 }
 
-.vfb-preview-wrapper-dark {
-  @apply bg-dark-900 text-white;
+.vfb-preview-wrapper-dark,
+.vfb-preview-wrapper.vfb-preview-wrapper-dark {
+  @apply bg-dark-900 text-white dark:text-white;
 
   .vfb-preview-empty-title {
     @apply text-white;
@@ -60,4 +61,8 @@
 
 .vfb-preview-form-with-tabs {
   @apply -mt-2;
+}
+
+.vfb-preview-form {
+  @q
 }

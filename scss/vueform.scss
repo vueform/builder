@@ -12,6 +12,8 @@
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
+  text-align: left;
+  @apply text-gray-900 dark:text-white;
 }
 
 .vfb-builder *, .vfb-builder ::before, .vfb-builder ::after{
