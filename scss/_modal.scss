@@ -26,6 +26,10 @@
   @apply text-gray-500 text-0.5md dark:text-dark-400;
 }
 
+.vfb-modal-close-button {
+  @apply bg-transparent border-0 cursor-pointer;
+}
+
 .vfb-modal-close {
   @apply text-lg text-gray-500 transition-colors hover:text-gray-900 dark:text-dark-400 dark:hover:text-dark-100;
 }

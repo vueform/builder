@@ -636,7 +636,7 @@ input::placeholder,textarea::placeholder{
 }
 
 .vfb-builder textarea {
-  resize: vertical;
+  resize: none;
 }
 
 .vfb-code-toolbar{
@@ -3561,6 +3561,13 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-modal-subtitle:is(.dark *){
   --tw-text-opacity: 1;
   color: rgb(132 132 132 / var(--tw-text-opacity));
+}
+
+.vfb-modal-close-button{
+  cursor: pointer;
+  border-width: 0px;
+  background-color: transparent;
+  border: 0;
 }
 
 .vfb-modal-close{

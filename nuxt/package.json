@@ -1,6 +1,6 @@
 {
   "name": "@vueform/builder-nuxt",
-  "version": "1.14.0",
+  "version": "1.16.0",
   "description": "Nuxt module for Vueform Builder",
   "repository": "vueform/builder-nuxt",
   "license": "MIT",
@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.8.0",
-    "@vueform/vueform": "^1.12.7",
-    "@vueform/builder": "^1.9.5"
+    "@vueform/vueform": "^1.12.9",
+    "@vueform/builder": "^1.10.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
