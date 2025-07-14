@@ -1,5 +1,16 @@
 [//]: # (Don't use <tags>)
 
+## v1.10.3
+
+> `2025-07-14`
+
+### 🎉 Feature
+- Change branding color via CSS var in `vueform` theme
+
+### 🐞 Bug Fixes
+- Don't reset static childs when added to list
+- Merge default prop features with element level definitions #136
+
 ## v1.10.2
 
 > `2025-06-04`

@@ -2982,6 +2982,8 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   font-weight: 600;
+  background-image: none;
+  background: rgb(var(--vfb-primary-500, 23 196 149)/1);
 }
 
 .vfb-btn-primary:focus,
@@ -3267,6 +3269,8 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   font-weight: 600;
+  background-image: none;
+  background: rgb(var(--vfb-primary-500, 23 196 149)/1);
 }
 
 .vfb-matrix-list-add-empty,
@@ -4209,6 +4213,8 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   font-weight: 600;
+  background-image: none;
+  background: rgb(var(--vfb-primary-500, 23 196 149)/1);
 }
 
 .vfb-conditions-render-title-btn:focus{
@@ -4353,6 +4359,8 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   font-weight: 600;
+  background-image: none;
+  background: rgb(var(--vfb-primary-500, 23 196 149)/1);
 }
 
 .vfb-conditions-render-empty-btn:focus{
@@ -8791,6 +8799,8 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   font-weight: 600;
+  background-image: none;
+  background: rgb(var(--vfb-primary-500, 23 196 149)/1);
 }
 
 .vfb-steps-control-button-lg{
@@ -10004,4 +10014,194 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   border-radius: 0px;
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.vfb-builder *, .vfb-builder:before, .vfb-builder:after, .vfb-builder:root {
+  --vf-primary: rgb(var(--vfb-primary-500, 23 196 149) / 1);
+  --vf-ring-color: rgb(var(--vfb-primary-500, 23 196 149) / 0.2);
+  --vf-bg-btn: var(--vf-primary);
+  --vf-border-color-btn: var(--vf-primary);
+}
+
+.vfb-tool-item-active-primary,
+.vfb-grid-modal-save:hover,
+.vfb-tree-item-drag-line-top,
+.vfb-tree-item-drag-line-bottom,
+.vfb-tree-item-drag-line-inside,
+.vfb-preview-drag-wrapper,
+.vfb-preview-drag-label,
+.vfb-preview-empty-container,
+.vfb-tab-container-drop-left:after,
+.vfb-tab-container-drop-right:after,
+.vfb-tab-overlay,
+.vfb-tab-area-left-drag-line,
+.vfb-tab-area-right-drag-line,
+.vfb-tab-action,
+.vfb-step-container.vfb-step-container-drop-left:after,
+.vfb-step-container.vfb-step-container-drop-right:after,
+.vfb-step-overlay,
+.vfb-step-area-left-drag-line,
+.vfb-step-area-right-drag-line,
+.vfb-step-action,
+.vfb-preview-element-name-tag,
+.vfb-preview-element-drag-label-wrapper,
+.vfb-preview-element-drag-label,
+.vfb-preview-element-edit-cells,
+.vfb-preview-element-clone,
+.vfb-preview-element-remove {
+  background-color: rgb(var(--vfb-primary-500, 23 196 149)/1);
+}
+
+.vfb-preview-element-clone-disabled,
+.vfb-preview-element-clone-disabled:hover,
+.vfb-preview-element-remove-disabled,
+.vfb-preview-element-remove-disabled:hover {
+  background-color: rgb(var(--vfb-primary-500, 23 196 149)/0.6);
+}
+
+.vfb-aligns-class-default-item-selected {
+  background-color: rgb(var(--vfb-primary-500, 23 196 149)/0.4);
+}
+
+.vfb-conditions-empty-icon,
+.vfb-util-tabs-outline-selected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-selected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-selected,
+.vfb-grid-modal-save,
+.vfb-grid-modal-grid-selector-box,
+.vfb-tree-item-wrapper-selected .vfb-tree-item-icon-container,
+.vfb-tree-item-wrapper-selected .vfb-tree-item-icon-container-repeat,
+.vfb-preview-grid-element-cell-drag-area {
+  background-color: rgb(var(--vfb-primary-500, 23 196 149)/0.2);
+}
+
+.vfb-preview-empty-container-active,
+.vfb-tab-container-editor.vfb-tab-container-selected,
+.vfb-tab-overlay-highlighted,
+.vfb-step-container-editor.vfb-step-container-selected,
+.vfb-step-overlay-highlighted,
+.vfb-steps-controls-container-select,
+.vfb-preview-element-overlay-selected {
+  background-color: rgb(var(--vfb-primary-500, 23 196 149)/0.1);
+}
+
+.vfb-preview-empty-container-inactive,
+.vfb-tab-overlay-not-highlighted,
+.vfb-step-overlay-not-highlighted {
+  background-color: rgb(var(--vfb-primary-500, 23 196 149)/0);
+}
+
+.vfb-tab-action:hover,
+.vfb-step-action:hover,
+.vfb-preview-element-edit-cells:hover,
+.vfb-preview-element-clone:hover,
+.vfb-preview-element-remove:hover {
+  background-color: rgb(var(--vfb-primary-600, 19 175 125)/1);
+}
+
+.vfb-aligns-class-default-item-selected {
+  background-color: rgb(var(--vfb-primary-700, 14 136 119)/0.4);
+}
+
+.vfb-dotted-link,
+.vfb-util-tabs-outline-unselected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-unselected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-unselected,
+.vfb-util-props-link,
+.vfb-modal-ai-loader,
+.vfb-conditions-empty-icon,
+.vfb-condition-icon,
+.vfb-field-icon,
+.vfb-grid-modal-save,
+.vfb-tree-item-wrapper-selected,
+.vfb-tree-item-wrapper-selected:is(.dark *),
+.vfb-tree-item-wrapper-selected .vfb-tree-item-icon-container,
+.vfb-tree-item-wrapper-selected .vfb-tree-item-icon-container-repeat,
+.vfb-panels-container-icons .vfb-panels-tab.is-active {
+  color: rgb(var(--vfb-primary-500, 23 196 149)/1);
+}
+
+.vfb-tree-item-wrapper-selected .vfb-tree-item-text-secondary {
+  color: rgb(var(--vfb-primary-500, 23 196 149)/0.7);
+}
+
+.vfb-preview-grid-element-cell-drag-area {
+  color: rgb(var(--vfb-primary-500, 23 196 149)/0.5);
+}
+
+.vfb-util-tabs-outline-selected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-selected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-selected {
+  color: rgb(var(--vfb-primary-600, 19 175 125)/1);
+}
+
+.vfb-tree-item-wrapper,
+.vfb-tab-container,
+.vfb-step-container,
+.vfb-steps-controls-container-editor {
+  border-color: rgb(var(--vfb-primary-500, 23 196 149)/0);
+}
+
+.vfb-code .line-highlight,
+.vfb-dotted-link,
+.vfb-util-tabs-outline-selected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-selected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-selected,
+.vfb-util-tabs-outline-unselected,
+.vf-checkbox-tabs.vf-checkbox-tabs-sm.vfb-util-tabs-outline-unselected,
+.vf-radio-tabs.vf-radio-tabs-sm.vfb-util-tabs-outline-unselected,
+.vfb-util-props-list-el-input-default.form-focus,
+.vfb-util-props-list-el-input-default:focus,
+.vfb-util-props-list-el-input-success.form-focus,
+.vfb-util-props-list-el-input-success:focus,
+.vfb-util-props-list-el-select-default.form-focus,
+.vfb-util-props-list-el-select-default:focus,
+.vfb-util-props-list-el-select-success.form-focus,
+.vfb-util-props-list-el-select-success:focus,
+.vfb-util-props-list-el-select-container-default.form-focus,
+.vfb-util-props-list-el-select-container-default:focus,
+.vfb-util-props-list-el-select-container-success.form-focus,
+.vfb-util-props-list-el-select-container-success:focus,
+.vfb-util-props-link,
+.vfb-conditions-render-title-btn:is(.dark *),
+.vfb-conditions-render-empty-btn:is(.dark *),
+.vfb-grid-modal-grid-selector-box,
+.vfb-tree-item-wrapper-being-moved,
+.vfb-model-preview-tab-active,
+.vfb-tab-container.vfb-tab-container-hover,
+.vfb-tab-container-editor:hover, .vfb-tab-container-editor:focus, .vfb-tab-container-editor.vfb-tab-container-moving,
+.vfb-tab-container-editor.vfb-tab-container-selected,
+.vfb-tab-container-editor.vfb-tab-container-moving:before,
+.vfb-step-container.vfb-step-container-hover,
+.vfb-step-container.vfb-step-container-drop-left:after,
+.vfb-step-container.vfb-step-container-drop-right:after,
+.vfb-step-container-editor:hover, .vfb-step-container-editor:focus, .vfb-step-container-editor.vfb-step-container-moving,
+.vfb-step-container-editor.vfb-step-container-selected,
+.vfb-step-container-editor.vfb-step-container-moving:before,
+.vfb-steps-controls-container-editor:hover,
+.vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-overlay, .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container > .vfb-preview-element-inner-wrapper > .vfb-preview-element-inner-overlay,
+.vfb-preview-element-overlay-selected,
+.vfb-preview-element-inner-overlay-selected,
+.vfb-preview-grid-element-cell-drag-area {
+  border-color: rgb(var(--vfb-primary-500, 23 196 149)/1);
+}
+
+.vfb-modal-ai-speed-selector *, .vfb-modal-ai-speed-selector:before, .vfb-modal-ai-speed-selector:after {
+  --vf-primary: var(--vf-gray-100);
+}
+
+.dark .vfb-modal-ai-speed-selector *, .dark .vfb-modal-ai-speed-selector:before, .dark .vfb-modal-ai-speed-selector:after {
+  --vf-primary: var(--vf-dark-500);
+}
+
+.vfb-modal-ai-head-title,
+.vfb-modal-ai-head-title-icon {
+  color: rgb(var(--vfb-primary-500, 23 196 149)/1);
+}
+
+.vf-btn.vfb-modal-ai-submit,
+.form-p-btn.vfb-modal-ai-submit,
+.vfb-modal-ai-head-title-beta {
+  background-image: none;
+  background: rgb(var(--vfb-primary-500, 23 196 149)/1);
 }

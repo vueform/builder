@@ -1775,7 +1775,9 @@ export default function () {
 
             nextTick(() => {
               component.children$Array.value.forEach((child$) => {
-                child$.reset()
+                if (!child$.isStatic) {
+                  child$.reset()
+                }
               })
             })
           }
