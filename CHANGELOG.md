@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.10.4
+
+> `2025-07-15`
+
+### 🐞 Bug Fixes
+- Default prop merge override fix
+
 ## v1.10.3
 
 > `2025-07-14`
