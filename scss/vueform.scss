@@ -61,7 +61,8 @@
 .vfb-preview-element-drag-label,
 .vfb-preview-element-edit-cells,
 .vfb-preview-element-clone,
-.vfb-preview-element-remove {
+.vfb-preview-element-remove,
+.vfb-expr-dialog-header {
   background-color: rgb(var(--vfb-primary-500, 23 196 149) / 1);
 }
 
@@ -138,7 +139,8 @@
 .vfb-tree-item-wrapper-selected:is(.dark *),
 .vfb-tree-item-wrapper-selected .vfb-tree-item-icon-container,
 .vfb-tree-item-wrapper-selected .vfb-tree-item-icon-container-repeat,
-.vfb-panels-container-icons .vfb-panels-tab.is-active {
+.vfb-panels-container-icons .vfb-panels-tab.is-active,
+.vfb-expr-dialog-content a {
   color: rgb(var(--vfb-primary-500, 23 196 149) / 1);
 }
 
@@ -208,7 +210,9 @@
 .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-overlay, .vfb-preview-element-container.vfb-preview-element-container-hover > .vfb-preview-element-outer-wrapper > .vfb-preview-element-inner-container > .vfb-preview-element-inner-wrapper > .vfb-preview-element-inner-overlay,
 .vfb-preview-element-overlay-selected,
 .vfb-preview-element-inner-overlay-selected,
-.vfb-preview-grid-element-cell-drag-area {
+.vfb-preview-grid-element-cell-drag-area,
+.vfb-modal-tab-selected,
+.dark .vfb-modal-tab-selected {
   border-color: rgb(var(--vfb-primary-500, 23 196 149) / 1);
 }
 

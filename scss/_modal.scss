@@ -184,6 +184,18 @@
   @apply bg-gray-100 px-3 py-2 rounded-lg border border-gray-300 text-gray-700 mt-2 dark:bg-dark-500 dark:border-dark-500 dark:text-white;
 }
 
+.vfb-modal-tabs {
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  @apply grid w-full pb-2;
+}
+
+.vfb-modal-tab {
+  @apply text-center h-12 flex items-center justify-center border-b border-gray-200 cursor-pointer dark:border-dark-500;
+}
+
+.vfb-modal-tab-selected {
+  @apply border-primary-500 font-semibold dark:border-primary-500;
+}
 
 @keyframes vfb-ai-loader-rotate {
   0% {

@@ -39,6 +39,22 @@
   @apply text-gray-500 leading-none mb-4 dark:text-dark-400;
 }
 
+.vfb-conditions-exp-form {
+  @apply mb-4;
+
+  textarea::placeholder {
+    @apply text-gray-400 dark:text-dark-400;
+  }
+}
+
+.vfb-conditions-exp-tools-wrapper {
+  @apply w-full flex flex-col;
+
+  .vfb-expr-helper {
+    @apply mt-0.5;
+  }
+}
+
 .vfb-condition-list {
 
 }
@@ -131,6 +147,11 @@
 }
 
 .vfb-conditions-render-one-wrapper {
+  @apply w-full;
+}
+
+.vfb-conditions-render-expr-wrapper {
+  @apply flex gap-2 flex-col w-full;
 }
 
 .vfb-conditions-render-one {

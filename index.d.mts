@@ -85,6 +85,7 @@ declare module '@vueform/builder' {
   const AlignField_toggle: any;
   const AlignField_checkbox: any;
   const AlignField_radio: any;
+  const AllowExpressionsField: any;
   const AttrsField: any;
   const AttrsField_static: any;
   const AutocompleteField: any;
@@ -153,12 +154,14 @@ declare module '@vueform/builder' {
   const ExportDownloadField: any;
   const ExportOutputField: any;
   const ExportThemeField: any;
+  const ExpressionField: any;
   const FieldNameField: any;
   const FileAcceptField: any;
   const FileEndpointsField: any;
   const FileRulesField: any;
   const FileUrlsField: any;
   const FontsField: any;
+  const ForceNumbersField: any;
   const FormColumnsField: any;
   const FormDisplayErrorsField: any;
   const FormDisplayMessagesField: any;
@@ -299,6 +302,7 @@ declare module '@vueform/builder' {
     AlignField_toggle,
     AlignField_checkbox,
     AlignField_radio,
+    AllowExpressionsField,
     AttrsField,
     AttrsField_static,
     AutocompleteField,
@@ -367,12 +371,14 @@ declare module '@vueform/builder' {
     ExportDownloadField,
     ExportOutputField,
     ExportThemeField,
+    ExpressionField,
     FieldNameField,
     FileAcceptField,
     FileEndpointsField,
     FileRulesField,
     FileUrlsField,
     FontsField,
+    ForceNumbersField,
     FormColumnsField,
     FormDisplayErrorsField,
     FormDisplayMessagesField,

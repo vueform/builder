@@ -85,7 +85,7 @@ export default function () {
                 select: {
                   tag: 'vfb-util-props-tags'
                 }
-              }
+              },
             },
           },
           'separator': {
@@ -116,6 +116,13 @@ export default function () {
             addClasses: {
               ElementLabel: {
                 container: 'vfb-util-props-toggle-label'
+              },
+            },
+          },
+          'prop-toggle-object': {
+            addClasses: {
+              ObjectElement: {
+                container: 'vfb-util-props-toggle-object'
               },
             },
           },
@@ -1673,7 +1680,42 @@ export default function () {
           type: Boolean,
           default: true
         },
-      }
+      },
+      setup(props, context, component) {
+        const { expression } = toRefs(props)
+        const { value, form$ } = component
+
+        const tags = inject('tags')
+        const config$ = inject('config$')
+
+        const locale = computed(() => {
+          return form$.value.locale$ || config$.value.i18n.locale
+        })
+
+        const placeholder = computed(() => {
+          let exp = expression.value
+
+          if (exp && typeof exp === 'object') {
+            exp = exp?.[locale.value] || exp?.[locale.value.toUpperCase()] || exp?.[config$.value.i18n.fallbackLocale] || exp?.[config$.value.i18n.fallbackLocale.toUpperCase()] || exp?.[Object.keys(exp)[0]] || undefined
+          }
+
+          if (exp) {
+            return exp
+          }
+
+          if (value.value) {
+            return value.value
+          }
+
+          return ''
+        })
+
+        return {
+          tags,
+          placeholder,
+          ...component,
+        }
+      },
     }),
     () => ({
       apply: ['StaticElement'],
@@ -1805,14 +1847,14 @@ export default function () {
         const resolvedColumns = computed(() => {
           return component.resolvedColumns.value.map((c) => ({
             ...c,
-            available: component.form$.value.editorMode ? true : c.available,
+            available: computed(() => component.form$.value.editorMode ? true : c.available.value),
           }))
         })
 
         const resolvedRows = computed(() => {
           return component.resolvedRows.value.map((c) => ({
             ...c,
-            available: component.form$.value.editorMode ? true : c.available,
+            available: computed(() => component.form$.value.editorMode ? true : c.available.value),
           }))
         })
 

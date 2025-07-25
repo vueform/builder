@@ -239,6 +239,7 @@ a.vfb-learn-more,
   gap: 0;
 } 
 
+
 .vfb-util-props-list-in-object-add,
 .vf-btn-list-add.vf-btn-list-add-sm.vfb-util-props-list-in-object-add {
   @apply -mt-1.25;
@@ -246,7 +247,7 @@ a.vfb-learn-more,
 
 .vfb-util-props-separator-top {
   .vfb-util-props-list-add {
-    @apply absolute top-3 right-0;
+    @apply absolute top-4 right-4;
   }
 }
 
@@ -286,7 +287,9 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-util-props-toggle-wrapper,
 .vf-toggle-wrapper.vfb-util-props-toggle-wrapper {
-  @apply items-center justify-end form-h-input-sm;
+  align-items: center !important;
+  justify-content: flex-end;
+  @apply form-h-input-sm;
 }
 
 .vfb-util-props-toggle-label,
@@ -697,4 +700,16 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-simple-items-label {
   @apply order-2 p-0 mt-1.5 text-gray-500 dark:text-dark-400;
+}
+
+.vfb-mt-0 {
+  margin-top: 0 !important;
+}
+
+.vfb-mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.vfb-bold {
+  @apply font-bold;
 }

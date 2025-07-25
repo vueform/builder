@@ -1,5 +1,21 @@
 [//]: # (Don't use <tags>)
 
+## v1.11.0
+
+> `2025-07-23`
+
+### 🎉 Feature
+- Added opt-in expression support for `text`, `hidden` values, `static` content and conditions. It can be enabled by `expressions.enabled` in `builder.config.js`.
+- Added `forceNumbers` toggle to `text` and `hidden` types.
+- Hided attach tool for editor default.
+
+### 🐞 Bug Fixes
+- Added missing `columnTypes`, `allowCustomColumnTypes`, `excludeTypesFromColumns` , `columnTypesWithItems` config options #138.
+- Removed console.log from AI Assistant modal.
+- Added translation for hidden element's edit preview placeholder.
+- Element search should search in translated value.
+- Toggles & lists in object fields needed a CSS fix.
+
 ## v1.10.4
 
 > `2025-07-15`

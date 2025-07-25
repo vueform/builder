@@ -1,0 +1,149 @@
+.vfb-expr-helper {
+  @apply text-gray-600 mb-1.5 -mt-1.5 dark:text-dark-300;
+
+  b {
+    @apply font-semibold;
+  }
+
+  p {
+    @apply mt-1;
+  } 
+}
+
+.vfb-expr-helper-head {
+  @apply flex justify-between items-center cursor-pointer;
+}
+
+.vfb-expr-helper-head-title {
+  @apply flex items-center;
+}
+
+.vfb-expr-helper-head-info-icon {
+  @apply text-gray-400 mr-1 dark:text-dark-400;
+}
+
+.vfb-expr-helper-head-caret {
+  @apply text-[11px] transition-transform transform text-gray-500 dark:text-dark-400;
+
+  &.is-open {
+    @apply text-[11px] rotate-180;
+  }
+}
+
+.vfb-expr-helper-content {
+  @apply mt-2 dark:text-dark-100;
+}
+
+.vfb-expr-item-block {
+  @apply flex gap-1 flex-col justify-start mt-1 w-full;
+}
+
+.vfb-expr-item-group {
+  @apply flex gap-1 flex-wrap relative items-start;
+}
+
+.vfb-expr-item-wrapper {
+  @apply bg-gray-200 bg-opacity-70 rounded px-1 cursor-pointer inline-flex items-center justify-center dark:bg-dark-550;
+}
+
+.vfb-expr-item-value {
+  @apply text-[11px] text-gray-600 tracking-tight leading-[18px] break-words font-mono dark:text-white;
+}
+
+.vfb-expr-param-block {
+  @apply inline-flex gap-1 flex-col items-start mt-1.5 w-full;
+}
+
+.vfb-expr-helper-important-icon {
+  @apply text-gray-500 mr-1 text-[11px] dark:text-dark-300;
+}
+
+.vfb-expr-dialog-param-line {
+  @apply flex gap-1.5;
+}
+
+.vfb-expr-dialog-param-optional {
+  @apply italic;
+}
+
+.vfb-expr-dialog {
+  @apply absolute -top-1 left-0 right-0 bg-white transform -translate-y-full shadow-box border border-gray-200 font-sans text-[12px] leading-normal rounded-md dark:bg-dark-600 dark:border-dark-800;
+}
+
+.vfb-expr-dialog-header {
+  @apply bg-primary-500 text-white font-bold px-2.5 py-1.5 rounded-t;
+}
+
+.vfb-expr-dialog-content {
+  @apply px-2.5 pt-0.5 pb-2.5 rounded-b dark:text-white;
+}
+
+.vfb-expr-dialog-content a {
+  @apply text-primary-500 underline;
+}
+
+.vfb-expr-dialog-content-block {
+  @apply mt-2;
+}
+
+.vfb-expr-dialog-content-warning {
+  @apply mt-1;
+}
+
+.vfb-expr-warning {
+  @apply mt-0.5 mb-1.5;
+}
+
+.vfb-expr-warning-head {
+  @apply flex justify-between items-center cursor-pointer text-gray-600 dark:text-dark-300;
+}
+
+.vfb-expr-warning-title {
+  @apply flex items-center;
+}
+
+.vfb-expr-warning-count {
+  @apply w-3.5 h-3.5 rounded-full bg-red-500 flex items-center justify-center font-bold text-red-200 text-[10px] leading-[1] mr-1;
+}
+
+.vfb-expr-warning-head-caret {
+  @apply text-[11px] transition-transform transform text-gray-500 dark:text-dark-400;
+
+  &.is-open {
+    @apply text-[11px] rotate-180;
+  }
+}
+
+.vfb-expr-warning-content {
+  @apply bg-red-100 text-red-500 mt-2 px-4 py-2 rounded leading-tight overflow-x-auto;
+
+  code {
+    @apply text-[11px] text-red-500 bg-red-500 bg-opacity-15 px-0.5 rounded-sm;
+  }
+}
+
+.vfb-expr-warning-ul {
+  @apply list-disc pl-3 leading-tight;
+
+  code {
+    @apply text-[11px] text-red-500 bg-red-500 bg-opacity-15 px-0.5 rounded-sm;
+  }
+}
+
+.vfb-expr-warning-li {
+  @apply text-xs font-semibold -ml-1 pr-4 underline cursor-pointer;
+}
+
+.vfb-expr-warning-footnote {
+  @apply mt-2 italic;
+}
+
+.expr-dialog-enter-active,
+.expr-dialog-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.expr-dialog-enter-from,
+.expr-dialog-leave-to {
+  opacity: 0;
+}

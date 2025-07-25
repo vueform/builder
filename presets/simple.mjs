@@ -84,6 +84,9 @@ import {
   ViewField_grid,
   MinWidthField_grid,
   MaxWidthField_grid,
+
+  ExpressionField,
+  AllowExpressionsField,
 } from './../'
 
 /**
@@ -870,15 +873,7 @@ const AddTextField = class extends BaseElementField
 /**
  * Element definitions
  */
-const text = {
-  label: 'simple_text_label',
-  description: 'simple_text_description',
-  icon: ['fas', 'font-case'],
-  category: 'fields',
-  schema: {
-    type: 'text',
-    label: 'simple_text_field_label',
-  },
+const textWithoutExpression = {
   sections: {
     properties: {
       name: 'properties',
@@ -929,7 +924,7 @@ const text = {
     properties: [
       ['type', 'label', 'description', 'placeholder'],
       ['addons'],
-      ['disabled', 'readonly',]
+      ['disabled', 'readonly']
     ],
     layout: [
       ['columns'],
@@ -942,8 +937,50 @@ const text = {
   }
 }
 
+const { properties, ...textSections } = textWithoutExpression.sections
+
+const textWithExpression = {
+  sections: {
+    properties: {
+      ...properties,
+      fields: {
+        ...properties.fields,
+        expression: { type: ExpressionField },
+      },
+    },
+    ...textSections,
+  },
+  separators: {
+    properties: [
+      ['type', 'label', 'description', 'placeholder'],
+      ['addons'],
+      ['disabled', 'readonly', 'expression'],
+    ],
+    layout: [
+      ['columns'],
+      ['size'],
+    ],
+    validation: [
+      ['validation'],
+      ['fieldName'],
+    ]
+  }
+}
+
+const text = {
+  ...textWithExpression,
+  label: 'simple_text_label',
+  description: 'simple_text_description',
+  icon: ['fas', 'font-case'],
+  category: 'fields',
+  schema: {
+    type: 'text',
+    label: 'simple_text_field_label',
+  },
+}
+
 const number = {
-  ...text,
+  ...textWithExpression,
   label: 'simple_number_label',
   description: 'simple_number_description',
   icon: ['fas', 'number'],
@@ -958,7 +995,7 @@ const number = {
 }
 
 const email = {
-  ...text,
+  ...textWithExpression,
   label: 'simple_email_label',
   description: 'simple_email_description',
   icon: ['fas', 'at'],
@@ -1129,7 +1166,7 @@ const signature = {
 }
 
 const password = {
-  ...text,
+  ...textWithExpression,
   label: 'simple_password_label',
   description: 'simple_password_description',
   icon: ['fas', 'lock'],
@@ -1142,7 +1179,7 @@ const password = {
 }
 
 const url = {
-  ...text,
+  ...textWithExpression,
   label: 'simple_url_label',
   description: 'simple_url_description',
   icon: ['fas', 'link'],
@@ -1158,7 +1195,7 @@ const url = {
 }
 
 const location = {
-  ...text,
+  ...textWithoutExpression,
   label: 'simple_location_label',
   description: 'simple_location_description',
   icon: ['fas', 'map-marker-alt'],
@@ -1170,7 +1207,7 @@ const location = {
 }
 
 const textarea = {
-  ...text,
+  ...textWithoutExpression,
   label: 'simple_textarea_label',
   description: 'simple_textarea_description',
   icon: ['fas', 'align-left'],
@@ -1182,7 +1219,7 @@ const textarea = {
 }
 
 const editor = {
-  ...text,
+  ...textWithoutExpression,
   label: 'simple_editor_label',
   description: 'simple_editor_description',
   icon: ['fas', 'italic'],
@@ -2368,6 +2405,7 @@ const h1 = {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
         content: { type: ContentField, },
+        expressions: { type: AllowExpressionsField, },
         description: { type: DescriptionField, },
       },
     },
@@ -2397,8 +2435,8 @@ const h1 = {
   },
   separators: {
     properties: [
-      ['type', 'tag', 'content'],
-      ['description'],
+      ['type', 'tag', 'content', 'expressions'],
+      ['description', ],
     ],
     layout: [
       ['align'],
@@ -2455,6 +2493,7 @@ const p = {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
         content: { type: ContentField_p, },
+        expressions: { type: AllowExpressionsField, },
         description: { type: DescriptionField, },
       },
     },
@@ -2484,7 +2523,7 @@ const p = {
   },
   separators: {
     properties: [
-      ['type', 'tag', 'content'],
+      ['type', 'tag', 'content', 'expressions'],
       ['description'],
     ],
     layout: [
@@ -2585,6 +2624,7 @@ const link = {
         type: { type: TypeField },
         tag: { type: TagField_simple, },
         content: { type: ContentField, extend: { rows: 1, label: 'Link text', columns: { label: 4 }, floating: false, placeholder: null } },
+        expressions: { type: AllowExpressionsField, },
         link: { type: LinkField_simple, },
         description: { type: DescriptionField, },
       },
@@ -2615,7 +2655,7 @@ const link = {
   },
   separators: {
     properties: [
-      ['type', 'tag', 'content', 'link'],
+      ['type', 'tag', 'content', 'expressions', 'link'],
       ['description'],
     ],
     layout: [

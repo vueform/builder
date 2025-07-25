@@ -11,7 +11,7 @@
 }
 
 .vfb-config-panel-header-container {
-  @apply flex justify-between items-center px-5 py-4 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700;
+  @apply flex justify-between items-center px-5 py-4 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700 dark:border-dark-600;
 }
 
 .vfb-config-panel-header {
@@ -145,6 +145,11 @@
   @apply -mt-2;
 }
 
+.vfb-config-toggle + .vfb-util-props-toggle-object:not(.vfb-util-props-separator-top),
+.vfb-util-props-toggle-object:not(.vfb-util-props-separator-top) + .vfb-config-toggle {
+  @apply -mt-2;
+}
+
 .vfb-config-form-header {
   @apply text-black -mx-5 -mt-px text-0.5md font-semibold px-5 py-2 flex items-center justify-between cursor-pointer col-span-12 border-t border-b border-gray-150 bg-gray-50 dark:bg-dark-700 dark:border-dark-600 dark:text-white;
 }
@@ -187,12 +192,17 @@
   @apply bg-red-100 text-red-500 my-4 px-4 py-3 rounded leading-tight overflow-x-auto;
 }
 
+
 .vfb-config-panel-warning-text {
-  @apply my-1;
+  @apply mt-1;
 }
 
 .vfb-config-panel-warning-ul {
-  @apply list-disc pl-5 leading-tight;
+  @apply list-disc pl-5 leading-tight mt-1;
+
+  code {
+    @apply text-[11px] bg-red-500 bg-opacity-15 px-0.5 rounded-sm;
+  }
 }
 
 .vfb-config-panel-warning-li {
