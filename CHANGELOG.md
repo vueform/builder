@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.11.1
+
+> `2025-07-28`
+
+### 🎉 Feature
+- Added `builder$` to BaseField props
+
 ## v1.11.0
 
 > `2025-07-23`

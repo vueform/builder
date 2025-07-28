@@ -760,6 +760,8 @@ export default function () {
 
         const config$ = inject('builderConfig$')
 
+        const builder$ = inject('builder$')
+
         const storage$ = inject('storage$')
 
         const settingsLocale = inject('settingsLocale')
@@ -821,6 +823,7 @@ export default function () {
                   tags,
                   settingsLocale: settingsLocale.value,
                   elementTypes: elementTypes.value,
+                  builder$,
                 }))
               }
             })
@@ -855,6 +858,7 @@ export default function () {
                 tags,
                 settingsLocale: settingsLocale.value,
                 elementTypes: elementTypes.value,
+                builder$,
               })
 
               if (excludeFields.value.indexOf(`${sectionName}.${fieldName}`) === -1) {
