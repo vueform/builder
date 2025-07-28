@@ -1,5 +1,15 @@
 [//]: # (Don't use <tags>)
 
+## v1.11.2
+
+> `2025-07-28`
+
+### 🎉 Feature
+- Be able to add custom tab/step props
+
+### 🐞 Bug Fixes
+- Unwatch type watcher on config panel open
+
 ## v1.11.1
 
 > `2025-07-28`
