@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.11.3
+
+> `2025-07-28`
+
+### 🎉 Feature
+- Export `BasePageField`
+
 ## v1.11.2
 
 > `2025-07-28`

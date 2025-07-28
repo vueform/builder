@@ -99,6 +99,7 @@ declare module '@vueform/builder' {
   const BaseFormField: any;
   const BaseMultilingualElementField: any;
   const BaseMultilingualFormField: any;
+  const BasePageField: any;
   const BaseSelectOptionField: any;
   const BaseThemeField: any;
   const BeforeField: any;
@@ -316,6 +317,7 @@ declare module '@vueform/builder' {
     BaseFormField,
     BaseMultilingualElementField,
     BaseMultilingualFormField,
+    BasePageField,
     BaseSelectOptionField,
     BaseThemeField,
     BeforeField,
