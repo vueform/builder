@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.11.4
+
+> `2025-07-29`
+
+### 🎉 Feature
+- Added `hideDefaultColumnType` option
+
 ## v1.11.3
 
 > `2025-07-28`
