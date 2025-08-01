@@ -4,10 +4,6 @@
   b {
     @apply font-semibold;
   }
-
-  p {
-    @apply mt-1;
-  } 
 }
 
 .vfb-expr-helper-head {
@@ -32,6 +28,10 @@
 
 .vfb-expr-helper-content {
   @apply mt-2 dark:text-dark-100;
+}
+
+.vfb-expr-helper-block {
+  @apply mt-1;
 }
 
 .vfb-expr-item-block {

@@ -4012,9 +4012,6 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-expr-helper b{
   font-weight: 600;
 }
-.vfb-expr-helper p{
-  margin-top: 0.25rem;
-}
 
 .vfb-expr-helper-head{
   display: flex;
@@ -4066,6 +4063,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-expr-helper-content:is(.dark *){
   --tw-text-opacity: 1;
   color: rgb(220 220 220 / var(--tw-text-opacity));
+}
+
+.vfb-expr-helper-block{
+  margin-top: 0.25rem;
 }
 
 .vfb-expr-item-block{

@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.11.5
+
+> `2025-08-01`
+
+### 🐞 Bug Fixes
+- Expression helper `div` in `p` HTML violation fix
+
 ## v1.11.4
 
 > `2025-07-29`

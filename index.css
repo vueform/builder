@@ -2003,9 +2003,6 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-expr-helper b {
   @apply font-semibold;
 }
-.vfb-expr-helper p {
-  @apply mt-1;
-}
 
 .vfb-expr-helper-head {
   @apply flex justify-between items-center cursor-pointer;
@@ -2028,6 +2025,10 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-expr-helper-content {
   @apply mt-2 dark:text-dark-100;
+}
+
+.vfb-expr-helper-block {
+  @apply mt-1;
 }
 
 .vfb-expr-item-block {
