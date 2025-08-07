@@ -1096,41 +1096,12 @@ export default function () {
       }
     }),
     () => ({
-      apply: ['FormElements'],
-      props: {
-        draggingElement: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggingPage: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggedSchema: {
-          required: false,
-          type: Object,
-        },
-      },
-    }),
-    () => ({
       apply: ['FormTabs', 'FormSteps'],
       emits: [
         'rename-page', 'add-page', 'remove-pages', 'remove-page', 'move-page', 'move-to-page', 'add-element',
         'select-page', 'start-moving',
       ],
       props: {
-        draggingElement: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggingPage: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggedSchema: {
-          required: false,
-          type: Object,
-        },
         moving: {
           required: false,
           type: [Boolean, Object],
@@ -1301,18 +1272,6 @@ export default function () {
           type: Object,
           required: false,
         },
-        draggingElement: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggingPage: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggedSchema: {
-          required: false,
-          type: Object,
-        },
         moving: {
           required: false,
           type: [Boolean, Object],
@@ -1333,7 +1292,8 @@ export default function () {
           return component
         }
 
-        const { name, draggingPage, moving, pointer } = toRefs(props)
+        const { form$ } = component
+        const { name, moving, pointer } = toRefs(props)
 
         const subscribeOnce = inject('subscribeOnce')
 
@@ -1352,7 +1312,7 @@ export default function () {
         // ============== COMPUTED ==============
 
         const beingDragged = computed(() => {
-          return draggingPage.value === name.value
+          return form$.value.draggingPage === name.value
         })
 
         const selectedPage = computed(() => {
@@ -1578,7 +1538,9 @@ export default function () {
               })
             })
 
-            let to = component.form$.value.tabs$.current$.elements?.pop()
+            let to = component.form$.value.tabs$
+              ? component.form$.value.tabs$.current$.elements?.pop()
+              : component.form$.value.steps$.current$.elements?.pop()
 
             // First move out the element from the container
             component.form$.value.el$(path).$emit('move-element', path, 'after', to)
@@ -1880,7 +1842,6 @@ export default function () {
         let startingMousePosition = 0
 
         const {
-          draggingElement,
           widths,
           cols,
           rows,
@@ -2364,7 +2325,6 @@ export default function () {
         }
       }
     }),
-
     () => ({
       apply: ['FormElements', 'Vueform', 'GroupElement', 'ObjectElement', 'ListElement', 'GridElement'],
       emits: [
@@ -2453,18 +2413,6 @@ export default function () {
           type: Boolean,
           default: true,
         },
-        draggingElement: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggingPage: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggedSchema: {
-          required: false,
-          type: Object,
-        },
         moving: {
           required: false,
           type: [Boolean, Object],
@@ -2481,7 +2429,8 @@ export default function () {
           return component
         }
 
-        const { droppable, draggingElement, moving, pointer } = toRefs(props)
+        const { form$ } = component
+        const { droppable, moving, pointer } = toRefs(props)
 
         // ================ DATA ================
 
@@ -2490,7 +2439,7 @@ export default function () {
         // ============== COMPUTED ==============
 
         const beingDragged = computed(() => {
-          return draggingElement.value === component.path.value
+          return form$.value.draggingElement === component.path.value
         })
 
         const Droppable = computed(() => {
@@ -2522,20 +2471,6 @@ export default function () {
       emits: [
         'add-element', 'select-element', 'clone-element', 'remove-element', 'resize-element', 'announce',
       ],
-      props: {
-        draggingElement: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggingPage: {
-          required: false,
-          type: [null, String, Boolean],
-        },
-        draggedSchema: {
-          required: false,
-          type: Object,
-        },
-      },
       setup(props, context, component) {
         if (!component.form$.value.builder) {
           return component
@@ -2549,6 +2484,8 @@ export default function () {
 
         const hovered = ref(false)
         const focused = ref(false)
+        const beingDraggedOver = ref(false)
+        const DropArea = ref()
 
         const startingWidth = ref(0)
         const elementWidth = ref(null)
@@ -2672,19 +2609,19 @@ export default function () {
         const canDragInside = computed(() => {
           if (['object', 'group'].indexOf(component.el$.value.type) !== -1) {
             return !Object.keys(component.el$.value.children).length &&
-                   (!component.el$.value.draggedSchema || ['tabs', 'steps'].indexOf(component.el$.value.draggedSchema.type) === -1)
+                   (!component.form$.value.draggedSchema || ['tabs', 'steps'].indexOf(component.form$.value.draggedSchema.type) === -1)
           }
 
           else if (['list'].indexOf(component.el$.value.type) !== -1) {
             return !component.el$.value.hasPrototype &&
-                   (!component.el$.value.draggedSchema || ['list', 'tabs', 'steps'].indexOf(component.el$.value.draggedSchema.type) === -1)
+                   (!component.form$.value.draggedSchema || ['list', 'tabs', 'steps'].indexOf(component.form$.value.draggedSchema.type) === -1)
           }
 
           return false
         })
 
         const canDragSibling = computed(() => {
-          return (!component.el$.value.draggedSchema || ['tabs', 'steps'].indexOf(component.el$.value.draggedSchema.type) === -1)
+          return (!component.form$.value.draggedSchema || ['tabs', 'steps'].indexOf(component.form$.value.draggedSchema.type) === -1)
         })
 
         const hideColumns = computed(() => {
@@ -3202,6 +3139,41 @@ export default function () {
           focused.value = false
         }
 
+        const handleContainerDragenter = (e) => {
+          beingDraggedOver.value = true
+        }
+
+        const handleContainerDragleave = (e) => {
+          if (DropArea.value.contains(e.target)) return
+
+          beingDraggedOver.value = false
+        }
+
+        const handleContainerDrop = (e) => {
+          beingDraggedOver.value = false
+        }
+
+        const handleContainerMouseover = (e) => {
+          hovered.value = true
+        }
+
+        const handleContainerMouseout = (e) => {
+          if (e.relatedTarget?.closest('.vfb-preview-element-container')?.getAttribute('data-path') === DropArea.value?.getAttribute('data-path')) {
+            return
+          }
+
+          if ([
+            'vfb-icon',
+            'vfb-preview-element-resizer',
+            'vfb-preview-element-remove',
+            'vfb-preview-element-clone',
+            'vfb-preview-element-name-tag',
+            'vfb-preview-element-edit-cells',
+          ].some(c => e.relatedTarget?.classList?.contains(c))) return
+
+          hovered.value = false
+        }
+
         const decreaseColumns = (shiftKey) => {
           let value = lastWidth.value - 1
 
@@ -3409,6 +3381,8 @@ export default function () {
           highlighted,
           hovered,
           focused,
+          beingDraggedOver,
+          DropArea,
           startingWidth,
           elementWidth,
           lastWidth,
@@ -3450,6 +3424,11 @@ export default function () {
           handleResizeMultiDragMouseUp,
           handleDrag,
           handleEditCellsClick,
+          handleContainerDragenter,
+          handleContainerDragleave,
+          handleContainerDrop,
+          handleContainerMouseover,
+          handleContainerMouseout,
         }
       }
     })

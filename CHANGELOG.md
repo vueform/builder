@@ -1,5 +1,17 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.0
+
+> `2025-08-07`
+
+### 🎉 Feature
+- Performance optimization. You should experience better performance when adding and moving elements in large forms.
+- Added `pt_PT` (Portuguese) builder locale.
+- Replaced SCSS `@import` with `@use`
+
+### 🐞 Bug Fixes
+- Moving from container directly to the step container threw an error.
+
 ## v1.11.5
 
 > `2025-08-01`

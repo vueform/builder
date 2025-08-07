@@ -1690,5 +1690,5 @@ export default {
   "expression_func_display_value_p0_value": "value",
   "expression_func_display_value_p0_description": "A reference to an element holding the value.",
   "expression_func_display_value_p1_value": "'full_path'",
-  "expression_func_display_value_p1_description": "The <b>full path</b> (not data path) of the field between single quotes, eg. `DISPLAY_VALUE(container.select, 'container.select')`. Siblings path (eg. 'list.*.select') cannot be used.",
+  "expression_func_display_value_p1_description": "The <b>full path</b> (not data path) of the field between single quotes, eg. `DISPLAY_VALUE(container.select, 'container.select')`. Siblings path (eg. 'list.*.select') cannot be used."
 };

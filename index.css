@@ -1049,6 +1049,9 @@ a.vfb-learn-more,
 .vfb-icon {
   @apply inline-block text-inherit overflow-visible align-icon;
 }
+.vfb-icon path {
+  pointer-events: none;
+}
 
 .vfb-icon-md {
   @apply h-1em;
