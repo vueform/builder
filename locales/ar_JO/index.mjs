@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "qima",
   "expression_func_display_value_p0_description": "مرجع إلى عنصر يحمل القيمة.",
   "expression_func_display_value_p1_value": "'masar_kamil'",
-  "expression_func_display_value_p1_description": "<b>المسار الكامل</b> (وليس مسار البيانات) للحقل بين علامتي اقتباس مفردتين، على سبيل المثال `DISPLAY_VALUE(container.select, 'container.select')`. لا يمكن استخدام مسار العناصر الشقيقة (مثل 'list.*.select')."
+  "expression_func_display_value_p1_description": "<b>المسار الكامل</b> (وليس مسار البيانات) للحقل بين علامتي اقتباس مفردتين، على سبيل المثال `DISPLAY_VALUE(container.select, 'container.select')`. لا يمكن استخدام مسار العناصر الشقيقة (مثل 'list.*.select').",
+  "expression_func_display_value_p1_description": "Fältets <b>fullständiga sökväg</b> (inte datasökväg) mellan enkla citattecken, t.ex. `DISPLAY_VALUE(container.select, 'container.select')`. Syskon-sökvägar (t.ex. 'list.*.select') kan inte användas.",  "expression_func_available_description": "تُرجع `true` إذا كان العنصر متاحًا (جميع شروطه مستوفاة).",
+  "expression_func_available_p0_value": "'masar_kamil'",
+  "expression_func_available_p0_description": "<b>المسار الكامل</b> (وليس مسار البيانات) للحقل بين علامتي اقتباس مفردتين، مثلاً: `AVAILABLE('container.select')`. لا يمكن استخدام مسارات الأشقاء (مثلاً: `list.*.select`).",
+  "rename_error_number_start": "يجب ألا يبدأ برقم"
 };

@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "varde",
   "expression_func_display_value_p0_description": "En referens till ett element som innehåller värdet.",
   "expression_func_display_value_p1_value": "'fullstandig_sokvag'",
-  "expression_func_display_value_p1_description": "Fältets <b>fullständiga sökväg</b> (inte datasökväg) mellan enkla citattecken, t.ex. `DISPLAY_VALUE(container.select, 'container.select')`. Syskon-sökvägar (t.ex. 'list.*.select') kan inte användas."
+  "expression_func_display_value_p1_description": "Fältets <b>fullständiga sökväg</b> (inte datasökväg) mellan enkla citattecken, t.ex. `DISPLAY_VALUE(container.select, 'container.select')`. Syskon-sökvägar (t.ex. 'list.*.select') kan inte användas.",
+  "expression_func_available_description": "Returnerar `true` om elementet är tillgängligt (alla dess villkor är uppfyllda).",
+  "expression_func_available_p0_value": "'fullstandig_sokvag'",
+  "expression_func_available_p0_description": "Den <b>fullständiga sökvägen</b> (inte datapath) till fältet inom enkla citattecken, t.ex. `AVAILABLE('container.select')`. Sökvägar till syskonelement (t.ex. `list.*.select`) kan inte användas.",
+  "rename_error_number_start": "Får inte börja med en siffra"
 };

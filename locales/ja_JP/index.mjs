@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "atai",
   "expression_func_display_value_p0_description": "値を保持する要素への参照。",
   "expression_func_display_value_p1_value": "'zen_path'",
-  "expression_func_display_value_p1_description": "単一引用符で囲まれたフィールドの<b>フルパス</b>（データパスではない）、例: `DISPLAY_VALUE(container.select, 'container.select')`。兄弟パス（例: 'list.*.select'）は使用できません。"
+  "expression_func_display_value_p1_description": "単一引用符で囲まれたフィールドの<b>フルパス</b>（データパスではない）、例: `DISPLAY_VALUE(container.select, 'container.select')`。兄弟パス（例: 'list.*.select'）は使用できません。",
+  "expression_func_available_description": "要素が利用可能な場合（すべての条件が満たされている場合）、`true` を返します。",
+  "expression_func_available_p0_value": "'zen_path'",
+  "expression_func_available_p0_description": "フィールドの<b>フルパス</b>（データパスではありません）をシングルクォートで囲んだ形式で指定します。例：`AVAILABLE('container.select')`。兄弟要素のパス（例：`list.*.select`）は使用できません。",
+  "rename_error_number_start": "数字で始めてはいけません"
 };

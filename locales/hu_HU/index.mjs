@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "ertek",
   "expression_func_display_value_p0_description": "Hivatkozás az értéket tartalmazó elemre.",
   "expression_func_display_value_p1_value": "'teljes_utvonal'",
-  "expression_func_display_value_p1_description": "A mező <b>teljes útvonala</b> (nem adatútvonal) szimpla idézőjelek között, pl. `DISPLAY_VALUE(kontener.select, \'kontener.select\')`. A testvér útvonal (pl. \'lista.*.select\') nem használható."
+  "expression_func_display_value_p1_description": "A mező <b>teljes útvonala</b> (nem adatútvonal) szimpla idézőjelek között, pl. `DISPLAY_VALUE(kontener.select, \'kontener.select\')`. A testvér útvonal (pl. \'lista.*.select\') nem használható.",
+  "expression_func_available_description": "`true` értéket ad vissza, ha az elem elérhető (minden feltétele teljesül).",
+  "expression_func_available_p0_value": "'teljes_utvonal'",
+  "expression_func_available_p0_description": "A mező <b>teljes útvonala</b> (nem az adatútvonal) egyes idézőjelek között, pl. `AVAILABLE('container.select')`. Testvérútvonal (pl. `list.*.select`) nem használható.",
+  "rename_error_number_start": "Nem kezdődhet számmal"
 };

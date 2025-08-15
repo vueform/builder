@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "waarde",
   "expression_func_display_value_p0_description": "Een verwijzing naar een element dat de waarde bevat.",
   "expression_func_display_value_p1_value": "'volledig_pad'",
-  "expression_func_display_value_p1_description": "Het <b>volledige pad</b> (niet het datapad) van het veld tussen enkele aanhalingstekens, bijv. `DISPLAY_VALUE(container.select, \'container.select\')`. Sibling-paden (bijv. \'lijst.*.select\') kunnen niet worden gebruikt."
+  "expression_func_display_value_p1_description": "Het <b>volledige pad</b> (niet het datapad) van het veld tussen enkele aanhalingstekens, bijv. `DISPLAY_VALUE(container.select, \'container.select\')`. Sibling-paden (bijv. \'lijst.*.select\') kunnen niet worden gebruikt.",
+  "expression_func_available_description": "Geeft `true` terug als het element beschikbaar is (alle voorwaarden zijn voldaan).",
+  "expression_func_available_p0_value": "'volledig_pad'",
+  "expression_func_available_p0_description": "Het <b>volledige pad</b> (niet het datapad) van het veld tussen enkele aanhalingstekens, bijvoorbeeld: `AVAILABLE('container.select')`. Paden van broers/zussen (bijv. `list.*.select`) kunnen niet worden gebruikt.",
+  "rename_error_number_start": "Mag niet met een cijfer beginnen"
 };

@@ -1,4 +1,4 @@
-import { onMounted, ref, computed, toRefs, watch, nextTick, inject, resolveComponent, } from 'vue'
+import { onMounted, ref, computed, toRefs, watch, nextTick, inject, resolveComponent, onBeforeUnmount, } from 'vue'
 import elementSelectorPlugin from './plugins/elementSelector/index.mjs'
 import _ from 'lodash'
 
@@ -1073,6 +1073,10 @@ export default function () {
           if (storage$.value.get(`${name.value}-closed`)) {
             closedSections.value = JSON.parse(storage$.value.get(`${name.value}-closed`))
           }
+        })
+
+        onBeforeUnmount(() => {
+          watchers.value.forEach((w) => w())
         })
 
         return {

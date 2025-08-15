@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "wert",
   "expression_func_display_value_p0_description": "Eine Referenz auf ein Element, das den Wert enthält.",
   "expression_func_display_value_p1_value": "'vollstaendiger_pfad'",
-  "expression_func_display_value_p1_description": "Der <b>vollständige Pfad</b> (nicht der Datenpfad) des Feldes in einfachen Anführungszeichen, z.B. `DISPLAY_VALUE(container.select, 'container.select')`. Geschwisterpfade (z.B. 'list.*.select') können nicht verwendet werden."
+  "expression_func_display_value_p1_description": "Der <b>vollständige Pfad</b> (nicht der Datenpfad) des Feldes in einfachen Anführungszeichen, z.B. `DISPLAY_VALUE(container.select, 'container.select')`. Geschwisterpfade (z.B. 'list.*.select') können nicht verwendet werden.",
+  "expression_func_available_description": "Gibt `true` zurück, wenn das Element verfügbar ist (alle Bedingungen erfüllt sind).",
+  "expression_func_available_p0_value": "'vollstaendiger_pfad'",
+  "expression_func_available_p0_description": "Der <b>vollständige Pfad</b> (nicht der Datenpfad) des Feldes in einfachen Anführungszeichen, z. B. `AVAILABLE('container.select')`. Pfade von Geschwistern (z. B. `list.*.select`) können nicht verwendet werden.",
+  "rename_error_number_start": "Darf nicht mit einer Zahl beginnen"
 };

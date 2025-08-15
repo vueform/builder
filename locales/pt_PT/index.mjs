@@ -1690,5 +1690,9 @@ export default {
   "expression_func_display_value_p0_value": "valor",
   "expression_func_display_value_p0_description": "Uma referência a um elemento que contém o valor.",
   "expression_func_display_value_p1_value": "'caminho_completo'",
-  "expression_func_display_value_p1_description": "O <b>caminho completo</b> (não caminho de dados) do campo entre aspas simples, ex. `DISPLAY_VALUE(conteiner.selecionar, 'conteiner.selecionar')`. Caminho de irmãos (ex. 'lista.*.selecionar') não pode ser usado."
+  "expression_func_display_value_p1_description": "O <b>caminho completo</b> (não caminho de dados) do campo entre aspas simples, ex. `DISPLAY_VALUE(conteiner.selecionar, 'conteiner.selecionar')`. Caminho de irmãos (ex. 'lista.*.selecionar') não pode ser usado.",
+  "expression_func_available_description": "Retorna `true` se o elemento estiver disponível (todas as condições forem cumpridas).",
+  "expression_func_available_p0_value": "'caminho_completo'",
+  "expression_func_available_p0_description": "O <b>caminho completo</b> (não o caminho de dados) do campo entre aspas simples, por exemplo: `AVAILABLE('container.select')`. Caminhos de elementos irmãos (ex: `list.*.select`) não podem ser usados.",
+  "rename_error_number_start": "Não pode começar com um número"
 };

@@ -1,5 +1,17 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.1
+
+> `2025-08-15`
+
+### 🎉 Feature
+- Added `AVAILABLE` function to expressions.
+
+### 🐞 Bug Fixes
+- Be able to add custom list of rules to custom named elements.
+- Unwatch config panel watchers *before* unmount.
+- Element names must not start with a number.
+
 ## v1.12.0
 
 > `2025-08-07`
