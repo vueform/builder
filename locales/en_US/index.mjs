@@ -636,7 +636,7 @@ export default {
 	"multiImage_field_label": "Multi-image",
 	"multiImage_label": "Multi-image upload",
 	"multifile_description": "Multi-file upload input",
-	"multifile_field_label": "Multi-fil",
+	"multifile_field_label": "Multi-file",
 	"multifile_label": "Multi-file upload",
 	"multiple_label_multiple_label_multiple_info": "The options label to display when more than one elements are selected. Use <code class=\"vfb-inline-code\">:x:</code> to reference the number of options, eg. <code class=\"vfb-inline-code\">:x: options selected</code>",
 	"multiple_label_multiple_label_multiple_label": "Options label (multi)",

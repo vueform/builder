@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.2
+
+> `2025-10-06`
+
+### 🐞 Bug Fixes
+- don't show hidden field on each step #482
+- en_US locale type fix
+
 ## v1.12.1
 
 > `2025-08-15`

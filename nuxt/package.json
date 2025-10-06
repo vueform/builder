@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.8.0",
-    "@vueform/vueform": "^1.13.1",
-    "@vueform/builder": "^1.12.1"
+    "@vueform/vueform": "^1.13.3",
+    "@vueform/builder": "^1.12.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
