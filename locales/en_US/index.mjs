@@ -194,7 +194,7 @@ export default {
 	"columns_default_default_only_label": "<div class=\"vfb-util-prop-label-with-link\">Columns &nbsp;<a href=\"https://vueform.com/docs/1.x/styles-and-layout#columns\" target=\"_blank\" class=\"vfb-learn-more\">learn more</a></div>",
 	"columns_default_default_only_text": "Use defaults",
 	"columns_default_text": "Default column widths",
-	"columns_size_desktop": "Dekstop",
+	"columns_size_desktop": "Desktop",
 	"columns_size_mobile": "Mobile",
 	"columns_size_tablet": "Tablet",
 	"columns_size_viewport": "Viewport size",
@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "Returns `true` if the element is available (all of its conditions are met).",
   "expression_func_available_p0_value": "'full_path'",
   "expression_func_available_p0_description": "The <b>full path</b> (not data path) of the field between single quotes, eg. `AVAILABLE('container.select')`. Siblings path (eg. `list.*.select`) cannot be used.",
-	"rename_error_number_start": "Must not start with number"
+	"rename_error_number_start": "Must not start with number",
+	"invalid_config_value_error": "Please fix all the errors in the config panel first."
 };

@@ -349,6 +349,10 @@
   @apply mb-2;
 }
 
+.vfb-tool-language-selector.is-disabled {
+  @apply opacity-60 pointer-events-none;
+}
+
 .vfb-tool-language-selector .vfb-tool-item {
   @apply text-sm;
 }
@@ -1746,15 +1750,15 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 .vfb-toaster {
   @apply text-white py-3 px-5 bg-black bg-opacity-80 overflow-hidden flex justify-between items-center rounded whitespace-nowrap opacity-100;
 }
-.vfb-toaster .vfb-toaster-error {
+.vfb-toaster.vfb-toaster-error {
   @apply bg-red-500;
   box-shadow: 2px 2px 1px 0px rgba(126, 58, 58, 0.5);
 }
-.vfb-toaster .vfb-toaster-info {
+.vfb-toaster.vfb-toaster-info {
   @apply bg-blue-400;
   box-shadow: 2px 2px 1px 0px rgba(96, 165, 250, 0.5);
 }
-.vfb-toaster .vfb-toaster-success {
+.vfb-toaster.vfb-toaster-success {
   @apply bg-primary-500;
   box-shadow: 2px 2px 1px 0px rgba(31, 150, 118, 0.5);
 }
@@ -2657,6 +2661,12 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 
 .vfb-config-panel-header {
   @apply flex items-center justify-between w-full;
+}
+
+.vfb-config-panel-header.has-disabled-actions .vfb-config-panel-header-close,
+.vfb-config-panel-header.has-disabled-actions .vfb-config-panel-header-save,
+.vfb-config-panel-header.has-disabled-actions .vfb-config-panel-header-clone {
+  @apply opacity-60 pointer-events-none;
 }
 
 .vfb-config-panel-header-wrapper-left {

@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "Returnerar `true` om elementet är tillgängligt (alla dess villkor är uppfyllda).",
   "expression_func_available_p0_value": "'fullstandig_sokvag'",
   "expression_func_available_p0_description": "Den <b>fullständiga sökvägen</b> (inte datapath) till fältet inom enkla citattecken, t.ex. `AVAILABLE('container.select')`. Sökvägar till syskonelement (t.ex. `list.*.select`) kan inte användas.",
-  "rename_error_number_start": "Får inte börja med en siffra"
+  "rename_error_number_start": "Får inte börja med en siffra",
+	"invalid_config_value_error": "Fixa alla fel i konfigurationspanelen först."
 };

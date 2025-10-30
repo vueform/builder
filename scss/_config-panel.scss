@@ -18,6 +18,15 @@
   @apply flex items-center justify-between w-full;
 }
 
+.vfb-config-panel-header.has-disabled-actions {
+  .vfb-config-panel-header-close,
+  .vfb-config-panel-header-save,
+  .vfb-config-panel-header-clone
+  {
+    @apply opacity-60 pointer-events-none;
+  }
+}
+
 .vfb-config-panel-header-wrapper-left {
   @apply flex items-center;
 }

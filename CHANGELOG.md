@@ -1,5 +1,18 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.3
+
+> `2025-10-30`
+
+### 🎉 Feature
+- Emit `change` event on config field value change
+- Use multilingual config fields without locale selector when using a single locale
+- `forceValid` config option to prevent closing panel if it has an invalid value
+
+### 🐞 Bug Fixes
+- Steps fix on locale changes #146
+- Fix spelling error #147
+
 ## v1.12.2
 
 > `2025-10-06`

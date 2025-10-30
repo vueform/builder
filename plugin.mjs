@@ -2388,6 +2388,21 @@ export default function () {
       }
     }),
     () => ({
+      apply: ['TTextElement', 'TTextareaElement', 'TEditorElement'],
+      setup(props, context, component) {
+        const config$ = inject('builderConfig$', undefined)
+
+        const displayCurrentLocale = computed(() => {
+          return Object.keys(config$?.value?.locales || {}).length > 1
+        })
+
+        return {
+          ...component,
+          displayCurrentLocale,
+        }
+      }
+    }),
+    () => ({
       apply: /^[a-zA-Z]*Element$/,
       emits: [
         'add-element', 'move-element', 'select-element', 'clone-element', 'remove-element', 'resize-element', 'set-dragged-schema', 'announce',

@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "要素が利用可能な場合（すべての条件が満たされている場合）、`true` を返します。",
   "expression_func_available_p0_value": "'zen_path'",
   "expression_func_available_p0_description": "フィールドの<b>フルパス</b>（データパスではありません）をシングルクォートで囲んだ形式で指定します。例：`AVAILABLE('container.select')`。兄弟要素のパス（例：`list.*.select`）は使用できません。",
-  "rename_error_number_start": "数字で始めてはいけません"
+  "rename_error_number_start": "数字で始めてはいけません",
+	"invalid_config_value_error": "まず設定パネルのすべてのエラーを修正してください。"
 };

@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "`true` értéket ad vissza, ha az elem elérhető (minden feltétele teljesül).",
   "expression_func_available_p0_value": "'teljes_utvonal'",
   "expression_func_available_p0_description": "A mező <b>teljes útvonala</b> (nem az adatútvonal) egyes idézőjelek között, pl. `AVAILABLE('container.select')`. Testvérútvonal (pl. `list.*.select`) nem használható.",
-  "rename_error_number_start": "Nem kezdődhet számmal"
+  "rename_error_number_start": "Nem kezdődhet számmal",
+	"invalid_config_value_error": "Kérlek, először javítsd ki az összes hibát a beállítási panelen."
 };

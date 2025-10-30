@@ -45,6 +45,10 @@
   @apply mb-2;
 }
 
+.vfb-tool-language-selector.is-disabled {
+  @apply opacity-60 pointer-events-none;
+}
+
 .vfb-tool-language-selector .vfb-tool-item {
   @apply text-sm;
 }

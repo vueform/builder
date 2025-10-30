@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "Gibt `true` zurück, wenn das Element verfügbar ist (alle Bedingungen erfüllt sind).",
   "expression_func_available_p0_value": "'vollstaendiger_pfad'",
   "expression_func_available_p0_description": "Der <b>vollständige Pfad</b> (nicht der Datenpfad) des Feldes in einfachen Anführungszeichen, z. B. `AVAILABLE('container.select')`. Pfade von Geschwistern (z. B. `list.*.select`) können nicht verwendet werden.",
-  "rename_error_number_start": "Darf nicht mit einer Zahl beginnen"
+  "rename_error_number_start": "Darf nicht mit einer Zahl beginnen",
+	"invalid_config_value_error": "____"
 };

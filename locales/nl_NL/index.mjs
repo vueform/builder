@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "Geeft `true` terug als het element beschikbaar is (alle voorwaarden zijn voldaan).",
   "expression_func_available_p0_value": "'volledig_pad'",
   "expression_func_available_p0_description": "Het <b>volledige pad</b> (niet het datapad) van het veld tussen enkele aanhalingstekens, bijvoorbeeld: `AVAILABLE('container.select')`. Paden van broers/zussen (bijv. `list.*.select`) kunnen niet worden gebruikt.",
-  "rename_error_number_start": "Mag niet met een cijfer beginnen"
+  "rename_error_number_start": "Mag niet met een cijfer beginnen",
+	"invalid_config_value_error": "Los eerst alle fouten op in het configuratiepaneel."
 };

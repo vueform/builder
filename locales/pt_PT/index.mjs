@@ -1694,5 +1694,6 @@ export default {
   "expression_func_available_description": "Retorna `true` se o elemento estiver disponível (todas as condições forem cumpridas).",
   "expression_func_available_p0_value": "'caminho_completo'",
   "expression_func_available_p0_description": "O <b>caminho completo</b> (não o caminho de dados) do campo entre aspas simples, por exemplo: `AVAILABLE('container.select')`. Caminhos de elementos irmãos (ex: `list.*.select`) não podem ser usados.",
-  "rename_error_number_start": "Não pode começar com um número"
+  "rename_error_number_start": "Não pode começar com um número",
+	"invalid_config_value_error": "Corrige primeiro todos os erros no painel de configuração."
 };
