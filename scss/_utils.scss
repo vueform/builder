@@ -553,6 +553,16 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply -mb-2;
 }
 
+.vfb-config-datepicker {
+  .flatpickr-calendar {
+    @apply left-auto right-0;
+
+    &:before {
+      @apply left-auto right-6 top-auto bottom-full;
+    }
+  }
+}
+
 .vfb-mx-px {
   @apply mx-px;
 }

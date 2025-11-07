@@ -2486,6 +2486,17 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   margin-bottom: -0.5rem;
 }
 
+.vfb-config-datepicker .flatpickr-calendar{
+  left: auto;
+  right: 0px;
+}
+.vfb-config-datepicker .flatpickr-calendar:before{
+  left: auto;
+  right: 1.5rem;
+  top: auto;
+  bottom: 100%;
+}
+
 .vfb-mx-px{
   margin-left: 1px;
   margin-right: 1px;

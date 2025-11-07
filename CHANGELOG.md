@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.4
+
+> `2025-11-07`
+
+### 🐞 Bug Fixes
+- datepicker position fix #148
+
 ## v1.12.3
 
 > `2025-10-30`
