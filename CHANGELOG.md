@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.5
+
+> `2025-11-21`
+
+### 🐞 Bug Fixes
+- Constrain date defaults in config panel
+- Re-format date(/time) defaults on format change
+
 ## v1.12.4
 
 > `2025-11-07`
