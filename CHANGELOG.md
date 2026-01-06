@@ -1,5 +1,16 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.7
+
+> `2026-01-06`
+
+### 🎉 Feature
+- Display label/text of target elements in conditions display panel #150
+
+### 🐞 Bug Fixes
+- Drag from first element before second fix
+- Translate labels in tree with names: false #150
+
 ## v1.12.6
 
 > `2025-12-03`
