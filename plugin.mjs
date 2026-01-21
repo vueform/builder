@@ -1652,6 +1652,10 @@ export default function () {
         },
       },
       setup(props, context, component) {
+        if (!component.form$.value.builder) {
+          return component
+        }
+        
         const { expression } = toRefs(props)
         const { value, form$ } = component
 

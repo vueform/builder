@@ -1,5 +1,14 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.8
+
+> `2026-01-21`
+
+### 🐞 Bug Fixes
+- Only apply builder plugin to hidden in builder
+- Drag first item in row of a page to top of another in the same row
+- Conditions subtitle fix in multilingual config #150
+
 ## v1.12.7
 
 > `2026-01-06`
