@@ -1,5 +1,13 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.9
+
+> `2026-02-04`
+
+### 🐞 Bug Fixes
+- remount config panel on element select
+
+
 ## v1.12.8
 
 > `2026-01-21`
