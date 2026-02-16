@@ -26,7 +26,7 @@
 }
 
 .vfb-steps-wrapper {
-  @apply flex justify-between overflow-x-auto pt-12 -mt-12;
+  @apply flex justify-between overflow-x-auto p-0 m-0 pt-12 -mt-12;
 }
 
 .vfb-steps-remove-wrapper {
@@ -46,7 +46,7 @@
 }
 
 .vfb-step-container {
-  @apply relative border-t border-b cursor-pointer border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0 p-0;
+  @apply relative border-solid border-l-0 border-r-0 border-t border-b cursor-pointer border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0 p-0;
 
   &.form-step {
     @apply p-0;
@@ -235,7 +235,7 @@
 }
 
 .vfb-step-edit-label-input {
-  @apply absolute bottom-0 left-0 right-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap;
+  @apply absolute bottom-0 left-0 right-0 border-0 appearance-none p-0 box-border leading-normal text-[0.875rem] w-full whitespace-nowrap outline-none;
 }
 
 .vfb-step-edit-label-sizer {
@@ -274,11 +274,11 @@
 }
 
 .vfb-steps-controls-container-editor {
-  @apply border border-primary-500 border-opacity-0 hover:border-opacity-100 cursor-pointer;
+  @apply border-solid border border-primary-500 border-opacity-0 hover:border-opacity-100 cursor-pointer;
 }
 
 .vfb-steps-controls-container-select {
-  @apply border-opacity-100 bg-primary-500 bg-opacity-10;
+  @apply border-solid border-opacity-100 bg-primary-500 bg-opacity-10;
 }
 
 .vfb-steps-controls-container-sm {

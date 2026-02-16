@@ -118,6 +118,7 @@
   animation-delay: 0;
   animation-fill-mode: both;
   animation-name: vfb-fade-in-down;
+  border-style: solid;
   @apply absolute top-8 mt-1 left-0 right-0 flex flex-col bg-white shadow-lg rounded border border-gray-300 dark:bg-dark-700 dark:border-dark-700 dark:text-white;
 }
 

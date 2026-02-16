@@ -119,7 +119,7 @@
 
 
 .vfb-conditions-render {
-  @apply text-left bg-gray-50 border border-gray-200 px-3 py-2 rounded-md relative dark:bg-dark-700 dark:border-dark-700;
+  @apply text-left bg-gray-50 border-solid border border-gray-200 px-3 py-2 rounded-md relative dark:bg-dark-700 dark:border-dark-700;
 }
 
 .vfb-conditions-render-title {

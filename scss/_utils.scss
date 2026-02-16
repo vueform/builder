@@ -15,7 +15,7 @@
 
 a.vfb-learn-more,
 .form-contains-link a.vfb-learn-more {
-  @apply leading-none text-0.5xs relative -top-0.5 text-gray-400 whitespace-nowrap border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
+  @apply leading-none text-0.5xs relative -top-0.5 text-gray-400 whitespace-nowrap border-t-0 border-r-0 border-l-0 border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
 }
 
 .vfb-dotted-link {
@@ -27,7 +27,7 @@ a.vfb-learn-more,
 }
 
 .vfb-info-container {
-  @apply relative;
+  @apply relative text-inherit;
 
   &:hover .vfb-info-tooltip {
     @apply block;
@@ -278,11 +278,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-util-props-separator-top {
-  @apply border-t border-gray-150 px-5 -mx-5 pt-4 mt-2 dark:border-dark-600;
+  @apply border-solid border-b-0 border-r-0 border-l-0 border-t border-gray-150 px-5 -mx-5 pt-4 mt-2 dark:border-dark-600;
 }
 
 .vfb-util-props-separator {
-  @apply border-b border-gray-150 px-5 -mx-5 pb-4 mb-2 dark:border-dark-600;
+  @apply border-solid border-t-0 border-r-0 border-l-0 border-b border-gray-150 px-5 -mx-5 pb-4 mb-2 dark:border-dark-600;
 }
 
 .vfb-util-props-multiline-label {
@@ -343,7 +343,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-util-props-link {
-  @apply text-primary-500 border-b border-dotted border-primary-500;
+  @apply text-primary-500 border-l-0 border-r-0 border-t-0 border-b border-dotted border-primary-500;
 }
 
 .vfb-util-props-description {

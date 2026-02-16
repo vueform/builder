@@ -50,7 +50,7 @@
   @apply flex;
 
   .vfb-panels-tabs {
-    @apply flex items-center flex-col w-12 absolute top-0 bottom-0 left-0 border-r border-gray-100 bg-white dark:bg-dark-750 dark:border-dark-750 z-1;
+    @apply flex items-center flex-col w-12 absolute top-0 bottom-0 left-0 border-solid border-r border-l-0 border-t-0 border-b-0 border-gray-100 bg-white dark:bg-dark-750 dark:border-dark-750 z-1;
   }
 
   .vfb-panels-tab {

@@ -11,7 +11,7 @@
 }
 
 .vfb-config-panel-header-container {
-  @apply flex justify-between items-center px-5 py-4 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700 dark:border-dark-600;
+  @apply flex justify-between items-center px-5 py-4 border-solid border-t-0 border-r-0 border-l-0 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700 dark:border-dark-600;
 }
 
 .vfb-config-panel-header {
@@ -160,7 +160,7 @@
 }
 
 .vfb-config-form-header {
-  @apply text-black -mx-5 -mt-px text-0.5md font-semibold px-5 py-2 flex items-center justify-between cursor-pointer col-span-12 border-t border-b border-gray-150 bg-gray-50 dark:bg-dark-700 dark:border-dark-600 dark:text-white;
+  @apply text-black -mx-5 -mt-px text-0.5md font-semibold px-5 py-2 flex items-center justify-between cursor-pointer col-span-12 border-solid border-r-0 border-l-0 border-t border-b border-gray-150 bg-gray-50 dark:bg-dark-700 dark:border-dark-600 dark:text-white;
 }
 
 .vfb-config-form-header-first {
@@ -207,7 +207,7 @@
 }
 
 .vfb-config-panel-warning-ul {
-  @apply list-disc pl-5 leading-tight mt-1;
+  @apply list-disc p-0 m-0 pl-5 leading-tight mt-1;
 
   code {
     @apply text-[11px] bg-red-500 bg-opacity-15 px-0.5 rounded-sm;

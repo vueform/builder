@@ -5,7 +5,7 @@
     @apply absolute top-4 right-6 opacity-0 transition hover:opacity-100;
 
     button {
-      @apply text-white opacity-70 transition hover:opacity-100 font-semibold outline-none;
+      @apply text-white opacity-70 transition hover:opacity-100 font-semibold outline-none bg-transparent border-0 cursor-pointer;
     }
   }
 

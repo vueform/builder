@@ -1,12 +1,19 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.10
+
+> `2026-02-16`
+
+### 🎉 Feature
+- Export components and utils
+- Remove unused global form style and scope them
+
 ## v1.12.9
 
 > `2026-02-04`
 
 ### 🐞 Bug Fixes
 - remount config panel on element select
-
 
 ## v1.12.8
 

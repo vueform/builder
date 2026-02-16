@@ -201,7 +201,7 @@
 }
 
 .vfb-preview-element-overlay {
-  @apply absolute inset-0 border cursor-pointer;
+  @apply absolute inset-0 border border-solid border-primary-500 cursor-pointer;
 
   &.vfb-preview-element-overlay-resizing {
     @apply border-primary-500-imp;
@@ -269,7 +269,7 @@
 }
 
 .vfb-preview-element-resizer-icon {
-  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition z-1;
+  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-solid border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition z-1;
 }
 
 .vfb-preview-element-resizer-icon-unselected {
@@ -277,7 +277,7 @@
 }
 
 .vfb-preview-element-columns-display {
-  @apply absolute left-0 -translate-x-1/2 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition w-auto h-4 text-sm px-0.5 whitespace-nowrap leading-none z-1;
+  @apply absolute left-0 -translate-x-1/2 bg-white border border-solid border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition w-auto h-4 text-sm px-0.5 whitespace-nowrap leading-none z-1;
 }
 
 .vfb-preview-element-columns-display-unselected {

@@ -18,7 +18,7 @@
 }
 
 .vfb-tabs-wrapper {
-  @apply flex justify-between flex-row overflow-x-auto pt-12 -mt-12;
+  @apply flex justify-between flex-row overflow-x-auto pt-12 -mt-12 list-none p-0 m-0;
 }
 
 .vfb-tabs-remove-wrapper {
@@ -38,7 +38,7 @@
 }
 
 .vfb-tab-container {
-  @apply relative cursor-pointer border border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0;
+  @apply relative cursor-pointer border border-solid border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0;
 
   &.vfb-tab-container-hover {
     @apply border-opacity-100;
@@ -145,7 +145,7 @@
 }
 
 .vfb-tab-wrapper {
-  @apply block border-b-2 relative bg-transparent whitespace-nowrap;
+  @apply block border-solid border-l-0 border-r-0 border-t-0 border-b-2 relative bg-transparent whitespace-nowrap;
 }
 
 .vfb-tab-wrapper-dragged {
@@ -187,7 +187,7 @@
 }
 
 .vfb-tab-edit-label-input {
-  @apply absolute inset-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap;
+  @apply absolute inset-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap outline-none text-[0.875rem];
 }
 
 .vfb-tab-edit-label-sizer {

@@ -24,7 +24,7 @@
 }
 
 .vfb-model-preview-warning-ul {
-  @apply list-disc pl-5 leading-tight;
+  @apply list-disc p-0 m-0 pl-5 leading-tight;
 }
 
 .vfb-model-preview-warning-li {
@@ -40,7 +40,7 @@
 }
 
 .vfb-model-preview-tab-active {
-  @apply border-b border-primary-500;
+  @apply border-solid border-t-0 border-l-0 border-r-0 border-b border-primary-500;
 }
 
 .vfb-model-preview-tab-inactive {

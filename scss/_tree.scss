@@ -21,7 +21,7 @@
 }
 
 .vfb-tree-search-input {
-  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 w-full dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
+  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 border-0 w-full dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
 }
 
 .vfb-tree-search-icon {
@@ -58,6 +58,7 @@
 }
 
 .vfb-tree-item-wrapper {
+  border-style: solid;
   @apply relative flex items-center text-gray-800 dark:text-white -ml-0.5 -mr-0.5 px-0.5 py-0.5 border border-primary-500 z-1 bg-white bg-opacity-0 border-opacity-0 rounded-lg shadow-none dark:bg-dark-800 dark:bg-opacity-0;
 }
 
@@ -209,6 +210,7 @@
 }
 
 .vfb-tree-item-children-toggle {
+  border-style: solid;
   @apply text-xxs border border-gray-400 w-2.25 h-2.25 flex items-center justify-center bg-white relative rounded-sm dark:bg-dark-500 dark:border-gray-500;
   
   &:after {

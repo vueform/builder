@@ -6,7 +6,7 @@
   @apply absolute top-4 right-6 opacity-0 transition hover:opacity-100;
 }
 .vfb-code-toolbar .vfb-toolbar button {
-  @apply text-white opacity-70 transition hover:opacity-100 font-semibold outline-none;
+  @apply text-white opacity-70 transition hover:opacity-100 font-semibold outline-none bg-transparent border-0 cursor-pointer;
 }
 .vfb-code-toolbar pre[data-nocopy] + .toolbar {
   @apply hidden;
@@ -418,6 +418,7 @@
   animation-delay: 0;
   animation-fill-mode: both;
   animation-name: vfb-fade-in-down;
+  border-style: solid;
   @apply absolute top-8 mt-1 left-0 right-0 flex flex-col bg-white shadow-lg rounded border border-gray-300 dark:bg-dark-700 dark:border-dark-700 dark:text-white;
 }
 
@@ -1024,7 +1025,7 @@ input.vfb-clr-color:focus {
 
 a.vfb-learn-more,
 .form-contains-link a.vfb-learn-more {
-  @apply leading-none text-0.5xs relative -top-0.5 text-gray-400 whitespace-nowrap border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
+  @apply leading-none text-0.5xs relative -top-0.5 text-gray-400 whitespace-nowrap border-t-0 border-r-0 border-l-0 border-b border-dotted border-gray-400 dark:text-dark-400 dark:border-dark-400;
 }
 
 .vfb-dotted-link {
@@ -1036,7 +1037,7 @@ a.vfb-learn-more,
 }
 
 .vfb-info-container {
-  @apply relative;
+  @apply relative text-inherit;
 }
 .vfb-info-container:hover .vfb-info-tooltip {
   @apply block;
@@ -1279,11 +1280,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-util-props-separator-top {
-  @apply border-t border-gray-150 px-5 -mx-5 pt-4 mt-2 dark:border-dark-600;
+  @apply border-solid border-b-0 border-r-0 border-l-0 border-t border-gray-150 px-5 -mx-5 pt-4 mt-2 dark:border-dark-600;
 }
 
 .vfb-util-props-separator {
-  @apply border-b border-gray-150 px-5 -mx-5 pb-4 mb-2 dark:border-dark-600;
+  @apply border-solid border-t-0 border-r-0 border-l-0 border-b border-gray-150 px-5 -mx-5 pb-4 mb-2 dark:border-dark-600;
 }
 
 .vfb-util-props-multiline-label {
@@ -1344,7 +1345,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-util-props-link {
-  @apply text-primary-500 border-b border-dotted border-primary-500;
+  @apply text-primary-500 border-l-0 border-r-0 border-t-0 border-b border-dotted border-primary-500;
 }
 
 .vfb-util-props-description {
@@ -1830,7 +1831,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-modal-buttons {
-  @apply flex items-end justify-between pl-7 pr-3 py-5 border-t border-gray-200 dark:border-dark-500;
+  @apply flex items-end justify-between pl-7 pr-3 py-5 border-solid border-l-0 border-r-0 border-b-0 border-t border-gray-200 dark:border-dark-500;
 }
 
 .vfb-modal-buttons-left > div, .vfb-modal-buttons-left > button {
@@ -1941,7 +1942,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-modal-import-textarea {
-  @apply w-full px-5 py-4 border-gray-300 min-h-[400px] text-[13px] shadow-inner box-border m-0 font-mono leading-normal dark:bg-dark-800 dark:text-white;
+  @apply w-full px-5 py-4 -mt-2 border-solid border-b-0 border-gray-200 min-h-[400px] text-[13px] shadow-inner box-border m-0 font-mono leading-normal dark:bg-dark-800 dark:text-white;
 }
 
 .vfb-modal-import-error {
@@ -1962,7 +1963,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-modal-tab {
-  @apply text-center h-12 flex items-center justify-center border-b border-gray-200 cursor-pointer dark:border-dark-500;
+  @apply text-center h-12 flex items-center justify-center border-solid border-t-0 border-l-0 border-r-0 border-b border-gray-200 cursor-pointer dark:border-dark-500;
 }
 
 .vfb-modal-tab-selected {
@@ -2078,7 +2079,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-expr-dialog {
-  @apply absolute -top-1 left-0 right-0 bg-white transform -translate-y-full shadow-box border border-gray-200 font-sans text-[12px] leading-normal rounded-md dark:bg-dark-600 dark:border-dark-800;
+  @apply absolute -top-1 left-0 right-0 bg-white transform -translate-y-full shadow-box border-solid border border-gray-200 font-sans text-[12px] leading-normal rounded-md dark:bg-dark-600 dark:border-dark-800;
 }
 
 .vfb-expr-dialog-header {
@@ -2132,7 +2133,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-expr-warning-ul {
-  @apply list-disc pl-3 leading-tight;
+  @apply p-0 m-0 list-disc pl-3 leading-tight;
 }
 .vfb-expr-warning-ul code {
   @apply text-[11px] text-red-500 bg-red-500 bg-opacity-15 px-0.5 rounded-sm;
@@ -2254,7 +2255,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-conditions-render {
-  @apply text-left bg-gray-50 border border-gray-200 px-3 py-2 rounded-md relative dark:bg-dark-700 dark:border-dark-700;
+  @apply text-left bg-gray-50 border-solid border border-gray-200 px-3 py-2 rounded-md relative dark:bg-dark-700 dark:border-dark-700;
 }
 
 .vfb-conditions-render-title {
@@ -2663,7 +2664,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-config-panel-header-container {
-  @apply flex justify-between items-center px-5 py-4 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700 dark:border-dark-600;
+  @apply flex justify-between items-center px-5 py-4 border-solid border-t-0 border-r-0 border-l-0 border-b border-gray-200 bg-gray-100 -mx-5 dark:bg-dark-700 dark:border-dark-600;
 }
 
 .vfb-config-panel-header {
@@ -2778,7 +2779,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-config-form-header {
-  @apply text-black -mx-5 -mt-px text-0.5md font-semibold px-5 py-2 flex items-center justify-between cursor-pointer col-span-12 border-t border-b border-gray-150 bg-gray-50 dark:bg-dark-700 dark:border-dark-600 dark:text-white;
+  @apply text-black -mx-5 -mt-px text-0.5md font-semibold px-5 py-2 flex items-center justify-between cursor-pointer col-span-12 border-solid border-r-0 border-l-0 border-t border-b border-gray-150 bg-gray-50 dark:bg-dark-700 dark:border-dark-600 dark:text-white;
 }
 
 .vfb-config-form-header-first {
@@ -2817,7 +2818,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-config-panel-warning-ul {
-  @apply list-disc pl-5 leading-tight mt-1;
+  @apply list-disc p-0 m-0 pl-5 leading-tight mt-1;
 }
 .vfb-config-panel-warning-ul code {
   @apply text-[11px] bg-red-500 bg-opacity-15 px-0.5 rounded-sm;
@@ -2862,7 +2863,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-elements-search-input {
-  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 w-full dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
+  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 w-full border-0 text-base dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
 }
 
 .vfb-elements-search-icon {
@@ -2975,7 +2976,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tree-search-input {
-  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 w-full dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
+  @apply bg-gray-100 pl-8 pr-3 py-1.25 rounded-lg placeholder-gray-400 placeholder-opacity-100 border-0 w-full dark:bg-dark-700 dark:placeholder-dark-500 dark:text-white;
 }
 
 .vfb-tree-search-icon {
@@ -3007,6 +3008,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tree-item-wrapper {
+  border-style: solid;
   @apply relative flex items-center text-gray-800 dark:text-white -ml-0.5 -mr-0.5 px-0.5 py-0.5 border border-primary-500 z-1 bg-white bg-opacity-0 border-opacity-0 rounded-lg shadow-none dark:bg-dark-800 dark:bg-opacity-0;
 }
 
@@ -3141,6 +3143,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tree-item-children-toggle {
+  border-style: solid;
   @apply text-xxs border border-gray-400 w-2.25 h-2.25 flex items-center justify-center bg-white relative rounded-sm dark:bg-dark-500 dark:border-gray-500;
 }
 .vfb-tree-item-children-toggle:after {
@@ -3190,7 +3193,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-model-preview-warning-ul {
-  @apply list-disc pl-5 leading-tight;
+  @apply list-disc p-0 m-0 pl-5 leading-tight;
 }
 
 .vfb-model-preview-warning-li {
@@ -3206,7 +3209,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-model-preview-tab-active {
-  @apply border-b border-primary-500;
+  @apply border-solid border-t-0 border-l-0 border-r-0 border-b border-primary-500;
 }
 
 .vfb-model-preview-tab-inactive {
@@ -3288,7 +3291,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
   @apply flex;
 }
 .vfb-panels-container-icons .vfb-panels-tabs {
-  @apply flex items-center flex-col w-12 absolute top-0 bottom-0 left-0 border-r border-gray-100 bg-white dark:bg-dark-750 dark:border-dark-750 z-1;
+  @apply flex items-center flex-col w-12 absolute top-0 bottom-0 left-0 border-solid border-r border-l-0 border-t-0 border-b-0 border-gray-100 bg-white dark:bg-dark-750 dark:border-dark-750 z-1;
 }
 .vfb-panels-container-icons .vfb-panels-tab {
   @apply relative vfb-tooltip-group flex h-12 w-12 items-center justify-center transition-colors text-lg border-x-3 border-transparent cursor-pointer;
@@ -3908,7 +3911,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tabs-wrapper {
-  @apply flex justify-between flex-row overflow-x-auto pt-12 -mt-12;
+  @apply flex justify-between flex-row overflow-x-auto pt-12 -mt-12 list-none p-0 m-0;
 }
 
 .vfb-tabs-remove-wrapper {
@@ -3928,7 +3931,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tab-container {
-  @apply relative cursor-pointer border border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0;
+  @apply relative cursor-pointer border border-solid border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0;
 }
 .vfb-tab-container.vfb-tab-container-hover {
   @apply border-opacity-100;
@@ -4022,7 +4025,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tab-wrapper {
-  @apply block border-b-2 relative bg-transparent whitespace-nowrap;
+  @apply block border-solid border-l-0 border-r-0 border-t-0 border-b-2 relative bg-transparent whitespace-nowrap;
 }
 
 .vfb-tab-wrapper-dragged {
@@ -4058,7 +4061,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-tab-edit-label-input {
-  @apply absolute inset-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap;
+  @apply absolute inset-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap outline-none text-[0.875rem];
 }
 
 .vfb-tab-edit-label-sizer {
@@ -4104,7 +4107,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-steps-wrapper {
-  @apply flex justify-between overflow-x-auto pt-12 -mt-12;
+  @apply flex justify-between overflow-x-auto p-0 m-0 pt-12 -mt-12;
 }
 
 .vfb-steps-remove-wrapper {
@@ -4124,7 +4127,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-step-container {
-  @apply relative border-t border-b cursor-pointer border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0 p-0;
+  @apply relative border-solid border-l-0 border-r-0 border-t border-b cursor-pointer border-transparent bg-primary-500 bg-opacity-0 border-primary-500 border-opacity-0 p-0;
 }
 .vfb-step-container.form-step {
   @apply p-0;
@@ -4266,7 +4269,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-step-edit-label-input {
-  @apply absolute bottom-0 left-0 right-0 border-0 appearance-none p-0 box-border w-full whitespace-nowrap;
+  @apply absolute bottom-0 left-0 right-0 border-0 appearance-none p-0 box-border leading-normal text-[0.875rem] w-full whitespace-nowrap outline-none;
 }
 
 .vfb-step-edit-label-sizer {
@@ -4290,11 +4293,11 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-steps-controls-container-editor {
-  @apply border border-primary-500 border-opacity-0 hover:border-opacity-100 cursor-pointer;
+  @apply border-solid border border-primary-500 border-opacity-0 hover:border-opacity-100 cursor-pointer;
 }
 
 .vfb-steps-controls-container-select {
-  @apply border-opacity-100 bg-primary-500 bg-opacity-10;
+  @apply border-solid border-opacity-100 bg-primary-500 bg-opacity-10;
 }
 
 .vfb-steps-controls-container-sm {
@@ -4553,7 +4556,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-overlay {
-  @apply absolute inset-0 border cursor-pointer;
+  @apply absolute inset-0 border border-solid border-primary-500 cursor-pointer;
 }
 .vfb-preview-element-overlay.vfb-preview-element-overlay-resizing {
   @apply border-primary-500-imp;
@@ -4616,7 +4619,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-resizer-icon {
-  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition z-1;
+  @apply absolute right-0 translate-x-1/2 w-2.25 h-2.25 bg-white border border-solid border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition z-1;
 }
 
 .vfb-preview-element-resizer-icon-unselected {
@@ -4624,7 +4627,7 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-preview-element-columns-display {
-  @apply absolute left-0 -translate-x-1/2 bg-white border border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition w-auto h-4 text-sm px-0.5 whitespace-nowrap leading-none z-1;
+  @apply absolute left-0 -translate-x-1/2 bg-white border border-solid border-gray-500 rounded-sm shadow-mini top-1/2 transform -translate-y-1/2 pointer-events-none transition w-auto h-4 text-sm px-0.5 whitespace-nowrap leading-none z-1;
 }
 
 .vfb-preview-element-columns-display-unselected {
