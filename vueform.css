@@ -5741,13 +5741,32 @@ div > div:first-of-type[style*="none;"] + .vfb-util-props-separator-top {
 }
 
 .vfb-element-text-description{
+  position: relative;
   font-size: 0.8125rem;
   line-height: 1.375;
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
 }
 
 .vfb-element-text-description:is(.dark *){
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity));
+}
+
+.vfb-element-text-info-tooltip {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.vfb-element-text-info{
+  font-size: 12px;
+  line-height: 1.375;
+  --tw-text-opacity: 1;
+  color: rgb(203 213 225 / var(--tw-text-opacity));
+}
+
+.vfb-element-text-info:is(.dark *){
   --tw-text-opacity: 1;
   color: rgb(115 115 115 / var(--tw-text-opacity));
 }

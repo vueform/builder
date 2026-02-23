@@ -77,7 +77,7 @@
 }
 
 .vfb-element-container {
-  @apply flex items-center -ml-2.5 -mr-2.5 px-2.5 py-2.5 my-2 border border-primary-500 bg-primary-500 bg-opacity-0 border-opacity-0 duration-300 rounded-lg transition-shadow shadow-none relative;
+  @apply relative flex items-center -ml-2.5 -mr-2.5 px-2.5 py-2.5 my-2 border border-primary-500 bg-primary-500 bg-opacity-0 border-opacity-0 duration-300 rounded-lg transition-shadow shadow-none relative;
 
   &:hover,
   &:focus,
@@ -129,7 +129,18 @@
 }
 
 .vfb-element-text-description {
- @apply text-gray-500 text-0.5sm leading-snug dark:text-dark-500; 
+ @apply relative  text-0.5sm leading-snug dark:text-dark-500; 
+}
+
+.vfb-element-text-info-tooltip {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+  width: max-content;
+}
+
+.vfb-element-text-info {
+ @apply text-gray-300 text-[12px] leading-snug dark:text-dark-500; 
 }
 
 

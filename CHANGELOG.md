@@ -1,5 +1,17 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.11
+
+> `2026-02-23`
+
+### 🎉 Feature
+- added `tags` option to element descriptor to define search tags
+- added info option to elements
+- change/disable ai modal modes from popup
+
+### 🐞 Bug Fixes
+- localStorage limit fix
+
 ## v1.12.10
 
 > `2026-02-16`
