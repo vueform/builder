@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.16
+
+> `2026-09-08`
+
+### 🐞 Bug Fixes
+- Renaming, moving or deleting an element should update step/page condition groups #169
+
 ## v1.12.15
 
 > `2026-07-21`
