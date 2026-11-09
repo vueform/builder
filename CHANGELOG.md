@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.17
+
+> `2026-11-09`
+
+### 🐞 Bug Fixes
+- Items description localization fix.
+
 ## v1.12.16
 
 > `2026-09-08`
