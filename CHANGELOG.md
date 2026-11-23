@@ -1,5 +1,12 @@
 [//]: # (Don't use <tags>)
 
+## v1.12.18
+
+> `2026-11-23`
+
+### 🐞 Bug Fixes
+- Grid remove row/col leaving an empty merge range that broke saving #171
+
 ## v1.12.17
 
 > `2026-11-09`
